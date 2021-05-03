@@ -1,0 +1,6 @@
+# lefthook.yml
+
+post-commit:
+    commands:
+        autopush:
+            run: git push origin master # The ssh passkey is stored in kwallet
