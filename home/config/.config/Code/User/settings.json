@@ -1,0 +1,208 @@
+{
+	"telemetry.enableCrashReporter": false,
+	"telemetry.enableTelemetry": false,
+	"editor.suggestSelection": "first",
+	"vsintellicode.modify.editor.suggestSelection": "automaticallyOverrodeDefaultValue",
+	"workbench.iconTheme": "helium-icon-theme",
+	"[typescript]": {
+		"editor.defaultFormatter": "esbenp.prettier-vscode"
+	},
+	"terminal.external.linuxExec": "konsole",
+	"terminal.integrated.enableBell": true,
+	"terminal.integrated.experimentalLinkProvider": true,
+	"terminal.integrated.fontWeightBold": "400",
+	"terminal.integrated.fontWeight": "300",
+	"workbench.startupEditor": "welcomePage",
+	"[jsonc]": {
+		"editor.defaultFormatter": "esbenp.prettier-vscode"
+	},
+	"smartsemicolon.autoLineChange": true,
+	"typescript.updateImportsOnFileMove.enabled": "always",
+	"prettier.trailingComma": "none",
+	"explorer.confirmDelete": false,
+	"[json]": {
+		"editor.defaultFormatter": "esbenp.prettier-vscode"
+	},
+	"files.associations": {
+		".env": "dotenv",
+		"*.sql": "postgres"
+	},
+	"[sql]": {
+		"editor.defaultFormatter": "bradymholt.pgformatter"
+	},
+	"java.semanticHighlighting.enabled": true,
+	"files.autoSave": "afterDelay",
+	"javascript.updateImportsOnFileMove.enabled": "always",
+	"[typescriptreact]": {
+		"editor.defaultFormatter": "esbenp.prettier-vscode"
+	},
+	"glassit.alpha": 240,
+	"editor.fontFamily": "'SF Mono', 'Roboto Mono',  'Fira Code Retina', 'Cousine', monospace",
+	"editor.renameOnType": true,
+	"prettier.packageManager": "yarn",
+	"files.exclude": {
+		"**/.classpath": true,
+		"**/.project": true,
+		"**/.settings": true,
+		"**/.factorypath": true
+	},
+	"editor.formatOnPaste": true,
+	"editor.formatOnType": true,
+	"terminal.integrated.rendererType": "dom",
+	"window.titleBarStyle": "native",
+	"[markdown]": {
+		"editor.defaultFormatter": "esbenp.prettier-vscode"
+	},
+	"[html]": {
+		"editor.defaultFormatter": "esbenp.prettier-vscode"
+	},
+	"extensions.ignoreRecommendations": false,
+	"python.languageServer": "Microsoft",
+	"code-runner.runInTerminal": true,
+	"python.formatting.blackPath": "/usr/bin/black",
+	"[python]": {
+		"editor.defaultFormatter": "ms-python.python"
+	},
+	"prettier.disableLanguages": ["markdown"],
+	"editor.formatOnSave": true,
+	"smartsemicolon.enable": true,
+	"[javascript]": {
+		"editor.defaultFormatter": "esbenp.prettier-vscode"
+	},
+	"[c]": {
+		"editor.defaultFormatter": "ms-vscode.cpptools"
+	},
+	"[javascriptreact]": {
+		"editor.defaultFormatter": "esbenp.prettier-vscode"
+	},
+	"liveServer.settings.donotShowInfoMsg": true,
+	"editor.cursorBlinking": "smooth",
+	"editor.cursorSmoothCaretAnimation": true,
+	"editor.tokenColorCustomizations": {
+		"textMateRules": [
+			{
+				"name": "One Dark italic",
+				"scope": [
+					"comment",
+					"entity.other.attribute-name",
+					"keyword",
+					"markup.underline.link",
+					"storage.modifier",
+					"storage.type",
+					"string.url",
+					"variable.language.super",
+					"variable.language.this"
+				],
+				"settings": {
+					"fontStyle": "italic"
+				}
+			},
+			{
+				"name": "One Dark italic reset",
+				"scope": [
+					"keyword.operator",
+					"keyword.other.type",
+					"storage.modifier.import",
+					"storage.modifier.package",
+					"storage.type.built-in",
+					"storage.type.function.arrow",
+					"storage.type.generic",
+					"storage.type.java",
+					"storage.type.primitive"
+				],
+				"settings": {
+					"fontStyle": ""
+				}
+			}
+		]
+	},
+	"editor.wordWrap": "on",
+	"editor.multiCursorModifier": "ctrlCmd",
+	"editor.minimap.renderCharacters": false,
+	"files.autoGuessEncoding": true,
+	"sonarlint.rules": {
+		"typescript:S1516": {
+			"level": "off"
+		}
+	},
+	"editor.definitionLinkOpensInPeek": true,
+	"terminal.integrated.cursorStyle": "line",
+	"terminal.integrated.cursorWidth": 2,
+	"terminal.integrated.cursorBlinking": true,
+	"material-ui-snippets.showNotesOnStartup": false,
+	"liveServer.settings.CustomBrowser": "chrome",
+	"python.autoComplete.addBrackets": true,
+	"python.formatting.autopep8Path": "black",
+	"python.formatting.provider": "black",
+	"workbench.preferredDarkColorTheme": "Dracula Refined",
+	"workbench.preferredLightColorTheme": "GitHub Light",
+	"css.validate": false, // Disable css built-in lint
+	"stylelint.enable": true,
+	"prettier.tabWidth": 4,
+	"editor.detectIndentation": false,
+	"editor.tabSize": 4,
+	"java.project.importOnFirstTimeStartup": "automatic",
+	"debug.onTaskErrors": "debugAnyway",
+	"git.autofetch": true,
+	"[yaml]": {
+		"editor.defaultFormatter": "esbenp.prettier-vscode"
+	},
+	"vscode_custom_css.imports": ["file:///home/ayush/synthwave84.css"],
+	"vscode_custom_css.policy": true,
+	"workbench.colorTheme": "Night Rider",
+	"customizeUI.titleBar": "regular",
+	"customizeUI.activityBar": "regular",
+	"customizeUI.font.monospace": "SF Mono",
+	"customizeUI.font.regular": "SF Pro Text",
+	"helium-icon-theme.activeIconPack": "react",
+	"vsintellicode.features.python.deepLearning": "enabled",
+	"go.autocompleteUnimportedPackages": true,
+	"vsicons.dontShowNewVersionMessage": true,
+
+	"go.useLanguageServer": true,
+	"[go]": {
+		"editor.formatOnSave": true,
+		"editor.codeActionsOnSave": {
+			"source.organizeImports": true
+		},
+		// Optional: Disable snippets, as they conflict with completion ranking.
+		"editor.snippetSuggestions": "none"
+	},
+	"[go.mod]": {
+		"editor.formatOnSave": true,
+		"editor.codeActionsOnSave": {
+			"source.organizeImports": true
+		}
+	},
+	"gopls": {
+		// Add parameter placeholders when completing a function.
+		"usePlaceholders": true,
+
+		// If true, enable additional analyses with staticcheck.
+		// Warning: This will significantly increase memory usage.
+		"staticcheck": false
+	},
+	"[dockerfile]": {
+		"editor.defaultFormatter": "ms-azuretools.vscode-docker"
+	},
+	"[dotenv]": {
+		"editor.defaultFormatter": "esbenp.prettier-vscode"
+	},
+	"vs-kubernetes": {
+		"vs-kubernetes.helm-path.linux": "/home/ayush/.vs-kubernetes/tools/helm/linux-amd64/helm",
+		"vs-kubernetes.draft-path.linux": "/home/ayush/.vs-kubernetes/tools/draft/linux-amd64/draft",
+		"vs-kubernetes.minikube-path.linux": "/home/ayush/.vs-kubernetes/tools/minikube/linux-amd64/minikube"
+	},
+	"code-runner.enableAppInsights": false,
+	"terminal.enableAppInsights": false,
+	"workbench.editorAssociations": [
+		{
+			"viewType": "jupyter.notebook.ipynb",
+			"filenamePattern": "*.ipynb"
+		}
+	],
+	"[nginx]": {
+		"editor.defaultFormatter": "ahmadalli.vscode-nginx-conf"
+	},
+	"material-icon-theme.showWelcomeMessage": false
+}

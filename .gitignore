@@ -1,0 +1,20 @@
+# .gitignore
+
+# OpenSSL
+.ca
+.crt
+.csr
+.der
+.kdb
+.org
+.p12
+.pem
+.rnd
+.ssleay
+.smime
+
+# GPG
+secring.*
+
+# Talisman
+talisman_reports/

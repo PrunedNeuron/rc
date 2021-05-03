@@ -1,0 +1,99 @@
+{
+  "aria2": {
+    "args": [
+      "--allow-overwrite=true",
+      "--always-resume=false",
+      "--auto-file-renaming=false",
+      "--check-integrity=true",
+      "--conditional-get=true",
+      "--continue=true",
+      "--file-allocation=none",
+      "--log-level=error",
+      "--max-concurrent-downloads=100",
+      "--max-connection-per-server=5",
+      "--min-split-size=5M",
+      "--remote-time=true",
+      "--show-console-readout=true"
+    ],
+    "path": "/usr/bin/aria2c"
+  },
+  "pacman": {
+    "config": "/etc/pacman.conf",
+    "path": "/usr/bin/pacman"
+  },
+  "pacserve": {
+    "server": null
+  },
+  "powerpill": {
+    "select": true,
+    "reflect databases": false
+  },
+  "reflector": {
+    "args.unused": [
+      "--protocol",
+      "https",
+      "--latest",
+      "50"
+    ]
+  },
+  "rsync": {
+    "args": [
+      "--no-motd",
+      "--progress"
+    ],
+    "db only": true,
+    "path": "/usr/bin/rsync",
+    "servers": [
+        "rsync://arch.mirror.square-r00t.net/arch/$repo/os/$arch",
+        "rsync://arch.mirror.constant.com/archlinux/$repo/os/$arch",
+        "rsync://mirror.pseudoform.org/packages/$repo/os/$arch",
+        "rsync://mirror.pkgbuild.com/packages/$repo/os/$arch",
+        "rsync://archlinux.mirror.liquidtelecom.com/archlinux/$repo/os/$arch",
+        "rsync://archlinux.uk.mirror.allworldit.com/archlinux/$repo/os/$arch",
+        "rsync://phinau.de/arch/$repo/os/$arch",
+        "rsync://mirror.dkm.cz/archlinux/$repo/os/$arch",
+        "rsync://archlinux.mailtunnel.eu/archlinux/$repo/os/$arch",
+        "rsync://mirror.f4st.host/archlinux/$repo/os/$arch",
+        "rsync://archlinux.dynamict.se/archlinux/$repo/os/$arch",
+        "rsync://mirror.lty.me/archlinux/$repo/os/$arch",
+        "rsync://ftp.sh.cvut.cz/arch/$repo/os/$arch",
+        "rsync://rsync.cyberbits.eu/archlinux/$repo/os/$arch",
+        "rsync://mirror.chaoticum.net/arch/$repo/os/$arch",
+        "rsync://rsync.osbeck.com/archlinux/$repo/os/$arch",
+        "rsync://ftp.halifax.rwth-aachen.de/archlinux/$repo/os/$arch",
+        "rsync://mirrors.atviras.lt/archlinux/$repo/os/$arch",
+        "rsync://pkg.adfinis-sygroup.ch/archlinux/$repo/os/$arch",
+        "rsync://arlm.tyzoid.com/archlinux/$repo/os/$arch",
+        "rsync://packages.oth-regensburg.de/archlinux/$repo/os/$arch",
+        "rsync://archlinux.za.mirror.allworldit.com/archlinux/$repo/os/$arch",
+        "rsync://mirrors.uni-plovdiv.net/archlinux/$repo/os/$arch",
+        "rsync://archlinux.polymorf.fr/archlinux/$repo/os/$arch",
+        "rsync://mirror.csclub.uwaterloo.ca/archlinux/$repo/os/$arch",
+        "rsync://mirror.neuf.no/archlinux/$repo/os/$arch",
+        "rsync://rsync.mirrors.niyawe.de/archlinux/$repo/os/$arch",
+        "rsync://mirrors.nic.cz/archlinux/$repo/os/$arch",
+        "rsync://mirrors.kernel.org/archlinux/$repo/os/$arch",
+        "rsync://mirror.dc02.hackingand.coffee/arch/$repo/os/$arch",
+        "rsync://archlinux.honkgong.info/archlinux/$repo/os/$arch",
+        "rsync://mirrors.lug.mtu.edu/archlinux/$repo/os/$arch",
+        "rsync://archlinux.thaller.ws/archlinux/$repo/os/$arch",
+        "rsync://mirror.ubrco.de/archlinux/$repo/os/$arch",
+        "rsync://mirror.23media.com/archlinux/$repo/os/$arch",
+        "rsync://archlinux.beccacervello.it/archlinux/$repo/os/$arch",
+        "rsync://mirror.puzzle.ch/archlinux/$repo/os/$arch",
+        "rsync://archlinux.c3sl.ufpr.br/archlinux/$repo/os/$arch",
+        "rsync://mirror.selfnet.de/archlinux/$repo/os/$arch",
+        "rsync://mirror.es.its.nyu.edu/archlinux/$repo/os/$arch",
+        "rsync://rsync.myrveln.se/pub/linux/archlinux/$repo/os/$arch",
+        "rsync://mirrors.celianvdb.fr/archlinux/$repo/os/$arch",
+        "rsync://iad.mirrors.misaka.one/archlinux/$repo/os/$arch",
+        "rsync://arch.hu.fo/archlinux/$repo/os/$arch",
+        "rsync://mirrors.dotsrc.org/archlinux/$repo/os/$arch",
+        "rsync://nova.quantum-mirror.hu/archlinux/$repo/os/$arch",
+        "rsync://quantum-mirror.hu/archlinux/$repo/os/$arch",
+        "rsync://super.quantum-mirror.hu/archlinux/$repo/os/$arch",
+        "rsync://ftp.rnl.tecnico.ulisboa.pt/pub/archlinux/$repo/os/$arch",
+        "rsync://arch.mirror.far.fi/archlinux/$repo/os/$arch"
+    ]
+  }
+}

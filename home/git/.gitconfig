@@ -1,0 +1,18 @@
+[user]
+	name = Ayush
+	email = aym@pm.me
+	signingKey = 0x9097ACD1EDE4D80F
+[core]
+    autocrlf = input
+	editor = nano -w
+	excludesFile = $HOME/.gitignore
+[commit]
+	gpgSign = true
+[gpg]
+	program = gpg
+[init]
+	defaultBranch = master
+[color]
+    ui = auto
+[push]
+    default = simple

@@ -1,0 +1,42 @@
+# Aliases
+
+# Systemctl
+alias start="sudo systemctl restart"
+alias stop="sudo systemctl stop"
+alias status="systemctl status"
+
+# Colorize
+alias ip="ip -color=auto"
+alias ls="ls --color=auto"
+alias diff="diff --color=auto"
+alias grep="grep --color=auto"
+alias egrep="egrep --color=auto"
+alias fgrep="fgrep --color=auto"
+
+# Yay
+alias yayy="yay -S --needed --noconfirm" # Install
+alias yayr="yay -Rns" # Uninstall / Remove completely / Purge
+
+# Text
+alias copy="xsel -bi" # Copy to clipboard
+alias paste="xsel -bo" # Paste from clipboard
+alias sudokate="SUDO_EDITOR=kate sudoedit"
+
+# Utility
+alias lsh="ls -d .*"
+alias now="date +\"%r\""
+alias today="date +%F"
+alias fastping="ping -c 100 -s.2"
+
+# Shortcuts
+alias ~="cd $HOME"
+alias fjson="python -m json.tool"
+
+# Safety
+alias rm="rm -i"
+alias cp="cp -i"
+alias mv="mv -i"
+alias ln="ln -i"
+
+# Tools
+alias talisman="$HOME/.talisman/bin/talisman_linux_amd64" # thoughtworks/talisman
