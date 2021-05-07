@@ -1,10 +1,11 @@
 # SSH socket
 export SSH_AUTH_SOCK="$XDG_RUNTIME_DIR/ssh-agent.socket"
 
-# Locale
+# Charset
 export LANG=en_US.UTF-8
 export LC_ALL=$LANG
 export LANGUAGE=$LANG
+export LESSCHARSET=UTF-8
 
 # Editor
 export EDITOR=nano

@@ -13,9 +13,14 @@ alias grep="grep --color=auto"
 alias egrep="egrep --color=auto"
 alias fgrep="fgrep --color=auto"
 
-# Yay
+# Arch
 alias yayy="yay -S --needed --noconfirm" # Install
 alias yayr="yay -Rns" # Uninstall / Remove completely / Purge
+alias refreshmirrors="sudo reflector --latest 200 --protocol https --sort rate --fastest 50 --save /etc/pacman.d/mirrorlist"
+
+
+# Programs
+alias reloaddns="sudo systemctl restart dnscrypt-proxy pihole-FTL NetworkManager"
 
 # Text
 alias copy="xsel -bi" # Copy to clipboard
@@ -37,6 +42,3 @@ alias rm="rm -i"
 alias cp="cp -i"
 alias mv="mv -i"
 alias ln="ln -i"
-
-# Tools
-alias talisman="$HOME/.talisman/bin/talisman_linux_amd64" # thoughtworks/talisman

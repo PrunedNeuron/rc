@@ -1,4 +1,7 @@
 # ~/.zprofile
 
-# TODO: Fix
-# [ -f ~/.profile ] && source ~/.profile
+# Load global profile
+emulate sh -c '[ -f ~/.profile ] && source ~/.profile'
+
+# ZSH Config location
+ZDOTDIR=$HOME/.config/zsh

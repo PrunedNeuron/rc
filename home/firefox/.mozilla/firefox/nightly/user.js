@@ -22,6 +22,7 @@ user_pref("browser.selfsupport.url", "");
 user_pref("browser.send_pings", false);
 user_pref("browser.sessionstore.privacy_level", 2);
 user_pref("browser.tabs.crashReporting.sendReport", false);
+user_pref("browser.tabs.loadBookmarksInBackground", true);
 user_pref("browser.urlbar.speculativeConnect.enabled", false);
 user_pref("datareporting.healthreport.service.enabled", false);
 user_pref("datareporting.healthreport.uploadEnabled", false);
