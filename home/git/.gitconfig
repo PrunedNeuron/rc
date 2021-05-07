@@ -1,7 +1,7 @@
 [user]
 	name = Ayush
 	email = aym@pm.me
-	signingKey = 0x9097ACD1EDE4D80F
+	signingKey = 0x26FB97C855160072
 [core]
     autocrlf = input
 	editor = nano -w
