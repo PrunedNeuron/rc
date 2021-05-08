@@ -23,7 +23,6 @@ bindkey '^[[3;5~' kill-word
 bindkey '^[[3^' kill-word
 bindkey '^H' backward-kill-word
 
-
 # File manager key binds
 # Alt+Left = go back
 # Alt+Up = go to parent dir

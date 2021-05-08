@@ -1,26 +1,11 @@
-# Prompt config
+# Spaceship - denysdovhan/spaceship-prompt
 
-#Options for Spaceship
+#SPACESHIP_PROMPT_ADD_NEWLINE=true
+SPACESHIP_PROMPT_SEPARATE_LINE=true
 
-# ORDER
-SPACESHIP_PROMPT_ORDER=(
-  time     #
-  vi_mode  # these sections will be
-  user     # before prompt char
-  host     #
-  char
-  dir
-  git
-  node
-  ruby
-  xcode
-  swift
-  golang
-  docker
-  venv
-  pyenv
-)
-
+# Time options
+#SPACESHIP_TIME_SHOW=true
+SPACESHIP_TIME_12HR=true
 
 # SPACESHIP_PROMPT_ADD_NEWLINE=false
 SPACESHIP_PACKAGE_SYMBOL=📦
@@ -40,6 +25,7 @@ SPACESHIP_DIR_PREFIX='' # disable directory prefix, cause it's not the first sec
 SPACESHIP_DIR_TRUNC='1' # show only last directory
 
 # GIT
+SPACESHIP_GIT_STATUS_SHOW=false
 # Disable git symbol
 SPACESHIP_GIT_SYMBOL="" # disable git prefix
 SPACESHIP_GIT_BRANCH_PREFIX="" # disable branch prefix too
@@ -89,4 +75,40 @@ SPACESHIP_VENV_SUFFIX=") "
 SPACESHIP_PYENV_PREFIX="python:("
 SPACESHIP_PYENV_SUFFIX=") "
 SPACESHIP_PYENV_SYMBOL=""
- 
+
+# Execution time
+SPACESHIP_EXEC_TIME_SHOW=true
+SPACESHIP_EXEC_TIME_ELAPSED=1 # in seconds
+
+# Exit code
+SPACESHIP_EXIT_CODE_SHOW=false
+SPACESHIP_EXIT_CODE_SYMBOL=✗
+
+SPACESHIP_WIP_PREFIX="${SPACESHIP_WIP_PREFIX="$SPACESHIP_PROMPT_DEFAULT_PREFIX"}"
+SPACESHIP_WIP_SUFFIX="${SPACESHIP_WIP_SUFFIX="$SPACESHIP_PROMPT_DEFAULT_SUFFIX"}"
+SPACESHIP_WIP_SYMBOL="${SPACESHIP_WIP_SYMBOL="🚧 "}"
+SPACESHIP_WIP_TEXT="${SPACESHIP_WIP_TEXT="WIP!!! "}"
+SPACESHIP_WIP_COLOR="${SPACESHIP_WIP_COLOR="red"}"
+
+spaceship_wip() {
+  [[ $SPACESHIP_WIP_SHOW == false ]] && return
+
+  spaceship::is_git || return
+  spaceship::exists work_in_progress || return
+
+  if [[ $(work_in_progress) == "WIP!!" ]]; then
+    # Display WIP section
+    spaceship::section \
+      "$SPACESHIP_WIP_COLOR" \
+      "$SPACESHIP_WIP_PREFIX" \
+      "$SPACESHIP_WIP_SYMBOL" \
+      "$SPACESHIP_WIP_TEXT" \
+      "$SPACESHIP_WIP_SUFFIX"
+  fi
+}
+
+
+# Prompt order
+# Just comment/remove a section if you want to disable it
+SPACESHIP_PROMPT_ORDER=(user dir host git node golang docker wip line_sep char)
+SPACESHIP_RPROMPT_ORDER=(jobs exec_time exit_code)

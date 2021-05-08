@@ -2,9 +2,6 @@
 
 ## Essentials
 
-# Prompt
-zinit light denysdovhan/spaceship-prompt
-
 # Autosuggestions & fast-syntax-highlighting
 zinit ice wait lucid atinit"ZINIT[COMPINIT_OPTS]=-C; zpcompinit; zpcdreplay"
 zinit light zdharma/fast-syntax-highlighting
@@ -18,8 +15,11 @@ zinit light zsh-users/zsh-history-substring-search
 zinit light zsh-users/zsh-completions
 
 # zsh-autopair (Auto-close and delete matching delimiters)
+zinit light hlissner/zsh-autopair
+
+# zsh-you-should-use (Recommends aliases that you could have used)
 zinit ice wait lucid
-zinit load hlissner/zsh-autopair
+zinit load MichaelAquilina/zsh-you-should-use
 
 # Gitignore plugin – commands gii and gi
 zinit ice wait"2" lucid

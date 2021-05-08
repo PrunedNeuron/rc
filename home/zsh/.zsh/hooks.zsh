@@ -1,13 +1,8 @@
-# Pacman cache rehash
+# ZSH hooks
 
-zshcache_time="$(date +%s%N)"
+# Load precmd hooks
+source <(cat $(ls -1 $ZCONFDIR/hooks/precmd/*.zsh))
 
-rehash_precmd() {
-  if [[ -a /var/cache/zsh/pacman ]]; then
-    local paccache_time="$(date -r /var/cache/zsh/pacman +%s%N)"
-    if (( zshcache_time < paccache_time )); then
-      rehash
-      zshcache_time="$paccache_time"
-    fi
-  fi
-}
+# Load chpwd hooks
+# Disabled atm - use cdr built-in instead
+# source <(cat $(ls -1 $ZCONFDIR/hooks/chpwd/*.zsh))
