@@ -16,6 +16,13 @@ zinit load reegnz/jq-zsh-plugin
 zinit ice wait"2" lucid
 zinit load zpm-zsh/colorize
 
+## LS_COLORS
+## Disabled for now
+# zinit ice atclone"dircolors -b LS_COLORS > clrs.zsh" \
+#     atpull'%atclone' pick"clrs.zsh" nocompile'!' \
+#     atload'zstyle ":completion:*" list-colors “${(s.:.)LS_COLORS}”'
+# zinit light trapd00r/LS_COLORS
+
 # improved ls
 zinit ice wait"2" lucid
 zinit load zpm-zsh/ls

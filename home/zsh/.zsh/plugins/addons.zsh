@@ -3,12 +3,12 @@
 ## Essentials
 
 # Autosuggestions & fast-syntax-highlighting
-zinit ice wait lucid atinit"ZINIT[COMPINIT_OPTS]=-C; zpcompinit; zpcdreplay"
-zinit light zdharma/fast-syntax-highlighting
-
-# zsh-autosuggestions
-zinit ice wait lucid atload"!_zsh_autosuggest_start"
-zinit load zsh-users/zsh-autosuggestions
+zinit wait lucid light-mode for \
+    atinit"ZINIT[COMPINIT_OPTS]=-C; zpcompinit; zpcdreplay" \
+        zdharma/fast-syntax-highlighting \
+    atload"!_zsh_autosuggest_start" \
+        zsh-users/zsh-autosuggestions \
+        marlonrichert/zsh-autocomplete # Amazing!
 
 zinit light ael-code/zsh-colored-man-pages
 zinit light zsh-users/zsh-history-substring-search
