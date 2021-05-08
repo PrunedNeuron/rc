@@ -1,23 +1,9 @@
 # Aliases
 
-# Systemctl
-alias start="sudo systemctl restart"
-alias stop="sudo systemctl stop"
-alias status="systemctl status"
-
-# Colorize
-alias ip="ip -color=auto"
-alias ls="ls --color=auto"
-alias diff="diff --color=auto"
-alias grep="grep --color=auto"
-alias egrep="egrep --color=auto"
-alias fgrep="fgrep --color=auto"
-
 # Arch
 alias yayy="yay -S --needed --noconfirm" # Install
 alias yayr="yay -Rns" # Uninstall / Remove completely / Purge
 alias refreshmirrors="sudo reflector --latest 200 --protocol https --sort rate --fastest 50 --save /etc/pacman.d/mirrorlist"
-
 
 # Programs
 alias reloaddns="sudo systemctl restart dnscrypt-proxy pihole-FTL NetworkManager"

@@ -1,15 +1,19 @@
-# $zshrc
+# ~/.zshrc
 
 source $ZCONFDIR/preinit.zsh
 
 autoload -Uz compinit; compinit
 autoload -U promptinit; promptinit
-autoload -Uz url-quote-magic
-zle -N self-insert url-quote-magic
-autoload -Uz add-zsh-hook
 
+autoload -Uz \
+    cdr \
+    chpwd_recent_dirs \
+    add-zsh-hook \
+    url-quote-magic
 source $ZCONFDIR/hooks.zsh
-add-zsh-hook -Uz precmd rehash_precmd
+add-zsh-hook chpwd chpwd_recent_dirs
+
+zle -N self-insert url-quote-magic
 
 # History
 HISTFILE=~/.zhistory
@@ -17,17 +21,13 @@ HISTFILESIZE=50000
 HISTSIZE=100000
 SAVEHIST=$HISTSIZE
 
-## Source all at once?
-## source <(cat $(ls -1 $ZCONFDIR/*.zsh))
-
-# ZSH options
+# ZSH options (setopts)
 source $ZCONFDIR/options.zsh
 
-# Load plugins
-# source <(antibody init) # Initialize antibody
-# antibody bundle < $ZCONFDIR/plugins.zsh
+# ZSH styles (zstyles)
+source $ZCONFDIR/styles.zsh
 
-source $ZCONFDIR/prompt.zsh
+# Load custom functions
 source $ZCONFDIR/functions.zsh
 
 # Other RCs
@@ -35,4 +35,4 @@ source ~/.aliasrc
 
 # Load plugins
 source $ZCONFDIR/plugins.zsh
-source $ZCONFDIR/bindkeys.zsh
+source $ZCONFDIR/keybindings.zsh

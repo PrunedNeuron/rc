@@ -1,4 +1,5 @@
-# Options
+# ZSH Options
+
 setopt auto_cd # cd by typing directory name if it's not a command
 setopt auto_list # automatically list choices on ambiguous completion
 setopt auto_menu # automatically use menu completion
@@ -9,10 +10,3 @@ setopt inc_append_history # save history entries as soon as they are entered
 setopt share_history # share history between different instances
 setopt interactive_comments # allow comments in interactive shells
 setopt appendhistory autocd beep nomatch notify complete_aliases correct
-
-# Styles
-# Improve autocompletion style
-zstyle ':completion:*' menu select # select completions with arrow keys
-zstyle ':completion:*' group-name '' # group results by category
-zstyle ':completion:::::' completer _expand _complete _ignored _approximate # enable approximate matches for completion
-zstyle ':completion:*' rehash true
