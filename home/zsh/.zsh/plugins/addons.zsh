@@ -11,9 +11,6 @@ zinit wait lucid light-mode for \
 
 zinit light zsh-users/zsh-history-substring-search
 
-# zsh-autopair (Auto-close and delete matching delimiters)
-zinit light hlissner/zsh-autopair
-
 # Git extras
 zinit lucid wait'0a' for \
     as"program" pick"$ZPFX/bin/git-*" src"etc/git-extras-completion.zsh" make"PREFIX=$ZPFX" \
