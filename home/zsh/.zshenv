@@ -1,4 +1,6 @@
 # ~/.zshenv
+# Environment variables configuration
+# Always read
 
 emulate sh -c '[ -f ~/.envrc ] && source ~/.envrc'
 
