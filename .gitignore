@@ -1,5 +1,9 @@
 # .gitignore
 
+# KDE
+.directory
+.*swp
+
 # OpenSSL
 .ca
 .crt
