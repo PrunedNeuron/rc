@@ -1,0 +1,38 @@
+# ~/.nanorc
+
+# Enable file backup to filename~
+set backup
+
+# Enable auto indentation
+set autoindent
+
+# First `HOME` returns to the end of the first whitespace,
+# second to the beginning of the line
+set smarthome
+
+# Allow opening multiple files in different buffers
+set multibuffer
+
+# Enable soft-wrap
+set softwrap
+
+# Remember previous cursor position when editing a previously edited file
+set positionlog
+
+# Set tab size to 4
+set tabsize 4
+
+# Enable bracket matching
+set matchbrackets "(<[{)>]}"
+
+# Enable mouse support
+set mouse
+
+# Constantly display cursor position
+set constantshow
+
+# Display scrollbar
+set indicator
+
+# Enable syntax highlighting
+include "/usr/share/nano-syntax-highlighting/*.nanorc"

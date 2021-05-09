@@ -1,0 +1,5 @@
+#!/usr/bin/env sh
+
+freeport() {
+    fuser -k "$1"/tcp
+}

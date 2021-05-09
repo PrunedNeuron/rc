@@ -7,11 +7,6 @@ zstyle ':completion:*' group-name '' # group results by category
 zstyle ':completion:*' rehash true # enable rehash
 zstyle ':completion:::::' completer _expand _complete _ignored _approximate # enable approximate matches for completion
 
-# CDR
-zstyle ':chpwd:*' recent-dirs-file $ZSH_CDR_DIR/recent-dirs
-zstyle ':chpwd:*' recent-dirs-max 1000
-zstyle ':chpwd:*' recent-dirs-default yes # fall through to cd
-
 ## Real time type-ahead autocomplete configuration | Using marlonrichert/zsh-autocomplete
 # -> Min input to start autocompletion
 zstyle ':autocomplete:*' min-input 2

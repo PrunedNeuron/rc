@@ -5,7 +5,6 @@ update_info=kwin.upd:replace-scalein-with-scale,kwin.upd:port-minimizeanimation-
 GLCore=true
 GLTextureFilter=1
 LatencyControl=0
-LatencyPolicy=Low
 OpenGLIsUnsafe=false
 
 [Desktops]
@@ -17,9 +16,12 @@ Rows=1
 AnimationDuration=240
 
 [Effect-Wobbly]
-Drag=85
-Stiffness=10
-WobblynessLevel=1
+Drag=90
+Stiffness=6
+WobblynessLevel=2
+
+[Effect-YetAnotherMagicLamp]
+Duration=200
 
 [ModifierOnlyShortcuts]
 Meta=org.kde.lattedock,/Latte,org.kde.LatteDock,activateLauncherMenu
@@ -35,10 +37,14 @@ blurEnabled=true
 forceblurEnabled=true
 highlightwindowEnabled=true
 kwin4_effect_eyeonscreenEnabled=true
+kwin4_effect_slidingnotificationsEnabled=true
+kwin4_effect_squashEnabled=false
 kwin4_effect_windowapertureEnabled=false
 lattewindowcolorsEnabled=true
+magiclampEnabled=true
 minimizeallEnabled=false
-sticky-window-snappingEnabled=false
+sheetEnabled=true
+sticky-window-snappingEnabled=true
 synchronizeskipswitcherEnabled=false
 videowallEnabled=false
 wobblywindowsEnabled=true

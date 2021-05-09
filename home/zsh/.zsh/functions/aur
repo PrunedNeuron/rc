@@ -1,0 +1,7 @@
+#!/usr/bin/env zsh
+
+# Open AUR packages in the browser
+
+aur() {
+    xdg-open "https://aur.archlinux.org/packages/$1" > /dev/null 2>&1
+}
