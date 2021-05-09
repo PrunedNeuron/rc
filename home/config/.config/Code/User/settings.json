@@ -204,5 +204,6 @@
 	"[nginx]": {
 		"editor.defaultFormatter": "ahmadalli.vscode-nginx-conf"
 	},
-	"material-icon-theme.showWelcomeMessage": false
+    "material-icon-theme.showWelcomeMessage": false,
+    "remote.SSH.configFile": "/home/ayush/.ssh/conf.d/www/helheim/config"
 }
