@@ -36,7 +36,7 @@ Since this is a template repository, feel free to create your own dotfiles repos
     stow -d home -t $HOME -S zsh
   ```
   
-## Contributing
+## Contribute
 - Feel free to share your thoughts about this repository (on the [discussions tab](https://github.com/PrunedNeuron/.dotfiles/discussions)).
 - I'm open to ideas, suggestions and critique
 - If you see something wrong with my dotfiles, feel free to open an issue or participate in the discussion
