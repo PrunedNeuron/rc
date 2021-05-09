@@ -15,6 +15,10 @@
 
 # GPG
 secring.*
+.gpg
+.asc
+.key
+.pub
 
-# Talisman
-talisman_reports/
+# SSH keys
+id_*
