@@ -7,11 +7,7 @@ source $ZCONFDIR/preinit.zsh
 autoload -Uz compinit; compinit
 autoload -U promptinit; promptinit
 autoload -Uz url-quote-magic
-
 zle -N self-insert url-quote-magic
-
-# Load ZSH hooks
-source $ZCONFDIR/hooks.zsh
 
 # History configuration
 HISTFILE=$HOME/.zhistory
@@ -24,6 +20,9 @@ source $ZCONFDIR/options.zsh
 # ZSH styles (zstyles)
 source $ZCONFDIR/styles.zsh
 
+# Common shell config
+emulate bash -c 'source <(cat $(ls -1 $CONFDIR/shell/**/*))'
+
 # Load custom functions
 source $ZCONFDIR/functions.zsh
 
@@ -32,6 +31,3 @@ source $ZCONFDIR/plugins.zsh
 
 # Bind keys
 source $ZCONFDIR/keybindings.zsh
-
-# Other RCs
-source ~/.aliasrc

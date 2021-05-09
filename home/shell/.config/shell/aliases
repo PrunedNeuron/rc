@@ -1,16 +1,19 @@
+#!/usr/bin/env sh
+
 # Aliases
+
+# Services
+alias reloadde="systemctl --user restart plasma-plasmashell"
+alias reloaddns="sudo systemctl restart dnscrypt-proxy pihole-FTL NetworkManager"
 
 # Arch
 alias yayy="yay -S --needed --noconfirm" # Install
 alias yayr="yay -Rns" # Uninstall / Remove completely / Purge
-alias refreshmirrors="sudo reflector --latest 200 --protocol https --sort rate --fastest 50 --save /etc/pacman.d/mirrorlist"
-
-# Programs
-alias reloaddns="sudo systemctl restart dnscrypt-proxy pihole-FTL NetworkManager"
+alias refreshmirrors="sudo reflector --latest 200 --protocol https --sort rate --fastest 50 --save /etc/pacman.d/mirrorlist > /dev/null 2>&1"
 
 # Text
-alias copy="xsel -bi" # Copy to clipboard
-alias paste="xsel -bo" # Paste from clipboard
+alias cpy="xsel -bi" # Copy to clipboard
+alias pst="xsel -bo" # Paste from clipboard
 alias sudokate="SUDO_EDITOR=kate sudoedit"
 
 # Utility

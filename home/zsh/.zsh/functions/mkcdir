@@ -1,0 +1,11 @@
+#!/usr/bin/env zsh
+
+# Make a directory and cd into it
+
+mkcdir() {
+    mkdir -p $@ && cd ${@:$#}
+}
+
+take() {
+    mkcdir "$@"
+}

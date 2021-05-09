@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+
+# Perform a math calculation
+
+calc() {
+    printf "%s\n" "$*" | bc
+}

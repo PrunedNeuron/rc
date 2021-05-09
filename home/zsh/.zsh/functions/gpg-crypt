@@ -1,3 +1,5 @@
+#!/usr/bin/env bash
+
 # Convenient GPG encryption and decryption
 # Source: https://github.com/Czocher/gpg-crypt
 

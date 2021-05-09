@@ -1,7 +1,8 @@
 # ~/.bash_profile
-[ -f ~/.profile ] && source ~/.profile
 
-[ -f ~/.pathrc ] && source ~/.pathrc
+[ -f "$HOME/.envrc" ] && source "$HOME/.envrc"
+[ -f "$HOME/.profile" ] source "$HOME/.profile"
+
 export PATH=$(IFS=$':'; echo "${paths[*]}")
 
 [ -f ~/.bashrc ] && source ~/.bashrc
