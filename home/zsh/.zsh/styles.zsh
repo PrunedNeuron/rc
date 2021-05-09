@@ -11,9 +11,6 @@ zstyle ':completion:::::' completer _expand _complete _ignored _approximate # en
 # -> Min input to start autocompletion
 zstyle ':autocomplete:*' min-input 2
 
-# Use fzf for completion
-zstyle ':autocomplete:tab:*' fzf-completion yes
-
 # -> If any of the following are shown at the same time,
 # list them in the order given,
 zstyle ':completion:*:' group-order \
@@ -21,3 +18,28 @@ zstyle ':completion:*:' group-order \
     aliases functions executables \
     local-directories directories suffix-aliases \
     reserved-words builtins
+
+## fzf styles
+# Use fzf for completion
+#zstyle ':autocomplete:tab:*' fzf-completion yes
+
+# disable sort when completing `git checkout`
+zstyle ':completion:*:git-checkout:*' sort false
+
+# set descriptions format to enable group support
+zstyle ':completion:*:descriptions' format '[%d]'
+
+# set list-colors to enable filename colorizing
+zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
+
+# preview directory's content with exa when completing cd
+zstyle ':fzf-tab:complete:cd:*' fzf-preview 'exa -1 --color=always $realpath'
+
+# switch group using `,` and `.`
+zstyle ':fzf-tab:*' switch-group ',' '.'
+
+# switch group using `,` and `.`
+zstyle ':fzf-tab:*' fzf-command ftb-tmux-popup
+
+zstyle ':fzf-tab:complete:cd:*' fzf-preview 'exa -1 --color=always $realpath'
+zstyle ':fzf-tab:complete:cd:*' popup-pad 30 0
