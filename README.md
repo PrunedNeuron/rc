@@ -49,3 +49,9 @@ Since this is a template repository, feel free to create your own dotfiles repos
 - Feel free to share your thoughts about this repository (on the [discussions tab](https://github.com/PrunedNeuron/.dotfiles/discussions)).
 - I'm open to ideas, suggestions and critique
 - If you see something wrong with my dotfiles, feel free to open an issue or participate in the discussion
+
+## About me
+- [website](https://ayushm.dev)
+- [keybase](https://keybase.io/ayushm)
+- [email](mailto:aym@protonmail.com)
+- pgp: [0x3C8C6F4D80E9E4A7](keys.openpgp.org)
