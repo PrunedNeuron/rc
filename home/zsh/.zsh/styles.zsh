@@ -10,6 +10,7 @@ zstyle ':completion:::::' completer _expand _complete _ignored _approximate # en
 ## Real time type-ahead autocomplete configuration | Using marlonrichert/zsh-autocomplete
 # -> Min input to start autocompletion
 zstyle ':autocomplete:*' min-input 2
+zstyle ':autocomplete:*' min-delay 0.5
 
 # -> If any of the following are shown at the same time,
 # list them in the order given,
@@ -21,7 +22,11 @@ zstyle ':completion:*:' group-order \
 
 ## fzf styles
 # Use fzf for completion
-#zstyle ':autocomplete:tab:*' fzf-completion yes
+zstyle ':autocomplete:tab:*' completion fzf
+zstyle ':autocomplete:tab:*' fzf-completion yes
+
+# use input as query string when completing zlua
+zstyle ':fzf-tab:complete:_zlua:*' query-string input
 
 # disable sort when completing `git checkout`
 zstyle ':completion:*:git-checkout:*' sort false
@@ -38,8 +43,16 @@ zstyle ':fzf-tab:complete:cd:*' fzf-preview 'exa -1 --color=always $realpath'
 # switch group using `,` and `.`
 zstyle ':fzf-tab:*' switch-group ',' '.'
 
-# switch group using `,` and `.`
+# enable tmux popup
 zstyle ':fzf-tab:*' fzf-command ftb-tmux-popup
 
+# continuous trigger (accept the result and start another completion immediately)
+zstyle ':fzf-tab:*' continuous-trigger '/'
+
+# right and bottom padding of the popup window in tmux
 zstyle ':fzf-tab:complete:cd:*' fzf-preview 'exa -1 --color=always $realpath'
 zstyle ':fzf-tab:complete:cd:*' popup-pad 30 0
+
+# specifies the key to accept and run a suggestion in one keystroke
+zstyle ':fzf-tab:*' fzf-bindings 'space:accept'
+zstyle ':fzf-tab:*' accept-line enter

@@ -11,7 +11,8 @@ alias yayy="yay -S --needed --noconfirm" # Install
 alias yayr="yay -Rns" # Uninstall / Remove completely / Purge
 alias refreshmirrors="sudo reflector --latest 200 --protocol https --sort rate --fastest 50 --save /etc/pacman.d/mirrorlist > /dev/null 2>&1"
 alias yayfind="yay -Slq | fzf --multi --preview 'yay -Si {1}' | xargs -ro yay -S"
-alias yayrm="yay -Qq | fzf --multi --preview 'yay -Qi {1}' | xargs -ro sudo yay -Rns"
+alias yayremove="yay -Qq | fzf --multi --preview 'yay -Qi {1}' | xargs -ro sudo yay -Rns"
+
 
 # Text
 alias cpy="xsel -bi" # Copy to clipboard

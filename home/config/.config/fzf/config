@@ -1,0 +1,17 @@
+# fzf configuration
+
+export FZF_DEFAULT_COMMAND='fd --reverse --hidden --follow --exclude .git'
+
+export FZF_DEFAULT_OPTS='
+    --height 60% --layout=reverse --border
+    --color=fg:#575757,bg:#ffffff,hl:#1f8fff
+    --color=fg+:#383838,bg+:#ffffff,hl+:#1fe1ff
+    --color=info:#ff9812,prompt:#1f8fff,pointer:#2ee687
+    --color=marker:#ff4242,spinner:#33f0f0,header:#1ad665'
+
+export FZF_CTRL_T_OPTS="--preview '(highlight -O ansi -l {} 2> /dev/null || cat {} || tree -C {}) 2> /dev/null | head -200'"
+
+export FZF_COMPLETION_TRIGGER=''
+
+# Load fzf shell extensions for zsh
+source <(cat $(ls -1 /usr/share/fzf/*.zsh))
