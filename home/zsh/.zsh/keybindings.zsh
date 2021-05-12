@@ -23,6 +23,17 @@ bindkey '^[[3;5~' kill-word
 bindkey '^[[3^' kill-word
 bindkey '^H' backward-kill-word
 
+# fzf
+bindkey '^T' fzf-completion
+# bindkey '^I' $fzf_default_completion # breaks fzf tab completion
+zle     -N     fzf-history-widget-accept
+bindkey '^X^R' fzf-history-widget-accept
+
+fzf-history-widget-accept() {
+  fzf-history-widget
+  zle accept-line
+}
+
 # File manager key binds
 # Alt+Left = go back
 # Alt+Up = go to parent dir
