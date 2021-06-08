@@ -1,18 +1,18 @@
 [user]
 	name = Ayush
 	email = aym@pm.me
-	signingKey = 0x26FB97C855160072
+	signingkey = 0x26FB97C855160072
 [core]
-    autocrlf = input
-	editor = nano -w
+	autocrlf = input
+	editor = "vim"
 	excludesFile = $HOME/.gitignore
 [commit]
-	gpgSign = true
+	gpgsign = true
 [gpg]
 	program = gpg
 [init]
-	defaultBranch = master
+	defaultbranch = master
 [color]
-    ui = auto
+	ui = auto
 [push]
-    default = simple
+	default = simple

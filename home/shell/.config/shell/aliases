@@ -17,10 +17,9 @@ alias yayremove="yay -Qq | fzf --multi --preview 'yay -Qi {1}' | xargs -ro sudo 
 # Text
 alias cpy="xsel -bi" # Copy to clipboard
 alias pst="xsel -bo" # Paste from clipboard
-alias sudokate="SUDO_EDITOR=kate sudoedit"
+alias sudokate="SUDO_EDITOR=kate sudoedit" # launch kate as root
 
 # Utility
-alias lsh="ls -d .*"
 alias now="date +\"%r\""
 alias today="date +%F"
 alias fastping="ping -c 100 -s.2"
@@ -28,6 +27,12 @@ alias fastping="ping -c 100 -s.2"
 # Shortcuts
 alias ~="cd $HOME"
 alias fjson="python -m json.tool"
+
+# exa
+alias exa="exa --icons --color=auto"
+alias exal="exa --long --icons --color=auto"
+alias exaa="exa --all --icons --color=auto"
+alias exaal="exa --all --long --icons --color=auto"
 
 # Safety
 alias rm="rm -i"

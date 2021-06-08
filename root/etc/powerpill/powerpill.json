@@ -7,7 +7,7 @@
       "--check-integrity=true",
       "--conditional-get=true",
       "--continue=true",
-      "--file-allocation=none",
+      "--file-allocation=falloc",
       "--log-level=error",
       "--max-concurrent-downloads=100",
       "--max-connection-per-server=5",

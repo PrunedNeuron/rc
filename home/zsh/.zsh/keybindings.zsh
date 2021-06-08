@@ -19,9 +19,19 @@ bindkey '^[[1;5D' backward-word
 bindkey '^[[1;5C' forward-word
 
 # Crtl+Backspace, Crtl+Delete
-bindkey '^[[3;5~' kill-word
+# bindkey '^[[3;5~' kill-word
 bindkey '^[[3^' kill-word
-bindkey '^H' backward-kill-word
+bindkey '^H' backward-kill-word # doesn't work anymore for some reason
+
+# [Ctrl-Backspace] - delete whole backward-word
+bindkey -M emacs '^H' backward-kill-word
+bindkey -M viins '^H' backward-kill-word
+bindkey -M vicmd '^H' backward-kill-word
+
+# [Ctrl-Delete] - delete whole forward-word
+bindkey -M emacs '^[[3;5~' kill-word
+bindkey -M viins '^[[3;5~' kill-word
+bindkey -M vicmd '^[[3;5~' kill-word
 
 # fzf
 bindkey '^T' fzf-completion
@@ -29,36 +39,38 @@ bindkey '^T' fzf-completion
 zle     -N     fzf-history-widget-accept
 bindkey '^X^R' fzf-history-widget-accept
 
-fzf-history-widget-accept() {
-  fzf-history-widget
-  zle accept-line
-}
-
 # File manager key binds
 # Alt+Left = go back
 # Alt+Up = go to parent dir
 cdUndoKey() {
   popd
-  zle       reset-prompt
+  zle reset-prompt
   print
   ls
-  zle       reset-prompt
+  zle reset-prompt
 }
 
 cdParentKey() {
   pushd ..
-  zle      reset-prompt
+  zle reset-prompt
   print
   ls
-  zle       reset-prompt
+  zle reset-prompt
 }
 
-zle -N                 cdParentKey
-zle -N                 cdUndoKey
-bindkey '^[[1;3A'      cdParentKey
-bindkey '^[[1;3D'      cdUndoKey
+zle -N cdParentKey
+zle -N cdUndoKey
+bindkey '^[[1;3A' cdParentKey
+bindkey '^[[1;3D' cdUndoKey
 
 # Exit zsh even on partial command line
 exit_zsh() { exit }
 zle -N exit_zsh
 bindkey '^D' exit_zsh
+
+
+# fzf specific
+fzf-history-widget-accept() {
+  fzf-history-widget
+  zle accept-line
+}

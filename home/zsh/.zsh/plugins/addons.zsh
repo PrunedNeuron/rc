@@ -16,8 +16,8 @@ zinit wait"0a" lucid light-mode for \
 # Fuzzy finder
 zinit has'fzf' lucid light-mode for \
     atload'source "$HOME/.config/fzf/config"' \
-        unixorn/fzf-zsh-plugin \
-        Aloxaf/fzf-tab
+        unixorn/fzf-zsh-plugin
+#         Aloxaf/fzf-tab
 
 # fm file manager
 zinit ice --depth'1' atinit'source fm.zsh' atclone'./fm__compile' atpull'%atclone'

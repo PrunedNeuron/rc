@@ -5,3 +5,7 @@ Xft.hinting: 1
 Xft.antialias: 1
 Xft.rgba: rgb
 Xft.dpi: 101
+
+! emacs
+Emacs.font: SF Mono
+
