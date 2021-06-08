@@ -14,14 +14,14 @@ HISTFILE=$HOME/.zhistory
 SAVEHIST=$(( 100 * 1000 ))
 HISTSIZE=$(( 1.2 * SAVEHIST )) # ZSH recommended value
 
+# Common shell config
+emulate bash -c 'source <(cat $(ls -1 $CONFDIR/shell/**/*))'
+
 # ZSH options (setopts)
 source $ZCONFDIR/options.zsh
 
 # ZSH styles (zstyles)
 source $ZCONFDIR/styles.zsh
-
-# Common shell config
-emulate bash -c 'source <(cat $(ls -1 $CONFDIR/shell/**/*))'
 
 # Load custom functions
 source $ZCONFDIR/functions.zsh
