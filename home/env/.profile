@@ -15,7 +15,7 @@ export VISUAL=$EDITOR
 export GPG_TTY=$(tty)
 
 # Use KDE file selector dialog instead of GTK
-export GTK_USE_PORTAL=1
+#export GTK_USE_PORTAL=1
 
 # Enable docker buildkit
 export DOCKER_BUILDKIT=1 COMPOSE_DOCKER_CLI_BUILD=1
