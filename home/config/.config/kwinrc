@@ -49,11 +49,6 @@ synchronizeskipswitcherEnabled=false
 videowallEnabled=false
 wobblywindowsEnabled=true
 
-[TabBox]
-DesktopLayout=org.kde.breeze.desktop
-DesktopListLayout=org.kde.breeze.desktop
-LayoutName=org.kde.breeze.desktop
-
 [TabBoxAlternative]
 LayoutName=com.github.vinceliuice.WhiteSur-alt
 
@@ -66,5 +61,4 @@ BorderSize=None
 BorderSizeAuto=false
 ButtonsOnLeft=XIA
 ButtonsOnRight=SH
-library=org.kde.kwin.aurorae
-theme=__aurorae__svg__WhiteSur
+theme=__aurorae__svg__PlasmaSur-dark
