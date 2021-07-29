@@ -13,6 +13,11 @@ zinit wait"[ -d .git ] || git rev-parse --git-dir > /dev/null 2>&1" lucid light-
     mdumitru/git-aliases \
     voronkovich/gitignore.plugin.zsh
 
+# Git extras
+zinit lucid wait'0a' for \
+    as"program" pick"$ZPFX/bin/git-*" src"etc/git-extras-completion.zsh" make"PREFIX=$ZPFX" \
+        tj/git-extras
+
 # SSH extras
 zinit ice wait"2" lucid
 zinit light gko/ssh-connect

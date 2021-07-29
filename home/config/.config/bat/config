@@ -1,6 +1,6 @@
 # bat config
 
 --theme="ansi"
---paging="never"
---style="numbers,changes,header"
 --map-syntax=".ignore:Git Ignore"
+#--style="numbers,changes,header"
+#--paging="never"
