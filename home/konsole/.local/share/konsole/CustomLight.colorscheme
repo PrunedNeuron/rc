@@ -91,6 +91,6 @@ Color=0,0,0
 [General]
 Blur=false
 ColorRandomization=false
-Description=CustomLight
+Description=Light
 Opacity=1
 Wallpaper=

@@ -360,7 +360,7 @@ user_pref("security.mixed_content.block_display_content", true);
  * [TEST] http://example.com [upgrade]
  * [TEST] http://neverssl.org/ [no upgrade]
  * [1] https://bugzilla.mozilla.org/1613063 [META] ***/
-user_pref("dom.security.https_only_mode", true); // [FF76+]
+user_pref("dom.security.https_only_mode", false); // [FF76+]
 
 /* 1246: disable HTTP background requests [FF82+]
  * When attempting to upgrade, if the server doesn't respond within 3 seconds, firefox
@@ -393,7 +393,7 @@ user_pref("security.insecure_connection_text.enabled", true); // [FF60+]
 /* 1603: CROSS ORIGIN: control when to send a referer
  * 0=always (default), 1=only if base domains match, 2=only if hosts match
  * [SETUP-WEB] Known to cause issues with older modems/routers and some sites e.g vimeo, icloud, instagram ***/
-user_pref("network.http.referer.XOriginPolicy", 2);
+user_pref("network.http.referer.XOriginPolicy", 0);
 
 /* 1604: CROSS ORIGIN: control the amount of information to send [FF52+]
  * 0=send full URI (default), 1=scheme+host+port+path, 2=scheme+host+port ***/
@@ -496,7 +496,7 @@ user_pref("extensions.postDownloadThirdPartyPrompt", false);
  * [NOTE] Enforcing category to custom ensures ETP related prefs are always honored
  * [SETTING] Privacy & Security>Enhanced Tracking Protection>Custom>Cookies
  * [1] https://blog.mozilla.org/security/2021/02/23/total-cookie-protection/ ***/
-user_pref("network.cookie.cookieBehavior", 5);
+user_pref("network.cookie.cookieBehavior", 4);
 user_pref("browser.contentblocking.category", "custom");
 
 /* 2702: set third-party cookies (if enabled, see 2701) to session-only
@@ -537,5 +537,69 @@ user_pref("layout.word_select.eat_space_to_next_word", true);
 /* Remove top sites from new tab page */
 user_pref("browser.newtabpage.activity-stream.feeds.topsites", false);
 
+// Added by user - July 2021
 
+
+// Fonts
+user_pref("font.name.monospace.x-western", "SF Mono");
+user_pref("font.name.sans-serif.x-western", "SF Pro Text");
+user_pref("font.name.serif.x-western", "New York Small");
+
+
+/* 
+    Firefox has a setting which determines how many replacements it will allow 
+    from fontconfig. To allow it to use all your replacement-rules, change 
+    gfx.font_rendering.fontconfig.max_generic_substitutions to 127 (the highest 
+    possible value). 
+ */
+user_pref("gfx.font_rendering.fontconfig.max_generic_substitutions", 127);
+
+/*
+    Firefox ships with Twemoji Mozilla font. To use system emoji font set 
+    font.name-list.emoji to emoji; Default: Twemoji Mozilla
+ */
+user_pref("font.name-list.emoji", "Twemoji");
+
+// Use kde file picker
+user_pref("widget.use-xdg-desktop-portal", true);
+
+// Disable default browser check
+user_pref("browser.shell.checkDefaultBrowser", false);
+
+user_pref("media.hardware-video-decoding.force-enabled", true);
+user_pref("browser.quitShortcut.disabled", true);
+// user_pref("privacy.resistFingerprinting", true);
+
+user_pref("gfx.webrender.enabled", true);
+user_pref("gfx.webrender.all", true);
+user_pref("gfx.webrender.compositor", true);
+user_pref("gfx.webrender.compositor.force-enabled", true);
+user_pref("layers.acceleration.force-enabled", true);
+user_pref("webgl.force-enabled", true);
+user_pref("webgl.msaa-force", true);
+
+user_pref("network.protocol-handler.expose.magnet", false);
+user_pref("network.dns.echconfig.enabled", true);
+user_pref("network.dns.use_https_rr_as_altsvc", true);
+user_pref("network.security.esni.enabled", true);
+user_pref("network.trr.cusom_uri", "https://127.0.0.1:3000/dns-query");
+user_pref("network.trr.uri", "https://127.0.0.1:3000/dns-query");
+user_pref("network.trr.mode", 2);
+user_pref("extensions.translations.disabled", false);
+user_pref("browser.cache.disk.smart_size.enabled", false);
+user_pref("browser.cache.disk.capacity", 50000);
+user_pref("media.autoplay.default", 5);
+user_pref("media.autoplay.allow-muted", false);
+user_pref("media.autoplay.block-webaudio", false);
+user_pref("browser.compactmode.show", true);
+user_pref("layout.forms.input-type-search.enabled", false);
+
+/*
+ * Don't restrict extensions from running on protected pages
+ *
+ * Default:
+ *
+ accounts-static.cdn.mozilla.net,accounts.firefox.com,addons.cdn.mozilla.net,addons.mozilla.org,api.accounts.firefox.com,content.cdn.mozilla.net,discovery.addons.mozilla.org,install.mozilla.org,oauth.accounts.firefox.com,profile.accounts.firefox.com,support.mozilla.org,sync.services.mozilla.com
+ */
+// user_pref("extensions.webextensions.restrictedDomains", "");
 

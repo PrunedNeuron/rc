@@ -2,12 +2,12 @@
 	"aururl": "https://aur.archlinux.org",
 	"buildDir": "/home/ayush/.cache/yay",
 	"absdir": "/home/ayush/.cache/yay/abs",
-	"editor": "",
+	"editor": "nvim",
 	"editorflags": "",
 	"makepkgbin": "makepkg",
 	"pacmanbin": "pacman",
 	"pacmanconf": "/etc/pacman.conf",
-	"redownload": "no",
+	"redownload": "yes",
 	"rebuild": "no",
 	"answerclean": "",
 	"answerdiff": "",
@@ -34,9 +34,9 @@
 	"pgpfetch": true,
 	"upgrademenu": true,
 	"cleanmenu": true,
-	"diffmenu": true,
-	"editmenu": false,
+	"diffmenu": false,
+	"editmenu": true,
 	"combinedupgrade": true,
 	"useask": false,
-	"batchinstall": false
+	"batchinstall": true
 }
