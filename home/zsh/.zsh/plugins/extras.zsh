@@ -3,7 +3,7 @@
 # ls -> exa aliases, colorization for several commands
 zinit wait"2" lucid light-mode for \
     zpm-zsh/colorize \
- 	zpm-zsh/ls
+    zpm-zsh/ls
 
 # Git extras
 zinit wait"[ -d .git ] || git rev-parse --git-dir > /dev/null 2>&1" lucid light-mode for \
@@ -45,3 +45,6 @@ zinit wait"2" lucid light-mode for \
     hlissner/zsh-autopair \
     denysdovhan/gitio-zsh \
     MichaelAquilina/zsh-you-should-use
+
+
+# Other

@@ -1,0 +1,7 @@
+#!/usr/bin/env sh
+
+# Check if a command exists
+
+function exists () {
+	hash "$1" 2>/dev/null
+}
