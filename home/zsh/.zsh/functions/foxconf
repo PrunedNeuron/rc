@@ -1,0 +1,14 @@
+#!/usr/bin/env zsh
+
+# Add entry to firefox configuration file - user.js
+
+foxconf() {
+	local profile="nightly"
+	local conf_location="$HOME/.mozilla/firefox/$profile/user.js"
+    
+    if [[ "$#" -eq 2 && -n "$1" && -n "$2" ]]; then
+		echo "user_pref(\"$1\", $2);" >> "$conf_location"
+	else
+		echo "Invalid arguments!"
+	fi
+}

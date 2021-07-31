@@ -1,0 +1,6 @@
+ #!/usr/bin/env sh
+
+# Import public key from a URL
+function gpgurl() {
+    curl -sSL $1 | gpg --import -
+}

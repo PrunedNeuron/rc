@@ -1,0 +1,79 @@
+#!/usr/bin/env bash
+
+declare -r esc=$'\033'
+declare -r c_reset="${esc}[0m"
+declare -r c_red="${esc}[31m"
+
+err() {
+  printf "${c_red}%s${c_reset}\n" "$*" >&2
+}
+
+die() {
+  [[ -n "$1" ]] && err "$1"
+  exit 1
+}
+
+has() {
+  local verbose=0
+  if [[ $1 == '-v' ]]; then
+    verbose=1
+    shift
+  fi
+  for c; do c="${c%% *}"
+    if ! command -v "$c" &> /dev/null; then
+      (( verbose > 0 )) && err "$c not found"
+      return 1
+    fi
+  done
+}
+
+openurl() {
+  local url="$1"
+  local browser
+  case "$url" in
+    *youtube.com*|*youtu.be*|*vimeo.com*)
+      browser=$(select_from \
+        mpv mplayer2 mplayer) ;;
+    *)
+      browser=$(select_from \
+        -c "pgrep -u $USER -i" \
+        firefox chromium-browser chrome)
+      [[ ! $browser ]] && browser='w3m'
+      ;;
+  esac
+  $browser "$url"
+}
+
+# http://stackoverflow.com/a/10660730
+rawurlencode() {
+  local string="$*"
+  local strlen=${#string}
+  local encoded=""
+  for (( pos=0; pos < strlen; pos++ )); do
+    c="${string:$pos:1}"
+    case "$c" in
+      [-_.~a-zA-Z0-9])
+        o="$c" ;;
+      *)
+        printf -v o '%%%02x' "'$c"
+    esac
+    encoded+="${o}"
+  done
+  echo "${encoded}"
+}
+
+has -v curl jq fzf || die
+
+if [[ -z "$*" ]]; then
+  die 'nothing to search for'
+fi
+
+response=$( curl -sfL "http://ajax.googleapis.com/ajax/services/search/web?v=1.0&rsz=8&q=$(rawurlencode "$*")" ) || die 'error connecting to google, check connection'
+json=$( jq -c '.["responseData"]["results"] | map("\(.unescapedUrl) \(.title) | \(.content)") | .[]' <<< "$response" ) || die 'error parsing results :('
+url=$( fzf -e --ansi --cycle --inline-info <\
+  <( sed -r 's/<[^>]*>//g; s/\\n//g; s/^\s*"//; s/",?$//' <<< "$json" ) |
+  cut -d' ' -f1 )
+
+if [[ -n "$url" ]]; then
+  openurl "$url"
+fi

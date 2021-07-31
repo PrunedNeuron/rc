@@ -574,7 +574,7 @@ user_pref("gfx.webrender.enabled", true);
 user_pref("gfx.webrender.all", true);
 user_pref("gfx.webrender.compositor", true);
 user_pref("gfx.webrender.compositor.force-enabled", true);
-user_pref("layers.acceleration.force-enabled", true);
+user_pref("layers.acceleration.force-enabled", false); // Hogging RAM?
 user_pref("webgl.force-enabled", true);
 user_pref("webgl.msaa-force", true);
 
@@ -586,7 +586,7 @@ user_pref("network.trr.cusom_uri", "https://127.0.0.1:3000/dns-query");
 user_pref("network.trr.uri", "https://127.0.0.1:3000/dns-query");
 user_pref("network.trr.mode", 2);
 user_pref("extensions.translations.disabled", false);
-user_pref("browser.cache.disk.smart_size.enabled", false);
+user_pref("browser.cache.disk.smart_size.enabled", true);
 user_pref("browser.cache.disk.capacity", 50000);
 user_pref("media.autoplay.default", 5);
 user_pref("media.autoplay.allow-muted", false);
