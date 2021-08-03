@@ -1,11 +1,7 @@
-Xft.autohint: 0
+Xft.dpi:       96
+Xft.antialias: true
+Xft.hinting:   true
+Xft.autohint:  false
+Xft.hintstyle: hintslight
 Xft.lcdfilter: lcddefault
-Xft.hintstyle: hintnone
-Xft.hinting: 0
-Xft.antialias: 1
-Xft.rgba: rgb
-Xft.dpi: 101
-
-! emacs
-Emacs.font: SF Mono
-
+Xft.rgba:      rgb

@@ -149,7 +149,7 @@
 	},
 	"vscode_custom_css.imports": ["file:///home/ayush/synthwave84.css"],
 	"vscode_custom_css.policy": true,
-	"workbench.colorTheme": "Serendipity Light",
+	"workbench.colorTheme": "Min Light",
 	"customizeUI.titleBar": "regular",
 	"customizeUI.activityBar": "regular",
 	"customizeUI.font.monospace": "SF Mono",
