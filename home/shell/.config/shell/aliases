@@ -60,13 +60,25 @@ alias ln="ln -i"
 # TeX Live Package Manager (pacman integration)
 alias texpac="tllocalmgr"
 
-# Config edit shortcuts
+## Config file shortcuts
+
+# User
 alias nvimrc='nvim ~/.config/nvim/init.vim'
 alias zshrc='nvim ~/.zshrc'
 alias zprofile='nvim ~/.zprofile'
 alias zshenv='nvim ~/.zshenv'
 alias foxrc='nvim ~/.mozilla/firefox/nightly/user.js'
 alias yayrc='nvim ~/.config/yay/config.json'
+alias starrc='nvim ~/.zsh/themes/starship.toml'
+
+# Root
+alias dnscryptrc='nvim /etc/dnscrypt-proxy/dnscrypt-proxy.toml'
+alias ftlrc='nvim /etc/pihole/pihole-FTL.conf'
+alias resolvrc='nvim /etc/resolv.conf'
+alias pacmanrc='nvim /etc/pacman.conf'
+alias makepkgrc='nvim /etc/makepkg.conf'
+alias nginxrc='nvim /etc/nginx/nginx.conf'
+alias piholerc='nvim /etc/pihole/pihole-FTL.conf'
 
 # Text editing
 alias snvim="sudo nvim"

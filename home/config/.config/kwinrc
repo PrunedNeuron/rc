@@ -61,7 +61,6 @@ BorderlessMaximizedWindows=true
 Placement=Centered
 
 [org.kde.kdecoration2]
-BorderSize=None
-BorderSizeAuto=false
 ButtonsOnLeft=XIA
 ButtonsOnRight=FH
+theme=__aurorae__svg__WhiteSur

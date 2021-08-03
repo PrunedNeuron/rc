@@ -20,3 +20,7 @@ zinit light ddnexus/fm
 # zsh-fnm
 zinit ice atinit"export ZSH_FNM_NODE_VERSION='16.4.0'"
 zinit light "dominik-schwabe/zsh-fnm"
+
+# dotbare dotfiles manager
+zinit ice wait lucid
+zinit light kazhala/dotbare

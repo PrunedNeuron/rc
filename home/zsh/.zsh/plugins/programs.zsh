@@ -29,8 +29,16 @@ zinit ice as"program" wait lucid pick"ugit"
 zinit light Bhupesh-V/ugit
 
 # git diff so fancy
-zplugin ice as"program" wait lucid pick"bin/git-dsf"
-zplugin light zdharma/zsh-diff-so-fancy
+zinit ice as"program" wait lucid pick"bin/git-dsf"
+zinit light zdharma/zsh-diff-so-fancy
+
+# fzpac
+zinit ice as"program" wait lucid pick"fzpac"
+zinit light sheepla/fzpac
+
+# fzfx
+zinit ice as"program" wait lucid pick"fzfx"
+zinit light danisztls/fzfx
 
 # asciinema
 zinit ice as"command" wait lucid has"python" \
