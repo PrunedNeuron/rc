@@ -54,4 +54,4 @@ Since this is a template repository, feel free to create your own dotfiles repos
 - [website](https://ayushm.dev)
 - [keybase](https://keybase.io/ayushm)
 - [email](mailto:aym@protonmail.com)
-- pgp: [0x3C8C6F4D80E9E4A7](keys.openpgp.org)
+- pgp: [0x3C8C6F4D80E9E4A7](https://keys.openpgp.org/vks/v1/by-keyid/3C8C6F4D80E9E4A7)
