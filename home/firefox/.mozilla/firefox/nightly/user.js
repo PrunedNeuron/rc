@@ -1,6 +1,6 @@
 /*
  * User configuration for firefox nightly
- * Modified: 03/08/2021
+ * Modified: 028/08/2021
  */
 
 
@@ -9,6 +9,13 @@ user_pref("gfx.webrender.enabled", true);
 user_pref("gfx.webrender.all", true);
 user_pref("gfx.webrender.compositor", true);
 user_pref("gfx.webrender.compositor.force-enabled", true);
+user_pref("gfx.x11-egl.force-enabled", true);
+user_pref("gfx.x11-egl.force-disabled", false);
+user_pref("webgl.disabled", true);
+user_pref("webgl.force-enabled", true);
+user_pref("webgl.msaa-force", true);
+//user_pref("layers.acceleration.force-enabled", true);
+
 
 // Fonts
 user_pref("gfx.font_rendering.fontconfig.max_generic_substitutions", 127);
@@ -16,10 +23,20 @@ user_pref("font.name-list.emoji", "emoji");
 
 
 /* Media */
-user_pref("media.autoplay.default", 0);
+user_pref("media.autoplay.default", 5);
 user_pref("media.autoplay.allow-muted", false);
 user_pref("media.autoplay.block-webaudio", false);
+user_pref("media.autoplay.block-event", true);
 user_pref("media.autoplay.blocking_policy", 2);
+user_pref("media.autoplay.allow-extension-background-pages", false);
+user_pref("media.ffmpeg.vaapi.enabled", true);
+user_pref("media.ffmpeg.vaapi-drm-display.enabled", true);
+user_pref("media.ffvpx.enabled", false);
+user_pref("media.rdd-vpx.enabled", false);
+user_pref("media.rdd-process.enabled", false);
+user_pref("media.navigator.enabled", false);
+user_pref("media.navigator.mediadatadecoder_vpx_enabled", true);
+user_pref("media.hardware-video-decoding.force-enabled", true);
 
 
 /* Behavior */
@@ -30,6 +47,13 @@ user_pref("browser.quitShortcut.disabled", true); // Don't quit on CTRL+Q
 user_pref("browser.bookmarks.openInTabClosesMenu", false);
 user_pref("browser.tabs.loadBookmarksInBackground", true);
 user_pref("layout.word_select.eat_space_to_next_word", true);
+user_pref("browser.helperApps.showOpenOptionForPdfJS", true);
+
+/* DOM */
+user_pref("dom.ipc.processCount", 4); // DEFAULT: 8
+user_pref("dom.event.clipboardevents.enabled", true);
+user_pref("dom.event.contextmenu.enabled", true); // Don't allow right click prevention'
+user_pref("dom.w3c_touch_events.enabled", 0); // prevents JS context menu from not appearing
 
 
 /* Privacy */
@@ -62,8 +86,8 @@ user_pref("toolkit.coverage.endpoint.base", "");
 user_pref("datareporting.healthreport.uploadEnabled", false);
 user_pref("app.shield.optoutstudies.enabled", false);
 user_pref("browser.discovery.enabled", false);
-user_pref("breakpad.reportURL", "");
-user_pref("browser.tabs.crashReporting.sendReport", false);
+user_pref("breakpad.reportURL", "https://crash-stats.mozilla.org/report/index/"); // Crash reports URL
+user_pref("browser.tabs.crashReporting.sendReport", true); // Temporary
 user_pref("app.normandy.enabled", false);
 user_pref("app.normandy.api_url", "");
 user_pref("browser.ping-centre.telemetry", false);
@@ -98,10 +122,13 @@ user_pref("extensions.blocklist.enabled", true);
 
 // Network
 user_pref("network.prefetch-next", false);
+user_pref("network.dns.disablePrefetchFromHTTPS", true);
 user_pref("network.dns.disablePrefetch", true);
+user_pref("network.predictor.enable-prefetch", false);
 user_pref("network.predictor.enabled", false);
 user_pref("network.http.speculative-parallel-limit", 0);
 user_pref("network.dns.disableIPv6", true);
+user_pref("network.IDN_show_punycode", true);
 user_pref("network.cookie.cookieBehavior", 4);
 user_pref("network.proxy.socks_remote_dns", true);
 user_pref("network.auth.subresource-http-auth-allow", 1);
@@ -113,6 +140,12 @@ user_pref("browser.urlbar.speculativeConnect.enabled", false);
 user_pref("browser.urlbar.dnsResolveSingleWordsAfterSearch", 0);
 user_pref("browser.formfill.enable", false); // disable form fill history
 user_pref("browser.display.use_system_colors", false);
+user_pref("browser.tabs.unloadOnLowMemory", true);
+user_pref("browser.cache.memory.capacity", 4096);
+user_pref("browser.sessionstore.privacy_level", 2); // 2 = Never store session data
+user_pref("browser.sessionstore.interval", 45000) // DEFAULT: 15000 (in ms); save session to disk every 45 seconds.
+user_pref("browser.menu.showViewImageInfo", true);
+user_pref("browser.menu.showCharacterEncoding", true);
 
 
 /* Other */
@@ -127,3 +160,17 @@ user_pref("javascript.use_us_english_locale", true);
 /* Experimental */
 user_pref("network.dns.echconfig.enabled", true);
 user_pref("network.dns.use_https_rr_as_altsvc", true);
+
+/* For custom CSS */
+user_pref("toolkit.legacyUserProfileCustomizations.stylesheets", true);
+user_pref("layout.css.backdrop-filter.enabled", true);
+user_pref("svg.context-properties.content.enabled", true);
+user_pref("mozilla.widget.use-argb-visuals", true);
+
+
+/* Disable default JSON viewer (use https://addons.mozilla.org/en-US/firefox/addon/jsondiscovery/) */
+user_pref("devtools.jsonview.enabled", false);
+
+
+/* Extensions */
+user_pref("extensions.pocket.enabled", false);

@@ -3,9 +3,7 @@
 # Read when starting as an interactive shell
 
 source $ZCONFDIR/preinit.zsh
-
 autoload -Uz compinit; compinit
-autoload -U promptinit; promptinit
 autoload -Uz url-quote-magic
 zle -N self-insert url-quote-magic
 

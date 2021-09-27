@@ -1,3 +1,4 @@
+# ~/.profile
 
 # systemd
 export SYSTEMD_PAGER=

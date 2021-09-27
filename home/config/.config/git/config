@@ -1,0 +1,19 @@
+[user]
+	name = Ayush
+	email = aym@protonmail.com
+	signingkey = 0x3C8C6F4D80E9E4A7
+[core]
+	autocrlf = input
+	editor = "nvim"
+[gpg]
+	program = gpg
+[init]
+	defaultbranch = master
+[color]
+    ui = auto
+[push]
+    default = simple
+[pull]
+    rebase = true
+[commit]
+	gpgsign = true

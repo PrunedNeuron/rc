@@ -13,6 +13,9 @@ Id_1=e9611443-147d-49a0-9b47-c3636f877bd0
 Number=1
 Rows=1
 
+[Effect-Blur]
+BlurStrength=9
+
 [Effect-MagicLamp]
 AnimationDuration=240
 
@@ -34,18 +37,24 @@ LongitudeAuto=86.2941
 [Plugins]
 ParachuteEnabled=true
 blurEnabled=true
+contrastEnabled=true
+force-decorations-gtk3Enabled=true
 forceblurEnabled=true
 highlightwindowEnabled=true
-krohnkiteEnabled=true
+krohnkiteEnabled=false
+kwin-rectangleEnabled=false
 kwin4_effect_eyeonscreenEnabled=true
+kwin4_effect_rubberband_maximizeEnabled=false
 kwin4_effect_slidingnotificationsEnabled=true
 kwin4_effect_squashEnabled=false
 kwin4_effect_windowapertureEnabled=false
 lattewindowcolorsEnabled=true
 magiclampEnabled=true
 minimizeallEnabled=false
+movewindowtocenterEnabled=true
+shakeEnabled=true
 sheetEnabled=true
-sticky-window-snappingEnabled=false
+sticky-window-snappingEnabled=true
 synchronizeskipswitcherEnabled=false
 videowallEnabled=false
 wobblywindowsEnabled=true
@@ -58,9 +67,12 @@ LayoutName=com.github.vinceliuice.WhiteSur-alt
 
 [Windows]
 BorderlessMaximizedWindows=true
+ElectricBorderCornerRatio=0.1
 Placement=Centered
 
 [org.kde.kdecoration2]
+BorderSize=None
+BorderSizeAuto=false
 ButtonsOnLeft=XIA
 ButtonsOnRight=FH
-theme=__aurorae__svg__WhiteSur
+theme=__aurorae__svg__PlasmaSur-white
