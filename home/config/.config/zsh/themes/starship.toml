@@ -3,6 +3,9 @@
 # General
 command_timeout = 1500
 
+[username]
+format = "[$user]($style)@"
+
 [character]
 success_symbol = "[➜](bold green)"
 error_symbol = "[➜](bold red)"
