@@ -41,6 +41,8 @@ call plug#begin()
     Plug 'sbdchd/neoformat'
     Plug 'sheerun/vim-polyglot'
     Plug 'ZSaberLv0/ZFVimTxtHighlight'
+    Plug 'junegunn/vim-easy-align'
+    Plug 'godlygeek/tabular'
 
     " languages
     Plug 'fatih/vim-go'
@@ -118,6 +120,14 @@ let g:lightline = {
 " set signify's async update interval (in ms)
 set updatetime=100
 
+" Mappings
+" Start interactive EasyAlign in visual mode (e.g. vipga)
+xmap ga <Plug>(EasyAlign)
+
+" Start interactive EasyAlign for a motion/text object (e.g. gaip)
+nmap ga <Plug>(EasyAlign)
+
+" Lua
 " setup function with require
 lua require('neoscroll').setup()
 

@@ -40,6 +40,10 @@ zinit snippet https://github.com/tjquillan/zsh-windscribe-completions/blob/maste
 zinit ice as"completion" has"git"
 zinit snippet https://github.com/git/git/blob/master/contrib/completion/git-completion.zsh
 
+# ipfs
+zinit ice as"completion" has"ipfs"
+zinit snippet https://github.com/hellounicorn/zsh-ipfs/blob/master/_zsh-ipfs
+
 # More yarn
 zinit ice atload"zpcdreplay" atclone'./zplug.zsh'
 zinit light g-plane/zsh-yarn-autocompletions
@@ -47,3 +51,10 @@ zinit light g-plane/zsh-yarn-autocompletions
 # More completions
 zinit ice wait"5" lucid
 zinit light zchee/zsh-completions
+
+zinit ice wait"5" lucid
+zinit light zsh-users/zsh-completions
+
+# Bash completions fallback
+zinit ice as"completion" has"bash"
+zinit snippet https://github.com/git/git/blob/master/contrib/completion/git-completion.zsh

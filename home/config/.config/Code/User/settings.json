@@ -209,5 +209,6 @@
     "go.toolsManagement.autoUpdate": true,
     "[toml]": {
         "editor.defaultFormatter": "tamasfe.even-better-toml"
-    }
+    },
+    "security.workspace.trust.untrustedFiles": "open"
 }

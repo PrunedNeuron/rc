@@ -1,5 +1,12 @@
 # Extras - to make the ZSH experience even better!
 
+# zoxide
+zinit ice wait"2" as"command" from"gh-r" lucid \
+  mv"zoxide*/zoxide -> zoxide" \
+  atclone"./zoxide init zsh > init.zsh" \
+  atpull"%atclone" src"init.zsh" nocompile'!'
+zinit light ajeetdsouza/zoxide
+
 # ls -> exa aliases, colorization for several commands
 zinit wait"2" lucid light-mode for \
     zpm-zsh/colorize \
@@ -36,6 +43,11 @@ zinit has'fzf' lucid light-mode for \
         changyuheng/zsh-interactive-cd \
         chitoku-k/fzf-zsh-completions
 
+# zsh-fnm
+zinit ice wait"2" lucid \
+    atinit"export ZSH_FNM_NODE_VERSION='16.4.0'"
+zinit light "dominik-schwabe/zsh-fnm"
+
 # Utilities
 zinit wait"2" lucid light-mode for \
     agkozak/zhooks \
@@ -44,7 +56,6 @@ zinit wait"2" lucid light-mode for \
     reegnz/jq-zsh-plugin \
     hlissner/zsh-autopair \
     denysdovhan/gitio-zsh \
-    MichaelAquilina/zsh-you-should-use
-
-
-# Other
+    MichaelAquilina/zsh-you-should-use \
+    arzzen/calc.plugin.zsh \
+    supercrabtree/k
