@@ -3,9 +3,6 @@
 # Read when starting as an interactive shell
 
 source $ZCONFDIR/preinit.zsh
-autoload -Uz compinit; compinit
-autoload -Uz url-quote-magic
-zle -N self-insert url-quote-magic
 
 # History configuration
 HISTFILE=$HOME/.zhistory
@@ -29,3 +26,7 @@ source $ZCONFDIR/plugins.zsh
 
 # Bind keys
 source $ZCONFDIR/keybindings.zsh
+
+# Load extras
+autoload -Uz url-quote-magic
+zle -N self-insert url-quote-magic

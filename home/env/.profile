@@ -31,3 +31,11 @@ export GPG_TTY=$(tty)
 
 # Enable docker buildkit
 export DOCKER_BUILDKIT=1 COMPOSE_DOCKER_CLI_BUILD=1
+
+# Disable telemetry
+export DO_NOT_TRACK=1
+export NEXT_TELEMETRY_DEBUG=1
+export NUXT_TELEMETRY_DISABLED=1
+export GATSBY_TELEMETRY_OPT_OUT=1
+export NG_CLI_ANALYTICS=false
+export HINT_TELEMETRY="off"

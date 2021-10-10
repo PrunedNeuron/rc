@@ -10,6 +10,9 @@ format = "[$user]($style)@"
 success_symbol = "[➜](bold green)"
 error_symbol = "[➜](bold red)"
 
+[directory]
+format = "[$path]($style) [$read_only]($read_only_style) "
+
 [cmd_duration]
 min_time = 500
 format = "took [$duration](bold yellow)"
