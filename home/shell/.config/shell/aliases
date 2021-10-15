@@ -7,19 +7,15 @@ alias reloadde="plasmashell --replace && kwin_x11 --replace  >/dev/null 2>&1"
 alias reloaddns="sudo systemctl restart dnscrypt-proxy pihole-FTL NetworkManager"
 
 # Arch package management
-alias yays="yay -S"
-alias yayy="yay -S --needed --noconfirm" # Install
-alias yayr="yay -Rns" # Uninstall / Remove completely / Purge
-alias yayrr="yay -Rns --noconfirm" # Uninstall / Remove completely / Purge non-interactively
-alias yayfd="yay -Slq | fzf --multi --preview 'yay -Si {1}' | xargs -ro yay -S"
-alias yayrm="yay -Qq | fzf --multi --preview 'yay -Qi {1}' | xargs -ro sudo yay -Rns"
 alias y="yay"
-alias ys="yays"
-alias yy="yayy"
-alias yr="yayr"
-alias yrr="yayrr"
-alias yfd="yayfd"
-alias yrm="yayrm"
+alias ys="yay -S"
+alias yy="yay -S --noconfirm" # Install / Reinstall
+alias yyy="yay -S --noconfirm --needed" # Install if required
+alias yr="yay -R" # Uninstall
+alias yrr="yay -Rns" # Uninstall / Remove completely / Purge
+alias yrrr="yay -Rns --noconfirm" # Uninstall / Remove completely / Purge non-interactively
+alias yfd="yay -Slq | fzf --multi --preview 'yay -Si {1}' | xargs -ro yay -S"
+alias yrm="yay -Qq | fzf --multi --preview 'yay -Qi {1}' | xargs -ro sudo yay -Rns"
 
 # Text
 alias cpy="xsel -bi" # Copy to clipboard
@@ -37,7 +33,7 @@ alias open="xdg-open 2>/dev/null"
 
 # Misc
 alias sudokate="SUDO_EDITOR=kate sudoedit" # launch kate as root
-alias refreshmirrors="sudo reflector --latest 200 --protocol https --sort rate --fastest 50 --save /etc/pacman.d/mirrorlist > /dev/null 2>&1"
+alias refreshmirrors="sudo systemctl start reflector"
 
 # Shortcuts
 alias ~="cd $HOME"
