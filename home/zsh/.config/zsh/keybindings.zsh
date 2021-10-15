@@ -10,24 +10,21 @@ bindkey '^[[B' history-substring-search-down
 # Delete char
 bindkey '^[[3~' delete-char
 
-# Crtl+Left, Crlt+Right
+# Ctrl+Left, Ctrl+Right
 bindkey '^[[1;5D' backward-word
 bindkey '^[[1;5C' forward-word
 
-# Crtl+Backspace, Crtl+Delete
+# Ctrl+Backspace, Ctrl+Delete
 bindkey '^[[3;5~' kill-word
 bindkey '^H' backward-kill-word # doesn't work anymore for some reason
 
-bindkey -M emacs '^H' backward-kill-word
-bindkey -M viins '^H' backward-kill-word
-bindkey -M vicmd '^H' backward-kill-word
-
+# Movement
+bindkey '^A' beginning-of-line
+bindkey '^E' end-of-line
 
 ### Program specific
-
 # fzf
 bindkey '^T' fzf-completion
-# bindkey '^I' $fzf_default_completion # breaks fzf tab completion
 zle     -N     fzf-history-widget-accept
 bindkey '^X^R' fzf-history-widget-accept
 
