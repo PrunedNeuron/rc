@@ -48,7 +48,7 @@ user_pref("browser.helperApps.showOpenOptionForPdfJS", true);
 /* DOM */
 user_pref("dom.ipc.processCount", 4); // DEFAULT: 8
 user_pref("dom.event.clipboardevents.enabled", true);
-user_pref("dom.event.contextmenu.enabled", true); // Don't allow right click prevention'
+user_pref("dom.event.contextmenu.enabled", false); // Don't allow right click prevention'
 user_pref("dom.w3c_touch_events.enabled", 0); // prevents JS context menu from not appearing
 user_pref("dom.battery.enabled", false);
 user_pref("dom.netinfo.enabled", false); // disable connection info leak
@@ -109,6 +109,9 @@ user_pref("security.mixed_content.block_display_content", true);
 user_pref("security.insecure_connection_text.enabled", true);
 user_pref("security.insecure_connection_text.pbmode.enabled", true);
 user_pref("security.ssl.treat_unsafe_negotiation_as_broken", true);
+user_pref("security.ssl.disable_session_identifiers", true);
+user_pref("security.tls.enable_0rtt_data", false);
+user_pref("security.ssl.enable_false_start", false);
 
 // Disable safebrowsing (sends information to third party upstream servers)
 user_pref("browser.safebrowsing.downloads.remote.enabled", false);

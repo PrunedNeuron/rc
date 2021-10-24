@@ -7,7 +7,11 @@ alias reloadde="plasmashell --replace && kwin_x11 --replace  >/dev/null 2>&1"
 alias reloaddns="sudo systemctl restart dnscrypt-proxy pihole-FTL NetworkManager"
 
 # Arch package management
-alias y="yay"
+alias y="yay" # Or just `yay`
+alias yf="yay -Syu --noconfirm"
+alias yayf="yay -Syu --noconfirm"
+alias yup="yay -Syyuu"
+alias yupf="yay -Syyuu --noconfirm"
 alias ys="yay -S"
 alias yy="yay -S --noconfirm" # Install / Reinstall
 alias yyy="yay -S --noconfirm --needed" # Install if required
@@ -30,6 +34,7 @@ alias now="date +\"%r\""
 alias today="date +%F"
 alias fastping="ping -c 100 -s.2"
 alias open="xdg-open 2>/dev/null"
+alias netcon="sudo arp-scan -l"
 
 # Misc
 alias sudokate="SUDO_EDITOR=kate sudoedit" # launch kate as root

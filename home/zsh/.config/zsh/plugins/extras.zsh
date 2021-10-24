@@ -12,6 +12,10 @@ zinit wait"2" lucid light-mode for \
     zpm-zsh/colorize \
     zpm-zsh/ls
 
+# enhancd -> next gen `cd` command with an interactive filter
+zinit ice wait lucid
+zinit light b4b4r07/enhancd
+
 # Git extras
 zinit wait"[ -d .git ] || git rev-parse --git-dir > /dev/null 2>&1" lucid light-mode for \
     ltj/gitgo \
