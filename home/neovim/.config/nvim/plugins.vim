@@ -28,9 +28,11 @@ call plug#begin()
     Plug 'Pocco81/AutoSave.nvim'
     Plug 'tpope/vim-surround'
     Plug 'junegunn/fzf.vim'
-   
+
     " feature additions
     Plug 'nvim-telescope/telescope.nvim'
+    Plug 'kyazdani42/nvim-tree.lua' " file explorer 
+    Plug 'ahmedkhalf/project.nvim' " Project management (cds to file dir)
     Plug 'nvim-lua/plenary.nvim'
     Plug 'ellisonleao/glow.nvim' " markdown reader in nvim buffer
     Plug 'numtostr/FTerm.nvim'
@@ -50,9 +52,10 @@ call plug#begin()
 
     " utilities
     Plug 'lambdalisue/suda.vim'
+    Plug 'folke/which-key.nvim'
     Plug 'mhinz/vim-startify'
 
-    " nvim-cmp recommended configuration 
+    " nvim-cmp recommended configuration
     Plug 'neovim/nvim-lspconfig'
     Plug 'hrsh7th/cmp-nvim-lsp'
     Plug 'hrsh7th/cmp-buffer'
@@ -60,3 +63,5 @@ call plug#begin()
 
 call plug#end()
 
+" Lua
+lua require ('plugins')

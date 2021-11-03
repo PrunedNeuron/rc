@@ -3,7 +3,7 @@
 export FZF_DEFAULT_COMMAND='fd --reverse --hidden --follow --exclude .git'
 
 export FZF_DEFAULT_OPTS='
-    --height 60% --layout=reverse --border
+    --height 80% --layout=reverse --border
     --color=fg:#575757,bg:#ffffff,hl:#1f8fff
     --color=fg+:#383838,bg+:#ffffff,hl+:#1fe1ff
     --color=info:#ff9812,prompt:#1f8fff,pointer:#2ee687

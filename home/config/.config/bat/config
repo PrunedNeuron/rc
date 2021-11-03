@@ -3,4 +3,4 @@
 --theme="ansi"
 --map-syntax=".ignore:Git Ignore"
 --style="numbers,changes,header"
---paging="never"
+#--paging="never"

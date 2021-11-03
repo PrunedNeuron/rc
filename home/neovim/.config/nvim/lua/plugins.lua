@@ -3,7 +3,11 @@
 -- comment frame
 require("nvim-comment-frame").setup()
 
+-- Project (project management, auto cd)
+require("project_nvim").setup()
+
 -- Telescope
+require("telescope").load_extension("projects")
 require("telescope").setup()
 
 -- Zen mode
@@ -18,6 +22,9 @@ require("neoscroll").setup()
 -- Comment shortcuts
 require("nvim_comment").setup()
 
+-- Key map (which-key)
+require("which-key").setup()
+
 -- lualine
 require("lualine").setup(
     {
@@ -26,6 +33,9 @@ require("lualine").setup(
         }
     }
 )
+
+-- nvim-tree
+require("nvim-tree").setup()
 
 -- Autosave
 require("autosave").setup(

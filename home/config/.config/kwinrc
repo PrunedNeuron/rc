@@ -59,16 +59,12 @@ synchronizeskipswitcherEnabled=false
 videowallEnabled=false
 wobblywindowsEnabled=true
 
-[TabBox]
-LayoutName=com.github.vinceliuice.WhiteSur
-
 [TabBoxAlternative]
 LayoutName=com.github.vinceliuice.WhiteSur-alt
 
 [Windows]
 BorderlessMaximizedWindows=true
 ElectricBorderCornerRatio=0.1
-Placement=Centered
 
 [org.kde.kdecoration2]
 BorderSize=None
