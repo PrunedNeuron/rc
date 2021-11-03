@@ -48,7 +48,7 @@ user_pref("browser.helperApps.showOpenOptionForPdfJS", true);
 /* DOM */
 user_pref("dom.ipc.processCount", 4); // DEFAULT: 8
 user_pref("dom.event.clipboardevents.enabled", true);
-user_pref("dom.event.contextmenu.enabled", false); // Don't allow right click prevention'
+user_pref("dom.event.contextmenu.enabled", true); // Don't allow right click prevention'
 user_pref("dom.w3c_touch_events.enabled", 0); // prevents JS context menu from not appearing
 user_pref("dom.battery.enabled", false);
 user_pref("dom.netinfo.enabled", false); // disable connection info leak
@@ -186,4 +186,7 @@ user_pref("mozilla.widget.use-argb-visuals", true);
 user_pref("devtools.jsonview.enabled", false);
 
 /* Extensions */
-user_pref("extensions.pocket.enabled", false);
+user_pref("extensions.pocket.enabled", true); // enable/disable pocket integration
+
+/* Development */
+user_pref("xpinstall.signatures.required", false); // allow unverified addons

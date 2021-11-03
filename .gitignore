@@ -26,7 +26,3 @@ secring.*
 
 # SSH keys
 id_*
-
-# Neovim plugins
-*/**/.config/nvim/plugged/**/*
-
