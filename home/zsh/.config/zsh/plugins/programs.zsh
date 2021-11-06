@@ -30,7 +30,7 @@ zinit light Bhupesh-V/ugit
 
 # git diff so fancy
 zinit ice as"program" wait"4" lucid has"git" pick"bin/git-dsf"
-zinit light zdharma/zsh-diff-so-fancy
+zinit light zdharma-continuum/zsh-diff-so-fancy
 
 # fzpac
 zinit ice as"program" wait"3" lucid has"fzf" has"pacman" pick"fzpac"

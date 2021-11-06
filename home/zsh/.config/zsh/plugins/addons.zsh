@@ -5,7 +5,7 @@ zinit wait lucid light-mode for \
             ZINIT[COMPINIT_OPTS]=-C;
             ZINIT[ZCOMPDUMP_PATH]=$ZCACHEDIR/.zcompdump;
             zpcompinit; zpcdreplay" \
-        zdharma/fast-syntax-highlighting \
+        zdharma-continuum/fast-syntax-highlighting \
     atload"!_zsh_autosuggest_start" \
         zsh-users/zsh-autosuggestions \
     blockf atpull'zinit creinstall -q .' \

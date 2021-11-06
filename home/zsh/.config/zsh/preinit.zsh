@@ -9,7 +9,7 @@ if [[ ! -f $HOME/.zinit/bin/zinit.zsh ]]; then
     local NOCOLOR="\e[0m"
     print -P "Installing ${CYAN}zinit${NOCOLOR}."
     command mkdir -p "$HOME/.zinit" && command chmod g-rwX "$HOME/.zinit"
-    command git clone https://github.com/zdharma/zinit "$HOME/.zinit/bin" && \\
+    command git clone https://github.com/zdharma-continuum/zinit.git "$HOME/.zinit/bin" && \\
         print -P "${GREEN}Installation successful.${NOCOLOR}" || \\
         print -P "${RED}Installation failed.${NOCOLOR}"
 fi
