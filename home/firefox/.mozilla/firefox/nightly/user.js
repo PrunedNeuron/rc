@@ -42,7 +42,7 @@ user_pref("browser.shell.checkDefaultBrowser", false);
 user_pref("browser.quitShortcut.disabled", true); // Don't quit on CTRL+Q
 user_pref("browser.bookmarks.openInTabClosesMenu", false);
 user_pref("browser.tabs.loadBookmarksInBackground", true);
-user_pref("layout.word_select.eat_space_to_next_word", true);
+user_pref("layout.word_select.eat_space_to_next_word", false);
 user_pref("browser.helperApps.showOpenOptionForPdfJS", true);
 
 /* DOM */
@@ -143,7 +143,8 @@ user_pref("network.IDN_show_punycode", true);
 user_pref("network.cookie.cookieBehavior", 4);
 user_pref("network.proxy.socks_remote_dns", true);
 user_pref("network.auth.subresource-http-auth-allow", 1);
-user_pref("network.http.referer.XOriginTrimmingPolicy", 2); // 2=scheme+host+port
+user_pref("network.http.referer.XOriginPolicy", 2); // don't send referer header across domains
+user_pref("network.http.referer.XOriginTrimmingPolicy", 2); // 2: only send the origin
 
 // Browser
 user_pref("browser.fixup.alternate.enabled", false); // disable domain guessing
