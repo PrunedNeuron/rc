@@ -26,3 +26,7 @@ secring.*
 
 # SSH keys
 id_*
+
+# neovim vim-plug files
+plugged/
+
