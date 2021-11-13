@@ -14,15 +14,17 @@ Number=1
 Rows=1
 
 [Effect-Blur]
-BlurStrength=9
+BlurStrength=7
+NoiseStrength=3
 
 [Effect-MagicLamp]
 AnimationDuration=240
 
 [Effect-Wobbly]
-Drag=90
-Stiffness=6
-WobblynessLevel=2
+Drag=92
+MoveFactor=20
+Stiffness=3
+WobblynessLevel=3
 
 [Effect-YetAnotherMagicLamp]
 Duration=200
@@ -40,11 +42,12 @@ blurEnabled=true
 contrastEnabled=true
 force-decorations-gtk3Enabled=true
 forceblurEnabled=true
+glideEnabled=true
 highlightwindowEnabled=true
 krohnkiteEnabled=false
 kwin-rectangleEnabled=false
 kwin4_effect_eyeonscreenEnabled=true
-kwin4_effect_rubberband_maximizeEnabled=false
+kwin4_effect_fadeEnabled=false
 kwin4_effect_slidingnotificationsEnabled=true
 kwin4_effect_squashEnabled=false
 kwin4_effect_windowapertureEnabled=false
@@ -52,6 +55,7 @@ lattewindowcolorsEnabled=true
 magiclampEnabled=true
 minimizeallEnabled=false
 movewindowtocenterEnabled=true
+overviewEnabled=true
 shakeEnabled=true
 sheetEnabled=true
 sticky-window-snappingEnabled=true
@@ -59,16 +63,25 @@ synchronizeskipswitcherEnabled=false
 videowallEnabled=false
 wobblywindowsEnabled=true
 
+[Script-forceblur]
+blurExceptMatching=true
+blurMatching=false
+patterns=
+
+[TabBox]
+LayoutName=com.github.vinceliuice.WhiteSur
+
 [TabBoxAlternative]
 LayoutName=com.github.vinceliuice.WhiteSur-alt
 
 [Windows]
 BorderlessMaximizedWindows=true
 ElectricBorderCornerRatio=0.1
+SnapOnlyWhenOverlapping=true
 
 [org.kde.kdecoration2]
 BorderSize=None
 BorderSizeAuto=false
 ButtonsOnLeft=XIA
 ButtonsOnRight=FH
-theme=__aurorae__svg__PlasmaSur-white
+theme=__aurorae__svg__McSur-white

@@ -10,11 +10,8 @@ require("project_nvim").setup()
 require("telescope").load_extension("projects")
 require("telescope").setup()
 
--- Zen mode
-require("zen-mode").setup()
-
 -- Twilight
-require("twilight").setup()
+-- require("twilight").setup()
 
 -- Neoscroll (smooth scrolling)
 require("neoscroll").setup()

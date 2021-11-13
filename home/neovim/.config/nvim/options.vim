@@ -37,7 +37,6 @@ set mouse=a					 " allow the mouse in all cases
 
 " custom
 set ww+=<,>                  " make the left and right movement wrap to previous/next line
-autocmd FileType * setlocal formatoptions-=cro	 " disable comment continuation
 
 " set signify's async update interval (in ms)
 set updatetime=100

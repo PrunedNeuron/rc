@@ -29,6 +29,9 @@ unset -f exists
 # GPG
 export GPG_TTY=$(tty)
 
+# GTK <-> KDE Portal
+export GTK_USE_PORTAL=1
+
 # Enable docker buildkit
 export DOCKER_BUILDKIT=1 COMPOSE_DOCKER_CLI_BUILD=1
 
