@@ -44,7 +44,7 @@ Since this is a template repository, feel free to create your own dotfiles repos
   ```sh
     stow -d home -t $HOME -S zsh
   ```
-  
+
 ## Contribute
 - Feel free to share your thoughts about this repository (on the [discussions tab](https://github.com/PrunedNeuron/.dotfiles/discussions)).
 - I'm open to ideas, suggestions and critique
@@ -55,3 +55,8 @@ Since this is a template repository, feel free to create your own dotfiles repos
 - [keybase](https://keybase.io/ayushm)
 - [email](mailto:aym@protonmail.com)
 - pgp: [0x3C8C6F4D80E9E4A7](https://keys.openpgp.org/vks/v1/by-keyid/3C8C6F4D80E9E4A7)
+
+## Mirrors
+- [codeberg](https://codeberg.org/ayush/rc)
+- [github](https://github.com/PrunedNeuron/rc)
+
