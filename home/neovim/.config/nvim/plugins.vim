@@ -16,8 +16,8 @@ call plug#begin()
     Plug 'lukas-reineke/indent-blankline.nvim' " indent guides
     Plug 'norcalli/nvim-colorizer.lua' " highlights hex codes with their colors
     Plug 'karb94/neoscroll.nvim' " smooth scrolling
-    Plug 'folke/twilight.nvim' " theatre mode for code
-    Plug 'folke/zen-mode.nvim' " enhanced twilight
+    " Plug 'folke/twilight.nvim' " theatre mode for code
+    " Plug 'folke/zen-mode.nvim' " enhanced twilight
 
     " status bar / notifier
     Plug 'hoob3rt/lualine.nvim'
@@ -38,7 +38,7 @@ call plug#begin()
     Plug 'numtostr/FTerm.nvim'
 
     " editing
-    Plug 'ZSaberLv0/ZFVimTxtHighlight'
+   Plug 'ZSaberLv0/ZFVimTxtHighlight'
     Plug 's1n7ax/nvim-comment-frame'
     Plug 'junegunn/vim-easy-align'
     Plug 'sheerun/vim-polyglot'

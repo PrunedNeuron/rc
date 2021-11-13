@@ -21,10 +21,12 @@ zstyle ':completion::complete:*' cache-path $ZCACHEDIR
 # Real time type-ahead autocomplete configuration | Using marlonrichert/zsh-autocomplete
 # The code below sets all of `zsh-autocomplete`'s settings to their default
 # values. To change a setting, copy it into your `.zshrc` file.
-zstyle ':autocomplete:*' min-input 2  # int
-zstyle ':autocomplete:*' insert-unambiguous yes
-zstyle ':autocomplete:*' widget-style complete-word
-zstyle ':autocomplete:history-search:*' list-lines 256
+zstyle ':autocomplete:*' min-input 2 # $int chars
+zstyle ':autocomplete:*' fzf-completion yes
+zstyle ':autocomplete:*' widget-style menu-select 
+zstyle ':autocomplete:*' list-lines 512
+zstyle ':autocomplete:history-search:*' list-lines 512
 
-# Show this many history lines (integer) when pressing ⌃R or ⌃S.
-zstyle ':autocomplete:history-incremental-search-*:*' list-lines 256
+# Number of history lines (integer) when pressing ⌃R or ⌃S.
+zstyle ':autocomplete:history-incremental-search-*:*' list-lines 512
+
