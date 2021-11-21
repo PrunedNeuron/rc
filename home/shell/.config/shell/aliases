@@ -87,3 +87,6 @@ alias svim="sudo vim"
 alias svi="sudo vi"
 alias snano="sudo nano"
 
+# download
+alias ytaudio='youtube-dl -i --extract-audio --audio-format mp3 --audio-quality 0 -o "~/Music/%(title)s.%(ext)s"'
+

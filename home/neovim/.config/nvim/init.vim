@@ -1,10 +1,10 @@
 " nvim configuration
 
-source ~/.config/nvim/plugins.vim
-source ~/.config/nvim/options.vim
-source ~/.config/nvim/autocmd.vim
-source ~/.config/nvim/themes.vim
+source $CONFDIR/nvim/plugins.vim
+source $CONFDIR/nvim/options.vim
+source $CONFDIR/nvim/autocmd.vim
+source $CONFDIR/nvim/themes.vim
+source $CONFDIR/nvim/functions.vim
 
 " abbreviations / aliases
 cnoreabbrev sw SudaWrite
-

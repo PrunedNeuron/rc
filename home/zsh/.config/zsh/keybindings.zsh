@@ -55,41 +55,6 @@ bindkey -M menuselect '\r' accept-line
 # .accept-line: Accept command line.
 # accept-line:  Accept selection and exit menu.
 
-
 ### Misc / Non-essential
-
-# File manager key binds
-# Alt+Left = go back
-# Alt+Up = go to parent dir
-cdUndoKey() {
-  popd
-  zle reset-prompt
-  print
-  ls
-  zle reset-prompt
-}
-
-cdParentKey() {
-  pushd ..
-  zle reset-prompt
-  print
-  ls
-  zle reset-prompt
-}
-
-zle -N cdParentKey
-zle -N cdUndoKey
-bindkey '^[[1;3A' cdParentKey
-bindkey '^[[1;3D' cdUndoKey
-
-# Exit zsh even on partial command line
-exit_zsh() { exit }
-zle -N exit_zsh
-bindkey '^D' exit_zsh
-
-
-# fzf specific
-fzf-history-widget-accept() {
-  fzf-history-widget
-  zle accept-line
-}
+# Load widgets with their keybindings
+source <(cat $(ls -1 $ZCONFDIR/widgets/**/*))

@@ -33,7 +33,7 @@ user_pref("media.rdd-vpx.enabled", false);
 user_pref("media.rdd-process.enabled", false);
 user_pref("media.navigator.enabled", false);
 user_pref("media.navigator.mediadatadecoder_vpx_enabled", true);
-user_pref("media.hardware-video-decoding.force-enabled", true);
+user_pref("media.hardware-video-decoding.force-enabled", false);
 
 /* Behavior */
 user_pref("general.autoScroll", true); // Enable middle mouse autoscrolling
@@ -47,7 +47,7 @@ user_pref("browser.helperApps.showOpenOptionForPdfJS", true);
 
 /* DOM */
 user_pref("dom.ipc.processCount", 4); // DEFAULT: 8
-user_pref("dom.event.clipboardevents.enabled", true);
+user_pref("dom.event.clipboardevents.enabled", false);
 user_pref("dom.event.contextmenu.enabled", true); // Don't allow right click prevention'
 user_pref("dom.w3c_touch_events.enabled", 0); // prevents JS context menu from not appearing
 user_pref("dom.battery.enabled", false);

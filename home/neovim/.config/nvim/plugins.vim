@@ -36,6 +36,7 @@ call plug#begin()
     Plug 'nvim-lua/plenary.nvim'
     Plug 'ellisonleao/glow.nvim' " markdown reader in nvim buffer
     Plug 'numtostr/FTerm.nvim'
+    Plug 'kevinhwang91/rnvimr' " tree
 
     " editing
    Plug 'ZSaberLv0/ZFVimTxtHighlight'
