@@ -5,7 +5,6 @@ update_info=kwin.upd:replace-scalein-with-scale,kwin.upd:port-minimizeanimation-
 GLCore=true
 GLTextureFilter=1
 LatencyControl=0
-LatencyPolicy=High
 OpenGLIsUnsafe=false
 
 [Desktops]
@@ -77,6 +76,7 @@ LayoutName=com.github.vinceliuice.WhiteSur-alt
 [Windows]
 BorderlessMaximizedWindows=true
 ElectricBorderCornerRatio=0.1
+Placement=Centered
 SnapOnlyWhenOverlapping=true
 
 [org.kde.kdecoration2]
@@ -84,4 +84,4 @@ BorderSize=None
 BorderSizeAuto=false
 ButtonsOnLeft=XIA
 ButtonsOnRight=FH
-theme=__aurorae__svg__McSur-white
+theme=__aurorae__svg__Monterey

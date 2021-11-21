@@ -1,0 +1,6 @@
+#!/usr/bin/env zsh
+
+# Exit zsh even on partial command line
+exit_zsh() { exit }
+zle -N exit_zsh
+bindkey '^D' exit_zsh
