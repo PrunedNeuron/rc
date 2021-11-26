@@ -10,8 +10,8 @@ alias reloaddns="sudo systemctl restart dnscrypt-proxy pihole-FTL NetworkManager
 alias y="yay" # Or just `yay`
 alias yf="yay -Syu --noconfirm"
 alias yayf="yay -Syu --noconfirm"
-alias yup="yay -Syyuu"
-alias yupf="yay -Syyuu --noconfirm"
+alias yup="yay -Syyu"
+alias yupf="yay -Syyu --noconfirm"
 alias ys="yay -S"
 alias yy="yay -S --noconfirm" # Install / Reinstall
 alias yyy="yay -S --noconfirm --needed" # Install if required
@@ -46,10 +46,10 @@ alias conf="cd $CONFIG"
 alias fjson="python -m json.tool"
 
 # exa
-alias exa="exa --icons --color=auto"
-alias exal="exa --long --icons --color=auto"
-alias exaa="exa --all --icons --color=auto"
-alias exaal="exa --all --long --icons --color=auto"
+alias exa="exa --git --icons --group --color-scale --time-style=long-iso --group-directories-first"
+alias exaa="exa --all"
+alias exal="exa --long"
+alias exaal="exa --all --long"
 
 # Safety
 alias rm="rm -i"
@@ -63,7 +63,7 @@ alias texpac="tllocalmgr"
 
 ## Config file shortcuts
 
-# User
+# Edit shortcuts
 alias nvimrc='nvim ~/.config/nvim/init.vim'
 alias zshrc='nvim ~/.zshrc'
 alias zprofile='nvim ~/.zprofile'

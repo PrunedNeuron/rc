@@ -9,8 +9,8 @@ zinit light ajeetdsouza/zoxide
 
 # ls -> exa aliases, colorization for several commands
 zinit wait"2" lucid light-mode for \
-    zpm-zsh/colorize \
-    zpm-zsh/ls
+    zpm-zsh/colorize
+    # zpm-zsh/ls
 
 # enhancd -> next gen `cd` command with an interactive filter
 zinit ice wait lucid
@@ -63,3 +63,4 @@ zinit wait"2" lucid light-mode for \
     MichaelAquilina/zsh-you-should-use \
     arzzen/calc.plugin.zsh \
     supercrabtree/k
+
