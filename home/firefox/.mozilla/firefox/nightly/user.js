@@ -14,6 +14,7 @@ user_pref("webgl.disabled", false);
 user_pref("webgl.force-enabled", true);
 user_pref("webgl.msaa-force", true);
 //user_pref("layers.acceleration.force-enabled", true);
+user_pref("layers.acceleration.disabled", true); // disable hardware acceleration (to fix freezes)
 
 // Fonts
 user_pref("gfx.font_rendering.fontconfig.max_generic_substitutions", 127);

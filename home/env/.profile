@@ -21,6 +21,7 @@ exists () { hash "$1" 2>/dev/null && echo "$1" || echo "$2" ; }
 # Use neovim if installed, else fallback to nano --
 export EDITOR=$(exists nvim nano)
 export VISUAL=$EDITOR
+export PAGER=bat
 
 # Unset function 'exists'
 unset -f exists
