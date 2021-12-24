@@ -1,3 +1,0 @@
-[submodule "home/zsh/.zsh/plugins/zinit"]
-	path = home/zsh/.zsh/plugins/zinit
-	url = https://github.com/zdharma/zinit.git
