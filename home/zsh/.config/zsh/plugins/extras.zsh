@@ -16,39 +16,27 @@ zinit wait"[ -d .git ] || git rev-parse --git-dir > /dev/null 2>&1" lucid light-
     voronkovich/gitignore.plugin.zsh
 
 # Git extras
-zinit lucid wait'0a' for \
+zinit lucid wait"5" for \
     as"program" pick"$ZPFX/bin/git-*" src"etc/git-extras-completion.zsh" make"PREFIX=$ZPFX" \
         tj/git-extras
 
-# fzf extras
-# fuzzy-sys (fuzzy systemctl)
-zinit ice wait"2" lucid \
-    atload"alias fzsys='fuzzy-sys'"
-zinit light NullSense/fuzzy-sys
-
-# Fuzzy finder
-zinit has'fzf' lucid light-mode for \
-    atload'source "$HOME/.config/fzf/config"' \
-        changyuheng/zsh-interactive-cd \
-        leophys/zsh-plugin-fzf-finder \
-        chitoku-k/fzf-zsh-completions \
-        atweiden/fzf-extras
-
 # zsh-fnm
-zinit ice wait"2" lucid \
+zinit ice wait"5" lucid \
     atinit"export ZSH_FNM_NODE_VERSION='17.2.0'"
 zinit light "dominik-schwabe/zsh-fnm"
 
 # Utilities
 zinit wait"2" lucid light-mode for \
+    hlissner/zsh-autopair \
+    le0me55i/zsh-systemd \
+    marzocchi/zsh-notify \
+    zpm-zsh/colorize \
+    zpm-zsh/ls
+
+zinit wait"5" lucid light-mode for \
     MichaelAquilina/zsh-you-should-use \
     arzzen/calc.plugin.zsh \
     le0me55i/zsh-extract \
-    le0me55i/zsh-systemd \
-    hlissner/zsh-autopair \
-    marzocchi/zsh-notify \
     supercrabtree/k \
     gko/ssh-connect \
-    agkozak/zhooks \
-    zpm-zsh/colorize \
-    zpm-zsh/ls
+    agkozak/zhooks

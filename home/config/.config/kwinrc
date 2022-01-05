@@ -80,8 +80,8 @@ Placement=Centered
 SnapOnlyWhenOverlapping=true
 
 [org.kde.kdecoration2]
-BorderSize=None
+BorderSize=Tiny
 BorderSizeAuto=false
 ButtonsOnLeft=XIA
 ButtonsOnRight=FH
-theme=__aurorae__svg__Monterey
+theme=__aurorae__svg__WhiteSur

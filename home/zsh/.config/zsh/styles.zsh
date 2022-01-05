@@ -23,7 +23,7 @@ zstyle ':completion::complete:*' cache-path $ZCACHEDIR
 # values. To change a setting, copy it into your `.zshrc` file.
 zstyle ':autocomplete:*' min-input 2 # $int chars
 zstyle ':autocomplete:*' fzf-completion no
-zstyle ':autocomplete:*' widget-style menu-select 
+zstyle ':autocomplete:*' widget-style menu-select
 zstyle ':autocomplete:*' list-lines 512
 zstyle ':autocomplete:history-search:*' list-lines 512
 

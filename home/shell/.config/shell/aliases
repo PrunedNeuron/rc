@@ -18,8 +18,6 @@ alias yyy="yay -S --noconfirm --needed" # Install if required
 alias yr="yay -R" # Uninstall
 alias yrr="yay -Rns" # Uninstall / Remove completely / Purge
 alias yrrr="yay -Rns --noconfirm" # Uninstall / Remove completely / Purge non-interactively
-alias yfd="yay -Slq | fzf --multi --preview 'yay -Si {1}' | xargs -ro yay -S"
-alias yrm="yay -Qq | fzf --multi --preview 'yay -Qi {1}' | xargs -ro sudo yay -Rns"
 
 # Text
 alias cpy="xsel -bi" # Copy to clipboard
