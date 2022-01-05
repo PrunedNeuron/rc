@@ -119,6 +119,10 @@ user_pref("device.sensors.enabled", false);
 user_pref("signon.autofillForms", false);
 user_pref("browser.search.region", "US");
 
+/* Extensions */
+// user_pref("extensions.webextensions.restrictedDomains", ""); // DEFAULT: "accounts-static.cdn.mozilla.net,accounts.firefox.com,addons.cdn.mozilla.net,addons.mozilla.org,api.accounts.firefox.com,content.cdn.mozilla.net,discovery.addons.mozilla.org,install.mozilla.org,oauth.accounts.firefox.com,profile.accounts.firefox.com,support.mozilla.org,sync.services.mozilla.com"
+// user_pref("privacy.resistFingerprinting.block_mozAddonManager", true);
+
 /* Experimental */
 user_pref("network.dns.echconfig.enabled", true);
 user_pref("network.dns.use_https_rr_as_altsvc", true);

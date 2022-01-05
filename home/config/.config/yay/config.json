@@ -20,7 +20,7 @@
 	"sortby": "popularity",
 	"searchby": "popularity",
 	"gitflags": "",
-	"removemake": "ask",
+	"removemake": "no",
 	"sudobin": "sudo",
 	"sudoflags": "",
 	"requestsplitn": 150,
