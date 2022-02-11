@@ -38,10 +38,10 @@ Color=86,236,139
 Color=178,104,24
 
 [Color3Faint]
-Color=224,208,146
+Color=224,177,136
 
 [Color3Intense]
-Color=255,195,111
+Color=255,192,82
 
 [Color4]
 Color=24,24,178
@@ -92,5 +92,5 @@ Color=0,0,0
 Blur=true
 ColorRandomization=false
 Description=Light
-Opacity=0.9
+Opacity=0.8
 Wallpaper=

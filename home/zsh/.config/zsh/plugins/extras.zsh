@@ -21,9 +21,9 @@ zinit lucid wait"5" for \
         tj/git-extras
 
 # zsh-fnm
-zinit ice wait"5" lucid \
-    atinit"export ZSH_FNM_NODE_VERSION='17.2.0'"
-zinit light "dominik-schwabe/zsh-fnm"
+# zinit ice wait"5" lucid \
+#     atinit"export ZSH_FNM_NODE_VERSION='17.2.0'"
+# zinit light "dominik-schwabe/zsh-fnm"
 
 # Utilities
 zinit wait"2" lucid light-mode for \
@@ -37,6 +37,6 @@ zinit wait"5" lucid light-mode for \
     MichaelAquilina/zsh-you-should-use \
     arzzen/calc.plugin.zsh \
     le0me55i/zsh-extract \
-    supercrabtree/k \
-    gko/ssh-connect \
-    agkozak/zhooks
+    supercrabtree/k
+#     gko/ssh-connect
+#     agkozak/zhooks

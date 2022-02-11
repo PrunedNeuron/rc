@@ -13,8 +13,8 @@ Number=1
 Rows=1
 
 [Effect-Blur]
-BlurStrength=7
-NoiseStrength=3
+BlurStrength=6
+NoiseStrength=9
 
 [Effect-MagicLamp]
 AnimationDuration=240
@@ -27,6 +27,9 @@ WobblynessLevel=3
 
 [Effect-YetAnotherMagicLamp]
 Duration=200
+
+[Effect-kwin4_effect_translucency]
+MoveResize=73
 
 [ModifierOnlyShortcuts]
 Meta=org.kde.lattedock,/Latte,org.kde.LatteDock,activateLauncherMenu
@@ -47,12 +50,15 @@ krohnkiteEnabled=false
 kwin-rectangleEnabled=false
 kwin4_effect_eyeonscreenEnabled=true
 kwin4_effect_fadeEnabled=false
+kwin4_effect_frozenappEnabled=false
+kwin4_effect_shapecornersEnabled=true
 kwin4_effect_slidingnotificationsEnabled=true
 kwin4_effect_squashEnabled=false
+kwin4_effect_translucencyEnabled=true
 kwin4_effect_windowapertureEnabled=false
 lattewindowcolorsEnabled=true
 magiclampEnabled=true
-minimizeallEnabled=false
+minimizeallEnabled=true
 movewindowtocenterEnabled=true
 overviewEnabled=true
 shakeEnabled=true
@@ -68,20 +74,20 @@ blurMatching=false
 patterns=
 
 [TabBox]
-LayoutName=com.github.vinceliuice.WhiteSur
+ShowDesktopMode=1
 
 [TabBoxAlternative]
-LayoutName=com.github.vinceliuice.WhiteSur-alt
+LayoutName=com.github.vinceliuice.McMojave
 
 [Windows]
 BorderlessMaximizedWindows=true
 ElectricBorderCornerRatio=0.1
-Placement=Centered
 SnapOnlyWhenOverlapping=true
 
 [org.kde.kdecoration2]
-BorderSize=Tiny
+BorderSize=None
 BorderSizeAuto=false
 ButtonsOnLeft=XIA
 ButtonsOnRight=FH
-theme=__aurorae__svg__WhiteSur
+library=org.kde.hello
+theme=hello
