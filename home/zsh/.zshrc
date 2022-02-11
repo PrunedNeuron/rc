@@ -2,6 +2,7 @@
 # Interactive shell configuration
 # Read when starting as an interactive shell
 
+# Run initial checks and repair
 source $ZCONFDIR/preinit.zsh
 
 # History configuration

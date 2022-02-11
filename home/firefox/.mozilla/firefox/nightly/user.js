@@ -118,6 +118,7 @@ user_pref("intl.accept_languages", "en-US, en");
 user_pref("device.sensors.enabled", false);
 user_pref("signon.autofillForms", false);
 user_pref("browser.search.region", "US");
+user_pref("media.hardwaremediakeys.enabled", false);
 
 /* Extensions */
 // user_pref("extensions.webextensions.restrictedDomains", ""); // DEFAULT: "accounts-static.cdn.mozilla.net,accounts.firefox.com,addons.cdn.mozilla.net,addons.mozilla.org,api.accounts.firefox.com,content.cdn.mozilla.net,discovery.addons.mozilla.org,install.mozilla.org,oauth.accounts.firefox.com,profile.accounts.firefox.com,support.mozilla.org,sync.services.mozilla.com"

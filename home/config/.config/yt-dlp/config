@@ -1,0 +1,14 @@
+# yt-dlp configuration
+
+# Do not copy the mtime
+--no-mtime
+
+# Restrict to shorter file names
+--restrict-filenames
+
+# Merge bestvideo and bestaudio into mp4
+#--format 'bestvideo[ext=mp4]+bestaudio[ext=m4a]/mp4'
+
+# Save downloaded file as -->
+--output ~/Videos/youtube/%(title)s.%(ext)s
+
