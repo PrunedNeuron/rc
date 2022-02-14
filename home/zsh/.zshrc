@@ -3,12 +3,10 @@
 # Read when starting as an interactive shell
 
 # Run initial checks and repair
-source $ZCONFDIR/preinit.zsh
+source $ZCONFDIR/pre.zsh
 
-# History configuration
-HISTFILE=$HOME/.zhistory
-SAVEHIST=$(( 100 * 1000 ))
-HISTSIZE=$(( 1.2 * SAVEHIST )) # ZSH recommended value
+# Configure history
+source $ZCONFDIR/other/history.zsh
 
 # Common shell config
 emulate bash -c 'source <(cat $(ls -1 $CONFDIR/shell/**/*))'

@@ -10,3 +10,4 @@ setopt inc_append_history # save history entries as soon as they are entered
 setopt share_history # share history between different instances
 setopt interactive_comments # allow comments in interactive shells
 setopt appendhistory autocd beep nomatch notify complete_aliases correct
+setopt extendedglob autopushd

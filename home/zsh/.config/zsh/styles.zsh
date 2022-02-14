@@ -15,18 +15,19 @@ zstyle ':completion:*:' group-order \
     local-directories directories suffix-aliases \
     reserved-words builtins
 
-zstyle ':completion::complete:*' use-cache 1
+zstyle ':completion::complete:*' use-cache on
 zstyle ':completion::complete:*' cache-path $ZCACHEDIR
-
-# Real time type-ahead autocomplete configuration | Using marlonrichert/zsh-autocomplete
-# The code below sets all of `zsh-autocomplete`'s settings to their default
-# values. To change a setting, copy it into your `.zshrc` file.
-zstyle ':autocomplete:*' min-input 2 # $int chars
-zstyle ':autocomplete:*' fzf-completion no
-zstyle ':autocomplete:*' widget-style menu-select
-zstyle ':autocomplete:*' list-lines 512
-zstyle ':autocomplete:history-search:*' list-lines 512
 
 # Number of history lines (integer) when pressing ⌃R or ⌃S.
 zstyle ':autocomplete:history-incremental-search-*:*' list-lines 512
 
+# ALERT: Lets completion scripts run in sudo
+zstyle ':completion::complete:*' gain-privileges 1
+
+# fuzzy matching of completions you mistype them
+zstyle ':completion:*' completer _complete _match _approximate
+zstyle ':completion:*:match:*' original only
+zstyle ':completion:*:approximate:*' max-errors 1 numeric
+
+# ignore completion functions
+zstyle ':completion:*:functions' ignore-patterns '_*'

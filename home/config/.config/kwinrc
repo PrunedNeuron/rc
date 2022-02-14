@@ -26,7 +26,7 @@ Stiffness=3
 WobblynessLevel=3
 
 [Effect-YetAnotherMagicLamp]
-Duration=200
+Duration=150
 
 [Effect-kwin4_effect_translucency]
 MoveResize=73
@@ -48,6 +48,7 @@ glideEnabled=true
 highlightwindowEnabled=true
 krohnkiteEnabled=false
 kwin-rectangleEnabled=false
+kwin4_effect_blur2Enabled=true
 kwin4_effect_eyeonscreenEnabled=true
 kwin4_effect_frozenappEnabled=false
 kwin4_effect_scaleEnabled=false
@@ -58,6 +59,7 @@ kwin4_effect_translucencyEnabled=true
 kwin4_effect_windowapertureEnabled=false
 lattewindowcolorsEnabled=true
 magiclampEnabled=true
+maximized-window-gapEnabled=false
 minimizeallEnabled=true
 movewindowtocenterEnabled=true
 overviewEnabled=true
