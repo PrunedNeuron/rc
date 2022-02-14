@@ -1,4 +1,4 @@
-# ~/.zsh/preinit.zsh
+# ~/.zsh/pre.zsh
 # Runs before compinit
 
 # Install zinit if not installed
@@ -11,5 +11,6 @@ if [[ ! -f $HOME/.local/share/zinit/zinit.git/zinit.zsh ]]; then
 fi
 
 source "$HOME/.local/share/zinit/zinit.git/zinit.zsh"
-autoload -Uz _zinit
-(( ${+_comps} )) && _comps[zinit]=_zinit
+
+# Add precmd and chpwd hooks
+source $ZCONFDIR/hooks.zsh

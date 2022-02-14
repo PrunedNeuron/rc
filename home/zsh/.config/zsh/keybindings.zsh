@@ -3,6 +3,10 @@
 # Cursor type
 echo -ne "\e]50;CursorShape=2\a" # Underline
 
+bindkey "^Q" push-line-or-edit
+bindkey "^N" insert-last-word
+bindkey "^Y" accept-and-hold
+
 # History nav vertical
 bindkey '^[[A' history-substring-search-up
 bindkey '^[[B' history-substring-search-down
@@ -21,12 +25,13 @@ bindkey '^H' backward-kill-word # doesn't work anymore for some reason
 # Movement
 bindkey '^A' beginning-of-line
 bindkey '^E' end-of-line
+bindkey "^K" kill-line
 
 ### Program specific
 # fzf
-bindkey '^T' fzf-completion
-zle     -N     fzf-history-widget-accept
-bindkey '^X^R' fzf-history-widget-accept
+# bindkey '^T' fzf-completion
+# zle     -N     fzf-history-widget-accept
+# bindkey '^X^R' fzf-history-widget-accept
 
 ## marlonrichert/zsh-autocomplete
 # Up arrow:
@@ -45,15 +50,6 @@ bindkey '\eOB' down-line-or-select
 bindkey '\0' list-expand
 # list-expand:      Reveal hidden completions.
 # set-mark-command: Activate text selection.
-
-# Uncomment the following lines to disable live history search:
-# zle -A {.,}history-incremental-search-forward
-# zle -A {.,}history-incremental-search-backward
-
-# Return key in completion menu & history menu:
-bindkey -M menuselect '\r' accept-line
-# .accept-line: Accept command line.
-# accept-line:  Accept selection and exit menu.
 
 ### Misc / Non-essential
 # Load widgets with their keybindings
