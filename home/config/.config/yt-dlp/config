@@ -6,9 +6,8 @@
 # Restrict to shorter file names
 --restrict-filenames
 
-# Merge bestvideo and bestaudio into mp4
-#--format 'bestvideo[ext=mp4]+bestaudio[ext=m4a]/mp4'
+# Add thumbnail
+--embed-thumbnail
 
-# Save downloaded file as -->
---output ~/Videos/youtube/%(title)s.%(ext)s
-
+# Add thumbnail
+--embed-metadata
