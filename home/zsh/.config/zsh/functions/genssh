@@ -13,7 +13,7 @@ genssh() {
 
 	key_path="$1"
 	comment="$2"
-	
+
 	if [ -z "$comment" ]; then
 		ssh-keygen -t ed25519 -f "$key_path"
 	else
@@ -21,3 +21,4 @@ genssh() {
 	fi
 }
 
+genssh "$@"

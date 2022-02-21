@@ -2,10 +2,8 @@
 
 # Make a directory and cd into it
 
-mkcdir() {
+mkcd() {
     mkdir -p $@ && cd ${@:$#}
 }
 
-take() {
-    mkcdir "$@"
-}
+mkcd "$@"

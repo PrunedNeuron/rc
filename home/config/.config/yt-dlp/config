@@ -1,5 +1,8 @@
 # yt-dlp configuration
 
+# Prefer ffmpeg
+--hls-prefer-ffmpeg
+
 # Do not copy the mtime
 --no-mtime
 
@@ -11,3 +14,8 @@
 
 # Add thumbnail
 --embed-metadata
+
+# Use aria2c
+--downloader aria2c
+--downloader-args aria2c:'-c -j 3 -x 3 -s 3 -k 1M'
+

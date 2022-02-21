@@ -23,4 +23,4 @@ setopt AUTO_PUSHD PUSHD_SILENT PUSHD_TO_HOME
 setopt PUSHD_IGNORE_DUPS
 
 ## This reverts the +/- operators.
-setopt PUSHD_MINUS 
+setopt PUSHD_MINUS
