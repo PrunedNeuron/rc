@@ -7,3 +7,4 @@ resetdns() {
     sudo systemctl restart dnscrypt-proxy pihole-FTL NetworkManager
 }
 
+resetdns "$@"

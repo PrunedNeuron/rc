@@ -7,8 +7,8 @@ require("nvim-comment-frame").setup()
 require("project_nvim").setup()
 
 -- Telescope
-require("telescope").load_extension("projects")
-require("telescope").setup()
+-- require("telescope").load_extension("projects")
+-- require("telescope").setup()
 
 -- Twilight
 -- require("twilight").setup()
@@ -51,6 +51,7 @@ require("autosave").setup(
      debounce_delay = 135
     }
 )
+
 
 -- lightbulb
 vim.cmd [[autocmd CursorHold,CursorHoldI * lua require'nvim-lightbulb'.update_lightbulb()]]

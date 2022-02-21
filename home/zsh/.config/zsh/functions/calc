@@ -5,3 +5,5 @@
 calc() {
     printf "%s\n" "$*" | bc
 }
+
+calc "$@"

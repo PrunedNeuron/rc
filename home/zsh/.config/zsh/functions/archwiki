@@ -1,0 +1,8 @@
+#!/usr/bin/env sh
+
+# Search the arch wiki for the given argument
+archwiki() {
+    xdg-open "https://wiki.archlinux.org/index.php?title=Special:Search&search=${1}" > /dev/null 2>&1
+}
+
+archwiki "$@"

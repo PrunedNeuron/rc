@@ -30,12 +30,12 @@ call plug#begin()
     Plug 'junegunn/fzf.vim'
 
     " feature additions
-    Plug 'nvim-telescope/telescope.nvim'
+   " Plug 'nvim-telescope/telescope.nvim'
     Plug 'kyazdani42/nvim-tree.lua' " file explorer 
     Plug 'ahmedkhalf/project.nvim' " Project management (cds to file dir)
-    Plug 'nvim-lua/plenary.nvim'
-    Plug 'ellisonleao/glow.nvim' " markdown reader in nvim buffer
-    Plug 'numtostr/FTerm.nvim'
+    " Plug 'nvim-lua/plenary.nvim'
+    " Plug 'ellisonleao/glow.nvim' " markdown reader in nvim buffer
+    " Plug 'numtostr/FTerm.nvim'
     Plug 'kevinhwang91/rnvimr' " tree
 
     " editing

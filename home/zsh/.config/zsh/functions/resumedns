@@ -10,3 +10,5 @@ options trust-ad edns0 single-request-reopen" | sudo tee /etc/resolv.conf >/dev/
 
     sudo systemctl restart dnscrypt-proxy pihole-FTL NetworkManager
 }
+
+resumedns "$@"

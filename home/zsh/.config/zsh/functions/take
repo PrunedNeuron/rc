@@ -1,0 +1,6 @@
+#!/usr/bin/env zsh
+
+# Alias for mkcd
+take() {
+    mkcd "$@"
+}

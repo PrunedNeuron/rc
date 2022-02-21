@@ -1,13 +1,81 @@
 # ZSH Options
 
-setopt auto_cd # cd by typing directory name if it's not a command
-setopt auto_list # automatically list choices on ambiguous completion
-setopt auto_menu # automatically use menu completion
-setopt always_to_end # move cursor to end if word had one match
-setopt hist_ignore_all_dups # remove older duplicate entries from history
-setopt hist_reduce_blanks # remove superfluous blanks from history items
-setopt inc_append_history # save history entries as soon as they are entered
-setopt share_history # share history between different instances
-setopt interactive_comments # allow comments in interactive shells
-setopt appendhistory autocd beep nomatch notify complete_aliases correct
-setopt extendedglob autopushd
+
+## -- Basics
+
+# Allow comments in interactive shell
+setopt INTERACTIVE_COMMENTS
+
+
+## -- History
+
+# Allow multiple terminal sessions to all append to one zsh command history
+setopt APPEND_HISTORY
+
+# Save history entries as soon as they are entered
+setopt INC_APPEND_HISTORY
+
+# Remove older duplicate entries from history
+setopt HIST_IGNORE_ALL_DUPS
+
+# When searching history don't display results already cycled through twice
+setopt HIST_FIND_NO_DUPS
+
+# Remove superfluous blanks from each line being added to history
+setopt HIST_REDUCE_BLANKS
+
+# Include more information about when the command was executed, etc
+setopt EXTENDED_HISTORY
+
+# Share history between different zsh instances
+setopt SHARE_HISTORY
+
+
+## -- Completion
+
+# Automatically list choices on an ambiguous completion.
+setopt AUTO_LIST
+
+# Automatically use menu completion after the second consecutive request for completion,
+# for example by pressing the tab key repeatedly.
+setopt AUTO_MENU
+
+# Move cursor to end if word had one match
+setopt ALWAYS_TO_END
+
+# Allow completion from within a word/phrase
+setopt COMPLETE_IN_WORD
+
+## -- Changing directories
+
+# Make cd push the old directory onto the directory stack
+setopt AUTO_PUSHD
+
+# cd by typing directory name if it's not a command
+setopt AUTO_CD
+
+## -- Expansions & Globbing
+
+# Print an error instead of leaving filename generation incomplete if no matches
+setopt NOMATCH
+
+# Treat the ‘#’, ‘~’ and ‘^’ characters as part of patterns for filename generation
+setopt EXTENDED_GLOB
+
+
+## -- Job control
+
+# Report the status of background jobs immediately, rather than waiting to print
+setopt NOTIFY
+
+
+## -- ZLE
+
+# Beep on error in ZLE
+setopt BEEP
+
+
+## -- Input / Output
+
+# Try to correct the spelling of commands
+setopt CORRECT

@@ -1,5 +1,9 @@
 # Extras - to make the ZSH experience even better!
 
+# Pacman command finder
+zinit ice svn
+zinit snippet OMZP::command-not-found
+
 # zoxide
 zinit ice wait"2" as"command" from"gh-r" lucid \
   mv"zoxide*/zoxide -> zoxide" \
@@ -9,16 +13,12 @@ zinit light ajeetdsouza/zoxide
 
 # Git extras
 zinit wait"[ -d .git ] || git rev-parse --git-dir > /dev/null 2>&1" lucid light-mode for \
-    ltj/gitgo \
-    wfxr/forgit \
-    robertzk/send.zsh \
-    mdumitru/git-aliases \
-    voronkovich/gitignore.plugin.zsh
+    robertzk/send.zsh
 
 # Git extras
-zinit lucid wait"5" for \
-    as"program" pick"$ZPFX/bin/git-*" src"etc/git-extras-completion.zsh" make"PREFIX=$ZPFX" \
-        tj/git-extras
+# zinit lucid wait"5" for \
+#     as"program" pick"$ZPFX/bin/git-*" src"etc/git-extras-completion.zsh" make"PREFIX=$ZPFX" \
+#         tj/git-extras
 
 # zsh-fnm
 # zinit ice wait"5" lucid \
@@ -27,7 +27,6 @@ zinit lucid wait"5" for \
 
 # Utilities
 zinit wait"2" lucid light-mode for \
-    hlissner/zsh-autopair \
     le0me55i/zsh-systemd \
     marzocchi/zsh-notify \
     zpm-zsh/colorize \
@@ -35,8 +34,5 @@ zinit wait"2" lucid light-mode for \
 
 zinit wait"5" lucid light-mode for \
     MichaelAquilina/zsh-you-should-use \
-    arzzen/calc.plugin.zsh \
     le0me55i/zsh-extract \
     supercrabtree/k
-#     gko/ssh-connect
-#     agkozak/zhooks

@@ -12,10 +12,8 @@
 # zinit ice wait"5" lucid from"gh-r" as"program" has"bw" mv"portwarden* -> portwarden"
 # zinit light vwxyzjn/portwarden
 
-# git diff so fancy
-zinit ice wait"5" lucid as"program" has"git" pick"bin/git-dsf"
-zinit light zdharma-continuum/zsh-diff-so-fancy
-
-# fzpac
-zinit ice wait"5" lucid as"program" has"fzf" has"pacman" pick"fzpac"
-zinit light sheepla/fzpac
+## Programs
+# vivid - sets LS_COLORS theme
+# zinit ice from'gh-r' as'program' mv'vivid* vivid' sbin'**/vivid(.exe|) -> vivid' \
+#     atload'export LS_COLORS="$(vivid generate ayu)"'
+# zinit light @sharkdp/vivid

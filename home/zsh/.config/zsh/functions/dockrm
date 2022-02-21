@@ -1,0 +1,8 @@
+#!/usr/bin/env sh
+
+# Remove docker container(s)
+dockrm() {
+  docker ps -a | sed 1d | fzf -q "$1" --no-sort -m --tac | awk '{ print $1 }' | xargs -r docker rm
+}
+
+dockrm "$@"

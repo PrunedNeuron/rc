@@ -4,3 +4,5 @@
 function gpgurl() {
     curl -sSL $1 | gpg --import -
 }
+
+gpgurl "$@"

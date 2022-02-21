@@ -3,3 +3,5 @@
 freeport() {
     fuser -k "$1"/tcp
 }
+
+freeport "$@"
