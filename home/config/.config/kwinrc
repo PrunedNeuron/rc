@@ -35,6 +35,9 @@ Duration=150
 [Effect-kwin4_effect_translucency]
 MoveResize=73
 
+[ElectricBorders]
+BottomLeft=ShowDesktop
+
 [ModifierOnlyShortcuts]
 Meta=org.kde.lattedock,/Latte,org.kde.LatteDock,activateLauncherMenu
 
@@ -82,16 +85,16 @@ blurExceptMatching=true
 blurMatching=false
 patterns=
 
-[Script-minimizeall]
-BorderActivate=1
-
 [TabBox]
 BorderActivate=7
-LayoutName=flipswitch
+BorderAlternativeActivate=1
+LayoutName=thumbnail_grid
 ShowDesktopMode=1
+SwitchingMode=1
 
 [TabBoxAlternative]
-LayoutName=coverswitch
+LayoutName=present_windows
+ShowDesktopMode=1
 
 [Windows]
 BorderlessMaximizedWindows=true

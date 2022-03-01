@@ -36,6 +36,12 @@ alias conf="cd $CONFIG"
 alias fjson="python -m json.tool"
 alias a2c="aria2c"
 
+# ls (exa)
+alias ll='ls --long'
+alias la='ls --all'
+alias lla='ls --all --long'
+alias lt='ls --tree'
+
 # exa
 alias exa="exa --git --icons --group --color-scale --time-style=long-iso --group-directories-first"
 alias exaa="exa --all"
@@ -80,7 +86,8 @@ alias snano="sudo nano"
 # yt-dlp
 alias ytd="yt-dlp"
 
+# Colorize
+alias dmesg='dmesg --color=always'
 
-# Archiving / Compression
 
 
