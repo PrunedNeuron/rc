@@ -7,8 +7,8 @@ require("nvim-comment-frame").setup()
 require("project_nvim").setup()
 
 -- Telescope
--- require("telescope").load_extension("projects")
--- require("telescope").setup()
+require("telescope").load_extension("projects")
+require("telescope").setup()
 
 -- Twilight
 -- require("twilight").setup()
@@ -41,17 +41,16 @@ require("autosave").setup(
      execution_message = "AutoSave: saved at " .. vim.fn.strftime("%H:%M:%S"),
      events = {"InsertLeave", "TextChanged"},
      conditions = {
-                   exists = true,
-                   filetype_is_not = {},
-                   modifiable = true
-                  },
+            exists = true,
+            filetype_is_not = {},
+            modifiable = true
+    },
      write_all_buffers = false,
      on_off_commands = true,
      clean_command_line_interval = 0,
      debounce_delay = 135
     }
 )
-
 
 -- lightbulb
 vim.cmd [[autocmd CursorHold,CursorHoldI * lua require'nvim-lightbulb'.update_lightbulb()]]
