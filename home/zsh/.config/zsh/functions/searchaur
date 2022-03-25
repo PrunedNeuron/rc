@@ -1,9 +1,9 @@
-#!/usr/bin/env bash
+#!/usr/bin/env sh
 
 # Open AUR search page with the first 250 results in the browser sorted by popularity and in descending order
 
 searchaur() {
-    xdg-open "https://aur.archlinux.org/packages/?K=$1&SB=p&SO=d&PP=250" > /dev/null 2>&1
+    xdg-open "https://aur.archlinux.org/packages/?K=${1}&SB=p&SO=d&PP=250" >/dev/null 2>&1
 }
 
 searchaur "$@"

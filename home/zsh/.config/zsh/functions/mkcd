@@ -1,9 +1,9 @@
-#!/usr/bin/env zsh
+#!/usr/bin/env bash
 
 # Make a directory and cd into it
 
 mkcd() {
-    mkdir -p $@ && cd ${@:$#}
+    mkdir -p "$@" && cd "${@:$#}" || exit
 }
 
 mkcd "$@"

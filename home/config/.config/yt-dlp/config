@@ -1,6 +1,9 @@
 # yt-dlp configuration
 
-# Prefer ffmpeg
+# Force IPv4
+--force-ipv4
+
+# Prefer ffmpeg for HLS
 --hls-prefer-ffmpeg
 
 # Do not copy the mtime
@@ -9,13 +12,31 @@
 # Restrict to shorter file names
 --restrict-filenames
 
-# Add thumbnail
---embed-thumbnail
+# Geolocation
+--geo-bypass-country US
 
-# Add thumbnail
---embed-metadata
+# Use only IPv4
+--force-ipv4
+
+# Overwrite if required
+--force-overwrites
+
+# Show progress bar
+--progress
+--newline
+
+# Suppress logs
+--quiet
+--verbose
+
+# Suppress warnings
+--no-warnings
+
+# Ignore no formats error
+--ignore-no-formats-error
 
 # Use aria2c
 --downloader aria2c
---downloader-args aria2c:'-c -j 3 -x 3 -s 3 -k 1M'
+--downloader-args aria2c:"--no-conf --conf-path=$CONFDIR/aria2/aria2.youtube.conf"
+
 

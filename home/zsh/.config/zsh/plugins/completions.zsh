@@ -57,5 +57,13 @@ zinit ice lucid wait as'completion' blockf has"ipfs" mv"_zsh-ipfs -> _ipfs"
 zinit snippet https://github.com/hellounicorn/zsh-ipfs/blob/master/_zsh-ipfs
 
 # More completions
-zinit ice lucid wait as'completion' blockf pick"src/go" "src/zsh"
-zinit light zchee/zsh-completions
+# zinit ice lucid wait as'completion' blockf pick"src/go" "src/zsh"
+# zinit light zchee/zsh-completions
+
+## Completion plugins
+zinit light clarketm/zsh-completions
+
+# fzf
+zinit ice lucid wait as'completion' blockf has'fzf' mv'completion.zsh -> _fzf'
+zinit snippet https://github.com/junegunn/fzf/blob/master/shell/completion.zsh
+

@@ -1,4 +1,4 @@
-#!/usr/bin/env sh
+#!/usr/bin/env bash
 
 # fkill - kill processes - list only the ones you can kill. Modified the earlier script.
 fkill() {
@@ -9,9 +9,8 @@ fkill() {
         pid=$(ps -ef | sed 1d | fzf -m | awk '{print $2}')
     fi
 
-    if [ "x$pid" != "x" ]
-    then
-        echo $pid | xargs kill -${1:-9}
+    if [ "x$pid" != "x" ]; then
+        echo "$pid" | xargs kill -"${1:-9}"
     fi
 }
 

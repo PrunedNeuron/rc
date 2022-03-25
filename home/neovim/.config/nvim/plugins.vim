@@ -16,8 +16,6 @@ call plug#begin()
     Plug 'lukas-reineke/indent-blankline.nvim' " indent guides
     Plug 'norcalli/nvim-colorizer.lua' " highlights hex codes with their colors
     Plug 'karb94/neoscroll.nvim' " smooth scrolling
-    " Plug 'folke/twilight.nvim' " theatre mode for code
-    " Plug 'folke/zen-mode.nvim' " enhanced twilight
 
     " status bar / notifier
     Plug 'hoob3rt/lualine.nvim'
@@ -31,18 +29,19 @@ call plug#begin()
 
     " feature additions
     Plug 'nvim-telescope/telescope.nvim'
-    Plug 'kyazdani42/nvim-tree.lua' " file explorer 
+    Plug 'kyazdani42/nvim-tree.lua' " file explorer
     Plug 'ahmedkhalf/project.nvim' " Project management (cds to file dir)
     Plug 'nvim-lua/plenary.nvim'
-    " Plug 'ellisonleao/glow.nvim' " markdown reader in nvim buffer
-    " Plug 'numtostr/FTerm.nvim'
     Plug 'kevinhwang91/rnvimr' " tree
 
     " editing
-   Plug 'ZSaberLv0/ZFVimTxtHighlight'
+    Plug 'ZSaberLv0/ZFVimTxtHighlight'
     Plug 's1n7ax/nvim-comment-frame'
     Plug 'junegunn/vim-easy-align'
     Plug 'sheerun/vim-polyglot'
+
+    " lsp
+    Plug 'neovim/nvim-lspconfig'
 
     " languages
     Plug 'mhartington/nvim-typescript'
@@ -57,12 +56,20 @@ call plug#begin()
     Plug 'mhinz/vim-startify'
 
     " nvim-cmp recommended configuration
+    Plug 'hrsh7th/nvim-cmp'
     Plug 'neovim/nvim-lspconfig'
     Plug 'hrsh7th/cmp-nvim-lsp'
     Plug 'hrsh7th/cmp-buffer'
-    Plug 'hrsh7th/nvim-cmp'
+    Plug 'hrsh7th/cmp-path'
+    Plug 'hrsh7th/cmp-cmdline'
+    Plug 'lukas-reineke/cmp-rg'
+
+    " luasnip
+    Plug 'L3MON4D3/LuaSnip'
+    Plug 'saadparwaiz1/cmp_luasnip'
+
 
 call plug#end()
 
 " Lua
-lua require ('plugins')
+lua require('plugins')

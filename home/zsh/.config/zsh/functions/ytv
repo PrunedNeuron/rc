@@ -1,34 +1,23 @@
-#!/usr/bin/env bash
+#!/usr/bin/env sh
 
-function __to_mp4_if_needed() {
-    # $1 = dir_name
-    output_file="$(/bin/ls -Art "$1" | tail -n 1)"
-    output_file_name="${output_file%.*}"
-    echo "Downloaded as '$output_file'"
+SCRIPTDIR="$ZCONFDIR/functions"
 
-    # If not already in mp4 format, convert
-    if [[ "${output_file_name##*.}" =~ mp4$ ]]; then
-        echo -e "\nOutput file is ${output_file_name##*.} format. Remuxing it to mp4."
-        echo -e " **---- $output_file to ${output_file_name}.mp4... ----**) "
-        ffmpeg -i "${1}/${output_file}" -c copy "${1}/${output_file_name}.mp4" >/dev/null 2>&1
-        echo -e "Converted file stored at ${1}/${output_file_name}.mp4"
-    else
-        echo -e "Video is already in mp4 container."
-    fi
-}
+# Download highest quality youtube video in mp4
+ytv() {
+    # restrict_mp4_format="bv*[ext=mp4]+ba[ext=m4a]/b[ext=mp4] / bv*+ba/b"
+    # best_quality_format='bv*+ba/b'
 
-# Download highest quality youtube video
-function ytv() {
-    output_format="$HOME/Videos/youtube/%(title)s.%(ext)s"
+    format='bv*[ext=mp4]+ba[ext=m4a]/b[ext=mp4] / bv*+ba/b'
+    output="$HOME/Videos/youtube/%(title)s.%(ext)s"
+    config_path="$HOME/.config/yt-dlp/config"
 
     yt-dlp \
-        --format 'bv*+ba/b' \
-        --format-sort 'res,vbr,abr,asr' \
-        --output "'$output_format'" \
+        --config-location "$config_path" \
+        --format "$format" \
+        --output "$output" \
         "$@"
 
-    __to_mp4_if_needed "$(dirname "$output_format")"
+    "$SCRIPTDIR/lib/__to_mp4" "$(dirname "$output")"
 }
 
-# Run
 ytv "$@"

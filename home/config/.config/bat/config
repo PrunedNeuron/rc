@@ -1,7 +1,8 @@
+# vim: set syntax:sh
 # bat config
 
 --theme="ansi"
 --map-syntax=".ignore:Git Ignore"
---style="numbers,changes,header,grid,snip"
+--style="full"
 --paging="never"
 

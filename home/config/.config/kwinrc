@@ -14,8 +14,12 @@ Number=1
 Rows=1
 
 [Effect-Blur]
-BlurStrength=6
-NoiseStrength=9
+BlurStrength=13
+NoiseStrength=8
+
+[Effect-Blur-Respect-Rounded-Corners]
+BlurStrength=14
+TopDecorationRadius=14
 
 [Effect-MagicLamp]
 AnimationDuration=240
@@ -32,9 +36,6 @@ WobblynessLevel=3
 [Effect-YetAnotherMagicLamp]
 Duration=150
 
-[Effect-kwin4_effect_translucency]
-MoveResize=73
-
 [ElectricBorders]
 BottomLeft=ShowDesktop
 
@@ -46,9 +47,9 @@ LatitudeAuto=20.0262
 LongitudeAuto=86.2941
 
 [Plugins]
-ParachuteEnabled=true
+ParachuteEnabled=false
 blurEnabled=true
-contrastEnabled=true
+contrastEnabled=false
 force-decorations-gtk3Enabled=true
 forceblurEnabled=true
 glideEnabled=true
@@ -68,7 +69,7 @@ lattewindowcolorsEnabled=true
 magiclampEnabled=true
 maximized-window-gapEnabled=false
 minimizeallEnabled=true
-movewindowtocenterEnabled=true
+movewindowtocenterEnabled=false
 overviewEnabled=true
 quick-tile-2Enabled=false
 quicktile-enhancementsEnabled=false
@@ -81,19 +82,16 @@ videowallEnabled=false
 wobblywindowsEnabled=true
 
 [Script-forceblur]
-blurExceptMatching=true
-blurMatching=false
-patterns=
+blurContent=true
+patterns=yakuake\nurxvt\nkeepassxc\nfirefox-nightly
 
 [TabBox]
 BorderActivate=7
 BorderAlternativeActivate=1
-LayoutName=thumbnail_grid
 ShowDesktopMode=1
-SwitchingMode=1
 
 [TabBoxAlternative]
-LayoutName=present_windows
+LayoutName=compact
 ShowDesktopMode=1
 
 [Windows]

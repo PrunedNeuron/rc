@@ -3,6 +3,12 @@
 export FZF_DEFAULT_COMMAND="fd --type f"
 export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 
+# export FZF_DEFAULT_OPTS=$FZF_DEFAULT_OPTS'
+#             --color=fg:#6e6e6e,bg:#ffffff,hl:#73b1f0
+#             --color=fg+:#4d4d4d,bg+:#ffffff,hl+:#70cceb
+#             --color=info:#ff2e58,prompt:#20e046,pointer:#af5fff
+#             --color=marker:#ffb11f,spinner:#af5fff,header:#6ccfcf'"
+
 export FZF_DEFAULT_OPTS='
     --height 100% --layout=reverse --border
     --color=fg:#575757,bg:#ffffff,hl:#1f8fff
@@ -12,5 +18,3 @@ export FZF_DEFAULT_OPTS='
 
 export FZF_COMPLETION_TRIGGER=''
 
-# Load fzf shell extensions for zsh
-source <(cat $(ls -1 /usr/share/fzf/*.zsh))

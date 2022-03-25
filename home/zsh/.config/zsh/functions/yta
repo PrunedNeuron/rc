@@ -1,14 +1,15 @@
-#!/usr/bin/env bash
+#!/usr/bin/env sh
 
 # Download highest quality youtube audio
-function yta() {
+yta() {
     yt-dlp \
         --format 'ba' \
         --extract-audio \
+        --audio-quality 0 \
+        --audio-format 'opus' \
         --format-sort 'abr,asr' \
-        --output '~/Music/youtube/%(title)s.%(ext)s' \
+        --output "$HOME/Music/youtube/%(title)s.%(ext)s" \
         "$@"
 }
 
-# Run
 yta "$@"

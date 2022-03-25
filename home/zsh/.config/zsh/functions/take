@@ -1,6 +1,8 @@
-#!/usr/bin/env zsh
+#!/usr/bin/env sh
 
 # Alias for mkcd
 take() {
     mkcd "$@"
 }
+
+take "$@"

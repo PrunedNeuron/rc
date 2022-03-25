@@ -1,0 +1,9 @@
+[Desktop Entry]
+Name=ssh-add
+Type=Application
+Terminal=false
+X-KDE-AutostartScript=true
+Comment='Adds all ssh keys to KDE Wallet keyring at startup.'
+Exec=/home/ayush/.config/autostart-scripts/ssh-add.sh
+Hidden=false
+

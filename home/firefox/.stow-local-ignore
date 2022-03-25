@@ -1,0 +1,9 @@
+#
+# .stow-local-ignore
+#
+
+# Ignore files ending with a tilde
+.*.*~
+
+# Ignore .stowignore files
+.*.stowignore

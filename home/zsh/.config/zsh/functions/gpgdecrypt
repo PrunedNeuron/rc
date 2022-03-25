@@ -4,13 +4,13 @@
 # Source: https://github.com/Czocher/gpg-crypt
 
 # Decrypt the given tar.gpg file
-function gpg-decrypt() {
-  if [ "$#" -ne 1  ] || [[ "$1" != *.tar.gpg ]]; then
+gpgdecrypt() {
+  if [ "$#" -ne 1 ] || [[ "$1" != *.tar.gpg ]]; then
     echo "Usage: $0 FILE.tar.gpg" >&2
     return 1
   fi
 
-  gpg --quiet --decrypt $1 | tar -x
+  gpg --quiet --decrypt "$1" | tar -x
 }
 
-gpg-decrypt "$@"
+gpgdecrypt "$@"
