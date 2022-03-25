@@ -1,0 +1,25 @@
+#!/usr/bin/env bash
+
+# SCRIPTNAME="$(basename -- ${BASH_SOURCE:-$0})"
+
+# Download highest quality youtube video
+yt_archive() {
+    # restrict_mp4_format="bv*[ext=mp4]+ba[ext=m4a]/b[ext=mp4] / bv*+ba/b"
+    # best_quality_format='bv*+ba/b'
+
+    local __FORMAT='bv*+ba/b'
+    local __OUTPUT="$HOME/Videos/Archive/%(title)s.%(ext)s"
+    local __SORT_ORDER='res,vbr,asr,abr'
+    local __CONFIG_PATH="$HOME/.config/yt-dlp/archive.video.config"
+    local __LOG_PATH="$HOME/.local/share/yt-dlp/logs/archive"
+
+
+    yt-dlp \
+        --config-location "$__CONFIG_PATH" \
+        --format "$__FORMAT" \
+        --format-sort "$__SORT_ORDER" \
+        --output "$__OUTPUT" \
+        "$@" 2> "$__LOG_PATH/$(date +'%F--%T').log"
+}
+
+yt_archive "$@"

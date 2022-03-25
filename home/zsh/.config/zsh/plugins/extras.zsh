@@ -17,13 +17,12 @@ zinit wait"[ -d .git ] || git rev-parse --git-dir > /dev/null 2>&1" lucid light-
 
 # Utilities
 zinit wait"2" lucid light-mode for \
-    MichaelAquilina/zsh-auto-notify \
+    MichaelAquilina/zsh-you-should-use \
     le0me55i/zsh-systemd \
     zpm-zsh/colorize \
     zpm-zsh/ls
 
-zinit wait"5" lucid light-mode for \
-    MichaelAquilina/zsh-you-should-use \
-    le0me55i/zsh-extract \
-    supercrabtree/k
-
+# fnm (Fast node manager)
+zinit ice wait'2' lucid \
+  atinit'export ZSH_FNM_NODE_VERSION=$NODEVER'
+zinit light dominik-schwabe/zsh-fnm

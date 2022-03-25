@@ -37,6 +37,9 @@ export GTK_USE_PORTAL=1
 # Enable docker buildkit
 export DOCKER_BUILDKIT=1 COMPOSE_DOCKER_CLI_BUILD=1
 
+# Kitty IME Support
+export GLFW_IM_MODULE=ibus
+
 # Disable telemetry
 export DO_NOT_TRACK=1
 export NEXT_TELEMETRY_DEBUG=1

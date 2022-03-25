@@ -1,0 +1,49 @@
+#!/usr/bin/env bash
+# -*- coding: utf-8 -*-
+
+usage() {
+    cat <<EOF
+Usage: $(basename "${BASH_SOURCE:-$0}") [-h] -s start_time -e end_time url
+
+Script description here.
+
+Available options:
+
+-h, --help      Print this help and exit
+-s, --start     Start time
+-e, --end       End time
+EOF
+}
+
+# $1 -> YouTube URL/URI
+# $2 -> Start time (hh:MM:SS.ss)
+# $3 -> End time (hh:MM:SS.ss)
+ytcut() {
+    while [ -n "$1" ]; do
+        case "$1" in
+        --start | -s)
+            shift
+            local START_TIME="${1}"
+            ;;
+        --end | -e)
+            shift
+            local END_TIME="${1}"
+            ;;
+        --uri | -u)
+            shift
+            local URI="${1}"
+            ;;
+        --help | -h)
+            shift
+            usage
+            ;;
+        *)
+            usage
+            ;;
+        esac
+        shift
+    done
+    ytv --downloader ffmpeg --downloader-args "ffmpeg_i:-ss ${START_TIME} -to ${END_TIME}" "${URI}"
+}
+
+ytcut "$@"

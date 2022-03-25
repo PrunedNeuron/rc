@@ -2,7 +2,7 @@
 
 # Check if a command exists
 
-function exists () {
+exists() {
 	hash "$1" 2>/dev/null
 }
 

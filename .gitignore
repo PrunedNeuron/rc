@@ -1,8 +1,12 @@
 # .gitignore
 
+# Logs
+.log
+
 # KDE
 .directory
 .*swp
+.*~
 
 # OpenSSL
 .ca

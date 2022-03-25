@@ -4,4 +4,7 @@
 [[ $- != *i* ]] && return
 
 source ~/.config/shell/aliases
-PS1='[\u@\h \W]\$ '
+# PS1='[\u@\h \W]\$ '
+
+eval "$(starship init bash)"
+

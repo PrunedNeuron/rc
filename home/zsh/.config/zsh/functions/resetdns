@@ -1,9 +1,9 @@
-#!/usr/bin/env zsh
+#!/usr/bin/env sh
 
 # Temporary point directly to a dns server rather than to dnscrypt-proxy
 
 resetdns() {
-	echo "nameserver 1.1.1.1\nnameserver 1.0.0.1" | sudo tee /etc/resolv.conf >/dev/null
+    printf "%s\n%s\n" "nameserver 1.1.1.1" "nameserver 1.0.0.1" | sudo tee /etc/resolv.conf >/dev/null
     sudo systemctl restart dnscrypt-proxy pihole-FTL NetworkManager
 }
 

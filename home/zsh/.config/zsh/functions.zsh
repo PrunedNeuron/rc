@@ -5,9 +5,10 @@
 typeset -a entries
 typeset -U fpath
 
-entries=( $ZCONFDIR/functions/**/* ) # List of paths of functions
+# List of paths of functions
+entries=($(find "$ZCONFDIR/functions" -path "$ZCONFDIR/functions/lib" -prune -o -type f))
 
 # Add functions directory to fpath
-fpath=( $ZCONFDIR/functions "${fpath[@]}" )
+fpath=($ZCONFDIR/functions "${fpath[@]}")
 export FPATH
 autoload ${entries#$ZCONFDIR/functions/}

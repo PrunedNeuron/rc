@@ -1,16 +1,16 @@
-#!/usr/bin/env bash
+#!/usr/bin/env sh
 
 # Convenient GPG encryption and decryption
 # Source: https://github.com/Czocher/gpg-crypt
 
 # Encrypt the given file or directory to a given recipient
-function gpg-encrypt() {
+gpgencrypt() {
   if [ "$#" -ne 2 ]; then
     echo "Usage: $0 FILE/DIRECTORY RECIPIENT" >&2
     return 1
   fi
 
-  tar -c `basename $1` | gpg --encrypt --recipient $2 -o `basename $1`.tar.gpg
+  tar -c "$(basename "$1")" | gpg --encrypt --recipient "$2" -o "$(basename "$1")".tar.gpg
 }
 
-gpg-encrypt "$@"
+gpgencrypt "$@"

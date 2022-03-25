@@ -1,11 +1,8 @@
-#!/bin/sh
+#!/usr/bin/env sh
 
 ## Generate ssh key (ed25519)
 
 genssh() {
-	local key_path="$KEYPATH"
-	local comment="$COMMENT"
-
 	if [ "$#" -eq 0 ]; then
 		echo "No arguments passed."
 		exit 1

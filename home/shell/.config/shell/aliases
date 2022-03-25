@@ -3,38 +3,49 @@
 # Aliases
 
 # Services
-alias reloadde="(plasmashell --replace & ; kwin_x11 --replace &) >/dev/null 2>&1"
+alias reloadde='(plasmashell --replace & ; kwin_x11 --replace &) >/dev/null 2>&1'
+alias reloaddns='sudo systemctl restart dnscrypt-proxy pihole-FTL NetworkManager'
 
 # Arch package management
-alias y="yay" # Or just `yay`
-alias ys="yay -S"
-alias yy="yay -S --noconfirm" # Install / Reinstall
-alias yr="yay -Rns" # Uninstall
-alias yrrr="yay -Rns --noconfirm" # Uninstall / Remove completely / Purge non-interactively
+alias y='yay' # Or just `yay`
+alias ys='yay -S'
+alias yy='yay -S --noconfirm' # Install / Reinstall
+alias yr='yay -Rns' # Uninstall
+alias yrrr='yay -Rns --noconfirm' # Uninstall / Remove completely / Purge non-interactively
+alias yclear='yay -Scc' # Clear caches
+alias ycclear='yes | yay -Scc' # Clear caches non-interactively
+
+# Pacman
+alias rmpaclock='sudo rm -f /var/lib/pacman/db.lck'
 
 # Text
-alias cpy="xsel -bi" # Copy to clipboard
-alias pst="xsel -bo" # Paste from clipboard
+alias cpy='xsel -bi' # Copy to clipboard
+alias pst='xsel -bo' # Paste from clipboard
 
 # Fonts
 alias fontcc='fc-cache -f'
 alias fontm='fc-match'
 
 # Utility
-alias now="date +\"%r\""
-alias today="date +%F"
-alias fastping="ping -c 100 -s.2"
-alias open="xdg-open 2>/dev/null"
-alias netcon="sudo arp-scan -l"
+alias now="date +\'%r\'"
+alias today='date +%F'
+alias fastping='ping -c 100 -s.2'
+alias open='xdg-open 2>/dev/null'
+alias netcon='sudo arp-scan -l'
+
+# Pastebin
+alias tcpbin='nc tcp.ac 9999'
+alias termbin='nc termbin.com 9999'
+alias pstbin='tcpbin'
 
 # Misc
-alias sudokate="SUDO_EDITOR=kate sudoedit" # launch kate as root
-alias refreshmirrors="sudo systemctl start reflector"
+alias sudokate='SUDO_EDITOR=kate sudoedit' # launch kate as root
+alias refreshmirrors='sudo systemctl start reflector'
 
 # Shortcuts
-alias conf="cd $CONFIG"
-alias fjson="python -m json.tool"
-alias a2c="aria2c"
+alias conf='cd $CONFIG'
+alias fjson='python -m json.tool'
+alias a2c='aria2c'
 
 # ls (exa)
 alias ll='ls --long'
@@ -43,19 +54,19 @@ alias lla='ls --all --long'
 alias lt='ls --tree'
 
 # exa
-alias exa="exa --git --icons --group --color-scale --time-style=long-iso --group-directories-first"
-alias exaa="exa --all"
-alias exal="exa --long"
-alias exaal="exa --all --long"
+alias exa='exa --git --icons --group --color-scale --time-style=long-iso --group-directories-first'
+alias exaa='exa --all'
+alias exal='exa --long'
+alias exaal='exa --all --long'
 
 # Safety
-alias rm="rm -i"
-alias cp="cp -i"
-alias mv="mv -i"
-alias ln="ln -i"
+alias rm='rm -i'
+alias cp='cp -i'
+alias mv='mv -i'
+alias ln='ln -i'
 
 # TeX Live Package Manager (pacman integration)
-alias texpac="tllocalmgr"
+alias texpac='tllocalmgr'
 
 ## Config file shortcuts
 
@@ -78,16 +89,16 @@ alias nginxrc='nvim /etc/nginx/nginx.conf'
 alias piholerc='nvim /etc/pihole/pihole-FTL.conf'
 
 # Text editing
-alias snvim="sudo nvim"
-alias svim="sudo vim"
-alias svi="sudo vi"
-alias snano="sudo nano"
+alias snvim='sudo nvim'
+alias svim='sudo vim'
+alias svi='sudo vi'
+alias snano='sudo nano'
 
 # yt-dlp
-alias ytd="yt-dlp"
+alias ytd='yt-dlp'
 
 # Colorize
 alias dmesg='dmesg --color=always'
 
-
-
+# ffmpeg
+alias ffmpeg='ffmpeg -v quiet -stats'

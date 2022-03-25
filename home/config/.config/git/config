@@ -1,19 +1,22 @@
 [user]
-	name = Ayush
-	email = aym@protonmail.com
-	signingkey = 0x3C8C6F4D80E9E4A7
+  name = Ayush
+  email = aym@protonmail.com
+  signingkey = 0x3C8C6F4D80E9E4A7
 [core]
-	autocrlf = input
-	editor = "nvim"
+  autocrlf = input
+  editor = "nvim"
 [gpg]
-	program = gpg
+  program = gpg
 [init]
-	defaultbranch = master
+  defaultbranch = master
 [color]
-    ui = auto
+  ui = auto
 [push]
-    default = simple
+  default = simple
 [pull]
-    rebase = true
+  rebase = true
 [commit]
-	gpgsign = true
+  gpgsign = true
+[include]
+  path = ~/.config/git/themes/dracula
+

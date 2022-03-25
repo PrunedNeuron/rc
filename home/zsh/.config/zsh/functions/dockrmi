@@ -1,7 +1,7 @@
 #!/usr/bin/env sh
 
 # Remove docker image(s)
-function dockrmi() {
+dockrmi() {
   docker images | sed 1d | fzf -q "$1" --no-sort -m --tac | awk '{ print $3 }' | xargs -r docker rmi
 }
 
