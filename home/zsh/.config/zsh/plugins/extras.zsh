@@ -20,6 +20,7 @@ zinit wait"2" lucid light-mode for \
     MichaelAquilina/zsh-you-should-use \
     le0me55i/zsh-systemd \
     zpm-zsh/colorize \
+    zpm-zsh/colors \
     zpm-zsh/ls
 
 # fnm (Fast node manager)

@@ -9,8 +9,10 @@ alias reloaddns='sudo systemctl restart dnscrypt-proxy pihole-FTL NetworkManager
 # Arch package management
 alias y='yay' # Or just `yay`
 alias ys='yay -S'
-alias yy='yay -S --noconfirm' # Install / Reinstall
+alias yy='yay -S --noconfirm --needed' # Install if required
+alias yyy='yay -S --noconfirm' # Install / Reinstall
 alias yr='yay -Rns' # Uninstall
+alias yrnsc='yay -Rnsc' # Uninstall and remove unneeded dependencies
 alias yrrr='yay -Rns --noconfirm' # Uninstall / Remove completely / Purge non-interactively
 alias yclear='yay -Scc' # Clear caches
 alias ycclear='yes | yay -Scc' # Clear caches non-interactively
@@ -48,9 +50,9 @@ alias fjson='python -m json.tool'
 alias a2c='aria2c'
 
 # ls (exa)
-alias ll='ls --long'
+alias ll='ls --long --header'
 alias la='ls --all'
-alias lla='ls --all --long'
+alias lla='ls --all --long --header'
 alias lt='ls --tree'
 
 # exa
@@ -80,19 +82,20 @@ alias yayrc='nvim ~/.config/yay/config.json'
 alias starrc='nvim ~/.zsh/themes/starship.toml'
 
 # Root
-alias dnscryptrc='nvim /etc/dnscrypt-proxy/dnscrypt-proxy.toml'
-alias ftlrc='nvim /etc/pihole/pihole-FTL.conf'
-alias resolvrc='nvim /etc/resolv.conf'
-alias pacmanrc='nvim /etc/pacman.conf'
-alias makepkgrc='nvim /etc/makepkg.conf'
-alias nginxrc='nvim /etc/nginx/nginx.conf'
-alias piholerc='nvim /etc/pihole/pihole-FTL.conf'
+alias dnscryptrc='sudo -e /etc/dnscrypt-proxy/dnscrypt-proxy.toml'
+alias ftlrc='sudo -e /etc/pihole/pihole-FTL.conf'
+alias resolvrc='sudo -e /etc/resolv.conf'
+alias pacmanrc='sudo -e /etc/pacman.conf'
+alias makepkgrc='sudo -e /etc/makepkg.conf'
+alias nginxrc='sudo -e /etc/nginx/nginx.conf'
+alias piholerc='sudo -e /etc/pihole/pihole-FTL.conf'
 
 # Text editing
-alias snvim='sudo nvim'
-alias svim='sudo vim'
-alias svi='sudo vi'
-alias snano='sudo nano'
+alias snvim='SUDO_EDITOR=nvim sudo -e'
+alias svim='SUDO_EDITOR=vim sudo -e'
+alias svi='SUDO_EDITOR=vi sudo -e'
+alias snano='SUDO_EDITOR=nano sudo -e'
+alias hx='helix'
 
 # yt-dlp
 alias ytd='yt-dlp'

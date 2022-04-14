@@ -1,23 +1,39 @@
-#!/usr/bin/env sh
+#!/usr/bin/env bash
+# -*- coding: utf-8 -*-
 
-SCRIPTDIR="$ZCONFDIR/functions"
+usage() {
+    cat >&2 <<-EOF
+    Usage: $(basename -- "${BASH_SOURCE:-$0}") [options] url
+    Download highest quality youtube video with video codec H.264 and audio codec AAC.
+EOF
+}
 
 # Download highest quality youtube video in mp4
 ytv() {
     # restrict_mp4_format="bv*[ext=mp4]+ba[ext=m4a]/b[ext=mp4] / bv*+ba/b"
     # best_quality_format='bv*+ba/b'
 
-    format='bv*[ext=mp4]+ba[ext=m4a]/b[ext=mp4] / bv*+ba/b'
-    output="$HOME/Videos/youtube/%(title)s.%(ext)s"
-    config_path="$HOME/.config/yt-dlp/config"
+    if [ "$#" -gt 0 ]; then
+        local __FORMAT='bv*[ext=mp4]+ba[ext=m4a]/b[ext=mp4] / bv*+ba/b'
+        local __OUTPUT="$HOME/Videos/youtube/processed/%(title)s.%(ext)s"
+        local __CONFIG_PATH="$HOME/.config/yt-dlp/config"
+        local __LOG_PATH="$HOME/.local/share/yt-dlp/logs/video"
+        local __LOG_FILE="$__LOG_PATH/$(date +'%F--%T').log"
 
-    yt-dlp \
-        --config-location "$config_path" \
-        --format "$format" \
-        --output "$output" \
-        "$@"
+        yt-dlp \
+            --config-location "$__CONFIG_PATH" \
+            --format "$__FORMAT" \
+            --output "$__OUTPUT" \
+            "$@" 2> "$__LOG_FILE"
 
-    "$SCRIPTDIR/lib/__to_mp4" "$(dirname "$output")"
+        "$ZCONFDIR/functions/lib/__remux_mp4" "$(dirname "$__OUTPUT")"
+
+        printf \
+            "${c[green]}Successfully ${c[reset]} downloaded as ${c[light_blue]} %s. ${c[reset]}\n" \
+            "$(/bin/ls -Art "$(dirname "$__OUTPUT")" | tail -n 1)"
+    else
+        usage
+    fi
 }
 
 ytv "$@"
