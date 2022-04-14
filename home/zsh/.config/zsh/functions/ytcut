@@ -2,48 +2,41 @@
 # -*- coding: utf-8 -*-
 
 usage() {
-    cat <<EOF
-Usage: $(basename "${BASH_SOURCE:-$0}") [-h] -s start_time -e end_time url
-
-Script description here.
-
-Available options:
-
--h, --help      Print this help and exit
--s, --start     Start time
--e, --end       End time
+    cat >&2 <<-EOF
+    Usage: $(basename "${BASH_SOURCE:-$0}") [-h] start_time end_time [yt-dlp args]
 EOF
 }
 
-# $1 -> YouTube URL/URI
-# $2 -> Start time (hh:MM:SS.ss)
-# $3 -> End time (hh:MM:SS.ss)
+# __is_24_hour() {
+#     regex="^(([0-1][0-9])|([2][0-3])):([0-5][0-9])(:[0-5][0-9](?:[.]\d{1,3})?)?$"
+# }
+
+# ytcut 'url' start end
 ytcut() {
-    while [ -n "$1" ]; do
-        case "$1" in
-        --start | -s)
-            shift
-            local START_TIME="${1}"
-            ;;
-        --end | -e)
-            shift
-            local END_TIME="${1}"
-            ;;
-        --uri | -u)
-            shift
-            local URI="${1}"
-            ;;
-        --help | -h)
-            shift
-            usage
-            ;;
-        *)
-            usage
-            ;;
-        esac
-        shift
-    done
-    ytv --downloader ffmpeg --downloader-args "ffmpeg_i:-ss ${START_TIME} -to ${END_TIME}" "${URI}"
+
+    local VIDEO_URL="${1}"
+    local START_TIME="${2}"
+    local END_TIME="${3}"
+    local __DURATION="$(($(date -d "$END_TIME" '+%s') - $(date -d "$START_TIME" '+%s')))"
+    local __COMMENT="$__DURATION seconds cut | $URI | from $START_TIME to $END_TIME"
+
+    local __FORMAT='bv*[ext=mp4]+ba[ext=m4a]/b[ext=mp4] / bv*+ba/b'
+    local __OUTPUT="$HOME/Videos/youtube/processed/%(title)s.%(ext)s"
+    local __CONFIG_PATH="$HOME/.config/yt-dlp/config"
+    local __LOG_PATH="$HOME/.local/share/yt-dlp/logs/video"
+    local __LOG_FILE="$__LOG_PATH/$(date +'%F--%T').log"
+
+    yt-dlp \
+        --config-location "$__CONFIG_PATH" \
+        --format "$__FORMAT" \
+        --output "$__OUTPUT" \
+        --downloader ffmpeg \
+        --downloader-args "ffmpeg_i:-ss ${START_TIME} -to ${END_TIME}" \
+        "${VIDEO_URL}" \
+        "${@:4}" # arg 4 and more if passed
+
+    "$ZCONFDIR/functions/lib/__transcode_mp4" "$(dirname "$__OUTPUT")"
+
 }
 
 ytcut "$@"

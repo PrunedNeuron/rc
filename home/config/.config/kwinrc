@@ -5,33 +5,36 @@ update_info=kwin.upd:replace-scalein-with-scale,kwin.upd:port-minimizeanimation-
 GLCore=true
 GLTextureFilter=1
 LatencyControl=0
-LatencyPolicy=High
+LatencyPolicy=ExtremelyHigh
 OpenGLIsUnsafe=false
+WindowsBlockCompositing=false
 
 [Desktops]
 Id_1=e9611443-147d-49a0-9b47-c3636f877bd0
 Number=1
 Rows=1
 
-[Effect-Blur]
-BlurStrength=13
-NoiseStrength=8
-
 [Effect-Blur-Respect-Rounded-Corners]
-BlurStrength=14
-TopDecorationRadius=14
+BottomDecorationRadius=8
+TopDecorationRadius=8
+
+[Effect-DimInactive]
+Strength=2
 
 [Effect-MagicLamp]
-AnimationDuration=240
+AnimationDuration=160
+
+[Effect-Overview]
+BorderActivate=7
 
 [Effect-PresentWindows]
 BorderActivateAll=9
 
 [Effect-Wobbly]
-Drag=92
-MoveFactor=20
-Stiffness=3
-WobblynessLevel=3
+AdvancedMode=true
+Drag=90
+Stiffness=19
+WobblynessLevel=2
 
 [Effect-YetAnotherMagicLamp]
 Duration=150
@@ -48,6 +51,7 @@ LongitudeAuto=86.2941
 
 [Plugins]
 ParachuteEnabled=false
+activatelattelaunchermenuEnabled=true
 blurEnabled=true
 contrastEnabled=false
 force-decorations-gtk3Enabled=true
@@ -59,6 +63,7 @@ kwin-rectangleEnabled=false
 kwin4_effect_blur2Enabled=true
 kwin4_effect_eyeonscreenEnabled=true
 kwin4_effect_frozenappEnabled=false
+kwin4_effect_maximize_xrenderEnabled=true
 kwin4_effect_scaleEnabled=false
 kwin4_effect_shapecornersEnabled=true
 kwin4_effect_slidingnotificationsEnabled=true
@@ -77,25 +82,29 @@ shakeEnabled=true
 sheetEnabled=true
 sticky-window-snappingEnabled=true
 synchronizeskipswitcherEnabled=true
+thumbnailasideEnabled=true
 toggleparachuteEnabled=true
 videowallEnabled=false
 wobblywindowsEnabled=true
 
 [Script-forceblur]
-blurContent=true
-patterns=yakuake\nurxvt\nkeepassxc\nfirefox-nightly
+blurExceptMatching=true
+blurMatching=false
+patterns=yakuake\nurxvt
 
-[TabBox]
-BorderActivate=7
-BorderAlternativeActivate=1
-ShowDesktopMode=1
+[Script-minimizeall]
+BorderActivate=1
 
-[TabBoxAlternative]
-LayoutName=compact
-ShowDesktopMode=1
+[Script-tilegaps]
+gapBottom=4
+gapLeft=4
+gapMid=4
+gapRight=4
+gapTop=4
+includeMaximized=true
 
 [Windows]
-BorderlessMaximizedWindows=true
+BorderlessMaximizedWindows=false
 ElectricBorderCornerRatio=0.1
 SnapOnlyWhenOverlapping=true
 
@@ -103,6 +112,5 @@ SnapOnlyWhenOverlapping=true
 BorderSize=None
 BorderSizeAuto=false
 ButtonsOnLeft=XIA
-ButtonsOnRight=LFH
-library=org.kde.hello
-theme=hello
+ButtonsOnRight=FH
+theme=__aurorae__svg__PearLightBlur

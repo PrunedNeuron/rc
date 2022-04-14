@@ -4,13 +4,16 @@ __to_mp4() {
     # $1 = dir_name
     output_file="$(/bin/ls -Art "$1" | tail -n 1)"
     output_file_name="${output_file%.*}"
-    echo "Downloaded as '$output_file'"
 
     # If not already in mp4 format, convert
     if [[ ! "${output_file##*.}" =~ mp4$ ]]; then
         echo -e "\nOutput file is ${output_file_name##*.} format. Remuxing it to mp4."
         echo -e " **---- $output_file to ${output_file_name}.mp4... ----** "
-        ffpb -y -i "${1}/${output_file}" -c copy "${1}/${output_file_name}.mp4" # >/dev/null 2>&1
+        ffmpeg -y \
+            -i "${1}/${output_file}" \
+            -c:v h264_nvenc -preset slow \
+            -c:a libfdk_aac -profile:a aac_he_v2 -b:a 64k \
+            "${1}/${output_file_name}.mp4" 2> /dev/null
         echo -e "Converted file stored at ${1}/${output_file_name}.mp4"
     else
         echo -e "Video is already in mp4 container."
