@@ -7,6 +7,13 @@ usage() {
 EOF
 }
 
+cleanup() {
+    trap - SIGINT SIGTERM ERR EXIT
+    # script cleanup here
+    revolver stop &>/dev/null
+    echo -e "\n${RED}Failed to download video${NOCOLOR}"
+}
+
 # __is_24_hour() {
 #     regex="^(([0-1][0-9])|([2][0-3])):([0-5][0-9])(:[0-5][0-9](?:[.]\d{1,3})?)?$"
 # }
@@ -18,25 +25,57 @@ ytcut() {
     local START_TIME="${2}"
     local END_TIME="${3}"
     local __DURATION="$(($(date -d "$END_TIME" '+%s') - $(date -d "$START_TIME" '+%s')))"
-    local __COMMENT="$__DURATION seconds cut | $URI | from $START_TIME to $END_TIME"
 
-    local __FORMAT='bv*[ext=mp4]+ba[ext=m4a]/b[ext=mp4] / bv*+ba/b'
-    local __OUTPUT="$HOME/Videos/youtube/processed/%(title)s.%(ext)s"
+    local __FORMAT='bv*+ba/b'
+    local __OUTPUT="$HOME/Videos/youtube/downloads/%(title)s.%(ext)s"
+    local __SORT_ORDER='res,vbr,abr,asr'
     local __CONFIG_PATH="$HOME/.config/yt-dlp/config"
     local __LOG_PATH="$HOME/.local/share/yt-dlp/logs/video"
     local __LOG_FILE="$__LOG_PATH/$(date +'%F--%T').log"
 
+    local __FFMPEG_ARGS="ffmpeg_i:-ss ${START_TIME}"
+
+    # if END_TIME was passed, add a end marker to the cut
+    #     [ -n "$END_TIME" ] && __FFMPEG_ARGS+=" -to ${END_TIME}"
+
+    argcount="$#"
+
+    # If end time passed or if not in time format
+    if [[ "$END_TIME" =~ ^[0-9:]+$ ]]; then
+        local __FFMPEG_ARGS="ffmpeg_i:-ss ${START_TIME} -to ${END_TIME}"
+        [ $argcount -ge 4 ] && local __OTHER_ARGS="${@:4}"
+    else
+        local __FFMPEG_ARGS="ffmpeg_i:-ss ${START_TIME}"
+        [ $argcount -ge 3 ] && local __OTHER_ARGS="${@:3}"
+    fi
+
+    revolver --style 'dots2' start "Processing"
+
+    local __VIDEO_TITLE=$(yt-dlp --get-filename --restrict-filenames -o "%(title)s" "$VIDEO_URL")
+    revolver --style 'dots2' update "Processed"
+    revolver stop
+
+    revolver --style 'dots2' start "Downloading ${__VIDEO_TITLE:0:100}... from YouTube."
+
     yt-dlp \
         --config-location "$__CONFIG_PATH" \
         --format "$__FORMAT" \
+        --format-sort "$__SORT_ORDER" \
         --output "$__OUTPUT" \
         --downloader ffmpeg \
-        --downloader-args "ffmpeg_i:-ss ${START_TIME} -to ${END_TIME}" \
-        "${VIDEO_URL}" \
-        "${@:4}" # arg 4 and more if passed
+        --downloader-args "$__FFMPEG_ARGS" \
+        "${VIDEO_URL}"
 
-    "$ZCONFDIR/functions/lib/__transcode_mp4" "$(dirname "$__OUTPUT")"
-
+    if (($? != 0)); then
+        revolver stop
+        echo -e "\n${RED}Failed to download video${NOCOLOR}"
+    else
+        revolver --style 'dots2' update "Download successful."
+        revolver stop
+        revolver --style 'dots2' start "Transcoding downloaded video..."
+        "$ZCONFDIR/functions/lib/__transcode_mp4" "$(dirname "$__OUTPUT")"
+        revolver stop &>/dev/null
+    fi
 }
 
 ytcut "$@"

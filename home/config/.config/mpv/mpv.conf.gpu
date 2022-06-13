@@ -1,17 +1,17 @@
 # mpv.conf - mpv configuration
 
 ## HQ Video
-profile=gpu-hq
-hwdec=vdpau
-vo=vdpau
-# vo=xv
+#profile=gpu-hq
+#hwdec=vdpau
+#vo=vdpau
+vo=xv
 
-# scale=ewa_lanczossharp
-# cscale=ewa_lanczossharp
+scale=ewa_lanczossharp
+cscale=ewa_lanczossharp
 
 # Low latency
-# opengl-glfinish=yes
-# opengl-swapinterval=0
+#opengl-glfinish=yes
+#opengl-swapinterval=0
 
 ## Subtitles
 slang=en
@@ -20,7 +20,7 @@ sub-codepage=UTF-8
 sub-auto=fuzzy
 
 # Enable KWin compositor support
-x11-bypass-compositor=no
+#x11-bypass-compositor=no
 
 # Enable HD audiop codecs like TrueHD and DTS-MA to passthrough to an AV receiver
 #audio-spdif=ac3,eac3,dts-hd,truehd
@@ -51,9 +51,4 @@ ytdl=yes
 ytdl_path=yt-dlp
 
 ytdl-format='bv*+ba/b'
-ytdl-raw-options=format-sort='res,vbr,abr,asr'
-
-#[svp]
-#input-ipc-server=/tmp/mpvsocket     # Receives input from SVP
-#hr-seek-framedrop=no                # Fixes audio desync
-#resume-playback=no                  # Not compatible with SVP
+ytdl-raw-options=format-sort='res,vbr,asr,abr'

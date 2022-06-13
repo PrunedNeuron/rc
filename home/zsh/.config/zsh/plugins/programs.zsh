@@ -17,3 +17,12 @@
 # zinit ice from'gh-r' as'program' mv'vivid* vivid' sbin'**/vivid(.exe|) -> vivid' \
 #     atload'export LS_COLORS="$(vivid generate ayu)"'
 # zinit light @sharkdp/vivid
+
+# revolver
+zinit ice wait"2" lucid as"program" pick"revolver"
+zinit light molovo/revolver
+
+# irs music downloader with metadata
+zinit ice from"gh-r" as"program"
+zinit light cooperhammond/irs
+

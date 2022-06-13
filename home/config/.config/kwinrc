@@ -18,6 +18,9 @@ Rows=1
 BottomDecorationRadius=8
 TopDecorationRadius=8
 
+[Effect-DesktopGrid]
+BorderActivate=3
+
 [Effect-DimInactive]
 Strength=2
 
@@ -32,8 +35,9 @@ BorderActivateAll=9
 
 [Effect-Wobbly]
 AdvancedMode=true
-Drag=90
-Stiffness=19
+Drag=57
+MoveFactor=20
+Stiffness=7
 WobblynessLevel=2
 
 [Effect-YetAnotherMagicLamp]
@@ -48,6 +52,7 @@ Meta=org.kde.lattedock,/Latte,org.kde.LatteDock,activateLauncherMenu
 [NightColor]
 LatitudeAuto=20.0262
 LongitudeAuto=86.2941
+NightTemperature=2300
 
 [Plugins]
 ParachuteEnabled=false
@@ -61,14 +66,13 @@ highlightwindowEnabled=true
 krohnkiteEnabled=false
 kwin-rectangleEnabled=false
 kwin4_effect_blur2Enabled=true
+kwin4_effect_dialogparentEnabled=false
 kwin4_effect_eyeonscreenEnabled=true
-kwin4_effect_frozenappEnabled=false
 kwin4_effect_maximize_xrenderEnabled=true
 kwin4_effect_scaleEnabled=false
 kwin4_effect_shapecornersEnabled=true
 kwin4_effect_slidingnotificationsEnabled=true
 kwin4_effect_squashEnabled=false
-kwin4_effect_translucencyEnabled=true
 kwin4_effect_windowapertureEnabled=false
 lattewindowcolorsEnabled=true
 magiclampEnabled=true
@@ -85,7 +89,6 @@ synchronizeskipswitcherEnabled=true
 thumbnailasideEnabled=true
 toggleparachuteEnabled=true
 videowallEnabled=false
-wobblywindowsEnabled=true
 
 [Script-forceblur]
 blurExceptMatching=true
@@ -113,4 +116,5 @@ BorderSize=None
 BorderSizeAuto=false
 ButtonsOnLeft=XIA
 ButtonsOnRight=FH
-theme=__aurorae__svg__PearLightBlur
+library=org.kde.hello
+theme=hello

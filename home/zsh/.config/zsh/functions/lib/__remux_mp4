@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+# -*- coding: utf-8 -*-
 
 __to_mp4() {
     # $1 = dir_name
@@ -7,16 +8,26 @@ __to_mp4() {
 
     # If not already in mp4 format, convert
     if [[ ! "${output_file##*.}" =~ mp4$ ]]; then
-        echo -e "\nOutput file is ${output_file_name##*.} format. Remuxing it to mp4."
-        echo -e " **---- $output_file to ${output_file_name}.mp4... ----** "
+
+        "$HOME/.config/zsh/functions/lib/__print_in_block" "Remuxing" "$output_file" "into MP4."
+
+        local __LOG_PATH="$HOME/.local/share/ffmpeg/logs/remux"
+        local __LOG_FILE="$__LOG_PATH/ffmpeg_REMUX__$(date +'%F--%T').log"
+
         ffmpeg -y \
+            -v quiet -stats \
             -i "${1}/${output_file}" \
-            -c:v h264_nvenc -preset slow \
-            -c:a libfdk_aac -profile:a aac_he_v2 -b:a 64k \
-            "${1}/${output_file_name}.mp4" 2> /dev/null
-        echo -e "Converted file stored at ${1}/${output_file_name}.mp4"
+            -map_metadata 0 \
+            -c copy \
+            -movflags +faststart+use_metadata_tags \
+            "${1}/${output_file_name}.mp4" 2> "$__LOG_FILE"
+
+        echo "Deleting ${1}/${output_file}"
+        rm -f "${1}/${output_file}"
+
+        echo -e "\n${LIGHTGREEN}✓${NOCOLOR}Remuxed file stored at ${LIGHTGREEN}${1}/${output_file_name}.mp4${NOCOLOR}"
     else
-        echo -e "Video is already in mp4 container."
+        echo -e "${RED}Video is already in MP4 container.${NOCOLOR}"
     fi
 }
 

@@ -1,0 +1,18 @@
+#!/usr/bin/env bash
+# -*- coding: utf-8 -*-
+
+trap cleanup SIGINT SIGTERM ERR EXIT
+
+cleanup() {
+    trap - SIGINT SIGTERM ERR EXIT
+    revolver stop 2>/dev/null
+}
+
+fdkaac() {
+    f="${1%.*}.m4a"
+    revolver --style 'dots2' start "Converting to $f."
+    ffmpeg -y -i "$1" -c:a libfdk_aac -cutoff 20000 -afterburner 1 -vbr 0 "$f" 2>/dev/null
+    revolver --style 'dots2' update "Conversion successful."
+}
+
+fdkaac "$@"
