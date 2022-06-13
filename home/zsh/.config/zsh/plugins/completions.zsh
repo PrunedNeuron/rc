@@ -67,3 +67,6 @@ zinit light clarketm/zsh-completions
 zinit ice lucid wait as'completion' blockf has'fzf' mv'completion.zsh -> _fzf'
 zinit snippet https://github.com/junegunn/fzf/blob/master/shell/completion.zsh
 
+# paru
+zinit ice lucid wait as'completion' blockf has'cargo' mv'zsh -> _paru'
+zinit snippet https://github.com/Morganamilo/paru/blob/master/completions/zsh

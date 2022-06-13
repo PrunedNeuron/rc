@@ -19,10 +19,10 @@ yt_archive() {
     if [ "$#" -gt 0 ]; then
         local __FORMAT='bv*+ba/b'
         local __OUTPUT="$HOME/Videos/Archive/%(title)s.%(ext)s"
-        local __SORT_ORDER='res,vbr,asr,abr'
+        local __SORT_ORDER='res,vbr,abr,asr'
         local __CONFIG_PATH="$HOME/.config/yt-dlp/archive.video.config"
         local __LOG_PATH="$HOME/.local/share/yt-dlp/logs/archive"
-        local __LOG_FILE="$__LOG_PATH/$(date +'%F--%T').log"
+        local __LOG_FILE="$__LOG_PATH/ytarchive__$(date +'%F--%T').log"
 
         yt-dlp \
             --config-location "$__CONFIG_PATH" \

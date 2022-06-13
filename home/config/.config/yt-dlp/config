@@ -12,12 +12,17 @@
 # Restrict to shorter file names
 --restrict-filenames
 
-# Add metadata
-#--embed-metadata
+# Add thumbnail
+--embed-thumbnail
 
---parse-metadata "title:%(title)s"
---parse-metadata "webpage_url:(?s)(?P<meta_comment>.+)"
---add-metadata
+# Add metadata
+--embed-metadata
+
+# Write subtitles
+--write-subs
+
+# Write auto-generated subtitles
+--write-auto-subs
 
 # Geolocation
 --geo-bypass-country US
@@ -31,7 +36,6 @@
 
 # Suppress logs
 --quiet
---verbose
 
 # Suppress warnings
 --no-warnings

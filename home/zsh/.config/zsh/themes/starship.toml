@@ -1,7 +1,7 @@
 # ~/.config/starship.toml
 
 # General
-command_timeout = 3000
+command_timeout = 6000
 right_format = """$time"""
 continuation_prompt = "  [↪](bold yellow)  "
 

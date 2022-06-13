@@ -69,6 +69,7 @@ alias ln='ln -i'
 
 # TeX Live Package Manager (pacman integration)
 alias texpac='tllocalmgr'
+alias tlmgr='/usr/share/texmf-dist/scripts/texlive/tlmgr.pl --usermode'
 
 ## Config file shortcuts
 

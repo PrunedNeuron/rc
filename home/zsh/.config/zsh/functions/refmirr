@@ -1,0 +1,17 @@
+#!/usr/bin/env sh
+
+# Refresh pacman mirrors
+refmirr() {
+    TMPFILE=$(mktemp)
+    
+    # Save new mirrorlist to temp
+    rate-mirrors \
+        --save=$TMPFILE \
+        --country-neighbors-per-country 6 \
+        --country-test-mirrors-per-country 4 \
+        arch --max-delay 21600
+
+    # Replace mirrorlist
+    sudo mv "$TMPFILE" /etc/pacman.d/mirrorlist
+}
+

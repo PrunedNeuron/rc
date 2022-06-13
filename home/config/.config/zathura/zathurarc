@@ -1,14 +1,35 @@
 # ~/.config/zathura/zathurarc
 # zathura config
 
-
 # Enable copy to clipboard
 set selection-clipboard clipboard
 
-set guioptions cshv
+# No status bar
+set guioptions "s"
+
+# Use basename in the window title 
+set window-title-basename "true"
+
+# Use page number in the window title
+set window-title-page "true"
+
+# '~' instead of /home/...
+set window-title-home-tilde "true"
+set statusbar-home-tilde "true"
+
+# Open document in fit-width mode by default
+set adjust-open "width"
+
+# Disable 'Loading...' text
+set render-loading "false"
 
 set default-bg \#FFFFFF
 set default-fg \#000000
 
 set statusbar-bg \#FFFFFF
 set statusbar-fg \#000000
+
+# Side-by-side mode (trigger 'd')
+map D set "first-page-column 1:1"
+map <C-d> set "first-page-column 1:2"
+

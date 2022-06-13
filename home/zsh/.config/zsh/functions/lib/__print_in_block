@@ -1,0 +1,20 @@
+#!/usr/bin/env bash
+# -*- coding: utf-8 -*-
+
+__columns="${COLUMNS:-$(tput cols)}"
+
+__print_divider() {
+    local primary="·"
+    local secondary="•"
+    local half_dots=$(printf '%*s' "$(((__columns - 3) / 2))" '' | sed "s/ /$primary/g")
+
+    echo -e "${BLUE}${secondary}${half_dots}${RED}${secondary}${BLUE}${half_dots}${secondary}${NOCOLOR}"
+}
+
+__print_divider
+
+for arg in "$@"; do
+    printf "%*s\n" "$(((${#arg} + $__columns) / 2))" "$arg"
+done
+
+__print_divider

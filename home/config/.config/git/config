@@ -1,22 +1,46 @@
 [user]
-  name = Ayush
-  email = aym@protonmail.com
-  signingkey = 0x3C8C6F4D80E9E4A7
+    name = Ayush
+    email = aym@protonmail.com
+    signingkey = 0x3C8C6F4D80E9E4A7
+
 [core]
-  autocrlf = input
-  editor = "nvim"
+    autocrlf = input
+    editor = "nvim"
+    pager = delta
+
+[interactive]
+    diffFilter = delta --color-only --features=interactive
+
+[delta]
+    features = decorations
+
+[delta "interactive"]
+    keep-plus-minus-markers = false
+
+[delta "decorations"]
+    commit-decoration-style = blue ol
+    commit-style = raw
+    file-style = omit
+    hunk-header-decoration-style = blue box
+    hunk-header-file-style = red
+    hunk-header-line-number-style = "#067a00"
+    hunk-header-style = file line-number syntax
+
 [gpg]
-  program = gpg
+    program = gpg
+
 [init]
-  defaultbranch = master
+    defaultbranch = master
+
 [color]
-  ui = auto
+    ui = auto
+
 [push]
-  default = simple
+    default = simple
+
 [pull]
-  rebase = true
+    rebase = true
+
 [commit]
-  gpgsign = true
-[include]
-  path = ~/.config/git/themes/dracula
+    gpgsign = true
 
