@@ -25,12 +25,21 @@ user_pref("security.dialog_enable_delay", 100); // Reduce delay when installing 
 user_pref("browser.startup.homepage", 'https://google.com/?gl=us');
 user_pref("browser.search.region", 'US');
 
+/* Disable sponsored quick suggestions */
+user_pref("browser.urlbar.suggest.quicksuggest.sponsored", false); // DEFAULT: true
+
+/* Enable offline (Disk) cache */
+user_pref("browser.cache.offline.enable", true); // DEFAULT: false
 
 /*
  * ********
  * Graphics
  * ********
  */
+
+/* WebGPU */
+user_pref("dom.webgpu.enabled", true); // DEFAULT: false
+user_pref("gfx.webgpu.force-enabled", true); // DEFAULT: false
 
 /* Display density */
 user_pref("browser.uidensity", 1); // (0=default, 1=compact, 2=touch)
@@ -64,6 +73,11 @@ user_pref("device.sensors.enabled", false);
 user_pref("device.sensors.motion.enabled", false);
 user_pref("device.sensors.orientation.enabled", false);
 user_pref("device.sensors.proximity.enabled", false);
+
+
+/* Prevent clipboard modification */
+user_pref("dom.event.clipboardevents.enabled", false);
+
 
 /*
  * *********
@@ -107,8 +121,27 @@ user_pref("app.shield.optoutstudies.enabled", false);
 user_pref("beacon.enabled", false);
 user_pref("breakpad.reportURL", "");
 
-/* Disable sponsored quick suggestions */
-user_pref("browser.urlbar.suggest.quicksuggest.sponsored", false); // DEFAULT: true
+
+/*
+ * *************
+ * Accessibility
+ * *************
+ */
+
+/* Disable accessibility for memory savings */
+user_pref("accessibility.force_disabled", 1); // DEFAULT: 0
+
+
+/*
+ * ************
+ * Experimental
+ * ************
+ */
+
+/* Enable experimental IndexedDB features */
+user_pref("dom.indexedDB.experimental", true); // DEFAULT: false
+
+
 
 // imgur workaround
 user_pref("layout.css.resizeobserver.enabled", true);

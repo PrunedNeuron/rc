@@ -2,6 +2,6 @@
 
 # fzf interface for yay -S
 yayz() {
-    yay -Slq | fzf --multi --preview 'cat <(yay -Si {1}) <(yay -Fl {1} | awk "{print \$2}")' | xargs -ro yay -S
+    yay -Slq | fzf --multi --reverse --preview 'cat <(yay -Si {1}) <(yay -Fl {1} | awk "{print \$2}")' | xargs -ro yay -S
 }
 
