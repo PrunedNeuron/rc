@@ -6,9 +6,6 @@ require('config/telescope')
 -- lualine
 require('config/lualine')
 
--- nvim-tree
-require('config/nvim-tree')
-
 -- Autosave
 require('config/autosave')
 

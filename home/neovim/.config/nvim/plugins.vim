@@ -25,14 +25,11 @@ call plug#begin()
     Plug 'kosayoda/nvim-lightbulb'
     Plug 'Pocco81/AutoSave.nvim'
     Plug 'tpope/vim-surround'
-    Plug 'junegunn/fzf.vim'
 
     " feature additions
     Plug 'nvim-telescope/telescope.nvim'
-    Plug 'kyazdani42/nvim-tree.lua' " file explorer
     Plug 'ahmedkhalf/project.nvim' " Project management (cds to file dir)
     Plug 'nvim-lua/plenary.nvim'
-    Plug 'kevinhwang91/rnvimr' " tree
 
     " editing
     Plug 'ZSaberLv0/ZFVimTxtHighlight'
@@ -44,11 +41,7 @@ call plug#begin()
     Plug 'neovim/nvim-lspconfig'
 
     " languages
-    Plug 'mhartington/nvim-typescript'
-    Plug 'ekalinin/dockerfile.vim'
-    Plug 'chr4/nginx.vim'
     Plug 'lervag/vimtex'
-    Plug 'fatih/vim-go'
 
     " utilities
     Plug 'lambdalisue/suda.vim'
@@ -63,10 +56,6 @@ call plug#begin()
     Plug 'hrsh7th/cmp-path'
     Plug 'hrsh7th/cmp-cmdline'
     Plug 'lukas-reineke/cmp-rg'
-
-    " luasnip
-    Plug 'L3MON4D3/LuaSnip'
-    Plug 'saadparwaiz1/cmp_luasnip'
 
 
 call plug#end()
