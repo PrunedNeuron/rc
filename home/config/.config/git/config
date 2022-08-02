@@ -44,3 +44,11 @@
 [commit]
     gpgsign = true
 
+; [url "https://github.com/"]
+;     insteadOf = gh:
+;
+; [url "https://gitlab.com/"]
+;     insteadOf = gl:
+;
+; [url "https://codeberg.org/"]
+;     insteadOf = cb:

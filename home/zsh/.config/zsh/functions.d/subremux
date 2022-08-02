@@ -1,0 +1,33 @@
+#!/usr/bin/env bash
+# -*- coding: utf-8 -*-
+
+usage() {
+    cat >&2 <<-EOF
+    Usage: $(basename -- "${BASH_SOURCE:-$0}") video subtitles
+    
+    Soft embed subtitles in video file.
+EOF
+}
+
+sub_remux() {
+    if [ "$#" -gt 0 ]; then
+        video="$1"
+        subtitles="$2"
+        title="${video%.*}"
+        ffmpeg -y \
+            -i "$video" -i "$subtitles" \
+            -map_metadata 0 -movflags +faststart+use_metadata_tags \
+            -c copy -c:s ass \
+            -metadata:s:s:0 language=eng \
+            -disposition:s:0 default "${title}.mkv"
+
+        rm -f "$video" "$subtitles"
+
+        printf "${c[green]}Saved ${c[reset]} as ${c[light_blue]} %s. ${c[reset]}\n" "${title}.mkv" 
+    else
+        usage
+    fi
+}
+
+sub_remux "$@"
+

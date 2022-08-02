@@ -1,3 +1,6 @@
+[Auto Allow]
+kdewallet=kwalletmanager5,ksshaskpass,discord,KDE System,Google Chrome,falkon,signond
+
 [Migration]
 alreadyMigrated=true
 
@@ -11,5 +14,5 @@ Idle Timeout=10
 Launch Manager=true
 Leave Manager Open=false
 Leave Open=true
-Prompt on Open=false
+Prompt on Open=true
 Use One Wallet=true

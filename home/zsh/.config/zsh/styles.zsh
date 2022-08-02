@@ -90,3 +90,11 @@ zstyle ':completion:*:*:*:users' ignored-patterns \
 		shoutcast tcpdump '_*'
 
 zstyle ':completion:*' single-ignored show
+
+## marlonrichert/zsh-autocomplete
+# zstyle ':autocomplete:*' min-input 2
+# zstyle ':autocomplete:*' list-lines 32
+# zstyle ':autocomplete:history-search:*' list-lines 32
+# zstyle ':autocomplete:history-incremental-search-*:*' list-lines 32
+# zstyle ':autocomplete:*' recent-dirs zoxide
+# zstyle ':autocomplete:*' widget-style menu-select

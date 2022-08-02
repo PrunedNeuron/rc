@@ -1,0 +1,99 @@
+#!/usr/bin/env bash
+# -*- coding: utf-8 -*-
+
+#
+# decrypt
+# linearize
+#
+#
+
+usage() {
+    cat >&2 <<-EOF
+    Usage: $(basename -- "${BASH_SOURCE:-$0}") [options] [args]
+    PDF Tools.
+EOF
+}
+
+_decrypt() {
+    src="${2}.backup"
+    dest="${2}"
+
+    stty -echo
+    echo -n "Enter decryption password: "
+    read password
+    echo
+
+    mv "$2" "$src"
+    qpdf \
+        --decrypt \
+        --password="$password" \
+        "$src" "$dest"
+    
+    echo -e "\nDecryption successful."
+    
+    stty echo
+}
+
+_linearize() {
+    src="${2}.backup"
+    dest="${2}"
+
+    mv "$2" "$src"
+
+    qpdf \
+        --optimize-images \
+        --linearize \
+        "$src" -- "$dest"
+
+    echo -e "\nLinearization successful."
+}
+
+_images() {
+    img2pdf --output "${2%.*}.pdf" --pagesize A4 "${@:3}"
+    echo -e "\nPDF created successful."
+}
+
+_text() {
+    pdftotext -layout "$2" "${2%.*}.txt"
+}
+
+_concat() {
+    qpdf --optimize-images --linearize --empty --pages "${@:2}"
+}
+
+main() {
+    if [ $# -gt 0 ]; then
+        if [[ -z "$1" ]] || [[ -z "$2" ]]; then
+            usage
+        fi
+
+        case "$1" in
+            -c|--concat)
+                _concat "$@"
+                ;;
+            -d|--decrypt)
+                _decrypt "$@"
+                ;;
+            -l|--linearize)
+                _linearize "$@"
+                ;;
+            -c|--compress)
+                _compress "$@"
+                ;;
+            -i|--images)
+                _images "$@"
+                ;;
+            -t|--text)
+                _text "$@"
+                ;;
+            -h|--help)
+                usage
+                ;;
+            *)
+                usage
+                ;;
+        esac
+    fi
+}
+
+main "$@"

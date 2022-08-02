@@ -30,6 +30,8 @@ setopt EXTENDED_HISTORY
 # Share history between different zsh instances
 setopt SHARE_HISTORY
 
+# Remove lines from the history list when the first character is a space, or when one of the expanded aliases contains a leading space.
+setopt HIST_IGNORE_SPACE
 
 ## -- Completion
 
@@ -45,6 +47,12 @@ setopt ALWAYS_TO_END
 
 # Allow completion from within a word/phrase
 setopt COMPLETE_IN_WORD
+
+# Complete aliases
+# setopt COMPLETE_ALIASES
+
+# Show the type of each file with a trailing identifying mark
+# setopt LIST_TYPES
 
 ## -- Changing directories
 
@@ -79,3 +87,6 @@ setopt BEEP
 
 # Try to correct the spelling of commands
 setopt CORRECT
+
+# Allow the short forms of for, repeat, select, if and function constructs
+setopt SHORT_LOOPS

@@ -55,7 +55,7 @@ user_pref("image.jxl.enabled", true);
  */
 
 user_pref("media.hardwaremediakeys.enabled", false); // fix for duplicate firefox mpris player bug
-
+user_pref("media.hardware-video-decoding.force-enabled", true); // Force enable HW video decode
 
 /*
  * *******   ********
@@ -67,6 +67,11 @@ user_pref("media.hardwaremediakeys.enabled", false); // fix for duplicate firefo
 user_pref("privacy.donottrackheader.enabled", true);
 user_pref("privacy.donottrackheader.value", 1);
 
+/* Tracking */
+user_pref("privacy.trackingprotection.enabled", true); // DEFAULT: false
+user_pref("privacy.trackingprotection.socialtracking.enabled", true); // DEFAULT: false
+user_pref("browser.contentblocking.category", "strict"); // DEFAULT: standard
+
 /* Disallow sensor data */
 user_pref("device.sensors.ambientLight.enabled", false);
 user_pref("device.sensors.enabled", false);
@@ -77,6 +82,16 @@ user_pref("device.sensors.proximity.enabled", false);
 
 /* Prevent clipboard modification */
 user_pref("dom.event.clipboardevents.enabled", false);
+
+
+/*
+ * **********
+ * Networking
+ * **********
+ */
+
+/* Disable IPv6 */
+user_pref("network.dns.disableIPv6", true); // DEFAULT: false
 
 
 /*

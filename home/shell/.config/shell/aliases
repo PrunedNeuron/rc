@@ -5,6 +5,8 @@
 # Services
 alias reloadde='(plasmashell --replace & ; kwin_x11 --replace &) >/dev/null 2>&1'
 alias reloaddns='sudo systemctl restart dnscrypt-proxy pihole-FTL NetworkManager'
+alias signout='loginctl terminate-session $XDG_SESSION_ID'
+
 
 # Arch package management
 alias y='yay' # Or just `yay`
@@ -49,16 +51,17 @@ alias conf='cd $CONFIG'
 alias fjson='python -m json.tool'
 alias a2c='aria2c'
 
-# ls (exa)
-alias ll='ls --long --header'
+# ls
+alias ls='ls --color=auto'
+alias ll='ls -l --inode --almost-all --human-readable --file-type --size --sort=time --author --group-directories-first --hyperlink=always'
 alias la='ls --all'
 alias lla='ls --all --long --header'
 alias lt='ls --tree'
 
 # exa
-alias exa='exa --git --icons --group --color-scale --time-style=long-iso --group-directories-first'
+alias exa='exa --git --icons --group --color-scale --group-directories-first'
 alias exaa='exa --all'
-alias exal='exa --long'
+alias exal='exa --long --time-style=long-iso'
 alias exaal='exa --all --long'
 
 # Safety

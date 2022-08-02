@@ -37,3 +37,6 @@ require('project_nvim').setup()
 vim.cmd [[autocmd CursorHold,CursorHoldI * lua require'nvim-lightbulb'.update_lightbulb()]]
 
 
+-- mason - manage formatters
+require("mason").setup()
+require("mason-lspconfig").setup()

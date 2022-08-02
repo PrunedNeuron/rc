@@ -44,6 +44,7 @@ call plug#begin()
     Plug 'lervag/vimtex'
 
     " utilities
+    Plug 'williamboman/mason.nvim', { 'branch': 'alpha' }
     Plug 'lambdalisue/suda.vim'
     Plug 'folke/which-key.nvim'
     Plug 'mhinz/vim-startify'
