@@ -21,7 +21,8 @@ sub_remux() {
             -metadata:s:s:0 language=eng \
             -disposition:s:0 default "${title}.mkv"
 
-        rm -f "$video" "$subtitles"
+        [ "$video" != "${title}.mkv" ] && rm -f "$video"
+        rm -f "$subtitles"
 
         printf "${c[green]}Saved ${c[reset]} as ${c[light_blue]} %s. ${c[reset]}\n" "${title}.mkv" 
     else

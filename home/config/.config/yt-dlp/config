@@ -18,11 +18,8 @@
 # Add metadata
 --embed-metadata
 
-# Write subtitles
---write-subs
-
-# Write auto-generated subtitles
---write-auto-subs
+# Embed subtitles
+--embed-subs
 
 # Geolocation
 --geo-bypass-country US

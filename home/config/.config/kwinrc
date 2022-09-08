@@ -44,11 +44,13 @@ WobblynessLevel=2
 Duration=150
 
 [Effect-blur]
+BlurStrength=5
 BottomDecorationRadius=8
+NoiseStrength=14
 TopDecorationRadius=8
 
 [Effect-desktopgrid]
-BorderActivate=3
+BorderActivate=7
 
 [Effect-diminactive]
 Strength=2
@@ -56,13 +58,11 @@ Strength=2
 [Effect-magiclamp]
 AnimationDuration=160
 
-[Effect-overview]
-BorderActivate=7
-
 [Effect-presentwindows]
 BorderActivateAll=9
 
 [Effect-windowview]
+BorderActivate=5
 BorderActivateAll=9
 
 [Effect-wobblywindows]
@@ -73,17 +73,17 @@ MoveFactor=20
 Stiffness=7
 WobblynessLevel=2
 
-[ElectricBorders]
-BottomLeft=ShowDesktop
-
 [ModifierOnlyShortcuts]
 Meta=org.kde.lattedock,/Latte,org.kde.LatteDock,activateLauncherMenu
 
 [Plugins]
+MoveSnapEnabled=true
 ParachuteEnabled=true
 activatelattelaunchermenuEnabled=true
+applicationswitcherEnabled=true
 blurEnabled=true
 contrastEnabled=true
+floatingtilesEnabled=false
 force-decorations-gtk3Enabled=true
 forceblurEnabled=true
 glideEnabled=true
@@ -109,10 +109,10 @@ minimizeallEnabled=true
 movewindowtocenterEnabled=false
 overviewEnabled=true
 quick-tile-2Enabled=false
-quicktile-enhancementsEnabled=false
+quicktile-enhancementsEnabled=true
 shakeEnabled=true
 sheetEnabled=true
-sticky-window-snappingEnabled=true
+sticky-window-snappingEnabled=false
 synchronizeskipswitcherEnabled=true
 thumbnailasideEnabled=true
 toggleparachuteEnabled=true
@@ -122,13 +122,19 @@ wobblywindowsEnabled=true
 [ScreenEdges]
 RemainActiveOnFullscreen=true
 
+[Script-exquisite]
+position=0
+
+[Script-floatingtiles]
+excludedAppsForeground=kwrite, kate, konsole, kitty
+
 [Script-forceblur]
 blurExceptMatching=true
 blurMatching=false
 patterns=yakuake\nurxvt
 
 [Script-minimizeall]
-BorderActivate=1
+BorderActivate=1,3
 
 [Script-tilegaps]
 gapBottom=4

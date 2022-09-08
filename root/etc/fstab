@@ -1,0 +1,7 @@
+# Static information about the filesystems.
+# See fstab(5) for details.
+
+# <device>                                 <dir> <type> <options>                                                                                              <dump> <fsck>
+UUID=75fd3d84-3245-40b8-ad4a-6c6ccee06328  /      ext4  rw,relatime                                                                                                0  1
+UUID=af7fc6fb-85cd-44bc-925a-68c84d62b32c  /home  ext4  defaults                                                                                                   0  2
+UUID=647B-6C76                             /boot  vfat  rw,relatime,fmask=0022,dmask=0022,codepage=437,iocharset=iso8859-1,shortname=mixed,utf8,errors=remount-ro  0  2

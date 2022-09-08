@@ -28,3 +28,4 @@ zi wait"2" lucid light-mode for \
 zi ice wait'2' lucid \
   atinit'export ZSH_FNM_NODE_VERSION=$NODEVER'
 zi light dominik-schwabe/zsh-fnm
+

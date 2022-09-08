@@ -1,29 +1,5 @@
 # Programs
 
-## Programs
-# vivid - sets LS_COLORS theme
-# zi ice from'gh-r' as'program' mv'vivid* vivid' sbin'**/vivid(.exe|) -> vivid' \
-#     atload'export LS_COLORS='$(vivid generate ayu)''
-# zi light @sharkdp/vivid
-
-# From gh:Jackson-soft/dotfiles/zsh/zshrc.zsh
-# Modern Unix commands
-# See gh:ibraheemdev/modern-unix
-
-# zi wait"1a" lucid from"gh-r" as"null" for \
-#     sbin"**/fd"         @sharkdp/fd \
-#     sbin"**/bat"        @sharkdp/bat \
-#     sbin"pacaptr"       rami3l/pacaptr \
-#     sbin"**/delta"      dandavison/delta \
-#     sbin"fzf" bpick"*linux*.tar.gz" \
-#                         junegunn/fzf \
-#     sbin"navi" atload'eval "$(navi widget zsh)"' \
-#                         denisidoro/navi \
-#     sbin"**/zoxide" atload'eval "$(zoxide init zsh)"' \
-#                         ajeetdsouza/zoxide \
-#     sbin"**/vivid" atload'export LS_COLORS="$(vivid generate one-light)"' \
-#                         @sharkdp/vivid
-
 zi wait"1" lucid from"gh-r" as"null" for \
     sbin'**/zoxide' \
         atclone"./zoxide init --cmd j zsh > init.zsh" atpull"%atclone" src"init.zsh" nocompile'!' ajeetdsouza/zoxide \

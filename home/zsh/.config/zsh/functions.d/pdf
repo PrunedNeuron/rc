@@ -10,51 +10,60 @@
 usage() {
     cat >&2 <<-EOF
     Usage: $(basename -- "${BASH_SOURCE:-$0}") [options] [args]
-    PDF Tools.
+    PDF manipulation tools.
 EOF
 }
 
+__backup() {
+   cp "$1" "${1}.backup"
+}
+
 _decrypt() {
-    src="${2}.backup"
-    dest="${2}"
+    src="${1}.backup"
+    dest="${1}"
 
     stty -echo
     echo -n "Enter decryption password: "
     read password
     echo
 
-    mv "$2" "$src"
+    mv "$1" "${1}.backup"
     qpdf \
         --decrypt \
         --password="$password" \
-        "$src" "$dest"
-    
+        "${1}.backup" "${1}"
+
     echo -e "\nDecryption successful."
-    
+
     stty echo
 }
 
-_linearize() {
-    src="${2}.backup"
-    dest="${2}"
+_rm_metadata() {
+    __backup "$1"
 
-    mv "$2" "$src"
+    exiftool -overwrite_original -all:all= "$src"
+}
+
+_linearize() {
+    _rm_metadata "$1"
 
     qpdf \
         --optimize-images \
         --linearize \
-        "$src" -- "$dest"
+        "$1" -- "_${1}"
+
+    mv -f "_${1}" "$1"
 
     echo -e "\nLinearization successful."
 }
 
 _images() {
-    img2pdf --output "${2%.*}.pdf" --pagesize A4 "${@:3}"
+    img2pdf --output "${1%.*}.pdf" --pagesize A4 "${@:2}"
     echo -e "\nPDF created successful."
 }
 
 _text() {
-    pdftotext -layout "$2" "${2%.*}.txt"
+    pdftotext -layout "$1" "${1%.*}.txt"
 }
 
 _concat() {
@@ -69,22 +78,22 @@ main() {
 
         case "$1" in
             -c|--concat)
-                _concat "$@"
+                _concat "${@:2}"
                 ;;
             -d|--decrypt)
-                _decrypt "$@"
+                _decrypt "${@:2}"
                 ;;
             -l|--linearize)
-                _linearize "$@"
+                _linearize "${@:2}"
                 ;;
             -c|--compress)
-                _compress "$@"
+                _compress "${@:2}"
                 ;;
             -i|--images)
-                _images "$@"
+                _images "${@:2}"
                 ;;
             -t|--text)
-                _text "$@"
+                _text "${@:2}"
                 ;;
             -h|--help)
                 usage

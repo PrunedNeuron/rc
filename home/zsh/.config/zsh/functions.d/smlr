@@ -1,0 +1,14 @@
+#!/usr/bin/env sh
+
+# Compare 2 files by byte
+
+smlr() {
+    
+    if cmp "$@" &>/dev/null; then
+        printf "${GREEN}%s${NOCOLOR}" "Identical!"
+    else
+        printf "${LIGHTRED}%s${NOCOLOR}" "Distinct!"
+    fi
+}
+
+smlr "$@"

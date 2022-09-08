@@ -18,12 +18,12 @@ set window-title-home-tilde "true"
 set statusbar-home-tilde "true"
 
 # Open document in fit-width mode by default
-set adjust-open "width"
+set adjust-open "best-fit"
 
 # Disable 'Loading...' text
 set render-loading "false"
 
-set default-bg \#FFFFFF
+set default-bg "rgba(222, 222, 222, 0.25)"
 set default-fg \#000000
 
 set statusbar-bg \#FFFFFF
@@ -32,4 +32,14 @@ set statusbar-fg \#000000
 # Side-by-side mode (trigger 'd')
 map D set "first-page-column 1:1"
 map <C-d> set "first-page-column 1:2"
+
+set scroll-page-aware true
+set statusbar-home-tilde true
+set vertical-center true
+set synctex true
+
+set zoom-center true
+set scroll-page-aware true
+set page-padding 2
+
 

@@ -18,6 +18,9 @@ source "${ZINIT_HOME}/zinit.zsh"
 # autoload -Uz _zinit
 # (( ${+_comps} )) && _comps[zinit]=_zinit
 
+# Fig pre block. Keep at the top of this file.
+# [[ -f "$HOME/.fig/shell/zshrc.pre.zsh" ]] && . "$HOME/.fig/shell/zshrc.pre.zsh"
+
 # Add precmd and chpwd hooks
 source $ZCONFDIR/hooks.zsh
 
