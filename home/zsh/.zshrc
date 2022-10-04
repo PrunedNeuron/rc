@@ -28,3 +28,5 @@ source $ZCONFDIR/plugins.zsh
 
 # Run final checks
 source $ZCONFDIR/other/post.zsh
+
+export PATH="/home/ayush/.deta/bin:$PATH"

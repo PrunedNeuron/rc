@@ -3,7 +3,7 @@
 # Perform a math calculation
 
 calc() {
-    printf "%s\n" "$*" | bc
+    printf "%s" "$*" | qalc
 }
 
 calc "$@"

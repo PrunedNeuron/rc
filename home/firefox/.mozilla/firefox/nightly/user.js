@@ -94,6 +94,9 @@ user_pref("geo.enabled", false);
 /* Prevent clipboard modification */
 user_pref("dom.event.clipboardevents.enabled", false);
 
+/* Prevent WebRTC LAN IP detection */
+user_pref("media.peerconnection.ice.default_address_only", true);
+user_pref("media.peerconnection.enabled", false);
 
 /*
  * **********
@@ -103,6 +106,9 @@ user_pref("dom.event.clipboardevents.enabled", false);
 
 /* Disable IPv6 */
 user_pref("network.dns.disableIPv6", true); // DEFAULT: false
+
+/* Disable captive portal check */
+user_pref("network.captive-portal-service.enabled", false);
 
 /* Disable offline DNS lookup */
 // user_pref("network.dns.offline-localhost", false);
@@ -227,9 +233,9 @@ user_pref("layout.css.resizeobserver.enabled", true);
 // user_pref("media.navigator.enabled", false);
 // user_pref("media.peerconnection.enabled", false);
 // user_pref("media.video_stats.enabled", false);
-// user_pref("network.IDN_show_punycode", true);
-// user_pref("network.allow-experiments", false);
-// user_pref("network.captive-portal-service.enabled", false);
+user_pref("network.IDN_show_punycode", true);
+user_pref("network.allow-experiments", false);
+user_pref("network.captive-portal-service.enabled", false);
 // user_pref("network.cookie.cookieBehavior", 5);
 // user_pref("network.dns.disablePrefetch", true);
 // user_pref("network.dns.disablePrefetchFromHTTPS", true);
@@ -239,12 +245,7 @@ user_pref("layout.css.resizeobserver.enabled", true);
 // user_pref("network.predictor.enabled", false);
 // user_pref("network.prefetch-next", false);
 // user_pref("network.trr.mode", 5);
-// user_pref("privacy.donottrackheader.enabled", true);
-// user_pref("privacy.donottrackheader.value", 1);
 // user_pref("privacy.query_stripping", true);
-// user_pref("privacy.trackingprotection.cryptomining.enabled", true);
-// user_pref("privacy.trackingprotection.fingerprinting.enabled", true);
-// user_pref("privacy.trackingprotection.pbmode.enabled", true);
 // user_pref("privacy.usercontext.about_newtab_segregation.enabled", true);
 // user_pref("security.ssl.disable_session_identifiers", true);
 // user_pref("services.sync.prefs.sync.browser.newtabpage.activity-stream.showSponsoredTopSite", false);

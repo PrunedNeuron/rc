@@ -44,9 +44,9 @@ WobblynessLevel=2
 Duration=150
 
 [Effect-blur]
-BlurStrength=5
+BlurStrength=9
 BottomDecorationRadius=8
-NoiseStrength=14
+NoiseStrength=8
 TopDecorationRadius=8
 
 [Effect-desktopgrid]
