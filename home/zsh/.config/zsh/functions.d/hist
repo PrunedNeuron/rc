@@ -1,0 +1,20 @@
+#!/usr/bin/env sh
+
+# Search through shell history
+
+usage() {
+    cat >&2 <<-EOF
+    Usage: $(basename -- "${BASH_SOURCE:-$0}") [searchterm]
+    Search through shell history.
+EOF
+}
+
+hist() {
+    if [ "$#" -ne 1 ]; then
+        usage
+    else
+        grep "$1" "$HISTFILE" | awk -F";" '{print $2}'
+    fi
+}
+
+hist "$@"
