@@ -34,8 +34,8 @@ exists () { hash "$1" 2>/dev/null && echo "$1" || echo "$2" ; }
 # Use neovim if installed, else fallback to nano --
 export EDITOR=$(exists nvim nano)
 export VISUAL=$EDITOR
-export PAGER="sh -c \"col -b | nvim -c 'set ft=man ts=8 nomod nolist nonu' -c 'nnoremap i <nop>' -\""
-export MANPAGER=$PAGER
+# export PAGER="sh -c \"col -b | nvim -c 'set ft=man ts=8 nomod nolist nonu' -c 'nnoremap i <nop>' -\""
+# export MANPAGER=$PAGER
 
 # Unset function 'exists'
 unset -f exists

@@ -9,6 +9,7 @@ zi wait lucid light-mode for \
             zicompinit; zicdreplay' \
         zdharma-continuum/fast-syntax-highlighting \
         zdharma-continuum/history-search-multi-word \
+        OMZP::colored-man-pages \
     atload'!_zsh_autosuggest_start' \
         zsh-users/zsh-autosuggestions \
     blockf atpull'zinit creinstall -q .' \

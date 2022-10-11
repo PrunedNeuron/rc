@@ -70,7 +70,7 @@ _concat() {
     qpdf --optimize-images --linearize --empty --pages "${@:2}"
 }
 
-_compress() {
+_sanitize() {
     exiftool -overwrite_original -all:all= "$1"
     mv "$1" "${1}.bkp"
     qpdf --linearize --empty --pages "${1}.bkp" -- "$1"
@@ -93,8 +93,8 @@ main() {
             -l|--linearize)
                 _linearize "${@:2}"
                 ;;
-            -c|--compress)
-                _compress "${@:2}"
+            -s|--sanitize)
+                _sanitize "${@:2}"
                 ;;
             -i|--images)
                 _images "${@:2}"
