@@ -1,21 +1,2 @@
-[Auto Allow]
-kdewallet=kwalletmanager5,ksshaskpass,discord,KDE System,Google Chrome,falkon,signond,kwalletcli,kded5,akonadi_imap_resource_12,akonadi_imap_resource_0
-
-[Auto Deny]
-kdewallet=
-
-[Migration]
-alreadyMigrated=true
-
 [Wallet]
-Close When Idle=false
-Close on Screensaver=false
-Default Wallet=kdewallet
-Enabled=true
 First Use=false
-Idle Timeout=10
-Launch Manager=true
-Leave Manager Open=false
-Leave Open=true
-Prompt on Open=false
-Use One Wallet=true

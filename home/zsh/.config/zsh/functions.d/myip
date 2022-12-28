@@ -3,7 +3,7 @@
 # List internal and external ip addresses
 
 myip() {
-    printf "Internal IP addresses:\n${GREEN}%s${NOCOLOR}\n" "$(ifconfig | grep "inet " | awk '{ print $2 }')"
+    printf "Internal IP addresses:\n${GREEN}%s${NOCOLOR}\n" "$(ip addr | grep "inet " | awk '{ print $2 }')"
     printf "External IP address:\n${CYAN}%s${NOCOLOR}\n" "$(dig +short myip.opendns.com @resolver4.opendns.com)"
 }
 
