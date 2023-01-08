@@ -6,6 +6,9 @@ Id_1=60af60b2-5203-4ed5-950c-293c9f6b5629
 Number=1
 Rows=1
 
+[Effect-blur]
+BlurStrength=11
+
 [Effect-wobblywindows]
 Drag=90
 Stiffness=6

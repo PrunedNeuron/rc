@@ -53,6 +53,9 @@ export DOCKER_BUILDKIT=1 COMPOSE_DOCKER_CLI_BUILD=1
 # Kitty IME Support
 export GLFW_IM_MODULE=ibus
 
+# Mozilla Firefox Trackpad Scrolling
+export MOZ_USE_XINPUT2=1
+
 # Disable telemetry
 export DO_NOT_TRACK=1
 export NEXT_TELEMETRY_DEBUG=1
