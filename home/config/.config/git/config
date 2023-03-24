@@ -1,7 +1,6 @@
 [user]
     name = Ayush
-    email = aym@protonmail.com
-    signingkey = 0x3C8C6F4D80E9E4A7
+    useConfigOnly = true
 
 [core]
     autocrlf = input
@@ -43,6 +42,12 @@
 
 [commit]
     gpgsign = true
+
+[include]
+    path = ~/.config/git/conf.d/personal
+
+[includeIf "gitdir:~/development/uni/"]
+    path = ~/.config/git/conf.d/university
 
 ; [url "https://github.com/"]
 ;     insteadOf = gh:

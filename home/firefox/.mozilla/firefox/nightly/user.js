@@ -49,6 +49,9 @@ user_pref("security.ssl.treat_unsafe_negotiation_as_broken", true);
 user_pref("browser.xul.error_pages.expert_bad_cert", true);
 user_pref("security.tls.enable_0rtt_data", false);
 
+/** ROOT CERTIFICATE ***/
+user_pref("security.enterprise_roots.enabled", true);
+
 /** RFP ***/
 user_pref("browser.startup.blankWindow", false);
 user_pref("browser.display.use_system_colors", false);
@@ -86,6 +89,15 @@ user_pref("dom.security.https_only_mode_error_page_user_suggestions", true);
 
 /** DNS-over-HTTPS (DOH) ***/
 user_pref("network.dns.skipTRR-when-parental-control-enabled", false);
+user_pref("network.trr.custom_uri", "https://127.0.0.1:3000/dns-query");
+user_pref("network.trr.uri", "https://127.0.0.1:3000/dns-query");
+user_pref("network.trr.mode", 2);
+user_pref("network.trr.uri", "https://127.0.0.1:3000/dns-query");
+
+/** ECH ***/
+user_pref("network.dns.echconfig.enabled", true)
+user_pref("network.dns.use_https_rr_as_altsvc", true)
+// user_pref("network.security.esni.enabled", true) // DEPRECATED
 
 /** PROXY / SOCKS / IPv6 ***/
 user_pref("network.proxy.socks_remote_dns", true);
