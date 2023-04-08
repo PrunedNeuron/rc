@@ -1,0 +1,8 @@
+#!/usr/bin/env sh
+
+# Defaults for pdfgrep
+pdfsearch() {
+    pdfgrep --with-filename --page-number --recursive "$@"
+}
+
+pdfsearch "$@"
