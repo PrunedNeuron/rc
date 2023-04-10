@@ -43,6 +43,7 @@ unset -f exists
 
 # GPG
 export GPG_TTY=$(tty)
+export PINENTRY=pinentry-curses # for kwalletcli
 
 # GTK <-> KDE Portal
 export GTK_USE_PORTAL=1
