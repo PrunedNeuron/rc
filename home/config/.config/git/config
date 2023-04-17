@@ -46,8 +46,8 @@
 [include]
     path = ~/.config/git/conf.d/personal
 
-[includeIf "gitdir:~/development/uni/"]
-    path = ~/.config/git/conf.d/university
+;[includeIf "gitdir:~/development/uni/"]
+;    path = ~/.config/git/conf.d/university
 
 ; [url "https://github.com/"]
 ;     insteadOf = gh:
