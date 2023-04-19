@@ -49,11 +49,14 @@
 ;[includeIf "gitdir:~/development/uni/"]
 ;    path = ~/.config/git/conf.d/university
 
-; [url "https://github.com/"]
-;     insteadOf = gh:
-;
-; [url "https://gitlab.com/"]
-;     insteadOf = gl:
-;
-; [url "https://codeberg.org/"]
-;     insteadOf = cb:
+[includeIf "hasconfig:remote.*.url:git@*.uni-bonn.de:**/**"]
+    path = ~/.config/git/conf.d/university
+
+[url "https://github.com/"]
+    insteadOf = gh:
+
+[url "https://gitlab.com/"]
+    insteadOf = gl:
+
+[url "https://codeberg.org/"]
+    insteadOf = cb:
