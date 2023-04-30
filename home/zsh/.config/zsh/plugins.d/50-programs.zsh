@@ -9,8 +9,6 @@ zi wait"1" lucid from"gh-r" as"null" for \
         mv"**/exa.zsh -> $ZINIT[COMPLETIONS_DIR]/_exa" sbin"**/exa" ogham/exa \
     sbin'**/vivid' \
         atload'export LS_COLORS="$(vivid generate one-light)"' @sharkdp/vivid \
-    sbin'**/navi' \
-        atload'eval "$(navi widget zsh)"' denisidoro/navi \
     sbin'**/delta' \
         atload"alias diff='delta -ns'" dandavison/delta \
     sbin'**/fd' \

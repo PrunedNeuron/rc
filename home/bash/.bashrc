@@ -7,3 +7,5 @@ source ~/.config/shell/aliases
 # PS1='[\u@\h \W]\$ '
 
 eval "$(starship init bash)"
+export PATH="/home/ayush/genv/bin:$PATH"
+eval "$(genv init -)"
