@@ -7,7 +7,11 @@ Number=1
 Rows=1
 
 [Effect-blur]
-BlurStrength=11
+BlurStrength=9
+NoiseStrength=4
+
+[Effect-magiclamp]
+AnimationDuration=300
 
 [Effect-wobblywindows]
 Drag=90
@@ -20,13 +24,16 @@ Meta=org.kde.lattedock,/Latte,org.kde.LatteDock,activateLauncherMenu
 [Plugins]
 blurEnabled=true
 contrastEnabled=true
+desktopchangeosdEnabled=false
 forceblurEnabled=true
-kwin4_effect_fadeEnabled=true
 kwin4_effect_lightlyshadersEnabled=true
+kwin4_effect_maximizeEnabled=false
+kwin4_effect_maximize_xrenderEnabled=true
+kwin4_effect_minimizescale_outexpoEnabled=true
+kwin4_effect_open_close_kineticEnabled=true
 kwin4_effect_scaleEnabled=false
 kwin4_effect_squashEnabled=false
 kwin4_effect_translucencyEnabled=true
-kwin4_effect_yetanothermagiclampEnabled=true
 sheetEnabled=true
 wobblywindowsEnabled=true
 
