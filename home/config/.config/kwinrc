@@ -45,6 +45,6 @@ tiles={"layoutDirection":"horizontal","tiles":[{"width":0.25},{"width":0.5},{"wi
 
 [org.kde.kdecoration2]
 ButtonsOnLeft=XIA
-ButtonsOnRight=HS
+ButtonsOnRight=HSF
 library=org.kde.sierrabreezeenhanced
 theme=Sierra Breeze Enhanced

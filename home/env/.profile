@@ -29,7 +29,7 @@ export LESSCHARSET=UTF-8
 
 # EDITOR & VISUAL
 # --
-exists () { hash "$1" 2>/dev/null && echo "$1" || echo "$2" ; }
+exists() { hash "$1" 2>/dev/null && echo "$1" || echo "$2"; }
 
 # Use neovim if installed, else fallback to nano --
 export EDITOR=$(exists nvim nano)
@@ -48,8 +48,9 @@ export PINENTRY=pinentry-curses # for kwalletcli
 # GTK <-> KDE Portal
 export GTK_USE_PORTAL=1
 
-# Enable docker buildkit
+# Docker
 export DOCKER_BUILDKIT=1 COMPOSE_DOCKER_CLI_BUILD=1
+export DOCKER_HOST=unix://$XDG_RUNTIME_DIR/docker.sock
 
 # Kitty IME Support
 export GLFW_IM_MODULE=ibus

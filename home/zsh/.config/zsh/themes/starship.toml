@@ -32,7 +32,7 @@ format = "took [$duration](bold yellow)"
 [memory_usage]
 disabled = true
 threshold = -1
-symbol = "𝐑𝐀𝐌 "
+symbol = "RAM "
 style = "bold dimmed green"
 format = "$fill $symbol [${ram_pct}]($style) "
 
@@ -48,10 +48,6 @@ ahead = "⇡${count}"
 diverged = "⇕⇡${ahead_count}⇣${behind_count}"
 behind = "⇣${count}"
 deleted = "✗"
-# style = "bold #ff5555" # Dracula
-
-[git_branch]
-# style = "bold #ff79c6" # Dracula
 
 [status]
 symbol = "🔴 "
@@ -64,9 +60,16 @@ disabled = false
 unknown_indicator = "mystery shell"
 disabled = true
 
-[aws]
-# style = "bold #ffb86c" # Dracula
-disabled = true
+[docker_context]
+format = '[$symbol]($style) '
 
-[gcloud]
-disabled = true
+[python]
+format = '[${symbol}${pyenv_prefix}(${version} )(\($virtualenv\) )]($style)'
+
+[git_metrics]
+format = '[+$added]($added_style)/[-$deleted]($deleted_style) '
+disabled = false 
+
+[git_commit]
+disabled = false
+

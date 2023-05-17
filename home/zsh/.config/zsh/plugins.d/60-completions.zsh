@@ -75,3 +75,6 @@ zi light zchee/zsh-completions
 zi ice lucid wait as'completion' blockf has'pacman'
 zi light clarketm/zsh-completions
 
+zi ice lucid wait as'completion' blockf has'conda'
+zi light conda-incubator/conda-zsh-completion
+

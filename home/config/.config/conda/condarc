@@ -1,15 +1,1 @@
 auto_activate_base: false
-create_default_packages:
-   -  pip
-   -  ipython
-   -  numpy
-   -  scipy
-   -  pandas
-   -  scikit-learn
-   -  plotly
-   -  jupyter
-   -  jupyterlab
-   -  matplotlib
-   -  seaborn
-   -  nbformat
-   -  nbconvert
