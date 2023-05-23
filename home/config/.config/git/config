@@ -1,35 +1,16 @@
 [user]
     name = ayush
-    useConfigOnly = true
 
 [core]
     autocrlf = input
-    editor = "nvim"
+    editor = nvim
     pager = delta
-
-[interactive]
-    diffFilter = delta --color-only --features=interactive
-
-[delta]
-    features = decorations
-
-[delta "interactive"]
-    keep-plus-minus-markers = false
-
-[delta "decorations"]
-    commit-decoration-style = blue ol
-    commit-style = raw
-    file-style = omit
-    hunk-header-decoration-style = blue box
-    hunk-header-file-style = red
-    hunk-header-line-number-style = "#067a00"
-    hunk-header-style = file line-number syntax
 
 [gpg]
     program = gpg
 
 [init]
-    defaultbranch = master
+    defaultBranch = master
 
 [color]
     ui = auto
@@ -37,17 +18,16 @@
 [push]
     default = simple
     autoSetupRemote = true
+    followTags = true
+
 [pull]
     rebase = true
 
 [commit]
-    gpgsign = true
+    gpgSign = true
 
 [include]
     path = ~/.config/git/conf.d/personal
-
-;[includeIf "gitdir:~/development/uni/"]
-;    path = ~/.config/git/conf.d/university
 
 [includeIf "hasconfig:remote.*.url:git@*.uni-bonn.de:**/**"]
     path = ~/.config/git/conf.d/university
