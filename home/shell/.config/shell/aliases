@@ -7,17 +7,16 @@ alias reloadde='(plasmashell --replace & ; kwin_x11 --replace &) >/dev/null 2>&1
 alias reloaddns='sudo systemctl restart dnscrypt-proxy pihole-FTL NetworkManager'
 alias signout='loginctl terminate-session $XDG_SESSION_ID'
 
-
 # Arch package management
 alias y='yay' # Or just `yay`
 alias ys='yay -S'
 alias yy='yay -S --noconfirm --needed' # Install if required
-alias yyy='yay -S --noconfirm' # Install / Reinstall
-alias yr='yay -Rns' # Uninstall
-alias yrnsc='yay -Rnsc' # Uninstall and remove unneeded dependencies
-alias yrrr='yay -Rns --noconfirm' # Uninstall / Remove completely / Purge non-interactively
-alias yclear='yay -Scc' # Clear caches
-alias ycclear='yes | yay -Scc' # Clear caches non-interactively
+alias yyy='yay -S --noconfirm'         # Install / Reinstall
+alias yr='yay -Rns'                    # Uninstall
+alias yrnsc='yay -Rnsc'                # Uninstall and remove unneeded dependencies
+alias yrrr='yay -Rns --noconfirm'      # Uninstall / Remove completely / Purge non-interactively
+alias yclear='yay -Scc'                # Clear caches
+alias ycclear='yes | yay -Scc'         # Clear caches non-interactively
 
 # Pacman
 alias rmpaclock='sudo rm -f /var/lib/pacman/db.lck'
@@ -51,18 +50,18 @@ alias conf='cd $CONFIG'
 alias fjson='python -m json.tool'
 alias a2c='aria2c'
 
+# exa
+alias exa='exa --all --git --icons --group --color-scale --group-directories-first --header --time-style=long-iso'
+alias l='exa'
+alias exal='exa --long --time-style=long-iso'
+alias ll='exa --long --time-style=long-iso'
+alias la='exa --all'
+alias lla='exa --long --header'
+alias lt='exa --long --tree --level=2'
+
 # ls
 alias ls='ls --color=auto'
-alias ll='ls -l --inode --almost-all --human-readable --file-type --size --sort=time --author --group-directories-first --hyperlink=always'
-alias la='ls --all'
-alias lla='ls --all --long --header'
-alias lt='ls --tree'
-
-# exa
-alias exa='exa --git --icons --group --color-scale --group-directories-first'
-alias exaa='exa --all'
-alias exal='exa --long --time-style=long-iso'
-alias exaal='exa --all --long'
+# alias ll='ls -l --inode --almost-all --human-readable --file-type --size --sort=time --author --group-directories-first --hyperlink=always'
 
 # Safety
 alias rm='rm -i'
