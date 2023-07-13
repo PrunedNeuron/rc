@@ -1,17 +1,22 @@
-#!/usr/bin/env sh
+#!/usr/bin/env bash
 
 # Refresh pacman mirrors
 refmirr() {
-    TMPFILE=$(mktemp)
-    
-    # Save new mirrorlist to temp
-    rate-mirrors \
-        --save=$TMPFILE \
-        --country-neighbors-per-country 6 \
-        --country-test-mirrors-per-country 4 \
-        arch --max-delay 21600
+	TMPFILE=$(mktemp)
 
-    # Replace mirrorlist
-    sudo mv "$TMPFILE" /etc/pacman.d/mirrorlist
+	# Save new mirrorlist to temp
+	rate-mirrors \
+		--save=$TMPFILE \
+		--concurrency 16 \
+		--country-neighbors-per-country 4 \
+		--country-test-mirrors-per-country 8 \
+		--top-mirrors-number-to-retest 8 \
+		--protocol https \
+		arch \
+		--sort-mirrors-by score_asc \
+		--max-delay 21600
+
+	# Replace mirrorlist
+	sudo mv /etc/pacman.d/mirrorlist{,.old}
+	sudo mv "$TMPFILE" /etc/pacman.d/mirrorlist
 }
-

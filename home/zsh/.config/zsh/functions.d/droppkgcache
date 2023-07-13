@@ -1,0 +1,7 @@
+#!/usr/bin/env sh
+
+# Drop the last 3 package caches
+droppkgcache() {
+	sudo paccache -rk3
+	yay -Sc --aur --noconfirm
+}

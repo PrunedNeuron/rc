@@ -12,10 +12,10 @@ zstyle ':completion:*' completer _complete _ignored _approximate # enable approx
 # -> If any of the following are shown at the same time,
 # list them in the order given,
 zstyle ':completion:*:' group-order \
-    expansions history-words options \
-    aliases functions executables \
-    local-directories directories suffix-aliases \
-    reserved-words builtins
+   expansions history-words options \
+   aliases functions executables \
+   local-directories directories suffix-aliases \
+   reserved-words builtins
 
 # Smart matching of dashed values, e.g. f-b matching foo-bar
 zstyle ':completion:*' matcher-list 'r:|[._-]=* r:|=*'
@@ -92,9 +92,9 @@ zstyle ':completion:*:*:*:users' ignored-patterns \
 zstyle ':completion:*' single-ignored show
 
 ## marlonrichert/zsh-autocomplete
-# zstyle ':autocomplete:*' min-input 2
-# zstyle ':autocomplete:*' list-lines 32
-# zstyle ':autocomplete:history-search:*' list-lines 32
-# zstyle ':autocomplete:history-incremental-search-*:*' list-lines 32
-# zstyle ':autocomplete:*' recent-dirs zoxide
-# zstyle ':autocomplete:*' widget-style menu-select
+zstyle ':autocomplete:*' min-input 2
+zstyle ':autocomplete:*' list-lines 32
+zstyle ':autocomplete:history-search:*' list-lines 32
+zstyle ':autocomplete:history-incremental-search-*:*' list-lines 32
+zstyle ':autocomplete:*' recent-dirs zoxide
+zstyle ':autocomplete:*' widget-style menu-select

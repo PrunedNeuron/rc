@@ -24,6 +24,8 @@ alias rmpaclock='sudo rm -f /var/lib/pacman/db.lck'
 # Text
 alias cpy='xsel -bi' # Copy to clipboard
 alias pst='xsel -bo' # Paste from clipboard
+alias tolower="tr '[:upper:]' '[:lower:]'"
+alias toupper="tr '[:lower:]' '[:upper:]'"
 
 # Fonts
 alias fontcc='fc-cache -f'
@@ -100,11 +102,15 @@ alias svi='SUDO_EDITOR=vi sudo -e'
 alias snano='SUDO_EDITOR=nano sudo -e'
 alias hx='helix'
 
-# yt-dlp
+# program shorthands
 alias ytd='yt-dlp'
+alias ratemirr='rate-mirrors'
 
 # Colorize
 alias dmesg='dmesg --color=always'
 
 # ffmpeg
 alias ffmpeg='ffmpeg -v quiet -stats'
+
+# git
+alias gcl='git clone'

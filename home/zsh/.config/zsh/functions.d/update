@@ -1,0 +1,8 @@
+#!/usr/bin/env sh
+
+# Update packages from refreshed mirrors
+update() {
+	refmirr
+	droppkgcache
+	yay -Syu
+}

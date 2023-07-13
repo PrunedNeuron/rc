@@ -1,5 +1,5 @@
 [$Version]
-update_info=kwin.upd:replace-scalein-with-scale,kwin.upd:port-minimizeanimation-effect-to-js,kwin.upd:port-scale-effect-to-js,kwin.upd:port-dimscreen-effect-to-js,kwin.upd:auto-bordersize,kwin.upd:animation-speed,kwin.upd:desktop-grid-click-behavior,kwin.upd:no-swap-encourage,kwin.upd:make-translucency-effect-disabled-by-default,kwin.upd:remove-flip-switch-effect,kwin.upd:remove-cover-switch-effect,kwin.upd:remove-cubeslide-effect,kwin.upd:remove-xrender-backend,kwin.upd:enable-scale-effect-by-default,kwin.upd:overview-group-plugin-id,kwin.upd:animation-speed-cleanup,kwin.upd:replace-cascaded-zerocornered
+update_info=kwin.upd:replace-scalein-with-scale,kwin.upd:port-minimizeanimation-effect-to-js,kwin.upd:port-scale-effect-to-js,kwin.upd:port-dimscreen-effect-to-js,kwin.upd:auto-bordersize,kwin.upd:animation-speed,kwin.upd:desktop-grid-click-behavior,kwin.upd:no-swap-encourage,kwin.upd:make-translucency-effect-disabled-by-default,kwin.upd:remove-flip-switch-effect,kwin.upd:remove-cover-switch-effect,kwin.upd:remove-cubeslide-effect,kwin.upd:remove-xrender-backend,kwin.upd:enable-scale-effect-by-default,kwin.upd:overview-group-plugin-id,kwin.upd:animation-speed-cleanup,kwin.upd:replace-cascaded-zerocornered,bismuth_new_logger.upd:bismuth-new-logger
 
 [Desktops]
 Id_1=60af60b2-5203-4ed5-950c-293c9f6b5629
@@ -10,6 +10,9 @@ Rows=1
 BlurStrength=9
 NoiseStrength=4
 
+[Effect-kwin4_effect_translucency]
+MoveResize=100
+
 [Effect-magiclamp]
 AnimationDuration=300
 
@@ -18,6 +21,11 @@ Drag=90
 Stiffness=6
 WobblynessLevel=2
 
+[Effect-ًRound-Corners]
+InactiveShadowSize=1
+OutlineThickness=0.5
+ShadowSize=1
+
 [ModifierOnlyShortcuts]
 Meta=org.kde.lattedock,/Latte,org.kde.LatteDock,activateLauncherMenu
 
@@ -25,25 +33,39 @@ Meta=org.kde.lattedock,/Latte,org.kde.LatteDock,activateLauncherMenu
 blurEnabled=true
 contrastEnabled=true
 desktopchangeosdEnabled=false
+exquisiteEnabled=false
 forceblurEnabled=true
+kdesnapassistEnabled=false
+kwin4_effect_fadingpopupsEnabled=false
+kwin4_effect_fadingpopups_kineticEnabled=true
+kwin4_effect_geometry_changeEnabled=true
+kwin4_effect_glideEnabled=true
 kwin4_effect_lightlyshadersEnabled=true
 kwin4_effect_maximizeEnabled=false
+kwin4_effect_maximize_kineticEnabled=true
 kwin4_effect_maximize_xrenderEnabled=true
-kwin4_effect_minimizescale_outexpoEnabled=true
-kwin4_effect_open_close_kineticEnabled=true
 kwin4_effect_scaleEnabled=false
+kwin4_effect_shapecornersEnabled=false
+kwin4_effect_slidingnotificationsEnabled=true
 kwin4_effect_squashEnabled=false
 kwin4_effect_translucencyEnabled=true
+kwin4_effects_foldpopupsEnabled=false
 sheetEnabled=true
+thumbnailasideEnabled=true
 wobblywindowsEnabled=true
 
 [Tiling]
 padding=4
 
+[Tiling][213a9620-187e-58a6-b80b-85d8fb95dfce]
+tiles={"layoutDirection":"horizontal","tiles":[{"width":0.25},{"width":0.5},{"width":0.25}]}
+
 [Tiling][e688eb74-7230-5d02-a5e0-3b38a54bc04e]
 tiles={"layoutDirection":"horizontal","tiles":[{"width":0.25},{"width":0.5},{"width":0.25}]}
 
 [org.kde.kdecoration2]
+BorderSize=None
+BorderSizeAuto=false
 ButtonsOnLeft=XIA
 ButtonsOnRight=HSF
 library=org.kde.sierrabreezeenhanced

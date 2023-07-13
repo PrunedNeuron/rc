@@ -6,7 +6,9 @@ zi wait"2" lucid light-mode for \
     le0me55i/zsh-systemd \
     zpm-zsh/colorize \
     zpm-zsh/undollar \
-    zpm-zsh/colors
+    zpm-zsh/colors \
+    ltj/gitgo \
+    wfxr/forgit
 #    zpm-zsh/ls
 
 # fnm (Fast node manager)
