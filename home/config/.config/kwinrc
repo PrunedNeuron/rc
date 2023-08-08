@@ -22,8 +22,9 @@ Stiffness=6
 WobblynessLevel=2
 
 [Effect-ًRound-Corners]
+InactiveOutlineThickness=0
 InactiveShadowSize=1
-OutlineThickness=0.5
+OutlineThickness=0
 ShadowSize=1
 
 [ModifierOnlyShortcuts]
@@ -36,23 +37,30 @@ desktopchangeosdEnabled=false
 exquisiteEnabled=false
 forceblurEnabled=true
 kdesnapassistEnabled=false
-kwin4_effect_fadingpopupsEnabled=false
+kwin4_effect_animationsSuiteEnabled=true
 kwin4_effect_fadingpopups_kineticEnabled=true
 kwin4_effect_geometry_changeEnabled=true
-kwin4_effect_glideEnabled=true
 kwin4_effect_lightlyshadersEnabled=true
 kwin4_effect_maximizeEnabled=false
+kwin4_effect_maximize_fadeinEnabled=true
 kwin4_effect_maximize_kineticEnabled=true
 kwin4_effect_maximize_xrenderEnabled=true
+kwin4_effect_minimize_kineticEnabled=true
+kwin4_effect_open_close_kineticEnabled=true
 kwin4_effect_scaleEnabled=false
-kwin4_effect_shapecornersEnabled=false
+kwin4_effect_shapecornersEnabled=true
 kwin4_effect_slidingnotificationsEnabled=true
+kwin4_effect_squash2Enabled=false
 kwin4_effect_squashEnabled=false
 kwin4_effect_translucencyEnabled=true
-kwin4_effects_foldpopupsEnabled=false
+poloniumEnabled=false
 sheetEnabled=true
+slidebackEnabled=true
 thumbnailasideEnabled=true
 wobblywindowsEnabled=true
+
+[TabBox]
+LayoutName=thumbnail_switcher
 
 [Tiling]
 padding=4
@@ -61,7 +69,7 @@ padding=4
 tiles={"layoutDirection":"horizontal","tiles":[{"width":0.25},{"width":0.5},{"width":0.25}]}
 
 [Tiling][e688eb74-7230-5d02-a5e0-3b38a54bc04e]
-tiles={"layoutDirection":"horizontal","tiles":[{"width":0.25},{"width":0.5},{"width":0.25}]}
+tiles={"layoutDirection":"horizontal","tiles":[]}
 
 [org.kde.kdecoration2]
 BorderSize=None

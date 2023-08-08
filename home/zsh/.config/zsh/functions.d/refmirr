@@ -7,6 +7,7 @@ refmirr() {
 	# Save new mirrorlist to temp
 	rate-mirrors \
 		--save=$TMPFILE \
+		--disable-comments-in-file \
 		--concurrency 16 \
 		--country-neighbors-per-country 4 \
 		--country-test-mirrors-per-country 8 \

@@ -86,7 +86,7 @@ setopt BEEP
 ## -- Input / Output
 
 # Try to correct the spelling of commands
-setopt CORRECT
+#setopt CORRECT
 
 # Allow the short forms of for, repeat, select, if and function constructs
 setopt SHORT_LOOPS
