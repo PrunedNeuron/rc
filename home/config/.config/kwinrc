@@ -31,12 +31,14 @@ ShadowSize=1
 Meta=org.kde.lattedock,/Latte,org.kde.LatteDock,activateLauncherMenu
 
 [Plugins]
+MoveSnapEnabled=false
 blurEnabled=true
 contrastEnabled=true
 desktopchangeosdEnabled=false
-exquisiteEnabled=false
+exquisiteEnabled=true
+focusonattentionrequestEnabled=true
 forceblurEnabled=true
-kdesnapassistEnabled=false
+kdesnapassistEnabled=true
 kwin4_effect_animationsSuiteEnabled=true
 kwin4_effect_fadingpopups_kineticEnabled=true
 kwin4_effect_geometry_changeEnabled=true
