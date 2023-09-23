@@ -34,3 +34,6 @@ id_*
 # neovim vim-plug files
 plugged/
 
+# General
+Cache/
+Extracted/
