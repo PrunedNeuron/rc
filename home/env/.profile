@@ -48,6 +48,10 @@ export PINENTRY=pinentry-curses # for kwalletcli
 # GTK <-> KDE Portal
 export GTK_USE_PORTAL=1
 
+# Qt 5
+export QT_AUTO_SCREEN_SCALE_FACTOR=1
+export QT_ENABLE_HIGHDPI_SCALING=1
+
 # Docker
 export DOCKER_BUILDKIT=1 COMPOSE_DOCKER_CLI_BUILD=1
 export DOCKER_HOST=unix://$XDG_RUNTIME_DIR/docker.sock

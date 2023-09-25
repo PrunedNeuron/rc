@@ -1,0 +1,9 @@
+[Unit]
+Description=Git push service
+Wants=network-online.target
+After=network-online.target
+
+[Service]
+Type=oneshot
+ExecStart=/bin/bash -c "ping -c1 google.com && /home/ayush/rc/sync.sh && /home/ayush/Documents/sync.sh"
+

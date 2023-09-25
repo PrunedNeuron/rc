@@ -1,0 +1,10 @@
+[Unit]
+Description=Schedule Git push
+
+[Timer]
+OnCalendar=*-*-* 00:20:00
+Persistent=true
+
+[Install]
+WantedBy=default.target
+
