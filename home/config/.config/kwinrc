@@ -38,6 +38,7 @@ desktopchangeosdEnabled=false
 exquisiteEnabled=true
 focusonattentionrequestEnabled=true
 forceblurEnabled=true
+karouselEnabled=false
 kdesnapassistEnabled=true
 kwin4_effect_animationsSuiteEnabled=true
 kwin4_effect_fadingpopups_kineticEnabled=true
@@ -55,11 +56,20 @@ kwin4_effect_slidingnotificationsEnabled=true
 kwin4_effect_squash2Enabled=false
 kwin4_effect_squashEnabled=false
 kwin4_effect_translucencyEnabled=true
+panelautohideEnabled=true
 poloniumEnabled=false
 sheetEnabled=true
 slidebackEnabled=true
 thumbnailasideEnabled=true
+ultrawidewindowsEnabled=false
 wobblywindowsEnabled=true
+
+[Script-tilegaps]
+gapBottom=4
+gapLeft=4
+gapMid=4
+gapRight=4
+gapTop=4
 
 [TabBox]
 LayoutName=thumbnail_switcher
