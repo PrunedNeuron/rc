@@ -71,9 +71,6 @@ gapMid=4
 gapRight=4
 gapTop=4
 
-[TabBox]
-LayoutName=thumbnail_switcher
-
 [Tiling]
 padding=4
 
