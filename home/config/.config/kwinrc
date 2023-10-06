@@ -1,14 +1,20 @@
 [$Version]
 update_info=kwin.upd:replace-scalein-with-scale,kwin.upd:port-minimizeanimation-effect-to-js,kwin.upd:port-scale-effect-to-js,kwin.upd:port-dimscreen-effect-to-js,kwin.upd:auto-bordersize,kwin.upd:animation-speed,kwin.upd:desktop-grid-click-behavior,kwin.upd:no-swap-encourage,kwin.upd:make-translucency-effect-disabled-by-default,kwin.upd:remove-flip-switch-effect,kwin.upd:remove-cover-switch-effect,kwin.upd:remove-cubeslide-effect,kwin.upd:remove-xrender-backend,kwin.upd:enable-scale-effect-by-default,kwin.upd:overview-group-plugin-id,kwin.upd:animation-speed-cleanup,kwin.upd:replace-cascaded-zerocornered,bismuth_new_logger.upd:bismuth-new-logger
 
+[Compositing]
+LatencyPolicy=Medium
+
 [Desktops]
 Id_1=60af60b2-5203-4ed5-950c-293c9f6b5629
 Number=1
 Rows=1
 
 [Effect-blur]
-BlurStrength=9
-NoiseStrength=4
+BlurStrength=13
+NoiseStrength=7
+
+[Effect-desktopgrid]
+BorderActivate=5
 
 [Effect-kwin4_effect_translucency]
 MoveResize=100
@@ -39,8 +45,9 @@ exquisiteEnabled=true
 focusonattentionrequestEnabled=true
 forceblurEnabled=true
 karouselEnabled=false
-kdesnapassistEnabled=true
+kdesnapassistEnabled=false
 kwin4_effect_animationsSuiteEnabled=true
+kwin4_effect_fadingpopupsEnabled=false
 kwin4_effect_fadingpopups_kineticEnabled=true
 kwin4_effect_geometry_changeEnabled=true
 kwin4_effect_lightlyshadersEnabled=true
@@ -49,6 +56,7 @@ kwin4_effect_maximize_fadeinEnabled=true
 kwin4_effect_maximize_kineticEnabled=true
 kwin4_effect_maximize_xrenderEnabled=true
 kwin4_effect_minimize_kineticEnabled=true
+kwin4_effect_morphingpopupsEnabled=false
 kwin4_effect_open_close_kineticEnabled=true
 kwin4_effect_scaleEnabled=false
 kwin4_effect_shapecornersEnabled=true
@@ -56,20 +64,31 @@ kwin4_effect_slidingnotificationsEnabled=true
 kwin4_effect_squash2Enabled=false
 kwin4_effect_squashEnabled=false
 kwin4_effect_translucencyEnabled=true
+kwin4_effects_foldpopupsEnabled=false
+minimizeallEnabled=true
 panelautohideEnabled=true
 poloniumEnabled=false
 sheetEnabled=true
 slidebackEnabled=true
+slidingpopupsEnabled=false
 thumbnailasideEnabled=true
 ultrawidewindowsEnabled=false
 wobblywindowsEnabled=true
 
+[Script-minimizeall]
+BorderActivate=1
+
 [Script-tilegaps]
-gapBottom=4
-gapLeft=4
+gapBottom=6
+gapLeft=6
 gapMid=4
-gapRight=4
-gapTop=4
+gapRight=6
+gapTop=6
+includeMaximized=true
+panelBottom=true
+panelLeft=true
+panelRight=true
+panelTop=true
 
 [Tiling]
 padding=4
@@ -79,6 +98,9 @@ tiles={"layoutDirection":"horizontal","tiles":[{"width":0.25},{"width":0.5},{"wi
 
 [Tiling][e688eb74-7230-5d02-a5e0-3b38a54bc04e]
 tiles={"layoutDirection":"horizontal","tiles":[]}
+
+[Windows]
+ShadeHover=true
 
 [org.kde.kdecoration2]
 BorderSize=None

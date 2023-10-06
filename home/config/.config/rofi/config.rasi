@@ -1,11 +1,15 @@
-/** Basic config file **/
-
 configuration {
-    modi: "window,drun,ssh,combi";
     font: "SF Mono 10";
-    combi-modi: "window,drun,ssh";
-    show-icons:         true;
-    icon-theme:         "Papirus";
+    show-icons: true;
+    icon-theme: "Papirus";
+    window-format: "{t}";
+    sidebar-mode: false;
+    lines: 10;
+    width: 60;
+    location: 1;
+    x-offset: 30;
+    y-offset: 30;
+    padding: 30;
 }
 
-
+@theme "spotlight"
