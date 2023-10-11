@@ -23,9 +23,11 @@ MoveResize=100
 AnimationDuration=300
 
 [Effect-wobblywindows]
-Drag=90
-Stiffness=6
-WobblynessLevel=2
+AdvancedMode=true
+Drag=70
+MoveFactor=8
+Stiffness=12
+WobblynessLevel=1
 
 [Effect-ًRound-Corners]
 InactiveOutlineThickness=0
@@ -47,7 +49,6 @@ forceblurEnabled=true
 karouselEnabled=false
 kdesnapassistEnabled=false
 kwin4_effect_animationsSuiteEnabled=true
-kwin4_effect_fadingpopupsEnabled=false
 kwin4_effect_fadingpopups_kineticEnabled=true
 kwin4_effect_geometry_changeEnabled=true
 kwin4_effect_lightlyshadersEnabled=true
@@ -55,7 +56,6 @@ kwin4_effect_maximizeEnabled=false
 kwin4_effect_maximize_fadeinEnabled=true
 kwin4_effect_maximize_kineticEnabled=true
 kwin4_effect_maximize_xrenderEnabled=true
-kwin4_effect_minimize_kineticEnabled=true
 kwin4_effect_morphingpopupsEnabled=false
 kwin4_effect_open_close_kineticEnabled=true
 kwin4_effect_scaleEnabled=false
@@ -65,6 +65,7 @@ kwin4_effect_squash2Enabled=false
 kwin4_effect_squashEnabled=false
 kwin4_effect_translucencyEnabled=true
 kwin4_effects_foldpopupsEnabled=false
+magiclampEnabled=true
 minimizeallEnabled=true
 panelautohideEnabled=true
 poloniumEnabled=false
@@ -72,6 +73,7 @@ sheetEnabled=true
 slidebackEnabled=true
 slidingpopupsEnabled=false
 thumbnailasideEnabled=true
+tilegapsEnabled=false
 ultrawidewindowsEnabled=false
 wobblywindowsEnabled=true
 
@@ -94,6 +96,9 @@ panelTop=true
 padding=4
 
 [Tiling][213a9620-187e-58a6-b80b-85d8fb95dfce]
+tiles={"layoutDirection":"horizontal","tiles":[{"width":0.25},{"width":0.5},{"width":0.25}]}
+
+[Tiling][c897c4f6-72b3-5b9a-8a41-b221a90df985]
 tiles={"layoutDirection":"horizontal","tiles":[{"width":0.25},{"width":0.5},{"width":0.25}]}
 
 [Tiling][e688eb74-7230-5d02-a5e0-3b38a54bc04e]
