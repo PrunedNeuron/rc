@@ -6,11 +6,11 @@
     editor = nvim
     pager = delta
 
-[gpg]
-    program = gpg
-
 [init]
     defaultBranch = master
+
+[gpg]
+    program = gpg
 
 [color]
     ui = auto
@@ -25,6 +25,7 @@
 
 [commit]
     gpgSign = true
+    
 
 [include]
     path = ~/.config/git/conf.d/personal

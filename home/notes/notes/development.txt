@@ -1,0 +1,3 @@
+~/development/personal/projects/.practice/api
+~/development/personal/projects/dashboard
+~/development/personal/projects/.workspace/icon-request-api/02
