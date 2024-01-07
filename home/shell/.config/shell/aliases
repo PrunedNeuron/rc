@@ -53,7 +53,7 @@ alias fjson='python -m json.tool'
 alias a2c='aria2c'
 
 # exa
-alias exa='exa --all --git --icons --group --color-scale --group-directories-first --header --time-style=long-iso'
+alias exa='exa --all --git --icons --group --header --time-style=long-iso'
 alias l='exa'
 alias exal='exa --long --time-style=long-iso'
 alias ll='exa --long --time-style=long-iso'

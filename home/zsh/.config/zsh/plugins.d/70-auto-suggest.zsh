@@ -15,3 +15,4 @@ zi wait lucid light-mode for \
     blockf atpull'zinit creinstall -q .' \
         zsh-users/zsh-completions
 
+#         marlonrichert/zsh-autocomplete

@@ -18,7 +18,7 @@ zstyle ':completion:*:' group-order \
    reserved-words builtins
 
 # Smart matching of dashed values, e.g. f-b matching foo-bar
-zstyle ':completion:*' matcher-list 'r:|[._-]=* r:|=*'
+# zstyle ':completion:*' matcher-list 'r:|[._-]=* r:|=*'
 
 # Number of history lines (integer) when pressing ⌃R or ⌃S.
 zstyle ':autocomplete:history-incremental-search-*:*' list-lines 512

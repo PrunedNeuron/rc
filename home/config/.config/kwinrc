@@ -30,10 +30,10 @@ Stiffness=12
 WobblynessLevel=1
 
 [Effect-ًRound-Corners]
+ActiveShadowAlpha=34
 InactiveOutlineThickness=0
-InactiveShadowSize=1
+InactiveShadowAlpha=32
 OutlineThickness=0
-ShadowSize=1
 
 [ModifierOnlyShortcuts]
 Meta=org.kde.lattedock,/Latte,org.kde.LatteDock,activateLauncherMenu
@@ -71,7 +71,6 @@ panelautohideEnabled=true
 poloniumEnabled=false
 sheetEnabled=true
 slidebackEnabled=true
-slidingpopupsEnabled=false
 thumbnailasideEnabled=true
 tilegapsEnabled=false
 ultrawidewindowsEnabled=false
@@ -98,6 +97,9 @@ padding=4
 [Tiling][213a9620-187e-58a6-b80b-85d8fb95dfce]
 tiles={"layoutDirection":"horizontal","tiles":[{"width":0.25},{"width":0.5},{"width":0.25}]}
 
+[Tiling][a43daab5-3cde-5d83-a361-caeda563d0d0]
+tiles={"layoutDirection":"horizontal","tiles":[{"width":0.25},{"width":0.5},{"width":0.25}]}
+
 [Tiling][c897c4f6-72b3-5b9a-8a41-b221a90df985]
 tiles={"layoutDirection":"horizontal","tiles":[{"width":0.25},{"width":0.5},{"width":0.25}]}
 
@@ -106,6 +108,9 @@ tiles={"layoutDirection":"horizontal","tiles":[]}
 
 [Windows]
 ShadeHover=true
+
+[Xwayland]
+Scale=1
 
 [org.kde.kdecoration2]
 BorderSize=None

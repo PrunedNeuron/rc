@@ -78,3 +78,5 @@ zi light clarketm/zsh-completions
 zi ice lucid wait as'completion' blockf has'conda'
 zi light conda-incubator/conda-zsh-completion
 
+zi ice lucid wait as'completion' blockf has'conda'
+zi light clavelm/yt-dlp-omz-plugin

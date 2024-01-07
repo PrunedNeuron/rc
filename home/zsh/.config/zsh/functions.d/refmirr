@@ -9,9 +9,11 @@ refmirr() {
 		--save=$TMPFILE \
 		--disable-comments-in-file \
 		--concurrency 16 \
-		--country-neighbors-per-country 4 \
+		--entry-country DE \
+		--country-neighbors-per-country 8 \
 		--country-test-mirrors-per-country 8 \
-		--top-mirrors-number-to-retest 8 \
+		--top-mirrors-number-to-retest 16 \
+		--max-jumps 8 \
 		--protocol https \
 		arch \
 		--sort-mirrors-by score_asc \

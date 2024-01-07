@@ -5,10 +5,10 @@ zi wait"2" lucid light-mode for \
     MichaelAquilina/zsh-you-should-use \
     le0me55i/zsh-systemd \
     zpm-zsh/colorize \
-    zpm-zsh/undollar \
-    zpm-zsh/colors \
-    ltj/gitgo \
-    wfxr/forgit
+    zpm-zsh/colors
+#     zpm-zsh/undollar \
+#     ltj/gitgo
+#     wfxr/forgit
 #    zpm-zsh/ls
 
 # fnm (Fast node manager)
@@ -20,3 +20,4 @@ zi wait"2" lucid light-mode for \
 zi wait"[ -d .git ] || git rev-parse --git-dir > /dev/null 2>&1" lucid light-mode for \
     robertzk/send.zsh
     
+
