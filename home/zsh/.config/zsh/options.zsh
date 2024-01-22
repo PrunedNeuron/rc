@@ -46,13 +46,13 @@ setopt AUTO_MENU
 setopt ALWAYS_TO_END
 
 # Allow completion from within a word/phrase
-setopt COMPLETE_IN_WORD
+# setopt COMPLETE_IN_WORD
 
 # Complete aliases
 # setopt COMPLETE_ALIASES
 
 # Show the type of each file with a trailing identifying mark
-# setopt LIST_TYPES
+ setopt LIST_TYPES
 
 ## -- Changing directories
 
@@ -70,6 +70,8 @@ setopt NOMATCH
 # Treat the ‘#’, ‘~’ and ‘^’ characters as part of patterns for filename generation
 setopt EXTENDED_GLOB
 
+# Ignore braces
+#setopt IGNORE_BRACES
 
 ## -- Job control
 
