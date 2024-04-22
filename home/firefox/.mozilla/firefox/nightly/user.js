@@ -37,11 +37,11 @@ user_pref("network.trr.mode", 2);
 user_pref("network.trr.uri", "https://127.0.0.1:3000/dns-query");
 
 /** ECH ***/
-user_pref("network.dns.echconfig.enabled", true)
-user_pref("network.dns.use_https_rr_as_altsvc", true)
+user_pref("network.dns.echconfig.enabled", true);
+user_pref("network.dns.use_https_rr_as_altsvc", true);
 
 /** Cookies **/
-user_pref("cookiebanners.service.mode", 1) // DEFAULT: 0
+user_pref("cookiebanners.service.mode", 1); // DEFAULT: 0
 
 
 /** Enable JPEG XL **/

@@ -31,20 +31,23 @@ WobblynessLevel=1
 
 [Effect-ًRound-Corners]
 ActiveShadowAlpha=34
+InactiveCornerRadius=8
 InactiveOutlineThickness=0
 InactiveShadowAlpha=32
 OutlineThickness=0
+Size=8
 
 [ModifierOnlyShortcuts]
-Meta=org.kde.lattedock,/Latte,org.kde.LatteDock,activateLauncherMenu
+Meta=org.kde.plasmashell,/PlasmaShell,org.kde.PlasmaShell,activateLauncherMenu
 
 [Plugins]
 MoveSnapEnabled=false
 blurEnabled=true
 contrastEnabled=true
-desktopchangeosdEnabled=false
+desktopchangeosdEnabled=true
 exquisiteEnabled=true
 focusonattentionrequestEnabled=true
+force-decorations-gtk3Enabled=true
 forceblurEnabled=true
 karouselEnabled=false
 kdesnapassistEnabled=false
@@ -52,12 +55,9 @@ kwin4_effect_animationsSuiteEnabled=true
 kwin4_effect_fadingpopups_kineticEnabled=true
 kwin4_effect_geometry_changeEnabled=true
 kwin4_effect_lightlyshadersEnabled=true
-kwin4_effect_maximizeEnabled=false
-kwin4_effect_maximize_fadeinEnabled=true
-kwin4_effect_maximize_kineticEnabled=true
-kwin4_effect_maximize_xrenderEnabled=true
 kwin4_effect_morphingpopupsEnabled=false
 kwin4_effect_open_close_kineticEnabled=true
+kwin4_effect_rubberband_maximizeEnabled=false
 kwin4_effect_scaleEnabled=false
 kwin4_effect_shapecornersEnabled=true
 kwin4_effect_slidingnotificationsEnabled=true
@@ -65,14 +65,21 @@ kwin4_effect_squash2Enabled=false
 kwin4_effect_squashEnabled=false
 kwin4_effect_translucencyEnabled=true
 kwin4_effects_foldpopupsEnabled=false
+kzonesEnabled=true
 magiclampEnabled=true
+max2NewVirtualDesktopEnabled=false
+maximized-window-gapEnabled=false
 minimizeallEnabled=true
 panelautohideEnabled=true
 poloniumEnabled=false
+shakeEnabled=false
 sheetEnabled=true
 slidebackEnabled=true
+sticky-window-snappingEnabled=false
 thumbnailasideEnabled=true
 tilegapsEnabled=false
+translucencyEnabled=true
+truely-maximizedEnabled=false
 ultrawidewindowsEnabled=false
 wobblywindowsEnabled=true
 
@@ -97,6 +104,9 @@ padding=4
 [Tiling][213a9620-187e-58a6-b80b-85d8fb95dfce]
 tiles={"layoutDirection":"horizontal","tiles":[{"width":0.25},{"width":0.5},{"width":0.25}]}
 
+[Tiling][6563027c-79b9-52bc-baac-34e2c36cdaec]
+tiles={"layoutDirection":"horizontal","tiles":[{"width":0.25},{"width":0.5},{"width":0.25}]}
+
 [Tiling][a43daab5-3cde-5d83-a361-caeda563d0d0]
 tiles={"layoutDirection":"horizontal","tiles":[{"width":0.25},{"width":0.5},{"width":0.25}]}
 
@@ -116,9 +126,7 @@ ShadeHover=true
 Scale=1
 
 [org.kde.kdecoration2]
-BorderSize=None
-BorderSizeAuto=false
 ButtonsOnLeft=XIA
 ButtonsOnRight=HSF
-library=org.kde.sierrabreezeenhanced
+library=sierrabreezeenhanced
 theme=Sierra Breeze Enhanced
