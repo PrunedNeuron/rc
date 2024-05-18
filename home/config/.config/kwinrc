@@ -10,7 +10,7 @@ Number=1
 Rows=1
 
 [Effect-blur]
-BlurStrength=13
+BlurStrength=10
 NoiseStrength=7
 
 [Effect-desktopgrid]
@@ -128,5 +128,3 @@ Scale=1
 [org.kde.kdecoration2]
 ButtonsOnLeft=XIA
 ButtonsOnRight=HSF
-library=sierrabreezeenhanced
-theme=Sierra Breeze Enhanced

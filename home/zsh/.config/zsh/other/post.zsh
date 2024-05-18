@@ -13,3 +13,5 @@ else
 fi
 unset __mamba_setup
 # <<< mamba initialize <<<
+
+[ -f /opt/mambaforge/etc/profile.d/conda.sh ] && source /opt/mambaforge/etc/profile.d/conda.sh
