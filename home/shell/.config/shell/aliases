@@ -4,7 +4,7 @@
 
 # Services
 alias reloadde='(plasmashell --replace & ; kwin_x11 --replace &) >/dev/null 2>&1'
-alias reloaddns='sudo systemctl restart dnscrypt-proxy pihole-FTL NetworkManager'
+alias reloaddns='sudo systemctl restart dnscrypt-proxy NetworkManager'
 alias signout='loginctl terminate-session $XDG_SESSION_ID'
 
 # Arch package management
@@ -45,7 +45,6 @@ alias pstbin='tcpbin'
 
 # Misc
 alias sudokate='SUDO_EDITOR=kate sudoedit' # launch kate as root
-alias refreshmirrors='sudo systemctl start reflector'
 
 # Shortcuts
 alias conf='cd $CONFIG'
@@ -53,13 +52,13 @@ alias fjson='python -m json.tool'
 alias a2c='aria2c'
 
 # exa
-alias exa='exa --all --git --icons --group --header --time-style=long-iso'
-alias l='exa'
-alias exal='exa --long --time-style=long-iso'
-alias ll='exa --long --time-style=long-iso'
-alias la='exa --all'
-alias lla='exa --long --header'
-alias lt='exa --long --tree --level=2'
+alias eza='eza --all --git --icons --group --header --time-style=long-iso'
+alias l='eza'
+alias exal='eza --long --time-style=long-iso'
+alias ll='eza --long --time-style=long-iso'
+alias la='eza --all'
+alias lla='eza --long --header'
+alias lt='eza --long --tree --level=2'
 
 # ls
 alias ls='ls --color=auto'
@@ -104,7 +103,6 @@ alias hx='helix'
 
 # program shorthands
 alias ytd='yt-dlp'
-alias ratemirr='rate-mirrors'
 
 # Colorize
 alias dmesg='dmesg --color=always'
@@ -114,3 +112,6 @@ alias ffmpeg='ffmpeg -v quiet -stats'
 
 # git
 alias gcl='git clone'
+
+# secure transfer
+alias rsync="rsync -a --info=progress2 --human-readable --compress --partial"

@@ -1,0 +1,4 @@
+# ZSH Plugins (managed by antidote)
+
+# prompt
+starship/starship     kind:fpath

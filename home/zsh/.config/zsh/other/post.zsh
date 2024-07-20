@@ -1,6 +1,9 @@
 # ~/.config/zsh/other/post.zsh
 # Runs after zshrc
 
+# atuin - shell history
+eval "$(atuin init zsh)"
+
 # >>> mamba initialize >>>
 # !! Contents within this block are managed by 'mamba init' !!
 export MAMBA_EXE='/usr/bin/micromamba';

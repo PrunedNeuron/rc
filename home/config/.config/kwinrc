@@ -51,6 +51,8 @@ force-decorations-gtk3Enabled=true
 forceblurEnabled=true
 karouselEnabled=false
 kdesnapassistEnabled=false
+kinetic_fadingpopupsEnabled=true
+kinetic_scaleEnabled=true
 kwin4_effect_animationsSuiteEnabled=true
 kwin4_effect_fadingpopups_kineticEnabled=true
 kwin4_effect_geometry_changeEnabled=true
@@ -59,7 +61,6 @@ kwin4_effect_morphingpopupsEnabled=false
 kwin4_effect_open_close_kineticEnabled=true
 kwin4_effect_rubberband_maximizeEnabled=false
 kwin4_effect_scaleEnabled=false
-kwin4_effect_shapecornersEnabled=true
 kwin4_effect_slidingnotificationsEnabled=true
 kwin4_effect_squash2Enabled=false
 kwin4_effect_squashEnabled=false
@@ -72,9 +73,11 @@ maximized-window-gapEnabled=false
 minimizeallEnabled=true
 panelautohideEnabled=true
 poloniumEnabled=false
+scaleEnabled=false
 shakeEnabled=false
 sheetEnabled=true
 slidebackEnabled=true
+squashEnabled=false
 sticky-window-snappingEnabled=false
 thumbnailasideEnabled=true
 tilegapsEnabled=false
@@ -82,6 +85,10 @@ translucencyEnabled=true
 truely-maximizedEnabled=false
 ultrawidewindowsEnabled=false
 wobblywindowsEnabled=true
+
+[PrimaryOutline]
+InactiveOutlineThickness=0
+OutlineThickness=0
 
 [Script-minimizeall]
 BorderActivate=1
@@ -97,6 +104,10 @@ panelBottom=true
 panelLeft=true
 panelRight=true
 panelTop=true
+
+[SecondOutline]
+InactiveSecondOutlineThickness=0
+SecondOutlineThickness=0
 
 [Tiling]
 padding=4
@@ -116,6 +127,9 @@ tiles={"layoutDirection":"horizontal","tiles":[{"width":0.25},{"width":0.5},{"wi
 [Tiling][e688eb74-7230-5d02-a5e0-3b38a54bc04e]
 tiles={"layoutDirection":"horizontal","tiles":[]}
 
+[Tiling][e90590d5-2b89-544f-904f-edd8916e11ad]
+tiles={"layoutDirection":"horizontal","tiles":[{"width":0.25},{"width":0.5},{"width":0.25}]}
+
 [Tiling][f9960e44-4c49-5ca5-8d60-d42bd0824988]
 tiles={"layoutDirection":"horizontal","tiles":[{"width":0.25},{"width":0.5},{"width":0.25}]}
 
@@ -126,5 +140,12 @@ ShadeHover=true
 Scale=1
 
 [org.kde.kdecoration2]
+BorderSize=None
+BorderSizeAuto=false
 ButtonsOnLeft=XIA
 ButtonsOnRight=HSF
+library=sierrabreezeenhanced
+theme=Sierra Breeze Enhanced
+
+[ًRound-Corners]
+InactiveShadowSize=15

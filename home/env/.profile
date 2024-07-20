@@ -6,7 +6,13 @@ export SYSTEMD_URLIFY=true
 export SYSTEMD_COLORS=true
 
 # SSH socket
-export SSH_AUTH_SOCK="$XDG_RUNTIME_DIR/ssh-agent.socket"
+# export SSH_AUTH_SOCK="$XDG_RUNTIME_DIR/ssh-agent.socket"
+
+# gpg-agent pinentry fix (2024 kde)
+export PINENTRY_KDE_USE_WALLET=1
+
+# 1Password SSH Agent
+export SSH_AUTH_SOCK="$HOME/.1password/agent.sock"
 
 # Charset
 export LANG=en_US.UTF-8

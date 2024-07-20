@@ -25,7 +25,9 @@
 
 [commit]
     gpgSign = true
-    
+
+[merge]
+    ff = false
 
 [include]
     path = ~/.config/git/conf.d/personal

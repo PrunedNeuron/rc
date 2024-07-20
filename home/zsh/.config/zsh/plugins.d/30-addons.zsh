@@ -19,5 +19,5 @@ zi wait"2" lucid light-mode for \
 # Git extras
 zi wait"[ -d .git ] || git rev-parse --git-dir > /dev/null 2>&1" lucid light-mode for \
     robertzk/send.zsh
-    
 
+zi light atuinsh/atuin
