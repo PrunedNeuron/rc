@@ -8,4 +8,4 @@ source ~/.config/shell/aliases
 
 eval "$(starship init bash)"
 export PATH="/home/ayush/genv/bin:$PATH"
-eval "$(genv init -)"
+# eval "$(genv init -)"

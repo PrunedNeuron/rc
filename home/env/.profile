@@ -59,8 +59,9 @@ export QT_AUTO_SCREEN_SCALE_FACTOR=1
 export QT_ENABLE_HIGHDPI_SCALING=1
 
 # Docker
-export DOCKER_BUILDKIT=1 COMPOSE_DOCKER_CLI_BUILD=1
-export DOCKER_HOST=unix://$XDG_RUNTIME_DIR/docker.sock
+# export DOCKER_BUILDKIT=1 COMPOSE_DOCKER_CLI_BUILD=1
+# export DOCKER_HOST=unix://$XDG_RUNTIME_DIR/docker.sock
+export DOCKER_HOST=
 
 # Kitty IME Support
 export GLFW_IM_MODULE=ibus
@@ -89,3 +90,11 @@ export HOMEBREW_NO_ANALYTICS=1
 export DOTNET_CLI_TELEMETRY_OPTOUT="true"
 export SCOUT_DISABLE=1
 export CLICOLOR=1
+
+# --- TEMPORARY ---
+
+# Gurobi
+# export GUROBI_HOME="/opt/gurobi1103/linux64"
+# export PATH="${PATH}:${GUROBI_HOME}/bin"
+# export LD_LIBRARY_PATH="${LD_LIBRARY_PATH}:${GUROBI_HOME}/lib"
+# export GRB_LICENSE_FILE="/home/ayush/.license/gurobi.lic"

@@ -66,7 +66,8 @@ kwin4_effect_squash2Enabled=false
 kwin4_effect_squashEnabled=false
 kwin4_effect_translucencyEnabled=true
 kwin4_effects_foldpopupsEnabled=false
-kzonesEnabled=true
+kzonesEnabled=false
+macsimize6Enabled=false
 magiclampEnabled=true
 max2NewVirtualDesktopEnabled=false
 maximized-window-gapEnabled=false
@@ -90,6 +91,11 @@ wobblywindowsEnabled=true
 InactiveOutlineThickness=0
 OutlineThickness=0
 
+[Round-Corners]
+InactiveShadowSize=16
+ShadowSize=20
+Size=8
+
 [Script-minimizeall]
 BorderActivate=1
 
@@ -109,16 +115,28 @@ panelTop=true
 InactiveSecondOutlineThickness=0
 SecondOutlineThickness=0
 
+[Shadow]
+InactiveShadowAlpha=0
+
 [Tiling]
 padding=4
 
+[Tiling][04bd0256-3926-5c90-88e4-d2187d197cd5]
+tiles={"layoutDirection":"horizontal","tiles":[{"width":0.25},{"width":0.5},{"width":0.25}]}
+
 [Tiling][213a9620-187e-58a6-b80b-85d8fb95dfce]
+tiles={"layoutDirection":"horizontal","tiles":[{"width":0.25},{"width":0.5},{"width":0.25}]}
+
+[Tiling][62e554ca-4539-5f61-a96c-8b15a4d976c3]
 tiles={"layoutDirection":"horizontal","tiles":[{"width":0.25},{"width":0.5},{"width":0.25}]}
 
 [Tiling][6563027c-79b9-52bc-baac-34e2c36cdaec]
 tiles={"layoutDirection":"horizontal","tiles":[{"width":0.25},{"width":0.5},{"width":0.25}]}
 
 [Tiling][a43daab5-3cde-5d83-a361-caeda563d0d0]
+tiles={"layoutDirection":"horizontal","tiles":[{"width":0.25},{"width":0.5},{"width":0.25}]}
+
+[Tiling][beb95039-300d-5a3f-823a-11cdd4deaafb]
 tiles={"layoutDirection":"horizontal","tiles":[{"width":0.25},{"width":0.5},{"width":0.25}]}
 
 [Tiling][c897c4f6-72b3-5b9a-8a41-b221a90df985]
