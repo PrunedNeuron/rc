@@ -1,15 +1,29 @@
-configuration {
-    font: "SF Mono 10";
-    show-icons: true;
-    icon-theme: "Papirus";
-    window-format: "{t}";
-    sidebar-mode: false;
-    lines: 10;
-    width: 60;
-    location: 1;
-    x-offset: 30;
-    y-offset: 30;
-    padding: 30;
+/* Minimal ~/.config/rofi/config.rasi */
+
+@define-color background-color    #1e1e2e;
+@define-color foreground-color    #d8dee9;
+@define-color border-color        #81a1c1;
+@define-color selected-background #81a1c1;
+@define-color selected-foreground #2e3440;
+
+window {
+    background-color: @background-color;
+    border: 2px solid @border-color;
+    border-radius: 10px;
+    padding: 10px;
+    width: 50%;
+    height: 30%;
+    xoffset: 25%;
+    yoffset: 35%;
+    font: "FiraCode Nerd Font 12";
 }
 
-@theme "spotlight"
+element {
+    padding: 10px 15px;
+    color: @foreground-color;
+}
+
+element selected {
+    background-color: @selected-background;
+    color: @selected-foreground;
+}

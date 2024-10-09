@@ -6,12 +6,17 @@ LatencyPolicy=Medium
 
 [Desktops]
 Id_1=60af60b2-5203-4ed5-950c-293c9f6b5629
-Number=1
+Id_2=ec612d9d-15d7-4945-8bd5-e09258b90a39
+Number=2
 Rows=1
 
 [Effect-blur]
 BlurStrength=10
 NoiseStrength=7
+
+[Effect-blurplus]
+BlurStrength=7
+NoiseStrength=6
 
 [Effect-desktopgrid]
 BorderActivate=5
@@ -42,7 +47,7 @@ Meta=org.kde.plasmashell,/PlasmaShell,org.kde.PlasmaShell,activateLauncherMenu
 
 [Plugins]
 MoveSnapEnabled=false
-blurEnabled=true
+blurEnabled=false
 contrastEnabled=true
 desktopchangeosdEnabled=true
 exquisiteEnabled=true
@@ -125,6 +130,9 @@ padding=4
 tiles={"layoutDirection":"horizontal","tiles":[{"width":0.25},{"width":0.5},{"width":0.25}]}
 
 [Tiling][213a9620-187e-58a6-b80b-85d8fb95dfce]
+tiles={"layoutDirection":"horizontal","tiles":[{"width":0.25},{"width":0.5},{"width":0.25}]}
+
+[Tiling][371a456b-38f8-5747-aa82-9408b12dd28d]
 tiles={"layoutDirection":"horizontal","tiles":[{"width":0.25},{"width":0.5},{"width":0.25}]}
 
 [Tiling][60d9ba20-6fdc-526f-965d-1784e4068f5a]
