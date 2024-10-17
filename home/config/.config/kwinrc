@@ -5,8 +5,9 @@ update_info=kwin.upd:replace-scalein-with-scale,kwin.upd:port-minimizeanimation-
 LatencyPolicy=Medium
 
 [Desktops]
-Id_1=60af60b2-5203-4ed5-950c-293c9f6b5629
-Id_2=ec612d9d-15d7-4945-8bd5-e09258b90a39
+Id_1=b37d37ca-6f06-4015-b940-783fad47001a
+Id_2=39411b13-80d1-4b69-bc1a-72ded94143f9
+Name_1=Desktop
 Number=2
 Rows=1
 
@@ -24,8 +25,14 @@ BorderActivate=5
 [Effect-kwin4_effect_translucency]
 MoveResize=100
 
+[Effect-login]
+FadeToBlack=true
+
 [Effect-magiclamp]
 AnimationDuration=300
+
+[Effect-overview]
+GridBorderActivate=5
 
 [Effect-wobblywindows]
 AdvancedMode=true
@@ -42,14 +49,17 @@ InactiveShadowAlpha=32
 OutlineThickness=0
 Size=8
 
+[ElectricBorders]
+BottomRight=ActivityManager
+TopRight=ShowDesktop
+
 [ModifierOnlyShortcuts]
 Meta=org.kde.plasmashell,/PlasmaShell,org.kde.PlasmaShell,activateLauncherMenu
 
 [Plugins]
 MoveSnapEnabled=false
-blurEnabled=false
+blurEnabled=true
 contrastEnabled=true
-desktopchangeosdEnabled=true
 exquisiteEnabled=true
 focusonattentionrequestEnabled=true
 force-decorations-gtk3Enabled=true
@@ -58,6 +68,8 @@ karouselEnabled=false
 kdesnapassistEnabled=false
 kinetic_fadingpopupsEnabled=true
 kinetic_scaleEnabled=true
+kinetic_squashEnabled=true
+krohnkiteEnabled=false
 kwin4_effect_animationsSuiteEnabled=true
 kwin4_effect_fadingpopups_kineticEnabled=true
 kwin4_effect_geometry_changeEnabled=true
@@ -73,16 +85,16 @@ kwin4_effect_translucencyEnabled=true
 kwin4_effects_foldpopupsEnabled=false
 kzonesEnabled=false
 macsimize6Enabled=false
-magiclampEnabled=true
 max2NewVirtualDesktopEnabled=false
 maximized-window-gapEnabled=false
-minimizeallEnabled=true
+minimizeallEnabled=false
 panelautohideEnabled=true
 poloniumEnabled=false
 scaleEnabled=false
 shakeEnabled=false
 sheetEnabled=true
 slidebackEnabled=true
+squash2Enabled=false
 squashEnabled=false
 sticky-window-snappingEnabled=false
 thumbnailasideEnabled=true
@@ -97,9 +109,10 @@ InactiveOutlineThickness=0
 OutlineThickness=0
 
 [Round-Corners]
+InactiveCornerRadius=6
 InactiveShadowSize=16
 ShadowSize=20
-Size=8
+Size=6
 
 [Script-minimizeall]
 BorderActivate=1
@@ -133,7 +146,7 @@ tiles={"layoutDirection":"horizontal","tiles":[{"width":0.25},{"width":0.5},{"wi
 tiles={"layoutDirection":"horizontal","tiles":[{"width":0.25},{"width":0.5},{"width":0.25}]}
 
 [Tiling][371a456b-38f8-5747-aa82-9408b12dd28d]
-tiles={"layoutDirection":"horizontal","tiles":[{"width":0.25},{"width":0.5},{"width":0.25}]}
+tiles={"layoutDirection":"horizontal","tiles":[]}
 
 [Tiling][60d9ba20-6fdc-526f-965d-1784e4068f5a]
 tiles={"layoutDirection":"horizontal","tiles":[{"width":0.25},{"width":0.5},{"width":0.25}]}
