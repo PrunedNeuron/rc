@@ -5,9 +5,8 @@ update_info=kwin.upd:replace-scalein-with-scale,kwin.upd:port-minimizeanimation-
 LatencyPolicy=Medium
 
 [Desktops]
-Id_1=b37d37ca-6f06-4015-b940-783fad47001a
-Id_2=39411b13-80d1-4b69-bc1a-72ded94143f9
-Name_1=Desktop
+Id_1=d8a1fe25-e1a6-480d-b02d-ad03ab4a8c48
+Id_2=c039e3ed-d810-4390-b822-3e181d28affb
 Number=2
 Rows=1
 
@@ -70,6 +69,7 @@ kinetic_fadingpopupsEnabled=true
 kinetic_scaleEnabled=true
 kinetic_squashEnabled=true
 krohnkiteEnabled=false
+kwin-walk-through-desktopsEnabled=false
 kwin4_effect_animationsSuiteEnabled=true
 kwin4_effect_fadingpopups_kineticEnabled=true
 kwin4_effect_geometry_changeEnabled=true
@@ -97,6 +97,7 @@ slidebackEnabled=true
 squash2Enabled=false
 squashEnabled=false
 sticky-window-snappingEnabled=false
+temporary-virtual-desktopsEnabled=false
 thumbnailasideEnabled=true
 tilegapsEnabled=false
 translucencyEnabled=true
@@ -116,6 +117,9 @@ Size=6
 
 [Script-minimizeall]
 BorderActivate=1
+
+[Script-polonium]
+EngineType=4
 
 [Script-tilegaps]
 gapBottom=6
