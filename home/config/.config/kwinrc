@@ -14,10 +14,6 @@ Rows=1
 BlurStrength=10
 NoiseStrength=7
 
-[Effect-blurplus]
-BlurStrength=7
-NoiseStrength=6
-
 [Effect-desktopgrid]
 BorderActivate=5
 
@@ -57,7 +53,7 @@ Meta=org.kde.plasmashell,/PlasmaShell,org.kde.PlasmaShell,activateLauncherMenu
 
 [Plugins]
 MoveSnapEnabled=false
-blurEnabled=true
+blurEnabled=false
 contrastEnabled=true
 exquisiteEnabled=true
 focusonattentionrequestEnabled=true
