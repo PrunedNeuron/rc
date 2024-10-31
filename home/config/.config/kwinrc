@@ -22,6 +22,10 @@ Rows=1
 BlurStrength=10
 NoiseStrength=7
 
+[Effect-blurplus]
+BlurStrength=11
+NoiseStrength=10
+
 [Effect-desktopgrid]
 BorderActivate=5
 

@@ -28,3 +28,4 @@ source $ZCONFDIR/plugins.zsh
 
 # Run final checks
 source $ZCONFDIR/other/post.zsh
+
