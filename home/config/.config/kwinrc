@@ -6,16 +6,11 @@ LatencyPolicy=Medium
 
 [Desktops]
 Id_1=d8a1fe25-e1a6-480d-b02d-ad03ab4a8c48
-Id_10=bfc6f492-a263-4bec-9391-5774c47ca820
 Id_2=c039e3ed-d810-4390-b822-3e181d28affb
 Id_3=08fd48eb-5adb-444f-8358-b0ecd9d028f2
-Id_4=113594a4-1b10-45a8-b33f-1f56449803e9
-Id_5=4e23c7cd-d588-455a-8051-0b820f4876d0
-Id_6=f90c430f-4b24-446e-bceb-21b6b4408f2d
-Id_7=f1662263-37fb-458a-b732-c56e5afcdbed
-Id_8=d62d03af-eb6b-4f79-9598-dc599c24df84
-Id_9=ab129222-e1e3-4493-9bc1-adc2a6ca320f
-Number=10
+Id_4=d62d03af-eb6b-4f79-9598-dc599c24df84
+Name_4=Desktop 8
+Number=4
 Rows=1
 
 [Effect-blur]
