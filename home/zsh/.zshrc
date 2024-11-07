@@ -24,7 +24,7 @@ source $ZCONFDIR/functions.zsh
 source $ZCONFDIR/keybindings.zsh
 
 # Load plugins
-source $ZCONFDIR/plugins.zsh
+# source $ZCONFDIR/plugins.zsh
 
 # Run final checks
 source $ZCONFDIR/other/post.zsh
