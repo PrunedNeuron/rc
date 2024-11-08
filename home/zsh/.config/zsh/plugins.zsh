@@ -1,27 +1,19 @@
-# ~/.zsh/plugins.zsh
+# $ZCONFDIR/plugins.zsh
 # zsh plugins, managed with zinit
 
-source <(cat $(ls -1 $ZCONFDIR/plugins.d/*.zsh))
-#
-# # source antidote
-# # ${ZDOTDIR:-~}/.zshrc
-#
-# # Set the root name of the plugins files (.txt and .zsh) antidote will use.
-# zsh_plugins=${ZDOTDIR:-~}/.zsh_plugins
-# antidote_path=${ZDATADIR}/.antidote
-#
-# # Ensure the .zsh_plugins.txt file exists so you can add plugins.
-# [[ -f ${ZCONFDIR}/plugins.txt ]] || touch ${ZCONFDIR}/plugins.txt
-#
-# # Lazy-load antidote from its functions directory.
-# fpath=(${ZDATADIR}/.antidote/functions $fpath)
-# autoload -Uz antidote
-#
-# # Generate a new static file whenever .zsh_plugins.txt is updated.
-# if [[ ! ${ZDATADIR}/antidote_plugins.zsh -nt ${ZCONFDIR}/plugins.txt ]]; then
-#   antidote bundle <${ZCONFDIR}/plugins.txt >${ZDATADIR}/antidote_plugins.zsh
-# fi
-#
-# # Source your static plugins file.
-# source ${ZDATADIR}/antidote_plugins.zsh
+# source <(cat $(ls -1 $ZCONFDIR/plugins.d/*.zsh))
 
+# Prompt
+command -v starship >/dev/null 2>&1 || curl -sS https://starship.rs/install.sh | sh -s -- --yes --bin-dir "$HOME/.local/bin"
+export STARSHIP_CONFIG=$ZCONFDIR/themes/starship.toml; eval "$(starship init zsh)"
+
+zcomet load le0me55i/zsh-systemd # systemd aliases
+
+zcomet trigger send robertzk/send.zsh # add+commit+push
+
+zcomet load zsh-users/zsh-completions
+zcomet load zsh-users/zsh-syntax-highlighting
+zcomet load zsh-users/zsh-autosuggestions
+
+# Run compinit and compile its cache
+zcomet compinit

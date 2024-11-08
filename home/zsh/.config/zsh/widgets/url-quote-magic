@@ -1,5 +1,5 @@
 #!/usr/bin/env zsh
 
 # Load url quote magic
-# autoload -Uz url-quote-magic
-# zle -N self-insert url-quote-magic
+autoload -Uz url-quote-magic
+zle -N self-insert url-quote-magic

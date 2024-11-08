@@ -1,100 +1,152 @@
-# Zstyles
+# $ZCONFDIR/styles.zsh
+# Zsh Styles Configuration
 
-# Completion
-zstyle ':completion::complete:*' use-cache 1 # Turn on completion caching
-zstyle ':completion::complete:*' cache-path $ZCACHEDIR # Completion cache directory
-zstyle ':completion:*:*:cdr:*:*' menu selection # Ref. https://man.archlinux.org/man/zshcontrib.1#REMEMBERING_RECENT_DIRECTORIES
-zstyle ':completion:*' menu select # select completions with arrow keys
-zstyle ':completion:*' group-name '' # group results by category
-zstyle ':completion:*' rehash true # enable rehash
-zstyle ':completion:*' completer _complete _ignored _approximate # enable approximate matches for completion
+# ===========================
+# General Completion Settings
+# ===========================
 
-# -> If any of the following are shown at the same time,
-# list them in the order given,
+# Enable completion caching and set cache path
+zstyle ':completion::complete:*' use-cache 1
+zstyle ':completion::complete:*' cache-path "$ZCACHEDIR"
+
+# Enable menu selection with arrow keys
+zstyle ':completion:*' menu select
+
+# Group completion results by category without names
+zstyle ':completion:*' group-name ''
+
+# Enable rehash to update completion functions dynamically
+zstyle ':completion:*' rehash true
+
+# Define completers to include complete, ignored, and approximate matches
+zstyle ':completion:*' completer _complete _ignored _approximate
+
+# Define the order of completion groups
 zstyle ':completion:*:' group-order \
-   expansions history-words options \
-   aliases functions executables \
-   local-directories directories suffix-aliases \
-   reserved-words builtins
+  expansions history-words options \
+  aliases functions executables \
+  local-directories directories suffix-aliases \
+  reserved-words builtins
 
-# Smart matching of dashed values, e.g. f-b matching foo-bar
-# zstyle ':completion:*' matcher-list 'r:|[._-]=* r:|=*'
+# ===========================
+# Completion Matching
+# ===========================
 
-# Number of history lines (integer) when pressing ⌃R or ⌃S.
-zstyle ':autocomplete:history-incremental-search-*:*' list-lines 512
-
-# ALERT: Lets completion scripts run in sudo
-zstyle ':completion::complete:*' gain-privileges 1
-
-# fuzzy matching of completions you mistype them
-zstyle ':completion:*:match:*' original only
+# Enable approximate matching with a maximum of 1 error (numeric)
 zstyle ':completion:*:approximate:*' max-errors 1 numeric
 
-# ignore completion functions
+# Match original input only for specific completion patterns
+zstyle ':completion:*:match:*' original only
+
+# ===========================
+# Completion Function Settings
+# ===========================
+
+# Ignore specific function patterns during completion
 zstyle ':completion:*:functions' ignore-patterns '(_*|pre(cmd|exec)|TRAP*)'
 
-# History multi word search
-zstyle ":history-search-multi-word" page-size "12"
-zstyle ":plugin:history-search-multi-word" clear-on-cancel "yes" # Exit on ctrl-c
+# Ignore specific user patterns during completion
+zstyle ':completion:*:*:*:users' ignored-patterns \
+  adm amanda apache at avahi avahi-autoipd beaglidx bin cacti canna \
+  clamav daemon dbus distcache dnsmasq dovecot fax ftp games gdm \
+  gkrellmd gopher hacluster haldaemon halt hsqldb ident junkbust kdm \
+  ldap lp mail mailman mailnull man messagebus mldonkey mysql nagios \
+  named netdump news nfsnobody nobody nscd ntp nut nx obsrun openvpn \
+  operator pcap polkitd postfix postgres privoxy pulse pvm quagga radvd \
+  rpc rpcuser rpm rtkit scard shutdown squid sshd statd svn sync tftp \
+  usbmux uucp vcsa wwwrun xfs cron mongodb nullmail portage redis \
+  shoutcast tcpdump '_*'
 
-# --
+# ===========================
+# Directory Completion
+# ===========================
 
-# Keep directories and files separated
+# Always list directories first in completions
 zstyle ':completion:*' list-dirs-first true
 
-# Don't try parent path completion if the directories exist
+# Accept exact directory names without attempting parent path completion
 zstyle ':completion:*' accept-exact-dirs true
 
-# Always use menu selection for `cd -`
+# Force menu listing and selection for `cd -`
 zstyle ':completion:*:*:cd:*:directory-stack' force-list always
 zstyle ':completion:*:*:cd:*:directory-stack' menu yes select
 
-# Pretty messages during pagination
+# ===========================
+# Completion Prompts and Messages
+# ===========================
+
+# Customize list prompt during pagination
 zstyle ':completion:*' list-prompt '%SAt %p: Hit TAB for more, or the character to insert%s'
+
+# Customize select prompt during active scrolling
 zstyle ':completion:*' select-prompt '%SScrolling active: current selection at %p%s'
 
-# Nicer format for completion messages
+# Format descriptions, corrections, and warnings with styling
 zstyle ':completion:*:descriptions' format '%U%B%d%b%u'
 zstyle ':completion:*:corrections' format '%U%F{green}%d (errors: %e)%f%u'
 zstyle ':completion:*:warnings' format '%F{202}%BSorry, no matches for: %F{214}%d%b'
 
-# Show message while waiting for completion
+# Show a message while waiting for completion
 zstyle ':completion:*' show-completer true
 
-# Prettier completion for processes
+# ===========================
+# Process Completion Enhancements
+# ===========================
+
+# Always list processes and enable menu selection
 zstyle ':completion:*:*:*:*:processes' force-list always
 zstyle ':completion:*:*:*:*:processes' menu yes select
+
+# Define list colors for process completions
 zstyle ':completion:*:*:*:*:processes' list-colors '=(#b) #([0-9]#) ([0-9a-z-]#)*=01;34=0=01'
+
+# Define the command used for fetching process information
 zstyle ':completion:*:*:*:*:processes' command "ps -u $USER -o pid,user,args -w -w"
 
-# Use ls-colors for path completions
-function _set-list-colors() {
-	zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
-	unfunction _set-list-colors
+# ===========================
+# Custom List Colors
+# ===========================
+
+# Apply LS_COLORS to completion listings
+_set_list_colors() {
+  zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
+  unfunction _set_list_colors
 }
-sched 0 _set-list-colors  # deferred since LC_COLORS might not be available yet
+sched 0 _set_list_colors  # Deferred execution until LS_COLORS is available
 
-# Don't complete hosts from /etc/hosts
-zstyle -e ':completion:*' hosts 'reply=()'
+# ===========================
+# Host and Directory Completion
+# ===========================
 
-zstyle ':completion:*:functions' ignored-patterns '(_*|pre(cmd|exec)|TRAP*)'
-zstyle ':completion:*:*:*:users' ignored-patterns \
-		adm amanda apache at avahi avahi-autoipd beaglidx bin cacti canna \
-		clamav daemon dbus distcache dnsmasq dovecot fax ftp games gdm \
-		gkrellmd gopher hacluster haldaemon halt hsqldb ident junkbust kdm \
-		ldap lp mail mailman mailnull man messagebus mldonkey mysql nagios \
-		named netdump news nfsnobody nobody nscd ntp nut nx obsrun openvpn \
-		operator pcap polkitd postfix postgres privoxy pulse pvm quagga radvd \
-		rpc rpcuser rpm rtkit scard shutdown squid sshd statd svn sync tftp \
-		usbmux uucp vcsa wwwrun xfs cron mongodb nullmail portage redis \
-		shoutcast tcpdump '_*'
+# Disable host completion from /etc/hosts
+zstyle ':completion:*' hosts 'reply=()'
 
-zstyle ':completion:*' single-ignored show
+# ===========================
+# Completion for History Search
+# ===========================
 
-## marlonrichert/zsh-autocomplete
-zstyle ':autocomplete:*' min-input 2
-zstyle ':autocomplete:*' list-lines 32
-zstyle ':autocomplete:history-search:*' list-lines 32
+# Configure list lines for history incremental search
 zstyle ':autocomplete:history-incremental-search-*:*' list-lines 32
+
+# Configure page size for multi-word history search
+zstyle ":history-search-multi-word" page-size 12
+
+# Exit multi-word history search on cancel (Ctrl-C)
+zstyle ":plugin:history-search-multi-word" clear-on-cancel yes
+
+# ===========================
+# Recent Directories and Widget Style
+# ===========================
+
+# Use zoxide for recent directory completions
 zstyle ':autocomplete:*' recent-dirs zoxide
+
+# Define widget style as menu-select
 zstyle ':autocomplete:*' widget-style menu-select
+
+# ===========================
+# Gain Privileges for Completions
+# ===========================
+
+# Allow completion scripts to gain elevated privileges when necessary
+zstyle ':completion::complete:*' gain-privileges 1

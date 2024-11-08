@@ -91,11 +91,3 @@ export DOTNET_CLI_TELEMETRY_OPTOUT="true"
 export SCOUT_DISABLE=1
 export CLICOLOR=1
 export MOZ_ENABLE_WAYLAND=1
-
-# --- TEMPORARY ---
-
-# Gurobi
-# export GUROBI_HOME="/opt/gurobi1103/linux64"
-# export PATH="${PATH}:${GUROBI_HOME}/bin"
-# export LD_LIBRARY_PATH="${LD_LIBRARY_PATH}:${GUROBI_HOME}/lib"
-# export GRB_LICENSE_FILE="/home/ayush/.license/gurobi.lic"

@@ -1,94 +1,90 @@
-# ZSH Options
+# $ZCONFDIR/options.zsh
+# Zsh Options Configuration
 
-
-## -- Basics
+# ===========================
+# Basic Shell Behavior
+# ===========================
 
 # Allow comments in interactive shell
 setopt INTERACTIVE_COMMENTS
 
+# Allow short forms of for, repeat, select, if, and function constructs
+setopt SHORT_LOOPS
 
-## -- History
+# ===========================
+# History Configuration
+# ===========================
 
-# Allow multiple terminal sessions to all append to one zsh command history
+# Append history instead of overwriting
 setopt APPEND_HISTORY
 
-# Save history entries as soon as they are entered
+# Incrementally append history as commands are entered
 setopt INC_APPEND_HISTORY
 
-# Remove older duplicate entries from history
-setopt HIST_IGNORE_ALL_DUPS
-
-# When searching history don't display results already cycled through twice
-setopt HIST_FIND_NO_DUPS
-
-# Remove superfluous blanks from each line being added to history
-setopt HIST_REDUCE_BLANKS
-
-# Include more information about when the command was executed, etc
-setopt EXTENDED_HISTORY
-
-# Share history between different zsh instances
+# Share command history across all sessions
 setopt SHARE_HISTORY
 
-# Remove lines from the history list when the first character is a space, or when one of the expanded aliases contains a leading space.
+# Ignore duplicate commands in history
+setopt HIST_IGNORE_ALL_DUPS
+
+# Avoid displaying duplicate history entries during search
+setopt HIST_FIND_NO_DUPS
+
+# Remove superfluous blanks from each history entry
+setopt HIST_REDUCE_BLANKS
+
+# Record timestamp and other metadata for each history entry
+setopt EXTENDED_HISTORY
+
+# Ignore commands that start with a space
 setopt HIST_IGNORE_SPACE
 
-## -- Completion
+# ===========================
+# Completion Behavior
+# ===========================
 
-# Automatically list choices on an ambiguous completion.
+# Automatically list choices on ambiguous completion
 setopt AUTO_LIST
 
-# Automatically use menu completion after the second consecutive request for completion,
-# for example by pressing the tab key repeatedly.
+# Use menu completion after multiple tab presses
 setopt AUTO_MENU
 
-# Move cursor to end if word had one match
+# Move cursor to end if the completed word has a single match
 setopt ALWAYS_TO_END
 
-# Allow completion from within a word/phrase
-# setopt COMPLETE_IN_WORD
+# Show file types with a trailing identifier
+setopt LIST_TYPES
 
-# Complete aliases
-# setopt COMPLETE_ALIASES
+# ===========================
+# Directory Navigation
+# ===========================
 
-# Show the type of each file with a trailing identifying mark
- setopt LIST_TYPES
-
-## -- Changing directories
-
-# Make cd push the old directory onto the directory stack
+# Automatically push the old directory onto the stack when changing directories
 setopt AUTO_PUSHD
 
-# cd by typing directory name if it's not a command
+# Change directory by typing the directory name if it's not a command
 setopt AUTO_CD
 
-## -- Expansions & Globbing
+# ===========================
+# Globbing and Expansion
+# ===========================
 
-# Print an error instead of leaving filename generation incomplete if no matches
-setopt NOMATCH
-
-# Treat the ‘#’, ‘~’ and ‘^’ characters as part of patterns for filename generation
+# Treat special characters like '#', '~', and '^' as part of patterns
 setopt EXTENDED_GLOB
 
-# Ignore braces
-#setopt IGNORE_BRACES
+# Print an error if filename generation fails (no matches found)
+setopt NOMATCH
 
-## -- Job control
+# ===========================
+# Job Control
+# ===========================
 
-# Report the status of background jobs immediately, rather than waiting to print
+# Report the status of background jobs immediately
 setopt NOTIFY
 
+# ===========================
+# Zsh Line Editor (ZLE)
+# ===========================
 
-## -- ZLE
-
-# Beep on error in ZLE
+# Beep on errors in ZLE
 setopt BEEP
-
-
-## -- Input / Output
-
-# Try to correct the spelling of commands
-#setopt CORRECT
-
-# Allow the short forms of for, repeat, select, if and function constructs
-setopt SHORT_LOOPS
