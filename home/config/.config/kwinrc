@@ -55,9 +55,6 @@ Size=8
 BottomRight=ActivityManager
 TopRight=ShowDesktop
 
-[ModifierOnlyShortcuts]
-Meta=org.kde.plasmashell,/PlasmaShell,org.kde.PlasmaShell,activateLauncherMenu
-
 [Plugins]
 MoveSnapEnabled=false
 blurEnabled=false
