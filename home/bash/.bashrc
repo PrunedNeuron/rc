@@ -9,3 +9,6 @@ source ~/.config/shell/aliases
 eval "$(starship init bash)"
 export PATH="/home/ayush/genv/bin:$PATH"
 # eval "$(genv init -)"
+
+# Added by LM Studio CLI (lms)
+export PATH="$PATH:/home/ayush/.lmstudio/bin"

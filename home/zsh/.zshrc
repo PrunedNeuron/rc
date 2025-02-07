@@ -28,3 +28,6 @@ source $ZCONFDIR/plugins.zsh
 
 # Run final checks
 source $ZCONFDIR/other/post.zsh
+
+# Added by LM Studio CLI (lms)
+export PATH="$PATH:/home/ayush/.lmstudio/bin"

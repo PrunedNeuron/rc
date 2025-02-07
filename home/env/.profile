@@ -91,3 +91,6 @@ export DOTNET_CLI_TELEMETRY_OPTOUT="true"
 export SCOUT_DISABLE=1
 export CLICOLOR=1
 export MOZ_ENABLE_WAYLAND=1
+
+# Added by LM Studio CLI (lms)
+export PATH="$PATH:/home/ayush/.lmstudio/bin"
