@@ -29,5 +29,5 @@ source $ZCONFDIR/plugins.zsh
 # Run final checks
 source $ZCONFDIR/other/post.zsh
 
-# Added by LM Studio CLI (lms)
-export PATH="$PATH:/home/ayush/.lmstudio/bin"
+[ -f /opt/miniforge/etc/profile.d/conda.sh ] && source /opt/miniforge/etc/profile.d/conda.sh
+eval "$(micromamba shell hook --shell zsh)"

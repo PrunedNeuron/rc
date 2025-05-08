@@ -73,3 +73,7 @@ disabled = false
 [git_commit]
 disabled = false
 
+
+# pixi
+[pixi]
+disabled = true
