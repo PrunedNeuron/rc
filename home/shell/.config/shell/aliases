@@ -115,3 +115,7 @@ alias gcl='git clone'
 
 # secure transfer
 alias rsync="rsync -a --info=progress2 --human-readable --compress --partial"
+
+alias chrome-egl='google-chrome-stable \
+  --use-gl=egl \
+  --disable-features=Vulkan,DefaultANGLEVulkan,VulkanFromANGLE "$@"'

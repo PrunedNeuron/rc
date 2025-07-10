@@ -17,3 +17,6 @@ zcomet load zsh-users/zsh-autosuggestions
 
 # Run compinit and compile its cache
 zcomet compinit
+
+
+eval "$(zoxide init zsh)"
