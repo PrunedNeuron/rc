@@ -1,46 +1,103 @@
-local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
-if not vim.loop.fs_stat(lazypath) then
-  -- bootstrap lazy.nvim
-  -- stylua: ignore
-  vim.fn.system({ "git", "clone", "--filter=blob:none", "https://github.com/folke/lazy.nvim.git", "--branch=stable", lazypath })
-end
-vim.opt.rtp:prepend(vim.env.LAZY or lazypath)
+-- ============================================================================
+-- Lazy.nvim Plugin Manager Configuration
+-- ============================================================================
+-- Performance: lazy.nvim uses lazy-loading to achieve <50ms startup time
+-- Architecture: Modular plugin specs loaded from lua/plugins/*.lua
+-- CRITICAL: Import order must be: lazyvim.plugins → extras → custom plugins
 
 require("lazy").setup({
   spec = {
-    -- add LazyVim and import its plugins
-    { "LazyVim/LazyVim", import = "lazyvim.plugins" },
-    -- import any extras modules here
-    -- { import = "lazyvim.plugins.extras.lang.typescript" },
-    -- { import = "lazyvim.plugins.extras.lang.json" },
-    -- { import = "lazyvim.plugins.extras.ui.mini-animate" },
-    -- import/override with your plugins
-    { import = "plugins" },
+    -- FIRST: Core LazyVim framework
+    {
+      "LazyVim/LazyVim",
+      import = "lazyvim.plugins",
+      opts = {
+        colorscheme = "catppuccin-mocha",
+        news = {
+          lazyvim = false,
+          neovim = false,
+        },
+      },
+    },
+
+    -- SECOND: LazyVim extras (language support, formatters, etc.)
+-- Python support
+{ import = "lazyvim.plugins.extras.lang.python" },
+-- TypeScript/JavaScript support
+{ import = "lazyvim.plugins.extras.lang.typescript" },
+-- JSON schema validation
+{ import = "lazyvim.plugins.extras.lang.json" },
+-- Markdown preview and editing
+{ import = "lazyvim.plugins.extras.lang.markdown" },
+-- Black formatter for Python
+{ import = "lazyvim.plugins.extras.formatting.black" },
+-- Docker support
+{ import = "lazyvim.plugins.extras.lang.docker" },
+-- YAML schema validation
+{ import = "lazyvim.plugins.extras.lang.yaml" },
+-- Mini patterns
+{ import = "lazyvim.plugins.extras.util.mini-hipatterns" },
+-- Project management
+{ import = "lazyvim.plugins.extras.util.project" },
+
+-- THIRD: Custom plugins from lua/plugins/
+{ import = "plugins" },
   },
+
   defaults = {
-    -- By default, only LazyVim plugins will be lazy-loaded. Your custom plugins will load during startup.
-    -- If you know what you're doing, you can set this to `true` to have all your custom plugins lazy-loaded by default.
-    lazy = false,
-    -- It's recommended to leave version=false for now, since a lot the plugin that support versioning,
-    -- have outdated releases, which may break your Neovim install.
-    version = false, -- always use the latest git commit
-    -- version = "*", -- try installing the latest stable version for plugins that support semver
+    lazy = true, -- Lazy-load all plugins by default
+    version = false, -- Use HEAD for latest features (stable tested by LazyVim)
   },
-  install = { colorscheme = { "tokyonight", "habamax" } },
-  checker = { enabled = true }, -- automatically check for plugin updates
+
+  -- UI: Modern floating window configuration
+  ui = {
+    border = "rounded",
+    backdrop = 60,
+    size = { width = 0.8, height = 0.8 },
+  },
+
+  -- Performance optimizations
   performance = {
+    cache = {
+      enabled = true,
+    },
     rtp = {
-      -- disable some rtp plugins
+      -- Disable unused built-in plugins for faster startup
       disabled_plugins = {
         "gzip",
-        -- "matchit",
-        -- "matchparen",
-        -- "netrwPlugin",
+        "matchit",
+        "matchparen",
+        "netrwPlugin",
         "tarPlugin",
         "tohtml",
         "tutor",
         "zipPlugin",
       },
     },
+  },
+
+  -- Auto-update check
+  checker = {
+    enabled = true,
+    notify = false, -- Disable notifications (check via :Lazy)
+frequency = 3600, -- Check every hour
+  },
+
+  -- Change detection for config files
+  change_detection = {
+    enabled = true,
+    notify = false, -- Disable notifications to avoid clutter
+  },
+
+  -- Install configuration
+  install = {
+    colorscheme = { "catppuccin-mocha", "tokyonight", "habamax" },
+  },
+
+  -- Development mode
+  dev = {
+    path = "~/projects",
+    patterns = {}, -- Add your local plugin dev paths here
+    fallback = false,
   },
 })

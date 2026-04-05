@@ -1,12 +1,15 @@
 #!/usr/bin/env zsh
 
+# widgets/twf-widget.zsh — DELETE or disable entirely.
+# twf-widget conflicts with fzf's Ctrl+T and is strictly worse.
+# If you want twf accessible, rebind it to something unused, e.g. Alt+T:
 twf-widget() {
-  local selected=$(twf --height=0.5)
+  local selected
+  selected=$(twf --height=0.5) || { zle reset-prompt; return 1 }
   BUFFER="$BUFFER$selected"
-  zle reset-prompt
   zle end-of-line
-  return $ret
+  zle reset-prompt
 }
-
 zle -N twf-widget
-bindkey '^T' twf-widget
+bindkey -M emacs '^[t' twf-widget   # Alt+T — no conflict
+bindkey -M viins '^[t' twf-widget

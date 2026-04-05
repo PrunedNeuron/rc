@@ -91,10 +91,3 @@ export DOTNET_CLI_TELEMETRY_OPTOUT="true"
 export SCOUT_DISABLE=1
 export CLICOLOR=1
 export MOZ_ENABLE_WAYLAND=1
-
-# Added by LM Studio CLI (lms)
-export PATH="$PATH:/home/ayush/.lmstudio/bin"
-
-export LIBVA_DRIVER_NAME=iHD # # Intel media driver (stable & efficient)
-export __NV_PRIME_RENDER_OFFLOAD=1
-export __GLX_VENDOR_LIBRARY_NAME=nvidia

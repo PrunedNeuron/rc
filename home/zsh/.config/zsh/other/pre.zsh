@@ -1,13 +1,17 @@
 # $ZCONFDIR/other/pre.zsh
+# Bootstraps zimfw. ZIM_HOME must be set first — all subsequent lines reference it.
 
-if [[ ! -f ${ZDOTDIR:-${HOME}}/.zcomet/bin/zcomet.zsh ]]; then
-  command git clone https://github.com/agkozak/zcomet.git ${ZDOTDIR:-${HOME}}/.zcomet/bin
+ZIM_HOME=${ZDOTDIR:-$HOME}/.zim
+
+# Download zimfw script if missing (first install only)
+if [[ ! -e $ZIM_HOME/zimfw.zsh ]]; then
+  curl -fsSL --create-dirs -o $ZIM_HOME/zimfw.zsh \
+    https://github.com/zimfw/zimfw/releases/latest/download/zimfw.zsh
 fi
 
-source ${ZDOTDIR:-${HOME}}/.zcomet/bin/zcomet.zsh
+# Rebuild init.zsh only when .zimrc is newer — a no-op on normal startups
+if [[ ! $ZIM_HOME/init.zsh -nt ${ZIM_CONFIG_FILE:-${ZDOTDIR:-$HOME}/.zimrc} ]]; then
+  source $ZIM_HOME/zimfw.zsh init -q
+fi
 
-# Add precmd and chpwd hooks
-# source $ZCONFDIR/hooks.zsh
-
-# Add zsh mods
-# source $ZCONFDIR/zmods.zsh
+# zsh-defer is loaded by init.zsh (post.zsh). No pre-bootstrap needed here.

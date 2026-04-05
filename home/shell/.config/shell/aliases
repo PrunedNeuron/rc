@@ -16,25 +16,25 @@ alias yr='yay -Rns'                    # Uninstall
 alias yrnsc='yay -Rnsc'                # Uninstall and remove unneeded dependencies
 alias yrrr='yay -Rns --noconfirm'      # Uninstall / Remove completely / Purge non-interactively
 alias yclear='yay -Scc'                # Clear caches
-alias ycclear='yes | yay -Scc'         # Clear caches non-interactively
 
 # Pacman
 alias rmpaclock='sudo rm -f /var/lib/pacman/db.lck'
 
 # Text
-alias cpy='xsel -bi' # Copy to clipboard
-alias pst='xsel -bo' # Paste from clipboard
+# alias cpy='xsel -bi' # Copy to clipboard
+alias cpy='wl-copy'
+# alias pst='xsel -bo' # Paste from clipboard
+alias pst='wl-paste'
 alias tolower="tr '[:upper:]' '[:lower:]'"
 alias toupper="tr '[:lower:]' '[:upper:]'"
 
 # Fonts
-alias fontcc='fc-cache -f'
+alias fontcc='fc-cache -fvr'
 alias fontm='fc-match'
 
 # Utility
 alias now="date +\'%r\'"
 alias today='date +%F'
-alias fastping='ping -c 100 -s.2'
 alias open='xdg-open 2>/dev/null'
 alias netcon='sudo arp-scan -l'
 
@@ -51,17 +51,15 @@ alias conf='cd $CONFIG'
 alias fjson='python -m json.tool'
 alias a2c='aria2c'
 
-# exa
-alias eza='eza --all --git --icons --group --header --time-style=long-iso'
-alias l='eza'
-alias exal='eza --long --time-style=long-iso'
-alias ll='eza --long --time-style=long-iso'
-alias la='eza --all'
-alias lla='eza --long --header'
+# eza / ls
+alias eza='eza --all --git --icons --hyperlink --group --header --time-style=long-iso --octal-permissions --group-directories-first'
+
+alias l='/usr/bin/ls'
+alias ls='eza'
+alias ll='eza --long'
 alias lt='eza --long --tree --level=2'
 
-# ls
-alias ls='ls --color=auto'
+# alias ls='ls --color=auto --hyperlink=auto'
 # alias ll='ls -l --inode --almost-all --human-readable --file-type --size --sort=time --author --group-directories-first --hyperlink=always'
 
 # Safety
@@ -83,7 +81,8 @@ alias zprofile='nvim ~/.zprofile'
 alias zshenv='nvim ~/.zshenv'
 alias foxrc='nvim ~/.mozilla/firefox/nightly/user.js'
 alias yayrc='nvim ~/.config/yay/config.json'
-alias starrc='nvim ~/.zsh/themes/starship.toml'
+alias starshiprc='starship config'
+# alias starrc='nvim ~/.zsh/themes/starship.toml'
 
 # Root
 alias dnscryptrc='sudo -e /etc/dnscrypt-proxy/dnscrypt-proxy.toml'
@@ -110,12 +109,11 @@ alias dmesg='dmesg --color=always'
 # ffmpeg
 alias ffmpeg='ffmpeg -v quiet -stats'
 
-# git
-alias gcl='git clone'
-
 # secure transfer
-alias rsync="rsync -a --info=progress2 --human-readable --compress --partial"
+# alias rsync="rsync -a --info=progress2 --human-readable --compress --partial"
 
 alias chrome-egl='google-chrome-stable \
   --use-gl=egl \
   --disable-features=Vulkan,DefaultANGLEVulkan,VulkanFromANGLE "$@"'
+
+alias batinfo='for BAT_PATH in $(upower -e | grep BAT); do upower -i "$BAT_PATH"; done'

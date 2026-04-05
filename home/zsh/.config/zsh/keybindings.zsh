@@ -1,89 +1,106 @@
-# Keybindings
+# $ZCONFDIR/keybindings.zsh — sourced last; these bindings are final.
 
-# Ensure the terminal is in application mode when ZLE is active
-if (( ${+terminfo[smkx]} )) && (( ${+terminfo[rmkx]} )); then
-  function zle-line-init() { echoti smkx }
-  function zle-line-finish() { echoti rmkx }
+bindkey -e  # emacs base keymap
+
+# ── Terminal application mode ─────────────────────────────────────────────────
+# Enables extended terminfo key sequences. Skipped on dumb/degraded terminals.
+if (( ${+terminfo[smkx]} && ${+terminfo[rmkx]} )); then
+  zle-line-init()   { echoti smkx }
+  zle-line-finish() { echoti rmkx }
   zle -N zle-line-init
   zle -N zle-line-finish
 fi
 
-# Use Emacs key bindings
-bindkey -e
+# ── Word boundary style ───────────────────────────────────────────────────────
+# 'bash' stops word-kill at '/', '-', '.', '=' — matches GUI text field behaviour
+autoload -Uz select-word-style
+select-word-style bash
 
-# Keymaps to bind keys in
-zsh_keymaps=(emacs viins vicmd)
+# ── Helpers ───────────────────────────────────────────────────────────────────
+_bk()  { bindkey -M emacs "$1" "$2"; bindkey -M viins "$1" "$2"; bindkey -M vicmd "$1" "$2" }
+_bti() { [[ -n ${terminfo[$1]} ]] && _bk "${terminfo[$1]}" "$2" }
 
-# Function to bind terminfo keys to a widget across multiple keymaps
-bind_terminfo_key() {
-  local key="$1" widget="$2"
-  [[ -n "${terminfo[$key]}" ]] || return
-  for map in $zsh_keymaps; do
-    bindkey -M "$map" "${terminfo[$key]}" "$widget"
-  done
-}
-
-# Function to bind a key sequence to a widget across multiple keymaps
-bind_key_sequence() {
-  local seq="$1" widget="$2"
-  for map in $zsh_keymaps; do
-    bindkey -M "$map" "$seq" "$widget"
-  done
-}
-
-
-
-# Bind PageUp and PageDown to history navigation
-bind_terminfo_key kpp up-line-or-history      # [PageUp]
-bind_terminfo_key knp down-line-or-history    # [PageDown]
-
-# Bind Up and Down arrows for fuzzy history search
+# ── History navigation ────────────────────────────────────────────────────────
 autoload -Uz up-line-or-beginning-search down-line-or-beginning-search
 zle -N up-line-or-beginning-search
 zle -N down-line-or-beginning-search
 
-bind_terminfo_key kcuu1 up-line-or-beginning-search   # [Up-Arrow]
-bind_terminfo_key kcud1 down-line-or-beginning-search # [Down-Arrow]
+_bti kpp   up-line-or-history
+_bti knp   down-line-or-history
+_bti kcuu1 up-line-or-beginning-search
+_bti kcud1 down-line-or-beginning-search
 
-# Fallback bindings for Up and Down arrows
-bindkey '^[[A' up-line-or-beginning-search
-bindkey '^[OA' up-line-or-beginning-search
-bindkey '^[[B' down-line-or-beginning-search
-bindkey '^[OB' down-line-or-beginning-search
+# Escape-sequence fallbacks (xterm, kitty, rxvt, tmux, …)
+_bk '^[[A' up-line-or-beginning-search
+_bk '^[OA' up-line-or-beginning-search
+_bk '^[[B' down-line-or-beginning-search
+_bk '^[OB' down-line-or-beginning-search
 
-# Bind Home and End keys
-bind_terminfo_key khome beginning-of-line   # [Home]
-bind_terminfo_key kend end-of-line          # [End]
+# ── Line navigation ───────────────────────────────────────────────────────────
+_bti khome beginning-of-line
+_bti kend  end-of-line
+_bk '^[[H'  beginning-of-line   # xterm / kitty
+_bk '^[[F'  end-of-line
+_bk '^[[1~' beginning-of-line   # rxvt
+_bk '^[[4~' end-of-line
 
-# Bind Shift-Tab for reverse menu completion
-bind_terminfo_key kcbt reverse-menu-complete  # [Shift-Tab]
+# ── Character navigation ──────────────────────────────────────────────────────
+# Bare arrows = one character. Ctrl/Alt+Arrow = one word.
+_bk '^[[C' forward-char
+_bk '^[[D' backward-char
 
-# Bind Backspace and Delete keys
-bind_key_sequence '^?' backward-delete-char    # [Backspace]
-if [[ -n "${terminfo[kdch1]}" ]]; then
-  bind_terminfo_key kdch1 delete-char          # [Delete]
-else
-  bind_key_sequence '^[[3~' delete-char
-fi
+_bk '^[[1;5C' forward-word      # Ctrl+Right
+_bk '^[[1;5D' backward-word     # Ctrl+Left
+_bk '^[[1;3C' forward-word      # Alt+Right
+_bk '^[[1;3D' backward-word     # Alt+Left
 
-# Bind Ctrl-Delete and Ctrl-Backspace for word deletion
-bind_key_sequence '^[[3;5~' kill-word          # [Ctrl-Delete]
-bind_key_sequence '^H' backward-kill-word      # [Ctrl-Backspace]
+# ── Deletion ─────────────────────────────────────────────────────────────────
+_bk '^?' backward-delete-char   # Backspace (0x7F)
+_bti kdch1  delete-char
+_bk '^[[3~' delete-char         # Delete fallback
 
-# Bind Ctrl-Arrow keys for word navigation
-bind_key_sequence '^[[1;5C' forward-word       # [Ctrl-RightArrow]
-bind_key_sequence '^[[1;5D' backward-word      # [Ctrl-LeftArrow]
+_bk '^[[3;5~' kill-word         # Ctrl+Delete
+_bk '^[[3;5M' kill-word         # Ctrl+Delete (kitty keyboard protocol)
 
-# Optional: Bind Left and Right arrows for word navigation
-bindkey '^[[C' forward-word   # [RightArrow]
-bindkey '^[[D' backward-word  # [LeftArrow]
+# Ctrl+Backspace: ^H (0x08) is the universal encoding.
+# Kitty "full keyboard protocol" sends ^[[127;5u instead.
+# select-word-style bash (above) ensures stop at '/', '-', '.', etc.
+_bk '^H'        backward-kill-word
+_bk '^[[127;5u' backward-kill-word
 
+# Alt+Backspace
+_bk '^[^?' backward-kill-word
+_bk '^[^H' backward-kill-word
 
-# Additional keybindings
-bindkey '\ew' kill-region                         # [Esc-w] - Kill to mark
-bindkey -s '\el' 'ls\n'                           # [Esc-l] - Run 'ls'
-bindkey '^r' history-incremental-search-backward  # [Ctrl-r] - Incremental search
-bindkey ' ' magic-space                           # [Space] - Disable history expansion
+# ── Completion ────────────────────────────────────────────────────────────────
+_bti kcbt reverse-menu-complete
+_bk '^[[Z' reverse-menu-complete
 
-# Load custom widgets
-source <(cat $(ls -1 $ZCONFDIR/widgets/**/*))
+# ── Editing utilities ─────────────────────────────────────────────────────────
+bindkey ' '    magic-space
+bindkey '^r'   history-incremental-search-backward  # atuin overrides this async
+bindkey '^_'   undo
+bindkey '^[^_' redo
+bindkey '^u'   kill-whole-line
+bindkey '^[.'  insert-last-word
+bindkey '\ew'  kill-region
+bindkey -s '\el' 'ls\n'
+
+# ── Bracketed paste ───────────────────────────────────────────────────────────
+autoload -Uz bracketed-paste-magic
+zle -N bracketed-paste bracketed-paste-magic
+
+# ── zsh-history-substring-search ─────────────────────────────────────────────
+# Override the Up/Down bindings set above only if the plugin actually loaded.
+(( ${+functions[history-substring-search-up]} )) && {
+  bindkey '^[[A' history-substring-search-up
+  bindkey '^[OA' history-substring-search-up
+  bindkey '^[[B' history-substring-search-down
+  bindkey '^[OB' history-substring-search-down
+}
+
+# ── Custom widgets ────────────────────────────────────────────────────────────
+# ~*.zwc excludes compiled binary files from being sourced as shell
+for _f in $ZCONFDIR/widgets/**/^*.zwc(.N); do builtin source "$_f"; done; unset _f
+
+unfunction _bk _bti

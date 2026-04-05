@@ -1,8 +1,160 @@
-# vim: set syntax:sh
-# bat config
+# bat configuration file
+# Location: ~/.config/bat/config
+# Tested with bat 0.24+
 
---theme="ansi"
---map-syntax=".ignore:Git Ignore"
+# ============================================================================
+# CORE RENDERING
+# ============================================================================
+
+# Theme
+--theme="Dracula"
+
+# Style components (all valid options included)
 --style="full"
---paging="never"
 
+# Color output control
+--color="auto"
+
+# Italic text
+--italic-text="always"
+
+# ============================================================================
+# PAGING CONFIGURATION
+# ============================================================================
+
+# Intelligent paging behavior
+--paging="auto"
+
+# Optimized pager with navigation features
+--pager="less -RFXiMSK"
+
+# ============================================================================
+# DISPLAY BEHAVIOR
+# ============================================================================
+
+# Line wrapping strategy
+--wrap="auto"
+
+# Tab width
+--tabs=4
+
+# Decorations (line numbers, git changes, etc.)
+--decorations="auto"
+
+# ============================================================================
+# SYNTAX MAPPINGS - VERIFIED AGAINST bat --list-languages
+# ============================================================================
+
+# Shell Configuration Files
+--map-syntax=".zshrc:Bourne Again Shell (bash)"
+--map-syntax=".zshenv:Bourne Again Shell (bash)"
+--map-syntax=".zprofile:Bourne Again Shell (bash)"
+--map-syntax=".zlogin:Bourne Again Shell (bash)"
+--map-syntax=".bashrc:Bourne Again Shell (bash)"
+--map-syntax=".bash_profile:Bourne Again Shell (bash)"
+--map-syntax=".bash_aliases:Bourne Again Shell (bash)"
+--map-syntax="*.bash:Bourne Again Shell (bash)"
+--map-syntax="*.zsh:Bourne Again Shell (bash)"
+--map-syntax=".profile:Bourne Again Shell (bash)"
+--map-syntax=".envrc:Bourne Again Shell (bash)"
+
+# Environment Files
+--map-syntax=".env:Bourne Again Shell (bash)"
+--map-syntax="*.env:Bourne Again Shell (bash)"
+--map-syntax=".env.*:Bourne Again Shell (bash)"
+
+# Git Files
+--map-syntax=".gitignore:Git Ignore"
+--map-syntax=".gitattributes:Git Attributes"
+--map-syntax=".gitmodules:Git Config"
+--map-syntax=".ignore:Git Ignore"
+--map-syntax=".dockerignore:Git Ignore"
+--map-syntax=".npmignore:Git Ignore"
+
+# Configuration Files (INI-style)
+--map-syntax="*.conf:INI"
+--map-syntax="*.cfg:INI"
+--map-syntax="*.ini:INI"
+--map-syntax=".editorconfig:INI"
+
+# Systemd Units
+--map-syntax="*.service:INI"
+--map-syntax="*.socket:INI"
+--map-syntax="*.device:INI"
+--map-syntax="*.mount:INI"
+--map-syntax="*.automount:INI"
+--map-syntax="*.swap:INI"
+--map-syntax="*.target:INI"
+--map-syntax="*.path:INI"
+--map-syntax="*.timer:INI"
+--map-syntax="*.slice:INI"
+
+# Hyprland/Wayland Ecosystem
+--map-syntax="hyprland.conf:INI"
+--map-syntax="hyprpaper.conf:INI"
+--map-syntax="hyprlock.conf:INI"
+--map-syntax="hypridle.conf:INI"
+--map-syntax="**/hypr/*.conf:INI"
+--map-syntax="**/sway/config:INI"
+
+# Terminal Emulator Configs
+--map-syntax="kitty.conf:INI"
+--map-syntax="**/kitty/*.conf:INI"
+--map-syntax="alacritty.toml:TOML"
+
+# Container Files
+--map-syntax="Containerfile:Dockerfile"
+--map-syntax="*.containerfile:Dockerfile"
+--map-syntax="Dockerfile.*:Dockerfile"
+--map-syntax="*.dockerfile:Dockerfile"
+--map-syntax="docker-compose.yml:YAML"
+--map-syntax="docker-compose.yaml:YAML"
+--map-syntax="compose.yml:YAML"
+
+# Build Systems
+--map-syntax="Makefile:Makefile"
+--map-syntax="*.mk:Makefile"
+--map-syntax="*.make:Makefile"
+--map-syntax="GNUmakefile:Makefile"
+--map-syntax="Justfile:Makefile"
+--map-syntax="justfile:Makefile"
+--map-syntax="*.just:Makefile"
+--map-syntax="CMakeLists.txt:CMake"
+--map-syntax="*.cmake:CMake"
+
+# Package Managers
+--map-syntax="Brewfile:Ruby"
+--map-syntax="Gemfile:Ruby"
+--map-syntax="Rakefile:Ruby"
+--map-syntax="Cargo.toml:TOML"
+--map-syntax="Cargo.lock:TOML"
+--map-syntax="pyproject.toml:TOML"
+--map-syntax="package.json:JSON"
+--map-syntax="tsconfig.json:JSON"
+
+# Config Formats
+--map-syntax="*.toml:TOML"
+--map-syntax="*.yml:YAML"
+--map-syntax="*.yaml:YAML"
+--map-syntax="*.json:JSON"
+--map-syntax="*.jsonc:JSON"
+
+# CI/CD
+--map-syntax=".gitlab-ci.yml:YAML"
+--map-syntax="Jenkinsfile:Groovy"
+--map-syntax=".travis.yml:YAML"
+
+# Specialized Files
+--map-syntax="*.ino:C++"
+--map-syntax="*.pde:C++"
+--map-syntax="go.mod:Go"
+--map-syntax="go.sum:Go"
+
+# SSH Config
+--map-syntax="ssh_config:SSH Config"
+--map-syntax="**/ssh/config:SSH Config"
+
+# Documentation
+--map-syntax="README:Markdown"
+--map-syntax="LICENSE:Markdown"
+--map-syntax="CHANGELOG:Markdown"

@@ -1,0 +1,24 @@
+#!/usr/bin/env zsh
+
+# --- Robust Detach (Session Bound) ---
+# Purpose: Run a command that survives terminal closure but cleans up on logout.
+
+# 1. Validation
+[[ -z "$1" ]] && { print "Usage: detach <command> [args...]"; exit 1; }
+
+# 2. Execution
+# We use systemd-run --scope to bind the process to the User Session (systemd --user).
+# This creates a 'scope' unit. The process is now a sibling of your terminal, 
+# not a child. It shares the same lifecycle as your login session.
+
+if (( $+commands[systemd-run] )); then
+  systemd-run --user \
+    --scope \
+    --quiet \
+    -p ExitType=cgroup \
+    --description="Detached: $1" \
+    -- "$@" </dev/null >/dev/null 2>&1 &!
+else
+  # Fallback: setsid (less deterministic cleanup, but works)
+  setsid "$@" </dev/null >/dev/null 2>&1 &!
+fi

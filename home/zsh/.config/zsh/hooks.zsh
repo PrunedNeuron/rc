@@ -1,4 +1,4 @@
 # $ZCONFDIR/hooks.zsh
+# Sources all precmd hook files. Glob loop — no subshell forks.
 
-# Load precmd hooks
-source <(cat $(ls -1 $ZCONFDIR/hooks.d/precmd/*.zsh))
+for _f in $ZCONFDIR/hooks.d/precmd/*.zsh(.N); do source "$_f"; done; unset _f

@@ -1,9 +1,6 @@
 [$Version]
 update_info=kwin.upd:replace-scalein-with-scale,kwin.upd:port-minimizeanimation-effect-to-js,kwin.upd:port-scale-effect-to-js,kwin.upd:port-dimscreen-effect-to-js,kwin.upd:auto-bordersize,kwin.upd:animation-speed,kwin.upd:desktop-grid-click-behavior,kwin.upd:no-swap-encourage,kwin.upd:make-translucency-effect-disabled-by-default,kwin.upd:remove-flip-switch-effect,kwin.upd:remove-cover-switch-effect,kwin.upd:remove-cubeslide-effect,kwin.upd:remove-xrender-backend,kwin.upd:enable-scale-effect-by-default,kwin.upd:overview-group-plugin-id,kwin.upd:animation-speed-cleanup,kwin.upd:replace-cascaded-zerocornered,bismuth_new_logger.upd:bismuth-new-logger
 
-[Activities][LastVirtualDesktop]
-40b8f9fe-537c-48e0-8cb2-ee5bb29b4fc5=c039e3ed-d810-4390-b822-3e181d28affb
-
 [Compositing]
 LatencyPolicy=Medium
 
@@ -143,13 +140,14 @@ SecondOutlineThickness=0
 [Shadow]
 InactiveShadowAlpha=0
 
-[Tiling]
-padding=4
-
 [Tiling][04bd0256-3926-5c90-88e4-d2187d197cd5]
 tiles={"layoutDirection":"horizontal","tiles":[{"width":0.25},{"width":0.5},{"width":0.25}]}
 
 [Tiling][08fd48eb-5adb-444f-8358-b0ecd9d028f2][56462259-e1bf-4600-b228-0142bed5d7d8]
+padding=4
+tiles={"layoutDirection":"horizontal","tiles":[{"width":0.25},{"width":0.5},{"width":0.25}]}
+
+[Tiling][08fd48eb-5adb-444f-8358-b0ecd9d028f2][bbff37ae-96a4-43c5-aee0-b600e725be96]
 tiles={"layoutDirection":"horizontal","tiles":[{"width":0.25},{"width":0.5},{"width":0.25}]}
 
 [Tiling][213a9620-187e-58a6-b80b-85d8fb95dfce]
@@ -177,15 +175,27 @@ tiles={"layoutDirection":"horizontal","tiles":[{"width":0.25},{"width":0.5},{"wi
 tiles={"layoutDirection":"horizontal","tiles":[{"width":0.25},{"width":0.5},{"width":0.25}]}
 
 [Tiling][c039e3ed-d810-4390-b822-3e181d28affb][56462259-e1bf-4600-b228-0142bed5d7d8]
+padding=4
+tiles={"layoutDirection":"horizontal","tiles":[{"width":0.25},{"width":0.5},{"width":0.25}]}
+
+[Tiling][c039e3ed-d810-4390-b822-3e181d28affb][bbff37ae-96a4-43c5-aee0-b600e725be96]
 tiles={"layoutDirection":"horizontal","tiles":[{"width":0.25},{"width":0.5},{"width":0.25}]}
 
 [Tiling][c897c4f6-72b3-5b9a-8a41-b221a90df985]
 tiles={"layoutDirection":"horizontal","tiles":[{"width":0.25},{"width":0.5},{"width":0.25}]}
 
 [Tiling][d62d03af-eb6b-4f79-9598-dc599c24df84][56462259-e1bf-4600-b228-0142bed5d7d8]
+padding=4
+tiles={"layoutDirection":"horizontal","tiles":[{"width":0.25},{"width":0.5},{"width":0.25}]}
+
+[Tiling][d62d03af-eb6b-4f79-9598-dc599c24df84][bbff37ae-96a4-43c5-aee0-b600e725be96]
 tiles={"layoutDirection":"horizontal","tiles":[{"width":0.25},{"width":0.5},{"width":0.25}]}
 
 [Tiling][d8a1fe25-e1a6-480d-b02d-ad03ab4a8c48][56462259-e1bf-4600-b228-0142bed5d7d8]
+padding=4
+tiles={"layoutDirection":"horizontal","tiles":[{"width":0.25},{"width":0.5},{"width":0.25}]}
+
+[Tiling][d8a1fe25-e1a6-480d-b02d-ad03ab4a8c48][bbff37ae-96a4-43c5-aee0-b600e725be96]
 tiles={"layoutDirection":"horizontal","tiles":[{"width":0.25},{"width":0.5},{"width":0.25}]}
 
 [Tiling][e688eb74-7230-5d02-a5e0-3b38a54bc04e]
@@ -209,8 +219,6 @@ BorderSize=None
 BorderSizeAuto=false
 ButtonsOnLeft=XIA
 ButtonsOnRight=HSF
-library=sierrabreezeenhanced
-theme=Sierra Breeze Enhanced
 
 [ًRound-Corners]
 InactiveShadowSize=15

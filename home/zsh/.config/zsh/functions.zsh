@@ -1,13 +1,17 @@
-# Reusable functions
+# $ZCONFDIR/functions.zsh
 
-typeset -a entries
-typeset -U fpath
+typeset -gU fpath
 
-# List of paths of functions
-entries=($(find "$ZCONFDIR/functions.d" -path "$ZCONFDIR/functions.d/lib" -prune -o -type f))
-
-# Add functions directory to fpath
-fpath=($ZCONFDIR/functions.d "${fpath[@]}")
+# Add functions root and lib subdir (lib is fpath-only; not explicitly autoloaded
+# — its helpers are lazy-loaded on first call by functions that depend on them).
+fpath=($ZCONFDIR/functions.d $ZCONFDIR/functions.d/lib(N/) $fpath)
 export FPATH
-autoload ${entries#$ZCONFDIR/functions.d/}
 
+# Autoload all regular files under functions.d, excluding lib contents.
+local -a _funcs=()
+for _f in $ZCONFDIR/functions.d/**/*(N.); do
+  [[ $_f != $ZCONFDIR/functions.d/lib/* ]] \
+    && _funcs+=("${_f#$ZCONFDIR/functions.d/}")
+done
+(( ${#_funcs} )) && autoload -Uz $_funcs
+unset _f _funcs

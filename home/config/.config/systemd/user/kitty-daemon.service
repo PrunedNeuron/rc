@@ -1,0 +1,20 @@
+# ~/.config/systemd/user/kitty-daemon.service
+# Pre-warms a headless kitty instance at login.
+# All subsequent kitty invocations join this instance via single_instance=yes,
+# paying zero GPU initialization cost.
+
+[Unit]
+Description=Kitty terminal daemon (single-instance pre-warm)
+After=graphical-session.target
+PartOf=graphical-session.target
+
+[Service]
+Type=simple
+# --start-as=hidden: create the OS window in hidden state (no visible window)
+# --single-instance: subsequent kitty launches attach to this process
+ExecStart=/usr/bin/kitty --single-instance --start-as=hidden
+Restart=on-failure
+RestartSec=3s
+
+[Install]
+WantedBy=graphical-session.target

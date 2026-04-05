@@ -39,7 +39,12 @@ set vertical-center true
 set synctex true
 
 set zoom-center true
-set scroll-page-aware true
 set page-padding 2
+
+set smooth-scroll "true"
+set scroll-full-overlap 0.01
+set scroll-step 100
+
+include noctaliarc
 
 
