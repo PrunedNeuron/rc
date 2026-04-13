@@ -1,0 +1,39 @@
+# Fuzzy-search and install packages from official repos + AUR.
+# Supports multi-select (Ctrl+Space) and batch install.
+
+local _aur
+_aur=$(command -v yay || command -v paru || command -v pikaur 2>/dev/null)
+
+local -a _list
+if [[ -n $_aur ]]; then
+  # Merge official (repo/pkg) and AUR (aur/pkg), deduplicated and sorted
+  _list=(${(f)"$( {
+    pacman -Slq 2>/dev/null | awk '{print $1"/"$2}'
+    $_aur -Slq --aur 2>/dev/null | sed 's/^/aur\//'
+  } | sort -u )"})
+else
+  _list=(${(f)"$(pacman -Slq 2>/dev/null)"})
+fi
+
+[[ ${#_list} -eq 0 ]] && { print -P '%F{red}✗ Package database empty or unavailable.%f'; return 1 }
+
+local -a selected
+selected=(${(f)"$(
+  printf '%s\n' "${_list[@]}" \
+  | fzf \
+      --prompt='install ❯ ' \
+      --header='Ctrl+Space: mark  Tab: accept all marked  Ctrl+/: preview  Ctrl+Y: copy name' \
+      --preview="$_PAC_PREVIEW" \
+      "${_PAC_FZF_OPTS[@]}"
+)"})
+
+[[ ${#selected} -eq 0 ]] && return 0
+
+# Strip the "repo/" prefix to get bare package names for pacman/aur-helper
+local -a pkgnames=(${selected[@]##*/})
+
+if [[ -n $_aur ]]; then
+  $_aur -S --needed "${pkgnames[@]}"
+else
+  sudo pacman -S --needed "${pkgnames[@]}"
+fi

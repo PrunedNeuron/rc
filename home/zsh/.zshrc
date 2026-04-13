@@ -1,34 +1,29 @@
-# ~/.zshrc — interactive shell only
+# ~/.zshrc — interactive shell entry point.
+#
+# Load order:
+#   init/pre.zsh      zimfw bootstrap
+#   init/history.zsh  HISTFILE / HISTSIZE / SAVEHIST
+#   shell/**/*        POSIX aliases, exports, PATH extensions
+#   zmods.zsh         zsh built-in modules (before compinit)
+#   options.zsh       setopt flags
+#   styles.zsh        zstyle completion + fzf-tab (before compinit)
+#   functions.zsh     autoload custom functions + fpath
+#   hooks.zsh         precmd/preexec hook registration
+#   init/post.zsh     source ZIM_HOME/init.zsh; async compile; zsh-defer available
+#   plugins.zsh       tool config + deferred init (starship, zoxide, atuin)
+#   keybindings.zsh   all key bindings (always last)
 
-# Bootstrap zimfw, rebuild init.zsh when .zimrc changes
-source $ZCONFDIR/other/pre.zsh
+source "$ZCONFDIR/init/pre.zsh"
+source "$ZCONFDIR/init/history.zsh"
 
-# History variables (HISTFILE, HISTSIZE, SAVEHIST)
-source $ZCONFDIR/other/history.zsh
+for _f in "$XDG_CONFIG_HOME/shell"/**/*(.N); do emulate bash -c "source $_f"; done
+unset _f
 
-# Shared POSIX/bash config (aliases, exports, PATH extensions)
-for _f in $CONFDIR/shell/**/*(.N); do emulate bash -c "source $_f"; done; unset _f
-
-# Built-in zsh modules — zsh/complist must load before compinit (post.zsh)
-source $ZCONFDIR/zmods.zsh
-
-# Shell behaviour options
-source $ZCONFDIR/options.zsh
-
-# Completion and plugin zstyles — before compinit in post.zsh
-source $ZCONFDIR/styles.zsh
-
-# Autoloaded functions
-source $ZCONFDIR/functions.zsh
-
-# precmd/preexec hooks
-source $ZCONFDIR/hooks.zsh
-
-# Initialize all zimfw modules — this is where zsh-defer becomes available
-source $ZCONFDIR/other/post.zsh
-
-# External tools: starship (sync), zoxide + atuin (async via zsh-defer)
-source $ZCONFDIR/plugins.zsh
-
-# Keybindings — unconditionally last so our binds win over every plugin
-source $ZCONFDIR/keybindings.zsh
+source "$ZCONFDIR/zmods.zsh"
+source "$ZCONFDIR/options.zsh"
+source "$ZCONFDIR/styles.zsh"
+source "$ZCONFDIR/functions.zsh"
+source "$ZCONFDIR/hooks.zsh"
+source "$ZCONFDIR/init/post.zsh"
+source "$ZCONFDIR/plugins.zsh"
+source "$ZCONFDIR/keybindings.zsh"

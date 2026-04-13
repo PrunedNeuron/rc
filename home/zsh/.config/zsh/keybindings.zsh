@@ -1,9 +1,24 @@
-# $ZCONFDIR/keybindings.zsh — sourced last; these bindings are final.
+# $ZCONFDIR/keybindings.zsh — all key bindings. Always sourced last.
 
-bindkey -e  # emacs base keymap
+# ── fzf widget map ────────────────────────────────────────────────────────────
+# Ctrl+T      file picker (multi-select, bat preview)
+# Ctrl+R      history (atuin / fzf fallback)
+# Alt+C       directory jump (zoxide + fzf)
+# Alt+G       live ripgrep (dual rg/fzf mode)      [widgets/fzf-live-grep.zsh]
+# Alt+M       package manager hub (pai/par/pao/pls) [widgets/fzf-pacman.zsh]
+# Alt+S       systemd hub (services/timers/journal) [widgets/fzf-systemd.zsh]
+# Alt+K       process browser/killer                [widgets/fzf-process.zsh]
+# Alt+N       SSH/network host picker               [widgets/fzf-ssh.zsh]
+# Alt+E       environment variable browser          [widgets/fzf-env.zsh]
+# Alt+I       man page browser (opens in nvim)      [widgets/fzf-man.zsh]
+# Alt+O       Docker hub (containers/images/vols)   [widgets/fzf-docker.zsh]
+# Ctrl+X E    edit buffer in $EDITOR                [keybindings.zsh]
+# Ctrl+X^N    navi cheatsheet browser               [plugins.zsh]
+# Ctrl+G *    fzf-git.sh object widgets             [junegunn/fzf-git.sh]
+
+bindkey -e   # emacs base keymap
 
 # ── Terminal application mode ─────────────────────────────────────────────────
-# Enables extended terminfo key sequences. Skipped on dumb/degraded terminals.
 if (( ${+terminfo[smkx]} && ${+terminfo[rmkx]} )); then
   zle-line-init()   { echoti smkx }
   zle-line-finish() { echoti rmkx }
@@ -12,11 +27,10 @@ if (( ${+terminfo[smkx]} && ${+terminfo[rmkx]} )); then
 fi
 
 # ── Word boundary style ───────────────────────────────────────────────────────
-# 'bash' stops word-kill at '/', '-', '.', '=' — matches GUI text field behaviour
 autoload -Uz select-word-style
-select-word-style bash
+select-word-style bash   # stop at '/', '-', '.', '=' — matches GUI text fields
 
-# ── Helpers ───────────────────────────────────────────────────────────────────
+# ── Helpers (scoped to this file; unfunction'd at end) ───────────────────────
 _bk()  { bindkey -M emacs "$1" "$2"; bindkey -M viins "$1" "$2"; bindkey -M vicmd "$1" "$2" }
 _bti() { [[ -n ${terminfo[$1]} ]] && _bk "${terminfo[$1]}" "$2" }
 
@@ -39,32 +53,28 @@ _bk '^[OB' down-line-or-beginning-search
 # ── Line navigation ───────────────────────────────────────────────────────────
 _bti khome beginning-of-line
 _bti kend  end-of-line
-_bk '^[[H'  beginning-of-line   # xterm / kitty
+_bk '^[[H'  beginning-of-line
 _bk '^[[F'  end-of-line
 _bk '^[[1~' beginning-of-line   # rxvt
 _bk '^[[4~' end-of-line
 
 # ── Character navigation ──────────────────────────────────────────────────────
-# Bare arrows = one character. Ctrl/Alt+Arrow = one word.
 _bk '^[[C' forward-char
 _bk '^[[D' backward-char
-
 _bk '^[[1;5C' forward-word      # Ctrl+Right
 _bk '^[[1;5D' backward-word     # Ctrl+Left
 _bk '^[[1;3C' forward-word      # Alt+Right
 _bk '^[[1;3D' backward-word     # Alt+Left
 
 # ── Deletion ─────────────────────────────────────────────────────────────────
-_bk '^?' backward-delete-char   # Backspace (0x7F)
-_bti kdch1  delete-char
+_bk '^?' backward-delete-char
+_bti kdch1 delete-char
 _bk '^[[3~' delete-char         # Delete fallback
 
 _bk '^[[3;5~' kill-word         # Ctrl+Delete
 _bk '^[[3;5M' kill-word         # Ctrl+Delete (kitty keyboard protocol)
 
-# Ctrl+Backspace: ^H (0x08) is the universal encoding.
-# Kitty "full keyboard protocol" sends ^[[127;5u instead.
-# select-word-style bash (above) ensures stop at '/', '-', '.', etc.
+# Ctrl+Backspace: 0x08 universally; ^[[127;5u in kitty full protocol
 _bk '^H'        backward-kill-word
 _bk '^[[127;5u' backward-kill-word
 
@@ -78,20 +88,27 @@ _bk '^[[Z' reverse-menu-complete
 
 # ── Editing utilities ─────────────────────────────────────────────────────────
 bindkey ' '    magic-space
-bindkey '^r'   history-incremental-search-backward  # atuin overrides this async
+bindkey '^r'   history-incremental-search-backward   # atuin overrides this async
 bindkey '^_'   undo
 bindkey '^[^_' redo
 bindkey '^u'   kill-whole-line
 bindkey '^[.'  insert-last-word
 bindkey '\ew'  kill-region
-bindkey -s '\el' 'ls\n'
+bindkey -s '\el' 'ls\n'                              # Alt+L: quick ls
+
+# ── Edit command in $EDITOR ───────────────────────────────────────────────────
+# Opens the current buffer in nvim for complex commands, pipelines, heredocs.
+autoload -Uz edit-command-line
+zle -N edit-command-line
+bindkey '^X^E' edit-command-line
+bindkey '^Xe'  edit-command-line
 
 # ── Bracketed paste ───────────────────────────────────────────────────────────
 autoload -Uz bracketed-paste-magic
 zle -N bracketed-paste bracketed-paste-magic
 
-# ── zsh-history-substring-search ─────────────────────────────────────────────
-# Override the Up/Down bindings set above only if the plugin actually loaded.
+# ── zsh-history-substring-search override ────────────────────────────────────
+# Must come after the up/down-line-or-beginning-search binds above.
 (( ${+functions[history-substring-search-up]} )) && {
   bindkey '^[[A' history-substring-search-up
   bindkey '^[OA' history-substring-search-up
@@ -100,7 +117,9 @@ zle -N bracketed-paste bracketed-paste-magic
 }
 
 # ── Custom widgets ────────────────────────────────────────────────────────────
-# ~*.zwc excludes compiled binary files from being sourced as shell
-for _f in $ZCONFDIR/widgets/**/^*.zwc(.N); do builtin source "$_f"; done; unset _f
+# ~*.zwc excludes compiled binary files; widgets/ is sourced entirely.
+for _f in "$ZCONFDIR/widgets"/**/^*.zwc(.N); do builtin source "$_f"; done
+unset _f
 
+# ── Cleanup ───────────────────────────────────────────────────────────────────
 unfunction _bk _bti

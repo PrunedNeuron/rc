@@ -1,6 +1,6 @@
 #!/usr/bin/env zsh
+# $ZCONFDIR/widgets/twf-widget — DELETE or disable entirely.
 
-# widgets/twf-widget.zsh — DELETE or disable entirely.
 # twf-widget conflicts with fzf's Ctrl+T and is strictly worse.
 # If you want twf accessible, rebind it to something unused, e.g. Alt+T:
 twf-widget() {

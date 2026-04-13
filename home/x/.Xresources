@@ -1,7 +1,13 @@
-Xft.dpi:       96
-Xft.antialias: 1
-Xft.hinting:   1
-Xft.autohint:  false
-Xft.hintstyle: hintslight
-Xft.lcdfilter: lcddefault
-Xft.rgba:      rgb
+! ~/.Xresources
+! Qt 6.8+ (xcb backend) gives Xresources precedence over fontconfig for
+! global Xft settings. These must match fonts.conf Section 1 exactly.
+! Note: Wayland-native Qt apps use the Wayland protocol for DPI; Xft.dpi
+! applies only to XWayland applications.
+! Load via: exec-once = xrdb -merge ~/.Xresources  (in autostart.conf)
+
+Xft.antialias:  1
+Xft.hinting:    1
+Xft.hintstyle:  hintslight
+Xft.rgba:       rgb
+Xft.lcdfilter:  lcddefault
+Xft.dpi:        96

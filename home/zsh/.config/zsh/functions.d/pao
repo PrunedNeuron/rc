@@ -1,0 +1,26 @@
+# List and interactively remove orphaned packages (installed as deps, no longer needed).
+
+local orphans
+orphans=$(pacman -Qdtq 2>/dev/null)
+
+if [[ -z $orphans ]]; then
+  print -P '%F{green}✓ No orphaned packages.%f'
+  return 0
+fi
+
+print -P "%F{yellow}Found $(echo "$orphans" | wc -l) orphan(s).%f"
+
+local -a selected
+selected=(${(f)"$(
+  echo "$orphans" \
+  | fzf \
+      --prompt='orphans ❯ ' \
+      --header='These packages are no longer required as dependencies.' \
+      --preview="$_PAC_INSTALLED_PREVIEW" \
+      "${_PAC_FZF_OPTS[@]}"
+)"})
+
+[[ ${#selected} -eq 0 ]] && return 0
+
+print -P "%F{red}Removing: ${selected[*]}%f"
+sudo pacman -Rns "${selected[@]}"

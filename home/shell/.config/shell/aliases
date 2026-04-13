@@ -1,119 +1,419 @@
 #!/usr/bin/env sh
+# ~/.config/shell/aliases.zsh
+# Sourced in emulate-bash mode from .zshrc — POSIX-compatible syntax only.
+# Functions and ZLE widgets live in $ZCONFDIR/functions.d/ and widgets/.
+#
+# Organisation:
+#   01 Shell & session       08 Network
+#   02 Navigation            09 Text & data
+#   03 File listing (eza)    10 Development
+#   04 File operations       11 Media
+#   05 Modern CLI tools      12 Display / Wayland / Hyprland
+#   06 Clipboard             13 Config file shortcuts
+#   07 Package management    14 Root config shortcuts
 
-# Aliases
+# ══════════════════════════════════════════════════════════════════════════════
+# 01 — Shell & session
+# ══════════════════════════════════════════════════════════════════════════════
 
-# Services
-alias reloadde='(plasmashell --replace & ; kwin_x11 --replace &) >/dev/null 2>&1'
+alias q='exit'
+alias c='clear'
+alias reload='exec zsh'
+alias h='history'
+alias j='jobs -l'
+
+# Sign out of the current session (works for TTY, X11, Wayland via logind)
+alias signout='loginctl terminate-session "$XDG_SESSION_ID"'
+
+# Restart DNS stack (dnscrypt-proxy + NetworkManager for resolver re-init)
 alias reloaddns='sudo systemctl restart dnscrypt-proxy NetworkManager'
-alias signout='loginctl terminate-session $XDG_SESSION_ID'
 
-# Arch package management
-alias y='yay' # Or just `yay`
-alias ys='yay -S'
-alias yy='yay -S --noconfirm --needed' # Install if required
-alias yyy='yay -S --noconfirm'         # Install / Reinstall
-alias yr='yay -Rns'                    # Uninstall
-alias yrnsc='yay -Rnsc'                # Uninstall and remove unneeded dependencies
-alias yrrr='yay -Rns --noconfirm'      # Uninstall / Remove completely / Purge non-interactively
-alias yclear='yay -Scc'                # Clear caches
+# KDE Plasma shell reload (kept even on Hyprland for reference / fallback)
+alias reloadkde='(plasmashell --replace & kwin_x11 --replace &) >/dev/null 2>&1'
 
-# Pacman
-alias rmpaclock='sudo rm -f /var/lib/pacman/db.lck'
+# PATH / FPATH inspection
+alias path='echo "$PATH" | tr ":" "\n" | nl -ba'
+alias fpath_='echo "$FPATH" | tr ":" "\n" | nl -ba'
 
-# Text
-# alias cpy='xsel -bi' # Copy to clipboard
-alias cpy='wl-copy'
-# alias pst='xsel -bo' # Paste from clipboard
-alias pst='wl-paste'
-alias tolower="tr '[:upper:]' '[:lower:]'"
-alias toupper="tr '[:lower:]' '[:upper:]'"
+# ── Systemd ───────────────────────────────────────────────────────────────────
+alias sc='systemctl'
+alias scs='systemctl status'
+alias scu='systemctl --user'
+alias sctl='sudo systemctl'
+alias scst='sudo systemctl start'
+alias scsp='sudo systemctl stop'
+alias scr='sudo systemctl restart'
+alias sce='sudo systemctl enable'
+alias scd='sudo systemctl disable'
+alias scen='sudo systemctl enable --now'
+alias scdn='sudo systemctl disable --now'
+alias scdaemon='sudo systemctl daemon-reload'
 
-# Fonts
-alias fontcc='fc-cache -fvr'
-alias fontm='fc-match'
+# Journal
+alias jctl='journalctl'
+alias jf='journalctl -f'            # follow system journal
+alias jfe='journalctl -fu'          # follow specific unit: jfe nginx
+alias je='journalctl -xe'           # recent errors with context
+alias jb='journalctl -b'            # this boot
+alias jbl='journalctl -b -1'        # last boot
 
-# Utility
-alias now="date +\'%r\'"
-alias today='date +%F'
-alias open='xdg-open 2>/dev/null'
-alias netcon='sudo arp-scan -l'
+# dmesg with colours and human timestamps
+alias dmesg='dmesg --color=always --human --reltime'
 
-# Pastebin
+# ══════════════════════════════════════════════════════════════════════════════
+# 02 — Navigation
+# ══════════════════════════════════════════════════════════════════════════════
+
+alias ..='cd ..'
+alias ...='cd ../..'
+alias ....='cd ../../..'
+alias .....='cd ../../../..'
+alias -- -='cd -'                   # return to previous directory
+
+# Jump to XDG config dir (requires $CONFIG or $XDG_CONFIG_HOME)
+alias conf='cd "${CONFIG:-$XDG_CONFIG_HOME}"'
+alias dl='cd ~/Downloads'
+alias dt='cd ~/Desktop'
+alias docs='cd ~/Documents'
+alias pics='cd ~/Pictures'
+alias vids='cd ~/Videos'
+
+# ══════════════════════════════════════════════════════════════════════════════
+# 03 — File listing (eza)
+# ══════════════════════════════════════════════════════════════════════════════
+# Base eza invocation: every alias below inherits these defaults.
+# --all              show hidden files (like ls -A)
+# --git              show git status column
+# --icons=auto       show NerdFont icons (only when terminal supports them)
+# --hyperlink        make file names clickable URLs in supporting terminals
+# --group            show group name in long format
+# --header           column headers in long format
+# --time-style       ISO 8601 timestamps: YYYY-MM-DD HH:MM
+# --octal-permissions show octal permission bits alongside rwx
+# --group-directories-first  list dirs before files
+alias eza='eza --all --git --icons=auto --hyperlink --group --header \
+               --time-style=long-iso --octal-permissions \
+               --group-directories-first'
+
+alias ls='eza'                          # default: compact + git + icons
+alias ll='eza --long'                   # long format (inherits eza base)
+alias la='eza --long --all'             # long + all (redundant --all is fine)
+alias lt='eza --long --tree --level=2'  # tree 2 levels
+alias l2='eza --tree --level=2'         # compact tree
+alias l3='eza --tree --level=3'         # deeper tree
+alias lg='eza --long --git-ignore'      # respects .gitignore — clean project view
+alias lsize='eza --long --sort=size'    # sorted by size, largest first
+alias lmod='eza --long --sort=modified' # sorted by modification time
+alias lext='eza --long --sort=ext'      # sorted by extension
+
+# Escape hatch: the real /usr/bin/ls when needed for scripting
+alias lsreal='/usr/bin/ls'
+
+# ══════════════════════════════════════════════════════════════════════════════
+# 04 — File operations (safety-first)
+# ══════════════════════════════════════════════════════════════════════════════
+
+alias cp='cp -iv'                   # interactive + verbose
+alias mv='mv -iv'                   # interactive + verbose
+alias rm='rm -iv'                   # interactive + verbose
+alias ln='ln -iv'                   # interactive + verbose
+alias mkdir='mkdir -pv'             # create parents + verbose
+alias rmdir='rmdir -v'
+
+# trash-cli: safe rm alternative (keeps files recoverable — requires trash-cli)
+if command -v trash &>/dev/null; then
+  alias t='trash'                   # t file — moves to XDG Trash
+  alias tl='trash-list'
+  alias tr_='trash-restore'         # avoid shadowing built-in `tr`
+  alias te='trash-empty'
+fi
+
+# Quick create and open
+alias mkf='touch'
+alias mkcd='() { mkdir -pv "$1" && cd "$1" }'
+
+# Disk usage — sorted human-readable list of largest entries in current dir
+alias ducks='du -csh -- * .[!.]* ..?* 2>/dev/null | sort -rh | head -20'
+alias ducksa='du -csh -- * 2>/dev/null | sort -rh | head -20'
+
+# ══════════════════════════════════════════════════════════════════════════════
+# 05 — Modern CLI tool replacements
+# ══════════════════════════════════════════════════════════════════════════════
+
+# ── bat — syntax-highlighted cat ─────────────────────────────────────────────
+# `cat` intentionally NOT aliased — bat changes behaviour in pipes/scripts.
+alias bcat='bat --paging=never'                         # true cat replacement
+alias bh='bat --style=header --paging=never'            # filename header only
+alias bp='bat --style=numbers,changes'                   # paginated, with gutter
+alias bdiff='bat --diff'                                 # bat-rendered diff
+alias bathelp='bat --plain --language=help'              # help text with highlighting
+
+# ── ripgrep ───────────────────────────────────────────────────────────────────
+alias rg='rg --color=auto --smart-case'
+alias rgi='rg --ignore-case'
+alias rgf='rg --files-with-matches'             # filenames only
+alias rgl='rg --files-without-match'            # inverted file list
+# ripgrep-all: search inside PDFs, docx, zip, notebooks, etc.
+command -v rga &>/dev/null && alias rga='rga --color=auto'
+
+# ── fd — find replacement ─────────────────────────────────────────────────────
+alias fd='fd --hidden --follow --exclude .git'
+alias fdf='fd --type f'                         # files only
+alias fdd='fd --type d'                         # directories only
+alias fdl='fd --type l'                         # symlinks only
+
+# ── delta — pretty diff ───────────────────────────────────────────────────────
+alias diff='diff --color=auto'
+command -v delta &>/dev/null && alias ddiff='delta'
+
+# ── Disk usage / free ─────────────────────────────────────────────────────────
+command -v dust &>/dev/null && alias du='dust' || alias du='du -sh'
+command -v duf  &>/dev/null && alias df='duf'  || alias df='df -h'
+
+# ── System monitoring ─────────────────────────────────────────────────────────
+command -v btop   &>/dev/null && alias top='btop'
+command -v procs  &>/dev/null && alias ps='procs --sortd cpu'
+command -v bottom &>/dev/null && alias btm='bottom'
+
+# ── Code stats ───────────────────────────────────────────────────────────────
+command -v tokei    &>/dev/null && alias loc='tokei'
+command -v hyperfine &>/dev/null && alias bench='hyperfine --warmup 3'
+
+# ── jq / json ─────────────────────────────────────────────────────────────────
+alias fjson='python3 -m json.tool'
+command -v jq  &>/dev/null && alias jq='jq --color-output'
+command -v jaq &>/dev/null && alias jaq='jaq --color-output'
+
+# ── General ───────────────────────────────────────────────────────────────────
+alias free='free -h'
+alias which='command -v'
+alias type='type -a'
+alias open='xdg-open'                           # open file with default app
+alias hex='xxd'
+alias timestamp='date +%Y%m%d_%H%M%S'
+alias now="date +'%r'"                          # 12h current time (user's original)
+alias today='date +%F'                          # ISO date YYYY-MM-DD
+alias week='date +%V'                           # ISO week number
+alias epoch='date +%s'
+
+# ── pastebin / pipe sharing ───────────────────────────────────────────────────
 alias tcpbin='nc tcp.ac 9999'
 alias termbin='nc termbin.com 9999'
-alias pstbin='tcpbin'
+alias pstbin='nc tcp.ac 9999'
 
-# Misc
-alias sudokate='SUDO_EDITOR=kate sudoedit' # launch kate as root
+# ── network scan ─────────────────────────────────────────────────────────────
+alias netcon='sudo arp-scan -l'
 
-# Shortcuts
-alias conf='cd $CONFIG'
-alias fjson='python -m json.tool'
+# ── aria2c ────────────────────────────────────────────────────────────────────
 alias a2c='aria2c'
 
-# eza / ls
-alias eza='eza --all --git --icons --hyperlink --group --header --time-style=long-iso --octal-permissions --group-directories-first'
+# ══════════════════════════════════════════════════════════════════════════════
+# 06 — Clipboard (Wayland-native)
+# ══════════════════════════════════════════════════════════════════════════════
 
-alias l='/usr/bin/ls'
-alias ls='eza'
-alias ll='eza --long'
-alias lt='eza --long --tree --level=2'
+alias cpy='wl-copy'
+alias pst='wl-paste'
+alias pbcopy='wl-copy'              # macOS muscle memory
+alias pbpaste='wl-paste'
+alias clip='wl-copy'
+alias xclip='wl-copy'              # legacy muscle memory
+alias clp='wl-paste'
 
-# alias ls='ls --color=auto --hyperlink=auto'
-# alias ll='ls -l --inode --almost-all --human-readable --file-type --size --sort=time --author --group-directories-first --hyperlink=always'
+# ══════════════════════════════════════════════════════════════════════════════
+# 07 — Package management
+# ══════════════════════════════════════════════════════════════════════════════
 
-# Safety
-alias rm='rm -i'
-alias cp='cp -i'
-alias mv='mv -i'
-alias ln='ln -i'
+# ── pacman ────────────────────────────────────────────────────────────────────
+alias pac='sudo pacman'
+alias pacs='pacman -Ss'             # search in repos
+alias paci='sudo pacman -S'         # install
+alias pacu='sudo pacman -Syu'       # upgrade
+alias pacr='sudo pacman -Rns'       # remove + deps + config
+alias pacq='pacman -Qi'             # local package info
+alias pacqs='pacman -Si'            # sync-db package info
+alias pacf='pacman -Fl'             # files owned by package
+alias pacfl='pacman -Ql'            # files from installed package
+alias paco='pacman -Qdtq'           # list orphans (no output = clean)
+alias pacrm='pacman -Qdtq | sudo pacman -Rns -'  # remove all orphans
+alias paccc='sudo pacman -Sc'       # clean cache (keep latest versions)
+alias pacccc='sudo pacman -Scc'     # clean cache completely
+alias paclog='cat /var/log/pacman.log | bat --language=log'
+alias rmpaclock='sudo rm -f /var/lib/pacman/db.lck'
 
-# TeX Live Package Manager (pacman integration)
+# ── yay (AUR helper) ──────────────────────────────────────────────────────────
+if command -v yay &>/dev/null; then
+  alias y='yay'
+  alias ys='yay -Ss'                # search (repos + AUR)
+  alias yi='yay -S'                 # install
+  alias yy='yay -S --noconfirm --needed'    # install if not present
+  alias yyy='yay -S --noconfirm'    # install/reinstall unconditionally
+  alias yr='yay -Rns'               # remove + deps + config
+  alias yrnsc='yay -Rnsc'           # remove + cascade (use with care)
+  alias yrrr='yay -Rns --noconfirm' # silent force-remove
+  alias yu='yay -Syu'               # upgrade everything (repos + AUR)
+  alias yq='yay -Qi'                # local package info
+  alias yqs='yay -Si'               # AUR/sync package info
+  alias yf='yay -Fl'                # files owned by package
+  alias yclear='yay -Scc'           # clear all caches
+  alias yclean='yay -Yc'            # remove unneeded AUR deps
+  alias ydev='yay -Syu --devel'     # upgrade including VCS (-git) packages
+# elif command -v paru &>/dev/null; then
+#   alias y='paru'
+#   alias ys='paru -Ss'
+#   alias yi='paru -S'
+#   alias yr='paru -Rns'
+#   alias yu='paru -Syu'
+#   alias yq='paru -Qi'
+#   alias yclear='paru -Scc'
+#   alias yclean='paru -c'
+fi
+
+# ── TeX Live package manager ──────────────────────────────────────────────────
 alias texpac='tllocalmgr'
 alias tlmgr='/usr/share/texmf-dist/scripts/texlive/tlmgr.pl --usermode'
 
-## Config file shortcuts
+# ══════════════════════════════════════════════════════════════════════════════
+# 08 — Network
+# ══════════════════════════════════════════════════════════════════════════════
 
-# Edit shortcuts
-alias nvimrc='nvim ~/.config/nvim/init.vim'
-alias zshrc='nvim ~/.zshrc'
-alias zprofile='nvim ~/.zprofile'
-alias zshenv='nvim ~/.zshenv'
-alias foxrc='nvim ~/.mozilla/firefox/nightly/user.js'
-alias yayrc='nvim ~/.config/yay/config.json'
-alias starshiprc='starship config'
-# alias starrc='nvim ~/.zsh/themes/starship.toml'
+alias ip='ip -color'
+alias ipa='ip -color addr'
+alias ipr='ip -color route'
+alias ipn='ip -color neigh'
+alias myip='curl -s --max-time 5 ifconfig.me && echo'
+alias myip6='curl -s --max-time 5 ifconfig.co && echo'
+alias localip='ip route get 1 2>/dev/null | awk "{print \$NF; exit}"'
+alias ports='ss -tulnp'             # all listening ports
+alias listening='ss -tlnp'          # TCP listening only
+alias ping='ping -c 5'              # default 5 packets
 
-# Root
-alias dnscryptrc='sudo -e /etc/dnscrypt-proxy/dnscrypt-proxy.toml'
-alias ftlrc='sudo -e /etc/pihole/pihole-FTL.conf'
-alias resolvrc='sudo -e /etc/resolv.conf'
-alias pacmanrc='sudo -e /etc/pacman.conf'
-alias makepkgrc='sudo -e /etc/makepkg.conf'
-alias nginxrc='sudo -e /etc/nginx/nginx.conf'
-alias piholerc='sudo -e /etc/pihole/pihole-FTL.conf'
+# DNS resolution (dog = modern dig; fallback to host)
+command -v dog &>/dev/null && alias dig='dog' || true
+alias resolve='dig +short'
 
-# Text editing
+# wget with progress bar
+alias wget='wget --show-progress'
+
+# ══════════════════════════════════════════════════════════════════════════════
+# 09 — Text & data utilities
+# ══════════════════════════════════════════════════════════════════════════════
+
+alias tolower="tr '[:upper:]' '[:lower:]'"
+alias toupper="tr '[:lower:]' '[:upper:]'"
+alias trimws="sed 's/[[:space:]]*$//'"      # trim trailing whitespace
+
+# Sort + unique (like uniq but no need to sort first)
+alias sortuniq='sort -u'
+alias uniqc='sort | uniq -c | sort -rn'    # sorted by frequency
+
+# ══════════════════════════════════════════════════════════════════════════════
+# 10 — Development
+# ══════════════════════════════════════════════════════════════════════════════
+
+# ── Editors ───────────────────────────────────────────────────────────────────
+alias v='nvim'
+alias vi='nvim'
+alias vim='nvim'
+alias nv='nvim'
+alias nvimd='nvim -d'               # diff mode
+alias nvimr='nvim -R'               # read-only
+alias hx='helix'                    # helix editor shorthand
+
+# Sudo editors — always use $EDITOR or specific fallbacks
 alias snvim='SUDO_EDITOR=nvim sudo -e'
 alias svim='SUDO_EDITOR=vim sudo -e'
 alias svi='SUDO_EDITOR=vi sudo -e'
 alias snano='SUDO_EDITOR=nano sudo -e'
-alias hx='helix'
+alias sudokate='SUDO_EDITOR=kate sudoedit'
 
-# program shorthands
-alias ytd='yt-dlp'
+# ── Git (supplements zimfw git module aliases) ────────────────────────────────
+alias g='git'
+alias groot='cd "$(git rev-parse --show-toplevel 2>/dev/null || echo .)"'
 
-# Colorize
-alias dmesg='dmesg --color=always'
+# ── Python ────────────────────────────────────────────────────────────────────
+alias python='python3'
+alias pip='pip3'
+alias venv='python3 -m venv'
+alias activate='source .venv/bin/activate 2>/dev/null || source venv/bin/activate'
+alias pipreqs='pip3 freeze > requirements.txt'
 
-# ffmpeg
+# ── HTTP server ───────────────────────────────────────────────────────────────
+alias serve='python3 -m http.server'
+alias serve8='python3 -m http.server 8080'
+
+# ── Quick web searches ────────────────────────────────────────────────────────
+alias archwiki='xdg-open "https://wiki.archlinux.org/index.php?search="'
+
+# ── ffmpeg (suppress header, show stats) ─────────────────────────────────────
 alias ffmpeg='ffmpeg -v quiet -stats'
 
-# secure transfer
-# alias rsync="rsync -a --info=progress2 --human-readable --compress --partial"
+# ── yt-dlp ───────────────────────────────────────────────────────────────────
+alias ytd='yt-dlp'
+alias ytda='yt-dlp -x --audio-format mp3'         # audio only, mp3
+alias ytdv='yt-dlp -f bestvideo+bestaudio'         # best quality video
+alias ytdp='yt-dlp --yes-playlist'                 # download entire playlist
 
+# ══════════════════════════════════════════════════════════════════════════════
+# 11 — Media
+# ══════════════════════════════════════════════════════════════════════════════
+
+# Battery info (upower)
+alias batinfo='for BAT_PATH in $(upower -e | grep BAT); do upower -i "$BAT_PATH"; done'
+
+# Font cache
+alias fontcc='fc-cache -fvr'
+alias fontm='fc-match'
+alias fontls='fc-list | sort'
+
+# ══════════════════════════════════════════════════════════════════════════════
+# 12 — Display / Wayland / Hyprland
+# ══════════════════════════════════════════════════════════════════════════════
+
+# Hyprland
+alias hypreload='hyprctl reload'
+alias hyprlog='bat --style=plain --language=log /tmp/hypr/$(ls -t /tmp/hypr/ 2>/dev/null | head -1)/hyprland.log 2>/dev/null'
+alias hyprver='hyprctl version'
+alias hyprmon='hyprctl monitors'
+alias hyprbind='hyprctl binds | bat --language=yaml --style=plain'
+
+# Screenshots (requires grim + slurp + wl-clipboard)
+alias screenshot='grim -g "$(slurp)" "$HOME/Pictures/screenshots/$(date +%Y%m%d_%H%M%S).png"'
+alias screenclip='grim -g "$(slurp)" - | wl-copy'
+alias screenall='grim "$HOME/Pictures/screenshots/$(date +%Y%m%d_%H%M%S).png"'
+
+# Chrome with EGL/no-Vulkan (for compatibility on hybrid GPU systems)
 alias chrome-egl='google-chrome-stable \
   --use-gl=egl \
-  --disable-features=Vulkan,DefaultANGLEVulkan,VulkanFromANGLE "$@"'
+  --disable-features=Vulkan,DefaultANGLEVulkan,VulkanFromANGLE'
 
-alias batinfo='for BAT_PATH in $(upower -e | grep BAT); do upower -i "$BAT_PATH"; done'
+# ══════════════════════════════════════════════════════════════════════════════
+# 13 — Config file shortcuts (edit with $EDITOR)
+# ══════════════════════════════════════════════════════════════════════════════
+
+alias nvimrc='"${EDITOR}" "${XDG_CONFIG_HOME:-$HOME/.config}/nvim/init.lua"'
+alias nvimconf='"${EDITOR}" "${XDG_CONFIG_HOME:-$HOME/.config}/nvim/"'
+alias zshrc='"${EDITOR}" "$HOME/.zshrc"'
+alias zshenv='"${EDITOR}" "$HOME/.zshenv"'
+alias zprofile='"${EDITOR}" "$HOME/.zprofile"'
+alias zimrc='"${EDITOR}" "$HOME/.zimrc"'
+alias zshalias='"${EDITOR}" "${XDG_CONFIG_HOME:-$HOME/.config}/shell/aliases.zsh"'
+alias starshiprc='starship config'
+alias hyprconf='"${EDITOR}" "${XDG_CONFIG_HOME:-$HOME/.config}/hypr/hyprland.conf"'
+alias kittyconf='"${EDITOR}" "${XDG_CONFIG_HOME:-$HOME/.config}/kitty/kitty.conf"'
+alias yayrc='"${EDITOR}" "${XDG_CONFIG_HOME:-$HOME/.config}/yay/config.json"'
+alias foxrc='"${EDITOR}" "$HOME/.mozilla/firefox/nightly/user.js"'
+alias sshconf='"${EDITOR}" "$HOME/.ssh/config"'
+alias gitconf='"${EDITOR}" "${XDG_CONFIG_HOME:-$HOME/.config}/git/config"'
+
+# ══════════════════════════════════════════════════════════════════════════════
+# 14 — Root config file shortcuts (sudoedit — safe, uses $SUDO_EDITOR)
+# ══════════════════════════════════════════════════════════════════════════════
+
+alias pacmanrc='sudo -e /etc/pacman.conf'
+alias makepkgrc='sudo -e /etc/makepkg.conf'
+alias dnscryptrc='sudo -e /etc/dnscrypt-proxy/dnscrypt-proxy.toml'
+alias resolvrc='sudo -e /etc/resolv.conf'
+alias hostsrc='sudo -e /etc/hosts'
+alias nginxrc='sudo -e /etc/nginx/nginx.conf'
+alias ftlrc='sudo -e /etc/pihole/pihole-FTL.conf'
+alias piholerc='sudo -e /etc/pihole/pihole-FTL.conf'

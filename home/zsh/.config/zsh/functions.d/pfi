@@ -1,0 +1,19 @@
+# Find which package owns a given file path (fuzzy file picker if no arg given).
+
+if [[ -n $1 ]]; then
+  pacman -Qo "$1"
+  return
+fi
+
+# No argument: use fzf to pick a file from the current directory tree
+local file
+file=$(
+  fd --type f --hidden --follow --exclude .git 2>/dev/null \
+  | fzf \
+      --prompt='file ❯ ' \
+      --header='Select a file to find its package owner' \
+      --preview='bat --style=numbers --color=always --line-range=:100 {} 2>/dev/null' \
+      --preview-window='right:55%:border-rounded' \
+      --scheme=path
+)
+[[ -n $file ]] && pacman -Qo "$file"

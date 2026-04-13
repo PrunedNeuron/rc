@@ -1,6 +1,2 @@
-# ~/.zprofile
-# Login shell configuration
-# Read when starting as a login shell
-
-# Load global profile
-emulate sh -c '[ -f ~/.profile ] && source ~/.profile'
+# ~/.zprofile — login shell only.
+emulate sh -c '[ -f "$HOME/.profile" ] && source "$HOME/.profile"'

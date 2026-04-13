@@ -1,0 +1,12 @@
+# Interactively browse all installed packages. Press Enter to view full file list.
+# Ctrl+U shows upstream URL; Ctrl+I shows optional dependencies.
+
+pacman -Qq 2>/dev/null \
+| fzf \
+    --prompt='packages ❯ ' \
+    --header='Enter: file list  Ctrl+/: toggle info  Ctrl+Y: copy name' \
+    --preview="$_PAC_INSTALLED_PREVIEW" \
+    --preview-window='right:60%:border-rounded:wrap' \
+    --bind='ctrl-/:toggle-preview' \
+    --bind='ctrl-y:execute-silent(echo -n {1} | wl-copy 2>/dev/null || echo -n {1} | xclip -selection clipboard 2>/dev/null)+bell' \
+    --bind='enter:execute(pacman -Ql {1} 2>/dev/null | awk "{print \$2}" | bat --style=plain --color=always --paging=always)'

@@ -17,7 +17,7 @@ shell_integration    enabled
 # ── Performance ───────────────────────────────────────────────────────────────
 input_delay          0
 repaint_delay        2
-sync_to_monitor      no
+sync_to_monitor      yes
 wayland_enable_ime   no
 # pacman/paru owns updates on Arch — disable kitty's own polling
 update_check_interval 0
@@ -33,6 +33,7 @@ italic_font      SF Mono Italic
 bold_italic_font SF Mono Bold Italic
 font_size        10.0
 disable_ligatures never
+font_features SF-Mono-Regular +ccmp +c2sc
 # Nerd Font symbols without a patched font
 symbol_map U+E000-U+E00A,U+EA60-U+EBEB,U+E0A0-U+E0C8,U+E0CA,U+E0CC-U+E0D4,U+E200-U+E2A9,U+E300-U+E3E3,U+E5FA-U+E6B1,U+E700-U+E7C5,U+F000-U+F2E0,U+F300-U+F372,U+F400-U+F532,U+F0001-U+F1AF0 Symbols Nerd Font Mono
 
@@ -53,8 +54,8 @@ pixel_scroll     yes
 window_padding_width    8
 placement_strategy      center
 window_border_width     1pt
-active_border_color     #bd93f9
-inactive_border_color   #44475a
+# active_border_color     #bd93f9
+# inactive_border_color   #44475a
 # Hyprland manages decorations
 hide_window_decorations yes
 # Auto-close pane when the child process exits; no zombie panes
@@ -65,7 +66,7 @@ confirm_os_window_close -1
 # ── Tab bar ───────────────────────────────────────────────────────────────────
 tab_bar_edge         bottom
 tab_bar_style        powerline
-tab_powerline_style  slanted
+tab_powerline_style  round
 tab_title_template   "{fmt.fg.red}{bell_symbol}{activity_symbol}{fmt.fg.tab}{index}: {title}"
 tab_bar_min_tabs     1
 tab_activity_symbol  "● "
@@ -74,12 +75,12 @@ tab_activity_symbol  "● "
 enabled_layouts splits,stack,grid,fat,tall,*
 
 # ── Transparency ──────────────────────────────────────────────────────────────
-background_opacity         0.75
+background_opacity         1.0
 dynamic_background_opacity yes
 text_composition_strategy  platform
 
 # ── URLs & hyperlinks ─────────────────────────────────────────────────────────
-url_style              underline
+url_style              straight
 open_url_with          default
 show_hyperlink_targets yes
 detect_urls            yes
@@ -100,10 +101,11 @@ focus_follows_mouse yes
 scrollbar_width       0.3
 scrollbar_hover_width 0.6
 scrollbar_gap         0.75
+touch_scroll_multiplier 3.0
 
 # ── Wayland ───────────────────────────────────────────────────────────────────
 linux_display_server   wayland
-wayland_titlebar_color system
+# wayland_titlebar_color system
 
 # ══════════════════════════════════════════════════════════════════════════════
 # KEY MAPPINGS

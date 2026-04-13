@@ -1,0 +1,27 @@
+# Interactively clean the package cache: select cached versions to remove.
+# Shows package info before deletion.
+
+local cache_dir
+cache_dir=$(pacman-conf CacheDir 2>/dev/null || echo '/var/cache/pacman/pkg')
+
+print -P "%F{cyan}Cache: $cache_dir%f"
+
+local -a selected
+selected=(${(f)"$(
+  ls -1 "$cache_dir"/*.pkg.tar.* 2>/dev/null \
+  | fzf \
+      --multi \
+      --prompt='cache ❯ ' \
+      --header='Select cached files to delete. Ctrl+A: all old versions.' \
+      --preview='
+        pkg=$(basename {} | sed "s/-[^-]*-[^-]*\.pkg\.tar\..*//")
+        pacman -Si "$pkg" 2>/dev/null || pacman -Qi "$pkg" 2>/dev/null || echo "orphaned cache"
+        echo; echo "File: {}"; ls -lh {} 2>/dev/null
+      ' \
+      --preview-window='right:50%:border-rounded:wrap'
+)"})
+
+[[ ${#selected} -eq 0 ]] && return 0
+
+print -P "%F{yellow}Deleting ${#selected} file(s)…%f"
+sudo rm -v "${selected[@]}"

@@ -1,0 +1,18 @@
+# Fuzzy-select and remove installed packages. Uses -Rns (recursive, no-save).
+
+local -a selected
+selected=(${(f)"$(
+  pacman -Qq 2>/dev/null \
+  | fzf \
+      --prompt='remove ❯ ' \
+      --header='Ctrl+Space: mark  Tab: accept all marked  Ctrl+/: preview' \
+      --preview="$_PAC_INSTALLED_PREVIEW" \
+      "${_PAC_FZF_OPTS[@]}"
+)"})
+
+[[ ${#selected} -eq 0 ]] && return 0
+
+print -P "%F{yellow}Packages to remove:%f ${selected[*]}"
+print -nP '%F{red}Continue? [y/N] %f'
+read -r _confirm
+[[ ${_confirm:l} == y ]] && sudo pacman -Rns "${selected[@]}"

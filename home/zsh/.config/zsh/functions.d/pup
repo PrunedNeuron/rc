@@ -1,0 +1,11 @@
+# Full system upgrade via the best available AUR helper, with pre-upgrade summary.
+
+local _aur
+_aur=$(command -v yay || command -v paru || command -v pikaur 2>/dev/null)
+
+print -P '%F{cyan}Checking for updates…%f'
+if [[ -n $_aur ]]; then
+  $_aur -Syu
+else
+  sudo pacman -Syu
+fi
