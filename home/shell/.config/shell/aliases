@@ -115,7 +115,8 @@ alias lsreal='/usr/bin/ls'
 
 alias cp='cp -iv'                   # interactive + verbose
 alias mv='mv -iv'                   # interactive + verbose
-alias rm='rm -iv'                   # interactive + verbose
+# alias rm='rm -iv'                   # interactive + verbose
+alias rm='rm -i'                   # interactive + verbose
 alias ln='ln -iv'                   # interactive + verbose
 alias mkdir='mkdir -pv'             # create parents + verbose
 alias rmdir='rmdir -v'

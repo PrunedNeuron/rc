@@ -1,48 +1,59 @@
-# $ZCONFDIR/widgets/fzf-ssh.zsh
+# $ZCONFDIR/widgets/fzf-ssh.zsh — fuzzy SSH host picker. Alt+N (Network).
 #
-# Fuzzy SSH host picker. Alt+N (Network).
-# Sources hosts from ~/.ssh/config, /etc/hosts, and known_hosts.
+# Host sources (merged and deduplicated):
+#   ~/.ssh/config         Host stanzas (wildcards excluded)
+#   /etc/hosts            Non-comment, non-localhost entries
+#   ~/.ssh/known_hosts    Hostnames (hashed entries and port-brackets excluded)
 #
 # Actions:
-#   Enter       ssh to selected host (inserts into buffer or connects directly)
-#   Ctrl+Y      copy hostname to clipboard
-#   Ctrl+E      open ~/.ssh/config in $EDITOR
-#   Ctrl+/      toggle preview
+#   Enter     insert `ssh <host>` into buffer (user can add flags before Enter)
+#   Ctrl+Y    copy hostname to clipboard
+#   Ctrl+E    open ~/.ssh/config in $EDITOR
+#   Ctrl+/    toggle preview (config block + DNS + ping)
 
 _fzf_ssh_picker() {
-  # Merge all known host sources
-  local -a hosts
+  local -a hosts=()
 
-  # ~/.ssh/config: extract Host entries (excluding wildcards)
+  # ~/.ssh/config
   if [[ -r ~/.ssh/config ]]; then
     hosts+=(${(f)"$(
-      grep -i '^host' ~/.ssh/config \
-      | awk '{print $2}' \
-      | grep -v '[*?]'
+      grep -iE '^[[:space:]]*Host[[:space:]]+' ~/.ssh/config \
+      | awk '{for(i=2;i<=NF;i++) print $i}' \
+      | grep -v '[*?!]'
     )"})
   fi
 
-  # /etc/hosts: non-comment, non-localhost lines
+  # ~/.ssh/conf.d/* (common pattern for split configs)
+  for _f in ~/.ssh/conf.d/*.conf(N); do
+    hosts+=(${(f)"$(
+      grep -iE '^[[:space:]]*Host[[:space:]]+' "$_f" \
+      | awk '{for(i=2;i<=NF;i++) print $i}' \
+      | grep -v '[*?!]'
+    )"})
+  done
+  unset _f
+
+  # /etc/hosts
   hosts+=(${(f)"$(
-    awk '/^[^#]/ && $2 !~ /localhost|broadcasthost/ {print $2}' /etc/hosts 2>/dev/null
+    awk '/^[^#]/ && $2 !~ /localhost|broadcasthost|localdomain/ {print $2}' \
+      /etc/hosts 2>/dev/null
   )"})
 
-  # ~/.ssh/known_hosts: extract hostnames (strip port notation and hashed entries)
+  # ~/.ssh/known_hosts (skip hashed lines and bracket notation)
   if [[ -r ~/.ssh/known_hosts ]]; then
     hosts+=(${(f)"$(
       awk '{print $1}' ~/.ssh/known_hosts \
       | grep -v '^\[' \
       | grep -v '|' \
       | tr ',' '\n' \
-      | grep -v '^$'
+      | grep -vE '^$'
     )"})
   fi
 
-  # Deduplicate
+  # Deduplicate, sort
   hosts=(${(u)hosts})
-
-  [[ ${#hosts} -eq 0 ]] && {
-    print -P '%F{yellow}No SSH hosts found in config or known_hosts.%f'
+  (( ${#hosts} == 0 )) && {
+    zle -M 'No SSH hosts found.'
     zle reset-prompt
     return
   }
@@ -53,17 +64,23 @@ _fzf_ssh_picker() {
     | sort -u \
     | fzf \
         --prompt='ssh ❯ ' \
-        --header='Enter: connect  Ctrl+Y: copy  Ctrl+E: edit config  Ctrl+/: preview' \
+        --input-label=' SSH Hosts ' \
+        --header='  Enter: connect  Ctrl+Y: copy  Ctrl+E: edit config' \
+        --header-border=bottom \
+        --bind="load:transform-footer:echo ' \$FZF_TOTAL_COUNT hosts'" \
+        --footer-border=top \
         --preview='
           host={}
           echo "── SSH Config ─────────────────────────────────────"
-          grep -A15 -i "^Host[[:space:]]\+$host\b" ~/.ssh/config 2>/dev/null \
-            || echo "(no specific config block)"
+          grep -A20 -iE "^[[:space:]]*Host[[:space:]]+$host\b" \
+            ~/.ssh/config ~/.ssh/conf.d/*.conf 2>/dev/null \
+          | head -25 \
+          || echo "(no config block)"
           echo
           echo "── DNS ────────────────────────────────────────────"
-          dig +short "$host" 2>/dev/null || host "$host" 2>/dev/null || echo "(no DNS)"
+          dig +short "$host" 2>/dev/null | head -5 || echo "(no DNS)"
           echo
-          echo "── Ping (1 packet) ────────────────────────────────"
+          echo "── Ping (1 packet, 1s timeout) ────────────────────"
           ping -c1 -W1 "$host" 2>/dev/null | tail -2 || echo "(unreachable)"
         ' \
         --preview-window='right:55%:border-rounded:wrap' \
@@ -73,13 +90,12 @@ _fzf_ssh_picker() {
   )
 
   if [[ -n $selected ]]; then
-    # Insert the ssh command into the buffer rather than executing directly —
-    # lets the user add flags before pressing Enter.
     BUFFER="ssh $selected"
     CURSOR=${#BUFFER}
   fi
   zle reset-prompt
 }
+
 zle -N _fzf_ssh_picker
 bindkey -M emacs '^[n' _fzf_ssh_picker
 bindkey -M viins '^[n' _fzf_ssh_picker

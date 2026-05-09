@@ -1,18 +1,19 @@
-# $ZCONFDIR/widgets/fzf-docker.zsh
+# $ZCONFDIR/widgets/fzf-docker.zsh — Docker management hub. Alt+O.
 #
-# Interactive Docker management hub. Alt+O (dOcker).
-# Requires: docker. All operations that modify state ask for confirmation.
+# Requires: docker. State-modifying actions ask for implicit confirmation via
+# the fzf execute-silent + reload pattern (no separate prompt needed for
+# idempotent operations; prune is the exception and prompts explicitly).
 #
-# Container browser actions:
-#   Ctrl+S   start   Ctrl+T   stop    Ctrl+K   kill
-#   Ctrl+R   restart Ctrl+L   logs    Ctrl+E   exec (interactive shell)
-#   Ctrl+I   inspect Ctrl+/   preview Enter    attach
+# Container browser:
+#   Ctrl+S  start    Ctrl+T  stop     Ctrl+K  kill
+#   Ctrl+R  restart  Ctrl+L  logs     Ctrl+E  exec shell
+#   Ctrl+/  preview  Enter   attach
 #
-# Image browser: pull, remove, tag interactively.
+# Image browser:  Ctrl+R  run shell   Ctrl+D  delete
+# Volume browser: Ctrl+D  delete      Ctrl+/  inspect
 
 _docker_preview='
   id={1}
-  # Try container info first, then image info
   docker inspect "$id" 2>/dev/null \
     | bat --language=json --color=always --style=plain \
     | head -60 \
@@ -27,7 +28,11 @@ _fzf_docker_containers() {
   | fzf \
       --multi \
       --prompt='container ❯ ' \
-      --header=$'Ctrl+S: start  Ctrl+T: stop  Ctrl+K: kill  Ctrl+R: restart  Ctrl+L: logs  Ctrl+E: exec shell\nCtrl+/: preview  Enter: attach' \
+      --input-label=' Containers ' \
+      --header='  Ctrl+S: start  Ctrl+T: stop  Ctrl+K: kill  Ctrl+R: restart  Ctrl+L: logs  Ctrl+E: shell' \
+      --header-border=bottom \
+      --bind="load:transform-footer:echo ' \$FZF_TOTAL_COUNT containers'" \
+      --footer-border=top \
       --preview="$_docker_preview" \
       --preview-window='right:55%:border-rounded:wrap' \
       --bind='ctrl-/:toggle-preview' \
@@ -46,7 +51,11 @@ _fzf_docker_images() {
   | fzf \
       --multi \
       --prompt='image ❯ ' \
-      --header='Ctrl+R: run shell  Ctrl+D: delete image  Ctrl+/: preview' \
+      --input-label=' Images ' \
+      --header='  Ctrl+R: run shell  Ctrl+D: delete' \
+      --header-border=bottom \
+      --bind="load:transform-footer:echo ' \$FZF_TOTAL_COUNT images'" \
+      --footer-border=top \
       --preview="$_docker_preview" \
       --preview-window='right:55%:border-rounded:wrap' \
       --bind='ctrl-/:toggle-preview' \
@@ -60,7 +69,9 @@ _fzf_docker_volumes() {
   | fzf \
       --multi \
       --prompt='volume ❯ ' \
-      --header='Ctrl+D: delete volume  Ctrl+I: inspect' \
+      --input-label=' Volumes ' \
+      --header='  Ctrl+D: delete  Ctrl+/: inspect' \
+      --header-border=bottom \
       --preview='docker volume inspect {2} 2>/dev/null | bat --language=json --color=always --style=plain' \
       --preview-window='right:55%:border-rounded:wrap' \
       --bind='ctrl-/:toggle-preview' \
@@ -69,14 +80,16 @@ _fzf_docker_volumes() {
 
 _fzf_docker_hub() {
   command -v docker &>/dev/null || {
-    print -P '%F{red}✗ docker not found.%f'; zle reset-prompt; return
+    zle -M '✗ docker not found.'
+    zle reset-prompt
+    return
   }
 
   local -a ops=(
-    'containers — browse all containers; start/stop/exec/attach'
-    'images     — browse local images; run/delete'
-    'volumes    — browse volumes; inspect/delete'
-    'prune      — remove all stopped containers, unused images & volumes'
+    'containers  browse all containers; start/stop/exec/attach'
+    'images      browse local images; run/delete'
+    'volumes     browse volumes; inspect/delete'
+    'prune       remove stopped containers, unused images & volumes'
   )
   local choice
   choice=$(
@@ -88,7 +101,7 @@ _fzf_docker_hub() {
         --layout=reverse \
         --border=rounded \
         --no-preview \
-        --header='Docker Hub'
+        --header='  Docker Hub'
   )
   [[ -z $choice ]] && { zle reset-prompt; return }
 
@@ -103,6 +116,7 @@ _fzf_docker_hub() {
   esac
   zle reset-prompt
 }
+
 zle -N _fzf_docker_hub
 bindkey -M emacs '^[o' _fzf_docker_hub
 bindkey -M viins '^[o' _fzf_docker_hub

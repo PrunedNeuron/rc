@@ -1,8 +1,8 @@
-# $ZCONFDIR/widgets/url-quote-magic — auto-quote special URL characters.
+# $ZCONFDIR/widgets/url-quote-magic.zsh — auto-quote special URL characters.
 #
-# Replaces the default self-insert with a URL-aware version.
-# Typed or pasted URLs no longer need manual escaping of ?, &, =, %, #, etc.
-# Works correctly with bracketed-paste-magic (set up in keybindings.zsh).
+# Replaces the default self-insert with a URL-aware version so that typed or
+# pasted URLs do not need manual escaping of ?, &, =, %, #, etc.
+# Works correctly with bracketed-paste-magic (configured in keybindings.zsh).
 
 autoload -Uz url-quote-magic
 zle -N self-insert url-quote-magic

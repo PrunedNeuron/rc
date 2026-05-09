@@ -11,23 +11,27 @@ zstyle ':completion::complete:*' cache-path   "$ZCACHEDIR"
 zstyle ':zim:completion'         dumpfile     "$ZCACHEDIR/.zcompdump"
 
 # ── Core behaviour ────────────────────────────────────────────────────────────
-# 'menu no' is required for fzf-tab to capture the unambiguous prefix
+# 'menu no' is mandatory: fzf-tab intercepts before the menu is drawn.
 zstyle ':completion:*' menu              no
 zstyle ':completion:*' group-name        ''
 zstyle ':completion:*' show-completer    true
-zstyle ':completion:*' gain-privileges   1        # sudo-aware completions
+zstyle ':completion:*' gain-privileges   1
 
-# Group order: expansions first, then options, then files
 zstyle ':completion:*:' group-order \
   expansions history-words options \
   aliases functions executables \
   local-directories directories suffix-aliases \
   reserved-words builtins
 
-# ── Matching — progressive four-stage fallback ────────────────────────────────
+# ── Completer pipeline ────────────────────────────────────────────────────────
+# _expand_alias is absent: it signals success (0 candidates) which causes
+# fzf-tab to open an empty popup before _complete even runs.
+# zsh-abbr handles abbreviation expansion at the ZLE layer independently.
 zstyle ':completion:*' completer _complete _ignored _approximate
 zstyle ':completion:*:approximate:*' max-errors 1 numeric
 zstyle ':completion:*:match:*'       original   only
+
+# ── Matching ─────────────────────────────────────────────────────────────────
 zstyle ':completion:*' matcher-list \
   'm:{a-z}={A-Z}' \
   'm:{a-zA-Z}={A-Za-z}' \
@@ -35,7 +39,6 @@ zstyle ':completion:*' matcher-list \
   'l:|=* r:|=*'
 
 # ── Descriptions ──────────────────────────────────────────────────────────────
-# Do NOT use %F{colour} here — fzf-tab silently ignores escape sequences.
 zstyle ':completion:*:descriptions' format '[%d]'
 zstyle ':completion:*:corrections'  format '%U%F{green}%d (errors: %e)%f%u'
 zstyle ':completion:*:warnings'     format '%F{202}%BSorry, no matches for: %F{214}%d%b'
@@ -54,11 +57,11 @@ zstyle ':completion:*:*:*:users' ignored-patterns \
   nullmail portage redis shoutcast tcpdump '_*'
 
 # ── Directory completion ──────────────────────────────────────────────────────
-zstyle ':completion:*'                    list-dirs-first  true
+zstyle ':completion:*'                    list-dirs-first   true
 zstyle ':completion:*'                    accept-exact-dirs true
-zstyle ':completion:*:*:cd:*:directory-stack' force-list  always
-zstyle ':completion:*:*:cd:*:directory-stack' menu        yes select
-zstyle ':completion:*:git-checkout:*'     sort             false
+zstyle ':completion:*:*:cd:*:directory-stack' force-list   always
+zstyle ':completion:*:*:cd:*:directory-stack' menu         yes select
+zstyle ':completion:*:git-checkout:*'     sort              false
 
 # ── Process completion ────────────────────────────────────────────────────────
 zstyle ':completion:*:*:*:*:processes' force-list  always
@@ -67,7 +70,6 @@ zstyle ':completion:*:*:*:*:processes' list-colors '=(#b) #([0-9]#) ([0-9a-z-]#)
 zstyle ':completion:*:*:*:*:processes' command     "ps -u $USER -o pid,user,args -w -w"
 
 # ── LS_COLORS ─────────────────────────────────────────────────────────────────
-# Scheduled after startup so LS_COLORS is fully populated by vivid/dircolors
 _set_list_colors() {
   zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
   unfunction _set_list_colors
@@ -75,97 +77,87 @@ _set_list_colors() {
 sched 0 _set_list_colors
 
 # ── Misc ──────────────────────────────────────────────────────────────────────
-zstyle ':completion:*' hosts 'reply=()'   # skip slow /etc/hosts lookup
+zstyle ':completion:*' hosts 'reply=()'
 
-# ── Allow searching display strings (group headers, descriptions) in fzf-tab ─
-zstyle ':completion:*' fzf-search-display true
-
-# ── Package completion cache policy (24-hour TTL) ─────────────────────────────
-# Without a policy, caches are permanent but the first completion in a new shell
-# that hasn't warmed yet queries pacman -Slq (~16k packages) synchronously.
-# A 24h TTL ensures stale caches auto-refresh while avoiding per-shell queries.
-# Glob qualifier: Nmh+24 = files with mtime > 24 hours ago.
+# ── Package completion cache (24-hour TTL) ────────────────────────────────────
 _pkg_cache_policy() { local -a old=("$1"(Nmh+24)); (( ${#old} )) }
+for _pm in pacman yay paru pikaur trizen; do
+  zstyle ":completion:*:${_pm}:*" cache-policy _pkg_cache_policy
+done
+unset _pm
 
-zstyle ':completion:*:pacman:*'  cache-policy _pkg_cache_policy
-zstyle ':completion:*:yay:*'     cache-policy _pkg_cache_policy
-zstyle ':completion:*:paru:*'    cache-policy _pkg_cache_policy
-zstyle ':completion:*:pikaur:*'  cache-policy _pkg_cache_policy
-zstyle ':completion:*:trizen:*'  cache-policy _pkg_cache_policy
+# list-separator for pacman/yay is intentionally NOT set.
+# When list-separator is active, fzf-tab receives display strings like
+# "vim ── Modern editor" and $word inherits the full string. `pacman -Si`
+# then receives "vim ── Modern editor" as its argument and fails silently.
+# The preview pane already shows descriptions, so the separator is redundant.
 
-# ── Show package descriptions alongside names in completion list ───────────────
-# Forces _pacman/_yay to include the description field in the display string,
-# making it readable inside fzf-tab without opening the preview pane.
-zstyle ':completion:*:pacman:option-S-1:*' list-separator '──'
-zstyle ':completion:*:yay:option-S-1:*'    list-separator '──'
-
-# ── Completion: always expand aliases in completion context ───────────────────
-zstyle ':completion:*' completer _expand_alias _complete _ignored _approximate
-
-# ── git: show description of subcommands ──────────────────────────────────────
+# ── git subcommands ───────────────────────────────────────────────────────────
 zstyle ':completion:*:git-*' verbose true
 
-# ── Show hidden files in completion (fd/rg don't need this; zsh built-ins do) ─
-zstyle ':completion:*' file-patterns \
-  '%p(^-/):globbed-files *(-/):directories' \
-  '*:all-files'
-
-# ── carapace: use dimmed group format that matches our style ──────────────────
-# This only applies when carapace is active (loaded in plugins.zsh).
+# ── carapace ─────────────────────────────────────────────────────────────────
 zstyle ':completion:*:carapace:*' group-name ''
 
 # ══════════════════════════════════════════════════════════════════════════════
 # fzf-tab
 # ══════════════════════════════════════════════════════════════════════════════
 #
-# Variable reference (always single-quote — evaluated at completion time):
-#   $realpath  absolute path of candidate (file/dir completions)
-#   $word      raw candidate string (git refs, package names, etc.)
-#   $group     current completion group (git-checkout context switching)
+# MULTISELECT (all fzf-tab popups):
+#   Ctrl+Space   toggle-mark + move down     (inherited from FZF_DEFAULT_OPTS)
+#   Ctrl+A       toggle-all                  (inherited from FZF_DEFAULT_OPTS)
+#   Tab          accept + insert all marked
+#   Shift+Tab    navigate up
 #
-# MULTISELECT: With --multi in fzf-flags:
-#   Ctrl+Space  toggle-mark current item and move down  (from FZF_DEFAULT_OPTS)
-#   Ctrl+A      toggle-all                               (from FZF_DEFAULT_OPTS)
-#   Tab         accept + insert all marked items
-#   Shift+Tab   navigate up
-# Example: `git add <Tab>` → Ctrl+Space to mark multiple files → Tab to stage all
+# PACKAGE COMPLETION IS AUTOMATIC:
+#   `pacman -S vim<Tab>` → _pacman completion → fzf-tab popup + preview.
+#   No manual invocation. pai/par/etc. are standalone operation helpers.
 #
-# PERFORMANCE: Run `build-fzf-tab-module` once after install to compile the
-# binary LS_COLORS module, replacing the slow pure-zsh fallback.
+# Run `build-fzf-tab-module` once after install to compile the binary
+# LS_COLORS module (replaces the slow pure-zsh fallback).
 
-# ── Inherit FZF_DEFAULT_OPTS ──────────────────────────────────────────────────
-# Caveats: --height is silently ignored when inherited; repeat in fzf-flags.
-# --bind=tab:accept in FZF_DEFAULT_OPTS would break continuous-trigger — never.
 zstyle ':fzf-tab:*' use-fzf-default-opts yes
 
 # ── Core fzf-tab flags ────────────────────────────────────────────────────────
-# --multi   enables Ctrl+Space multi-select (binds from FZF_DEFAULT_OPTS apply)
-# tab:accept  accept the selection (with --multi, inserts ALL marked items)
-# btab:up     Shift+Tab navigates up without accepting
+# --style=default  Overrides global --style=full. Each inner border (list,
+#   input, header) costs ~1 line of height; in a 70% popup that's already
+#   tight, three extra borders shrink the item list area materially. The outer
+#   rounded border from --border=rounded in FZF_DEFAULT_OPTS is preserved.
+#
+# --exit-0  Exits immediately (code 1, no popup) when stdin is empty. fzf-tab
+#   treats non-zero exit as "fall back to standard zsh". Fixes the blank-popup
+#   symptom when completion returns 0 candidates for any reason.
+#
+# --select-1 is ABSENT by design. With it, a completion narrowed to a single
+#   candidate (e.g., `pacman -S vim<Tab>` matching only "vim") auto-accepts
+#   silently — the preview/info pane never renders. Users pressing Tab to
+#   inspect packages need to see the popup even for single matches.
 zstyle ':fzf-tab:*' fzf-flags \
-  '--height=65%'    \
-  '--min-height=12' \
+  '--height=70%'    \
+  '--min-height=16' \
   '--multi'         \
+  '--style=default' \
+  '--exit-0'        \
   '--bind=tab:accept' \
   '--bind=btab:up'
 
-# ── Global fzf-tab bindings (use {_FTB_INIT_} to access $realpath/$word) ─────
-# These allow acting on completion candidates without leaving the menu.
+# ── Global fzf-tab action bindings ───────────────────────────────────────────
 zstyle ':fzf-tab:*' fzf-bindings \
   'ctrl-e:execute-silent({_FTB_INIT_}${EDITOR:-nvim} "$realpath" </dev/tty >/dev/tty)' \
   'ctrl-y:execute-silent({_FTB_INIT_}wl-copy -- "$realpath" 2>/dev/null || xclip -selection clipboard -- "$realpath" 2>/dev/null)'
 
 zstyle ':fzf-tab:*' switch-group       '<' '>'
 zstyle ':fzf-tab:*' continuous-trigger '/'
-zstyle ':fzf-tab:*' show-group        full
-zstyle ':fzf-tab:*' popup-min-size    80 12
+zstyle ':fzf-tab:*' show-group         full
+zstyle ':fzf-tab:*' popup-min-size     80 16
 
-# ── Shared file preview (DRY helper) ─────────────────────────────────────────
+# ── Shared file/dir preview ───────────────────────────────────────────────────
 _ftp='
   if [[ -d $realpath ]]; then
-    eza --tree --level=2 --color=always --icons=auto "$realpath" 2>/dev/null || ls -la "$realpath"
+    eza --tree --level=2 --color=always --icons=auto "$realpath" 2>/dev/null \
+      || ls -la "$realpath"
   else
-    bat --style=numbers,changes --color=always --line-range=:200 "$realpath" 2>/dev/null || cat "$realpath"
+    bat --style=numbers,changes --color=always --line-range=:200 "$realpath" 2>/dev/null \
+      || cat "$realpath"
   fi
 '
 
@@ -177,7 +169,7 @@ zstyle ':fzf-tab:complete:cd:*' popup-min-size 60 16
 zstyle ':fzf-tab:complete:(ls|eza|exa|lsd|stat|file|wc|head|tail|diff|patch|cp|mv|rm):*' \
   fzf-preview "$_ftp"
 
-# Fallback for every other command with file/dir arguments
+# Catch-all: preview for any command not explicitly configured.
 zstyle ':fzf-tab:complete:*:*' fzf-preview "$_ftp"
 
 # ── Editors ───────────────────────────────────────────────────────────────────
@@ -233,9 +225,51 @@ zstyle ':fzf-tab:complete:(-command-|-parameter-|-brace-parameter-|export|unset|
 zstyle ':fzf-tab:complete:docker-(run|pull|push|tag|rmi|inspect):*' fzf-preview \
   'docker inspect $word 2>/dev/null | bat --language=json --color=always | head -80'
 
-# ── Pacman / yay / paru ───────────────────────────────────────────────────────
-zstyle ':fzf-tab:complete:(pacman|yay|paru):*' fzf-preview \
-  'pacman -Si $word 2>/dev/null || pacman -Qi $word 2>/dev/null'
+# ── Pacman / yay / paru / pikaur ─────────────────────────────────────────────
+#
+# Design decisions:
+#
+# (a) Separate entries per tool — not `(pacman|yay|paru)` alternation.
+#     Alternation in zstyle patterns relies on EXTENDED_GLOB and zstyle's
+#     internal pattern-matching implementation. Behaviour is not guaranteed
+#     across zsh versions. Separate entries are unambiguous.
+#
+# (b) No `yay -Si` / `paru -Si` in the preview.
+#     Both make AUR API calls over HTTPS. A preview re-executes on every
+#     cursor movement — dozens of HTTP requests per second. `pacman -Si`
+#     reads /var/lib/pacman/sync/ locally and returns in ~5ms.
+#
+# (c) $word cleaning before passing to pacman.
+#     Defensive strip of any trailing whitespace and separator artifacts.
+#     `"${word%%[[:space:]]*}"` handles both. This ensures correctness
+#     across fzf-tab versions regardless of how $word is populated.
+#
+# (d) File list appended below the info block.
+#     `pacman -Fl` (sync) / `pacman -Ql` (local) shows installed files,
+#     which is useful when choosing between packages with similar names.
+
+_pac_preview='
+  p="${word%%[[:space:]]*}"
+  p="${p%%[[:space:]]──*}"
+  if info=$(pacman -Si "$p" 2>/dev/null); then
+    printf "%s\n" "$info"
+    printf "\n\033[2m── Files (head 20) ──────────────────────────────────\033[0m\n"
+    pacman -Fl "$p" 2>/dev/null | awk "{print \$2}" | head -20
+  elif info=$(pacman -Qi "$p" 2>/dev/null); then
+    printf "%s\n" "$info"
+    printf "\n\033[2m── Installed files (head 20) ────────────────────────\033[0m\n"
+    pacman -Ql "$p" 2>/dev/null | awk "{print \$2}" | head -20
+  else
+    printf "\033[2m(AUR-only — not in sync/local DB)\033[0m\n"
+    printf "Run: yay -Si %s\n" "$p"
+  fi
+'
+
+zstyle ':fzf-tab:complete:pacman:*' fzf-preview "$_pac_preview"
+zstyle ':fzf-tab:complete:yay:*'    fzf-preview "$_pac_preview"
+zstyle ':fzf-tab:complete:paru:*'   fzf-preview "$_pac_preview"
+zstyle ':fzf-tab:complete:pikaur:*' fzf-preview "$_pac_preview"
+unset _pac_preview
 
 # ── pip ───────────────────────────────────────────────────────────────────────
 zstyle ':fzf-tab:complete:pip(|3):*' fzf-preview \
@@ -256,5 +290,9 @@ zstyle ':fzf-tab:complete:ssh:*' fzf-preview \
 # ── Network interfaces ────────────────────────────────────────────────────────
 zstyle ':fzf-tab:complete:ip:*' fzf-preview \
   'ip addr show $word 2>/dev/null || ip link show $word 2>/dev/null'
+
+# ── mise ──────────────────────────────────────────────────────────────────────
+zstyle ':fzf-tab:complete:mise:*' fzf-preview \
+  'mise info $word 2>/dev/null | head -30'
 
 unset _ftp
