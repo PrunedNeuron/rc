@@ -1,0 +1,56 @@
+# ~/.zimrc — zimfw module manifest.
+# After changes: zimfw install && zimfw compile
+#
+# ── Load order constraints ────────────────────────────────────────────────────
+# • zsh-defer       MUST be first
+# • Completion pipeline: fpath defs → fzf → fzf-tab → compinit
+# • autosuggestions-abbreviations-strategy AFTER zsh-abbr AND zsh-autosuggestions
+# • zsh-history-substring-search BEFORE zsh-syntax-highlighting
+# • zsh-syntax-highlighting MUST be last
+
+# ── Foundation ────────────────────────────────────────────────────────────────
+zmodule romkatv/zsh-defer
+
+zmodule environment
+zmodule termtitle
+zmodule pacman
+
+# ── Productivity ──────────────────────────────────────────────────────────────
+zmodule archive
+zmodule git
+zmodule robertzk/send.zsh
+zmodule wfxr/forgit
+zmodule junegunn/fzf-git.sh --source fzf-git.sh
+zmodule ohmyzsh/ohmyzsh --root plugins/systemd
+
+# ── Shell UX ──────────────────────────────────────────────────────────────────
+# eza: canonical ll/la/lt/lla/llt aliases respecting EZA_ICONS_AUTO.
+zmodule ohmyzsh/ohmyzsh --root plugins/eza
+
+# colored-man-pages: sets MANPAGER + MANROFFOPT so man uses ANSI colour via less.
+# Does not conflict with widgets/man.zsh (which provides the fzf browser on top).
+zmodule ohmyzsh/ohmyzsh --root plugins/colored-man-pages
+
+# command-not-found: sources /usr/share/doc/pkgfile/command-not-found.zsh when
+# present, providing Arch-aware "install with: yay -S foo" suggestions.
+# Requires: yay -S pkgfile && sudo pkgfile --update
+zmodule ohmyzsh/ohmyzsh --root plugins/command-not-found
+
+# ── Quality of life ───────────────────────────────────────────────────────────
+zmodule hlissner/zsh-autopair
+zmodule olets/zsh-abbr
+zmodule Tarrasch/zsh-bd
+zmodule jirutka/zsh-shift-select
+zmodule MichaelAquilina/zsh-you-should-use
+
+# ── Completion pipeline (ORDER IS MANDATORY) ──────────────────────────────────
+zmodule zsh-users/zsh-completions --fpath src
+zmodule fzf
+zmodule Aloxaf/fzf-tab
+zmodule completion
+
+# ── Interactive enhancements (ORDER IS CRITICAL) ──────────────────────────────
+zmodule zsh-users/zsh-autosuggestions
+zmodule olets/zsh-autosuggestions-abbreviations-strategy
+zmodule zsh-users/zsh-history-substring-search
+zmodule zsh-users/zsh-syntax-highlighting    # MUST be last
