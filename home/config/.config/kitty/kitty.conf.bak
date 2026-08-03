@@ -5,7 +5,6 @@
 # Run `kitty +list-shortcuts` to see the full default keybinding set.
 # ══════════════════════════════════════════════════════════════════════════════
 
-include themes/noctalia.conf
 
 # ── Single-instance / startup ─────────────────────────────────────────────────
 single_instance      yes
@@ -75,9 +74,16 @@ tab_activity_symbol  "● "
 enabled_layouts splits,stack,grid,fat,tall,*
 
 # ── Transparency ──────────────────────────────────────────────────────────────
-background_opacity         1.0
-dynamic_background_opacity yes
+background_opacity         0.7
+background_blur            0
+dynamic_background_opacity no
 text_composition_strategy  platform
+
+
+# Kitty applies its own gamma correction, which neutralizes CFF stem darkening.
+# Setting legacy 1.0 disables Kitty's correction, allowing stem darkening
+# to render as intended (identical to what every other app on the system shows).
+# text_composition_strategy legacy
 
 # ── URLs & hyperlinks ─────────────────────────────────────────────────────────
 url_style              straight
@@ -220,3 +226,9 @@ map kitty_mod+alt+delete clear_terminal to_cursor active
 
 # ── Live theme switcher overlay ───────────────────────────────────────────────
 map kitty_mod+F3 launch --type=overlay kitty +kitten themes
+
+
+# BEGIN_KITTY_THEME
+# Vibrant Ink
+include current-theme.conf
+# END_KITTY_THEME

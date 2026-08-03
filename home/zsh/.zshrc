@@ -42,3 +42,5 @@ for _f in "$ZCONFDIR"/widgets/*.zsh(.N); do source "$_f"; done
 unset _f
 
 source "$ZCONFDIR/keybindings.zsh"
+# Created by `pipx` on 2026-07-05 16:47:46
+export PATH="$PATH:/home/ayush/.local/bin"
