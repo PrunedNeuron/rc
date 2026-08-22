@@ -57,12 +57,12 @@ TopRight=ShowDesktop
 
 [Plugins]
 MoveSnapEnabled=false
-blurEnabled=true
+blurEnabled=false
 contrastEnabled=true
 exquisiteEnabled=true
 focusonattentionrequestEnabled=true
 force-decorations-gtk3Enabled=true
-forceblurEnabled=true
+glassEnabled=true
 karouselEnabled=false
 kdesnapassistEnabled=false
 kinetic_fadingpopupsEnabled=true
