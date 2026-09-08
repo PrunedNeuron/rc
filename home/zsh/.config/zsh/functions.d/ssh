@@ -1,0 +1,15 @@
+#!/usr/bin/env zsh
+
+# Custom SSH wrapper to intercept specific hosts for 1Password injection
+
+ssh() {
+    if [[ "$*" == *"meteo"* ]]; then
+        # Removed 'command' here so sshpass can execute the actual ssh binary
+        SSHPASS=$(op read "op://Personal/yrv4bmruebyiig5yvqxyjckfq4/new_password") sshpass -e ssh "$@"
+    else
+        # Kept 'command' here because this runs natively inside Zsh
+        command ssh "$@"
+    fi
+}
+
+ssh "$@"
