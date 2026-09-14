@@ -1,14 +1,25 @@
-# fzf/defaults.zsh — Global FZF options and Catppuccin Mocha colour palette.
-# Per-command opts (CTRL_T, ALT_C, CTRL_R) live in fzf/commands.zsh.
-# fzf-tab zstyle lives in fzf/tab.zsh.
+# fzf/defaults.zsh — Global fzf defaults and Catppuccin Mocha palette.
+# Native fzf shell widgets use these defaults. fzf-tab intentionally does NOT
+# inherit FZF_DEFAULT_OPTS; its equivalent scoped configuration lives in tab.zsh.
 
-# ── Source commands ───────────────────────────────────────────────────────────
-export FZF_DEFAULT_COMMAND='fd --type f --hidden --follow --exclude .git'
-export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
-export FZF_ALT_C_COMMAND='fd --type d --hidden --follow --exclude .git'
+# ══════════════════════════════════════════════════════════════════════════════
+# Candidate sources
+# ══════════════════════════════════════════════════════════════════════════════
+# Keep fd for deterministic filtering and explicit ignore policy.
+export FZF_DEFAULT_COMMAND='fd --type f --hidden --follow --exclude .git --exclude node_modules --exclude .cache --exclude .venv --exclude __pycache__'
+
+# Ctrl+T should accept both files and directories, matching fzf's native widget.
+export FZF_CTRL_T_COMMAND='fd --hidden --follow --exclude .git --exclude node_modules --exclude .cache --exclude .venv --exclude __pycache__'
+
+# Alt+C is directory-only.
+export FZF_ALT_C_COMMAND='fd --type d --hidden --follow --exclude .git --exclude node_modules --exclude .cache --exclude .venv --exclude __pycache__'
+
+# Commands eligible for fzf's ** path completion.
 export FZF_COMPLETION_DIR_COMMANDS='cd pushd rmdir tree eza ls'
 
-# ── Catppuccin Mocha palette ──────────────────────────────────────────────────
+# ══════════════════════════════════════════════════════════════════════════════
+# Catppuccin Mocha
+# ══════════════════════════════════════════════════════════════════════════════
 _fzf_mocha=(
   '--color=bg+:#313244,bg:#1e1e2e,spinner:#f5e0dc,hl:#f38ba8'
   '--color=fg:#cdd6f4,header:#f38ba8,info:#cba6f7,pointer:#f5e0dc'
@@ -20,15 +31,20 @@ _fzf_mocha=(
   '--color=list-border:#45475a,header-border:#585b70'
 )
 
-# Popup geometry only makes sense inside tmux; plain --height is the fallback.
-[[ -n $TMUX ]] && _fzf_tmux_flag='--tmux center,85%' || _fzf_tmux_flag=''
+# fzf's native --tmux popup is ignored outside tmux, so keep a normal --height
+# fallback and add the popup only when tmux is actually present.
+_fzf_tmux_flag=''
+[[ -n ${TMUX-} ]] && _fzf_tmux_flag='--tmux=center,85%'
+_fzf_wrap_sign=$'\t↳ '
 
-# ── FZF_DEFAULT_OPTS ──────────────────────────────────────────────────────────
-# HARD CONSTRAINTS — never change these:
-#   (1) NO --bind=tab:accept   — breaks fzf-tab's continuous-trigger
-#   (2) NO --multi             — breaks fzf-tab's Tab-to-accept workflow
-#   (3) NO clipboard bindings  — fire spuriously during fzf-tab completions
-#   (4) NO --scheme globally   — scheme is per-context, set in commands.zsh
+# ══════════════════════════════════════════════════════════════════════════════
+# Global options
+# ══════════════════════════════════════════════════════════════════════════════
+# Intentionally absent globally:
+#   --multi              native widgets choose this per context
+#   --bind=tab:accept    would interfere with fzf's own multi-select semantics
+#   --scheme             path/history/default are context-specific
+#   clipboard actions    are context-specific
 export FZF_DEFAULT_OPTS="
   --height=60%
   ${_fzf_tmux_flag}
@@ -45,12 +61,12 @@ export FZF_DEFAULT_OPTS="
   --cycle
   --scroll-off=5
   --highlight-line
-  --wrap-sign=$'\t↳ '
+  --wrap-sign='${_fzf_wrap_sign}'
   ${_fzf_mocha[@]}
   --preview-window=right:55%:border-rounded:wrap
-  --bind=ctrl-space:toggle+down
-  --bind=ctrl-a:toggle-all
-  --bind=ctrl-/:toggle-preview
+  --bind='ctrl-space:toggle+down'
+  --bind='ctrl-a:toggle-all'
+  --bind='ctrl-/:toggle-preview'
   --bind='alt-up:preview-up'
   --bind='alt-down:preview-down'
   --bind='alt-f:preview-page-down'
@@ -59,4 +75,5 @@ export FZF_DEFAULT_OPTS="
   --bind='alt-E:preview-bottom'
   --bind='ctrl-s:toggle-sort'
 "
-unset _fzf_mocha _fzf_tmux_flag
+
+unset _fzf_mocha _fzf_tmux_flag _fzf_wrap_sign

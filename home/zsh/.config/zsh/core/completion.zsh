@@ -1,46 +1,77 @@
-# core/completion.zsh — zstyle configuration for the completion system.
-# MUST be sourced before compinit (which fires inside ZIM_HOME/init.zsh).
+# core/completion.zsh — zstyle configuration for Zsh's completion system.
+# Intentionally sourced twice:
+#   1. before Zim, so cache/dumpfile settings are visible to compinit;
+#   2. after Zim, because Zim's completion module installs its own zstyles and
+#      would otherwise override our fzf-tab-compatible runtime policy.
+# Everything in this file is idempotent.
 
-# ── Cache ─────────────────────────────────────────────────────────────────────
-zstyle ':completion::complete:*' use-cache  1
+# ══════════════════════════════════════════════════════════════════════════════
+# Cache
+# ══════════════════════════════════════════════════════════════════════════════
+zstyle ':completion::complete:*' use-cache yes
 zstyle ':completion::complete:*' cache-path "$ZCACHEDIR"
-zstyle ':zim:completion'         dumpfile   "$ZCACHEDIR/.zcompdump"
+zstyle ':zim:completion' dumpfile "$ZCACHEDIR/.zcompdump"
 
-# ── Core behaviour ────────────────────────────────────────────────────────────
-# menu=no is MANDATORY: fzf-tab intercepts the menu before it is drawn.
-zstyle ':completion:*' menu              no
-zstyle ':completion:*' group-name        ''
-zstyle ':completion:*' show-completer    true
-zstyle ':completion:*' gain-privileges   1
+# ══════════════════════════════════════════════════════════════════════════════
+# Core behaviour
+# ══════════════════════════════════════════════════════════════════════════════
+# fzf-tab needs the normal Zsh menu suppressed so it can own selection.
+zstyle ':completion:*' menu no
 
-zstyle ':completion:*:' group-order \
-  expansions history-words options \
-  aliases functions executables \
-  local-directories directories suffix-aliases \
-  reserved-words builtins
+# Preserve named groups; fzf-tab turns these into group headers.
+zstyle ':completion:*' group-name ''
 
-# ── Completer pipeline ────────────────────────────────────────────────────────
-# _expand_alias is intentionally absent: it returns success with 0 candidates,
-# causing fzf-tab to open an empty popup before _complete even runs.
-# zsh-abbr handles abbreviation expansion at the ZLE layer independently.
+# Deterministic command-position grouping without imposing irrelevant groups on
+# every other completion context.
+zstyle ':completion:*:*:-command-:*:*' group-order \
+  aliases functions builtins reserved-words commands
+
+# Useful behaviour retained from the original configuration.
+zstyle ':completion:*' gain-privileges yes
+zstyle ':completion:*' list-dirs-first true
+zstyle ':completion:*' accept-exact-dirs true
+zstyle ':completion:*:git-checkout:*' sort false
+
+# ══════════════════════════════════════════════════════════════════════════════
+# Completer pipeline
+# ══════════════════════════════════════════════════════════════════════════════
+# Fast/normal completion first, then ignored candidates, then one-error typo
+# recovery. _expand_alias stays absent because zsh-abbr owns abbreviation
+# expansion at the ZLE layer.
 zstyle ':completion:*' completer _complete _ignored _approximate
 zstyle ':completion:*:approximate:*' max-errors 1 numeric
-zstyle ':completion:*:match:*'       original   only
+zstyle ':completion:*:match:*' original only
 
-# ── Matching: case-insensitive, partial-word, substring ───────────────────────
+# ══════════════════════════════════════════════════════════════════════════════
+# Matching
+# ══════════════════════════════════════════════════════════════════════════════
+# Each matcher-list entry is a fresh completion pass. Keep the progression
+# compact while preserving case-insensitive, partial-word and substring search.
+# Start with Zim's Zsh-5.9-safe smart-case matcher, then progressively
+# broaden the same matcher with separator-aware and substring matching.
 zstyle ':completion:*' matcher-list \
-  'm:{a-z}={A-Z}' \
-  'm:{a-zA-Z}={A-Za-z}' \
-  'r:|[._-]=* r:|=*' \
-  'l:|=* r:|=*'
+  'm:{[:lower:]}={[:upper:]}' \
+  '+r:|[._-]=* r:|=*' \
+  '+l:|=*'
 
-# ── Display format ────────────────────────────────────────────────────────────
+# ══════════════════════════════════════════════════════════════════════════════
+# Presentation
+# ══════════════════════════════════════════════════════════════════════════════
+# fzf-tab requires a plain description format for group support.
 zstyle ':completion:*:descriptions' format '[%d]'
 zstyle ':completion:*:corrections'  format '%U%F{green}%d (errors: %e)%f%u'
 zstyle ':completion:*:warnings'     format '%F{202}%BSorry, no matches for: %F{214}%d%b'
 zstyle ':completion:*:messages'     format '%F{yellow}%d%f'
 
-# ── Ignored patterns ──────────────────────────────────────────────────────────
+# LS_COLORS is already established by tools/env.zsh before this file is sourced.
+if [[ -n ${LS_COLORS-} ]]; then
+  zstyle ':completion:*'         list-colors ${(s.:.)LS_COLORS}
+  zstyle ':completion:*:default' list-colors ${(s.:.)LS_COLORS}
+fi
+
+# ══════════════════════════════════════════════════════════════════════════════
+# Ignored candidates
+# ══════════════════════════════════════════════════════════════════════════════
 zstyle ':completion:*:functions' ignored-patterns '(_*|pre(cmd|exec)|TRAP*)'
 zstyle ':completion:*:*:*:users' ignored-patterns \
   adm amanda apache at avahi avahi-autoipd bin cacti canna clamav daemon \
@@ -52,35 +83,41 @@ zstyle ':completion:*:*:*:users' ignored-patterns \
   sshd statd svn sync tftp usbmux uucp vcsa wwwrun xfs cron mongodb \
   nullmail portage redis shoutcast tcpdump '_*'
 
-# ── Directory completion ──────────────────────────────────────────────────────
-zstyle ':completion:*'                        list-dirs-first   true
-zstyle ':completion:*'                        accept-exact-dirs true
-zstyle ':completion:*:*:cd:*:directory-stack' force-list        always
-zstyle ':completion:*:*:cd:*:directory-stack' menu              yes select
-zstyle ':completion:*:git-checkout:*'         sort              false
+# ══════════════════════════════════════════════════════════════════════════════
+# Directory/process completion
+# ══════════════════════════════════════════════════════════════════════════════
+# Zim installs a more-specific `menu yes select` for directory-stack and
+# history-word completion. Those would beat the global `menu no`, so explicitly
+# neutralize them for fzf-tab as well.
+zstyle ':completion:*:*:cd:*:directory-stack' menu no
+zstyle ':completion:*:history-words' menu no
 
-# ── Process completion ────────────────────────────────────────────────────────
-zstyle ':completion:*:*:*:*:processes' force-list  always
-zstyle ':completion:*:*:*:*:processes' menu        yes select
-zstyle ':completion:*:*:*:*:processes' list-colors '=(#b) #([0-9]#) ([0-9a-z-]#)*=01;34=0=01'
-zstyle ':completion:*:*:*:*:processes' command     "ps -u $USER -o pid,user,args -w -w"
+# Force candidate generation, but never turn the native menu selector back on.
+zstyle ':completion:*:*:cd:*:directory-stack' force-list always
+zstyle ':completion:*:*:*:*:processes' force-list always
+zstyle ':completion:*:*:*:*:processes' list-colors \
+  '=(#b) #([0-9]#) ([0-9a-z-]#)*=01;34=0=01'
+zstyle ':completion:*:*:*:*:processes' command \
+  'ps -u $USER -o pid,user,args -w -w'
 
-# ── LS_COLORS (applied after vivid generates them in tools/env.zsh) ───────────
-# sched 0 fires after the current event loop cycle, by which point LS_COLORS is set.
-_apply_list_colors() {
-  zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
-  unfunction _apply_list_colors
-}
-sched 0 _apply_list_colors
-
-# ── Miscellaneous ─────────────────────────────────────────────────────────────
-zstyle ':completion:*' hosts 'reply=()'   # disable slow DNS host completion
-zstyle ':completion:*:git-*'    verbose    true
+# ══════════════════════════════════════════════════════════════════════════════
+# Application-specific behaviour
+# ══════════════════════════════════════════════════════════════════════════════
+zstyle ':completion:*:git-*' verbose true
 zstyle ':completion:*:carapace:*' group-name ''
 
-# ── Package completion TTL (24-hour cache) ────────────────────────────────────
-_pkg_cache_policy() { local -a old=("$1"(Nmh+24)); (( ${#old} )) }
-for _cpm in pacman yay paru pikaur trizen; do
-  zstyle ":completion:*:${_cpm}:*" cache-policy _pkg_cache_policy
+# Do NOT globally blank the `hosts` style. Zsh can complete SSH hosts from
+# ~/.ssh/config, known_hosts and /etc/hosts without performing a DNS zone walk.
+
+# ══════════════════════════════════════════════════════════════════════════════
+# Package completion cache policy — 24 hours
+# ══════════════════════════════════════════════════════════════════════════════
+_pkg_cache_policy() {
+  local -a stale=("$1"(Nmh+24))
+  (( ${#stale} ))
+}
+
+for _completion_pm in pacman yay paru pikaur trizen; do
+  zstyle ":completion:*:${_completion_pm}:*" cache-policy _pkg_cache_policy
 done
-unset _cpm
+unset _completion_pm

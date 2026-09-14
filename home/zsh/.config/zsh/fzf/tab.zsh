@@ -1,169 +1,203 @@
-# fzf/tab.zsh — fzf-tab zstyle configuration.
-# MUST be sourced before compinit (which fires inside ZIM_HOME/init.zsh).
+# fzf/tab.zsh — fzf-tab configuration.
 #
-# Multiselect in all fzf-tab popups:
-#   Ctrl+Space  toggle + down   (inherited from FZF_DEFAULT_OPTS)
-#   Ctrl+A      toggle all      (inherited from FZF_DEFAULT_OPTS)
-#   Tab         accept + insert all marked
-#   Shift+Tab   navigate up
+# This file may be sourced before compinit because it only installs zstyles.
+# The fzf-tab PLUGIN itself, however, MUST load after Zim's completion module
+# (compinit) and before plugins that wrap ZLE widgets. .zimrc enforces that.
 
-zstyle ':fzf-tab:*' use-fzf-default-opts yes
+# Do not inherit FZF_DEFAULT_OPTS wholesale. fzf-tab explicitly warns that some
+# global fzf options can break its protocol; mirror the desired UI here instead.
+zstyle ':fzf-tab:*' use-fzf-default-opts no
 
-# ── Core flags ────────────────────────────────────────────────────────────────
-# --style=default: overrides global --style=full. Three extra inner borders
-#   in a 70% popup shrink the item list; the outer --border=rounded is kept.
-# --exit-0: exit immediately (code 1, no popup) when stdin is empty. fzf-tab
-#   treats non-zero exit as "fall back to standard zsh completion", which fixes
-#   blank-popup symptoms when completion returns 0 candidates.
-# --select-1 is ABSENT: single-match auto-accept hides the preview pane, which
-#   is valuable for package inspection.
-zstyle ':fzf-tab:*' fzf-flags \
-  '--height=70%'      \
-  '--min-height=16'   \
-  '--multi'           \
-  '--style=default'   \
-  '--exit-0'          \
-  '--bind=tab:accept' \
+# ══════════════════════════════════════════════════════════════════════════════
+# Base fzf-tab flags
+# ══════════════════════════════════════════════════════════════════════════════
+_fzf_tab_flags=(
+  '--height=70%'
+  '--min-height=16+'
+  '--layout=reverse'
+  '--style=default'
+  '--border=rounded'
+  '--padding=0,1'
+  '--info=inline-right'
+  '--prompt=❯ '
+  '--pointer=▶'
+  '--marker=✓'
+  '--separator=─'
+  '--scrollbar=│'
+  '--cycle'
+  '--scroll-off=5'
+  '--highlight-line'
+  '--multi'
+  '--exit-0'
+  '--preview-window=right:55%:border-rounded:wrap'
+  '--color=bg+:#313244,bg:#1e1e2e,spinner:#f5e0dc,hl:#f38ba8'
+  '--color=fg:#cdd6f4,header:#f38ba8,info:#cba6f7,pointer:#f5e0dc'
+  '--color=marker:#b4befe,fg+:#cdd6f4,prompt:#cba6f7,hl+:#f38ba8'
+  '--color=selected-bg:#45475a,border:#585b70,label:#cdd6f4'
+  '--color=preview-bg:#1e1e2e,preview-border:#585b70,preview-label:#cdd6f4'
+  '--color=gutter:#1e1e2e,query:#cdd6f4,disabled:#6c7086'
+  '--color=input-border:#585b70,input-label:#cba6f7'
+  '--color=list-border:#45475a,header-border:#585b70'
+  '--bind=tab:accept'
   '--bind=btab:up'
+  '--bind=ctrl-space:toggle+down'
+  '--bind=ctrl-a:toggle-all'
+  '--bind=ctrl-/:toggle-preview'
+  '--bind=alt-up:preview-up'
+  '--bind=alt-down:preview-down'
+  '--bind=alt-f:preview-page-down'
+  '--bind=alt-b:preview-page-up'
+  '--bind=alt-e:preview-top'
+  '--bind=alt-E:preview-bottom'
+  '--bind=ctrl-s:toggle-sort'
+)
 
-# ── Global action bindings ────────────────────────────────────────────────────
+# Preserve your tmux popup UX without leaking a global --tmux flag into fzf-tab.
+[[ -n ${TMUX-} ]] && _fzf_tab_flags+=( '--tmux=center,85%' )
+
+zstyle ':fzf-tab:*' fzf-flags "${_fzf_tab_flags[@]}"
+
+# ══════════════════════════════════════════════════════════════════════════════
+# Global actions / navigation
+# ══════════════════════════════════════════════════════════════════════════════
 zstyle ':fzf-tab:*' fzf-bindings \
-  'ctrl-e:execute-silent({_FTB_INIT_}${EDITOR:-nvim} "$realpath" </dev/tty >/dev/tty)' \
-  'ctrl-y:execute-silent({_FTB_INIT_}wl-copy -- "$realpath" 2>/dev/null || xclip -selection clipboard -- "$realpath" 2>/dev/null)'
+  'ctrl-e:execute-silent({_FTB_INIT_}[[ -e "$realpath" ]] && ${EDITOR:-nvim} "$realpath" </dev/tty >/dev/tty)' \
+  'ctrl-y:execute-silent({_FTB_INIT_}printf %s "${realpath:-$word}" | (wl-copy 2>/dev/null || xclip -selection clipboard 2>/dev/null))' \
+  'ctrl-o:execute-silent({_FTB_INIT_}[[ -e "$realpath" ]] && xdg-open "$realpath" >/dev/null 2>&1)'
 
-zstyle ':fzf-tab:*' switch-group       '<' '>'
+zstyle ':fzf-tab:*' switch-group '<' '>'
 zstyle ':fzf-tab:*' continuous-trigger '/'
-zstyle ':fzf-tab:*' show-group         full
-zstyle ':fzf-tab:*' popup-min-size     80 16
+zstyle ':fzf-tab:*' show-group full
+zstyle ':fzf-tab:*' popup-min-size 80 16
 
-# ── Shared file/directory preview ─────────────────────────────────────────────
-# $realpath is the full path of the completion candidate, set by fzf-tab.
-# This variable is interpolated into zstyle at source time, so unset is safe.
-_ftp='
-  if [[ -d $realpath ]]; then
+# ══════════════════════════════════════════════════════════════════════════════
+# Shared file/directory preview
+# ══════════════════════════════════════════════════════════════════════════════
+_fzf_tab_file_preview='
+  if [[ -d "$realpath" ]]; then
     eza --tree --level=2 --color=always --icons=auto "$realpath" 2>/dev/null \
-      || ls -la "$realpath"
+      || ls -la -- "$realpath"
+  elif [[ -f "$realpath" ]]; then
+    bat --style=numbers,changes --color=always --line-range=:240 -- "$realpath" 2>/dev/null \
+      || file --brief -- "$realpath"
   else
-    bat --style=numbers,changes --color=always --line-range=:200 "$realpath" 2>/dev/null \
-      || cat "$realpath"
+    printf "%s\\n" "$word"
   fi
 '
 
+# Catch-all first; more-specific contexts win automatically via zstyle lookup.
+zstyle ':fzf-tab:complete:*:*' fzf-preview "$_fzf_tab_file_preview"
+
 # ── Directories ───────────────────────────────────────────────────────────────
-zstyle ':fzf-tab:complete:cd:*' fzf-preview \
-  'eza --tree --level=2 --color=always --icons=auto $realpath 2>/dev/null || ls -la $realpath'
+zstyle ':fzf-tab:complete:(cd|pushd|rmdir):*' fzf-preview \
+  'eza --tree --level=3 --color=always --icons=auto "$realpath" 2>/dev/null || ls -la -- "$realpath"'
 zstyle ':fzf-tab:complete:cd:*' popup-min-size 60 16
 
 # ── File-manipulating commands ────────────────────────────────────────────────
-zstyle ':fzf-tab:complete:(ls|eza|exa|lsd|stat|file|wc|head|tail|diff|patch|cp|mv|rm):*' \
-  fzf-preview "$_ftp"
-
-# ── Catch-all ─────────────────────────────────────────────────────────────────
-zstyle ':fzf-tab:complete:*:*' fzf-preview "$_ftp"
+zstyle ':fzf-tab:complete:(ls|eza|exa|lsd|stat|file|wc|head|tail|diff|patch|cp|mv|rm|ln|chmod|chown):*' \
+  fzf-preview "$_fzf_tab_file_preview"
 
 # ── Editors ───────────────────────────────────────────────────────────────────
 zstyle ':fzf-tab:complete:(nvim|vim|vi|nano|hx|code|emacs):*' fzf-preview \
-  'bat --style=numbers,changes --color=always --line-range=:300 $realpath 2>/dev/null || cat $realpath'
+  'bat --style=numbers,changes --color=always --line-range=:320 -- "$realpath" 2>/dev/null || file --brief -- "$realpath"'
 
 # ── Git ───────────────────────────────────────────────────────────────────────
-zstyle ':fzf-tab:complete:git-(add|diff|restore|checkout|reset|rm):*' fzf-preview \
-  'git diff --color=always -- $word 2>/dev/null | delta 2>/dev/null \
-  || git diff --color=always -- $word 2>/dev/null \
-  || bat --style=numbers,changes --color=always $realpath 2>/dev/null'
+zstyle ':fzf-tab:complete:git-(add|diff|restore|reset|rm):*' fzf-preview \
+  'git diff --color=always -- "$word" 2>/dev/null | delta 2>/dev/null \
+   || git diff --color=always -- "$word" 2>/dev/null \
+   || bat --style=numbers,changes --color=always -- "$realpath" 2>/dev/null'
 
 zstyle ':fzf-tab:complete:git-log:*' fzf-preview \
-  'git log --color=always --oneline --graph --decorate $word 2>/dev/null'
+  'git log --color=always --oneline --graph --decorate "$word" 2>/dev/null'
 
 zstyle ':fzf-tab:complete:git-show:*' fzf-preview \
-  'case "$group" in
-     "commit tag") git show --color=always $word ;;
-     *) git show --color=always $word | delta 2>/dev/null || git show --color=always $word ;;
-   esac'
+  'git show --color=always "$word" 2>/dev/null | delta 2>/dev/null \
+   || git show --color=always "$word" 2>/dev/null'
 
 zstyle ':fzf-tab:complete:git-checkout:*' fzf-preview \
   'case "$group" in
      "modified file")
-       git diff --color=always $word | delta 2>/dev/null || git diff --color=always $word ;;
+       git diff --color=always -- "$word" 2>/dev/null | delta 2>/dev/null \
+         || git diff --color=always -- "$word" 2>/dev/null ;;
      "recent commit object name")
-       git show --color=always $word | delta 2>/dev/null ;;
+       git show --color=always "$word" 2>/dev/null | delta 2>/dev/null \
+         || git show --color=always "$word" 2>/dev/null ;;
      *)
-       git log --color=always --oneline --graph $word ;;
+       git log --color=always --oneline --graph --decorate "$word" 2>/dev/null ;;
    esac'
 
 zstyle ':fzf-tab:complete:git-help:*' fzf-preview \
-  'git help $word 2>/dev/null | bat --language=man --style=plain --color=always 2>/dev/null | head -80'
+  'MANPAGER=cat git help "$word" 2>/dev/null | col -bx 2>/dev/null | head -100 | bat --language=man --style=plain --color=always 2>/dev/null'
 
 # ── Systemd ───────────────────────────────────────────────────────────────────
-zstyle ':fzf-tab:complete:(systemctl|sc-*|journalctl):*' fzf-preview \
-  'SYSTEMD_COLORS=1 systemctl status --no-pager $word 2>/dev/null'
+zstyle ':fzf-tab:complete:systemctl:*' fzf-preview \
+  'SYSTEMD_COLORS=1 systemctl status --no-pager -- "$word" 2>/dev/null'
+zstyle ':fzf-tab:complete:journalctl:*' fzf-preview \
+  'SYSTEMD_COLORS=1 journalctl --no-pager -n 80 -u "$word" 2>/dev/null'
 
 # ── Processes ─────────────────────────────────────────────────────────────────
 zstyle ':fzf-tab:complete:kill:argument-rest' fzf-preview \
-  'ps --pid=$word -o pid,user,comm,args --no-headers -w -w 2>/dev/null'
-zstyle ':fzf-tab:complete:kill:argument-rest' fzf-flags '--preview-window=down:5:wrap'
+  'ps --pid="$word" -o pid,user,pcpu,pmem,etime,comm,args --no-headers -w -w 2>/dev/null'
+# A more-specific fzf-flags style replaces, rather than merges with, the global
+# one, so explicitly carry the entire base array forward before overriding only
+# preview geometry.
+zstyle ':fzf-tab:complete:kill:argument-rest' fzf-flags \
+  "${_fzf_tab_flags[@]}" '--preview-window=down:7:wrap'
 
 # ── Man pages ─────────────────────────────────────────────────────────────────
 zstyle ':fzf-tab:complete:(\\|*/|)man:*' fzf-preview \
-  'man $word 2>/dev/null | head -60 | bat --language=man --style=plain --color=always 2>/dev/null'
+  'MANPAGER=cat man "$word" 2>/dev/null | col -bx 2>/dev/null | head -100 | bat --language=man --style=plain --color=always 2>/dev/null'
 
 # ── Environment variables ─────────────────────────────────────────────────────
 zstyle ':fzf-tab:complete:(-command-|-parameter-|-brace-parameter-|export|unset|expand):*' \
-  fzf-preview 'echo ${(P)word}'
+  fzf-preview 'typeset -p "$word" 2>/dev/null || print -r -- "${(P)word}" 2>/dev/null'
 
 # ── Docker ────────────────────────────────────────────────────────────────────
 zstyle ':fzf-tab:complete:docker-(run|pull|push|tag|rmi|inspect):*' fzf-preview \
-  'docker inspect $word 2>/dev/null | bat --language=json --color=always | head -80'
+  'docker inspect "$word" 2>/dev/null | head -120 | bat --language=json --style=plain --color=always 2>/dev/null'
 
 # ── Pacman / AUR helpers ──────────────────────────────────────────────────────
-# Separate entries per helper (not alternation): zstyle pattern matching with
-# alternation is not guaranteed across zsh versions.
-# No yay/paru -Si in preview: AUR HTTPS calls on every cursor movement
-# (potentially dozens/sec) would saturate the network. pacman -Si reads
-# /var/lib/pacman/sync/ locally in ~5ms.
+# Keep previews local-only: no AUR request on every cursor movement.
 _pac_preview='
   p="${word%%[[:space:]]*}"
   p="${p%%[[:space:]]──*}"
   if info=$(pacman -Si "$p" 2>/dev/null); then
-    printf "%s\n" "$info"
-    printf "\n\033[2m── Files (head 20) ──────────────────────────────────\033[0m\n"
-    pacman -Fl "$p" 2>/dev/null | awk "{print \$2}" | head -20
+    printf "%s\\n" "$info"
+    printf "\\n\\033[2m── Files (head 20) ──────────────────────────────────\\033[0m\\n"
+    pacman -Fl "$p" 2>/dev/null | awk "{print \\$2}" | head -20
   elif info=$(pacman -Qi "$p" 2>/dev/null); then
-    printf "%s\n" "$info"
-    printf "\n\033[2m── Installed files (head 20) ────────────────────────\033[0m\n"
-    pacman -Ql "$p" 2>/dev/null | awk "{print \$2}" | head -20
+    printf "%s\\n" "$info"
+    printf "\\n\\033[2m── Installed files (head 20) ────────────────────────\\033[0m\\n"
+    pacman -Ql "$p" 2>/dev/null | awk "{print \\$2}" | head -20
   else
-    printf "\033[2m(AUR-only — not in sync/local DB)\033[0m\n"
-    printf "Run: yay -Si %s\n" "$p"
+    printf "\\033[2m(AUR-only — not in sync/local DB)\\033[0m\\n"
+    printf "Run: yay -Si %s\\n" "$p"
   fi
 '
-zstyle ':fzf-tab:complete:pacman:*' fzf-preview "$_pac_preview"
-zstyle ':fzf-tab:complete:yay:*'    fzf-preview "$_pac_preview"
-zstyle ':fzf-tab:complete:paru:*'   fzf-preview "$_pac_preview"
-zstyle ':fzf-tab:complete:pikaur:*' fzf-preview "$_pac_preview"
-unset _pac_preview
+for _pm in pacman yay paru pikaur trizen; do
+  zstyle ":fzf-tab:complete:${_pm}:*" fzf-preview "$_pac_preview"
+done
+unset _pm _pac_preview
 
-# ── pip ───────────────────────────────────────────────────────────────────────
+# ── Python / Cargo / Flatpak ──────────────────────────────────────────────────
 zstyle ':fzf-tab:complete:pip(|3):*' fzf-preview \
-  'pip show $word 2>/dev/null | bat --language=yaml --color=always'
+  'pip show "$word" 2>/dev/null | bat --language=yaml --style=plain --color=always 2>/dev/null'
 
-# ── cargo ─────────────────────────────────────────────────────────────────────
 zstyle ':fzf-tab:complete:cargo:*' fzf-preview \
-  'cargo info $word 2>/dev/null | head -30'
+  'timeout 2s cargo info "$word" 2>/dev/null | head -40'
 
-# ── Flatpak ───────────────────────────────────────────────────────────────────
 zstyle ':fzf-tab:complete:flatpak:*' fzf-preview \
-  'flatpak info $word 2>/dev/null | head -40'
+  'flatpak info "$word" 2>/dev/null | head -60'
 
-# ── SSH ───────────────────────────────────────────────────────────────────────
-zstyle ':fzf-tab:complete:ssh:*' fzf-preview \
-  'grep -A5 "Host[[:space:]]*$word" ~/.ssh/config 2>/dev/null | head -12'
+# ── SSH / network ─────────────────────────────────────────────────────────────
+zstyle ':fzf-tab:complete:(ssh|scp|sftp):*' fzf-preview \
+  'grep -A8 "^[[:space:]]*Host[[:space:]].*${word}" ~/.ssh/config 2>/dev/null | head -16'
 
-# ── Network interfaces ────────────────────────────────────────────────────────
 zstyle ':fzf-tab:complete:ip:*' fzf-preview \
-  'ip addr show $word 2>/dev/null || ip link show $word 2>/dev/null'
+  'ip addr show "$word" 2>/dev/null || ip link show "$word" 2>/dev/null'
 
 # ── mise ──────────────────────────────────────────────────────────────────────
 zstyle ':fzf-tab:complete:mise:*' fzf-preview \
-  'mise info $word 2>/dev/null | head -30'
+  'mise info "$word" 2>/dev/null | head -40'
 
-unset _ftp
+unset _fzf_tab_file_preview _fzf_tab_flags

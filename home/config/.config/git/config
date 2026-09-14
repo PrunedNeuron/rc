@@ -1,33 +1,119 @@
 [user]
     name = ayush
 
+    # Never invent an identity from the local username/hostname.
+    # Repositories must obtain an email from this config, an included
+    # identity file, or their own local configuration.
+    useConfigOnly = true
+
 [core]
+    # Store text as LF in Git while tolerating CRLF input.
+    # Repository-specific .gitattributes remains authoritative.
     autocrlf = input
+
     editor = nvim
     pager = delta
 
+    # Display UTF-8 path names directly instead of octal-escaping them.
+    quotePath = false
+
 [init]
-    defaultBranch = master
+    defaultBranch = main
 
 [gpg]
+    # Be explicit about the signing backend. This is Git's traditional
+    # OpenPGP/GnuPG signing mechanism.
+    format = openpgp
     program = gpg
 
 [color]
     ui = auto
 
-[push]
-    default = simple
-    autoSetupRemote = true
-    followTags = true
-
-[pull]
-    rebase = true
+[column]
+    ui = auto
 
 [commit]
+    # Sign every commit by default.
     gpgSign = true
 
+    # When Git opens the commit-message editor, also show the staged diff.
+    # This makes accidental commits easier to catch.
+    verbose = true
+
+[push]
+    # Only push the current branch to its same-named upstream.
+    default = simple
+
+    # First push of a new branch automatically establishes its upstream.
+    autoSetupRemote = true
+
+    # Deliberately do NOT enable push.followTags globally.
+    # Release tags are published explicitly by the release workflow.
+
+[pull]
+    # A normal `git pull` may only move the current branch straight
+    # forward. If local and remote history diverge, stop and let the user
+    # explicitly decide whether to merge or rebase.
+    ff = only
+    rebase = false
+
+[fetch]
+    # Automatically remove stale remote-tracking branches.
+    prune = true
+
+    # Maintain Git's commit graph after fetches. This improves the
+    # performance of graph-heavy operations such as log and merge-base.
+    writeCommitGraph = true
+
 [merge]
-    ff = false
+    # Show ours, base, and theirs while keeping conflict regions compact.
+    conflictStyle = zdiff3
+
+[rerere]
+    # Remember conflict resolutions and reuse them when the same conflict
+    # appears again.
+    enabled = true
+
+[diff]
+    # Usually produces more human-readable hunks than the default Myers
+    # algorithm, especially when code blocks have moved or changed.
+    algorithm = histogram
+
+    # Visually distinguish moved lines in compatible diff viewers.
+    colorMoved = default
+
+[interactive]
+    # Required for delta to render interactive Git diffs correctly.
+    diffFilter = delta --color-only
+
+[delta]
+    # n / N navigate between files and diff sections.
+    navigate = true
+
+    # Useful without forcing the much more opinionated side-by-side mode.
+    line-numbers = true
+
+[branch]
+    # `git branch` shows recently worked-on branches first.
+    sort = -committerdate
+
+[tag]
+    # Semantic/version-aware ordering, newest versions first.
+    sort = -version:refname
+
+[status]
+    # Remind you when a repository has stashed work.
+    showStash = true
+
+[help]
+    # A typo such as `git statsu` may be corrected, but only after asking.
+    autoCorrect = prompt
+
+[safe]
+    # Security hardening for modern Git: do not implicitly operate inside
+    # bare repositories discovered through the filesystem. Explicit
+    # --git-dir use still works.
+    bareRepository = explicit
 
 [include]
     path = ~/.config/git/conf.d/personal

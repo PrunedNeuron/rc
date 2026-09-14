@@ -1,12 +1,14 @@
 # ~/.zimrc — zimfw module manifest.
-# After changes: zimfw install && zimfw compile
+# After changes: zimfw install && zimfw compile && exec zsh
 #
-# ── Load order constraints ────────────────────────────────────────────────────
-# • zsh-defer       MUST be first
-# • Completion pipeline: fpath defs → fzf → fzf-tab → compinit
-# • autosuggestions-abbreviations-strategy AFTER zsh-abbr AND zsh-autosuggestions
-# • zsh-history-substring-search BEFORE zsh-syntax-highlighting
-# • zsh-syntax-highlighting MUST be last
+# Ordering invariants:
+# • zsh-defer first.
+# • Completion definitions before Zim's completion module.
+# • Zim completion calls compinit.
+# • fzf-tab AFTER completion/compinit, BEFORE widget-wrapping plugins.
+# • zsh-syntax-highlighting before autosuggestions so autosuggestions can wrap
+#   the final highlighting widgets once on the first precmd.
+# • autosuggestions-abbreviations-strategy after both zsh-abbr and autosuggestions.
 
 # ── Foundation ────────────────────────────────────────────────────────────────
 zmodule romkatv/zsh-defer
@@ -24,16 +26,8 @@ zmodule junegunn/fzf-git.sh --source fzf-git.sh
 zmodule ohmyzsh/ohmyzsh --root plugins/systemd
 
 # ── Shell UX ──────────────────────────────────────────────────────────────────
-# eza: canonical ll/la/lt/lla/llt aliases respecting EZA_ICONS_AUTO.
 zmodule ohmyzsh/ohmyzsh --root plugins/eza
-
-# colored-man-pages: sets MANPAGER + MANROFFOPT so man uses ANSI colour via less.
-# Does not conflict with widgets/man.zsh (which provides the fzf browser on top).
 zmodule ohmyzsh/ohmyzsh --root plugins/colored-man-pages
-
-# command-not-found: sources /usr/share/doc/pkgfile/command-not-found.zsh when
-# present, providing Arch-aware "install with: yay -S foo" suggestions.
-# Requires: yay -S pkgfile && sudo pkgfile --update
 zmodule ohmyzsh/ohmyzsh --root plugins/command-not-found
 
 # ── Quality of life ───────────────────────────────────────────────────────────
@@ -41,16 +35,23 @@ zmodule hlissner/zsh-autopair
 zmodule olets/zsh-abbr
 zmodule Tarrasch/zsh-bd
 zmodule jirutka/zsh-shift-select
-zmodule MichaelAquilina/zsh-you-should-use
+# zmodule MichaelAquilina/zsh-you-should-use
 
-# ── Completion pipeline (ORDER IS MANDATORY) ──────────────────────────────────
+# ── Completion pipeline ───────────────────────────────────────────────────────
+# fzf provides Ctrl+T/Ctrl+R/Alt+C and ** completion.
 zmodule zsh-users/zsh-completions --fpath src
 zmodule fzf
-zmodule Aloxaf/fzf-tab
+
+# Zim's completion module calls compinit and must follow all fpath providers.
 zmodule completion
 
-# ── Interactive enhancements (ORDER IS CRITICAL) ──────────────────────────────
+# fzf-tab must be loaded AFTER compinit and BEFORE widget wrappers.
+zmodule Aloxaf/fzf-tab
+
+# ── Interactive enhancements ──────────────────────────────────────────────────
+# This order matches the wrapping requirements of modern autosuggestions and
+# keeps fzf-tab's ^I widget underneath all later wrappers.
+zmodule zsh-users/zsh-syntax-highlighting
+zmodule zsh-users/zsh-history-substring-search
 zmodule zsh-users/zsh-autosuggestions
 zmodule olets/zsh-autosuggestions-abbreviations-strategy
-zmodule zsh-users/zsh-history-substring-search
-zmodule zsh-users/zsh-syntax-highlighting    # MUST be last
