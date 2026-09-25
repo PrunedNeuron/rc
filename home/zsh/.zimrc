@@ -1,23 +1,34 @@
 # ~/.zimrc — zimfw module manifest.
-# After changes: zimfw install && zimfw compile && exec zsh
+#
+# After changes:
+#   zimfw install
+#   zimfw compile
+#   exec zsh
 #
 # Ordering invariants:
 # • zsh-defer first.
-# • Completion definitions before Zim's completion module.
-# • Zim completion calls compinit.
-# • fzf-tab AFTER completion/compinit, BEFORE widget-wrapping plugins.
-# • zsh-syntax-highlighting before autosuggestions so autosuggestions can wrap
-#   the final highlighting widgets once on the first precmd.
-# • autosuggestions-abbreviations-strategy after both zsh-abbr and autosuggestions.
+# • Completion-definition providers before Zim's completion module.
+# • Zim completion runs compinit.
+# • fzf-tab AFTER completion/compinit.
+# • fzf-tab BEFORE later ZLE-wrapping interactive plugins.
+# • autosuggestions-abbreviations-strategy after both zsh-abbr and
+#   zsh-autosuggestions.
 
-# ── Foundation ────────────────────────────────────────────────────────────────
+# ══════════════════════════════════════════════════════════════════════════════
+# Foundation
+# ══════════════════════════════════════════════════════════════════════════════
+
 zmodule romkatv/zsh-defer
 
 zmodule environment
 zmodule termtitle
 zmodule pacman
 
-# ── Productivity ──────────────────────────────────────────────────────────────
+
+# ══════════════════════════════════════════════════════════════════════════════
+# Productivity
+# ══════════════════════════════════════════════════════════════════════════════
+
 zmodule archive
 zmodule git
 zmodule robertzk/send.zsh
@@ -25,33 +36,56 @@ zmodule wfxr/forgit
 zmodule junegunn/fzf-git.sh --source fzf-git.sh
 zmodule ohmyzsh/ohmyzsh --root plugins/systemd
 
-# ── Shell UX ──────────────────────────────────────────────────────────────────
+
+# ══════════════════════════════════════════════════════════════════════════════
+# Shell UX
+# ══════════════════════════════════════════════════════════════════════════════
+
 zmodule ohmyzsh/ohmyzsh --root plugins/eza
 zmodule ohmyzsh/ohmyzsh --root plugins/colored-man-pages
 zmodule ohmyzsh/ohmyzsh --root plugins/command-not-found
 
-# ── Quality of life ───────────────────────────────────────────────────────────
+
+# ══════════════════════════════════════════════════════════════════════════════
+# Quality of life
+# ══════════════════════════════════════════════════════════════════════════════
+
 zmodule hlissner/zsh-autopair
 zmodule olets/zsh-abbr
 zmodule Tarrasch/zsh-bd
 zmodule jirutka/zsh-shift-select
+
+# Optional; useful but potentially noisy.
 # zmodule MichaelAquilina/zsh-you-should-use
 
-# ── Completion pipeline ───────────────────────────────────────────────────────
-# fzf provides Ctrl+T/Ctrl+R/Alt+C and ** completion.
+
+# ══════════════════════════════════════════════════════════════════════════════
+# Completion pipeline
+# ══════════════════════════════════════════════════════════════════════════════
+
+# Completion definitions must be on fpath before compinit.
 zmodule zsh-users/zsh-completions --fpath src
+
+# fzf shell integration.
 zmodule fzf
 
-# Zim's completion module calls compinit and must follow all fpath providers.
+# Runs compinit.
 zmodule completion
 
-# fzf-tab must be loaded AFTER compinit and BEFORE widget wrappers.
-zmodule Aloxaf/fzf-tab
+# Must load after compinit.
+#
+# Intentionally pinned while avoiding the newer fzf-tab completion regression
+# affecting this setup.
+zmodule Aloxaf/fzf-tab --tag v1.1.2
 
-# ── Interactive enhancements ──────────────────────────────────────────────────
-# This order matches the wrapping requirements of modern autosuggestions and
-# keeps fzf-tab's ^I widget underneath all later wrappers.
+
+# ══════════════════════════════════════════════════════════════════════════════
+# Interactive enhancements
+# ══════════════════════════════════════════════════════════════════════════════
+
 zmodule zsh-users/zsh-syntax-highlighting
 zmodule zsh-users/zsh-history-substring-search
 zmodule zsh-users/zsh-autosuggestions
+
+# Requires both zsh-abbr and zsh-autosuggestions.
 zmodule olets/zsh-autosuggestions-abbreviations-strategy
